@@ -32,7 +32,7 @@
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="list/diploma">
+				<html:link action="/stats/prepare">
 					<bean:message key="menu.user.stats" />
 				</html:link>
 			</td>
