@@ -63,7 +63,7 @@ public class TakeRdvAction extends Action {
 
 			boolean isRavel = (calDateBac.get(Calendar.MONTH) == calCurrent.get(Calendar.MONTH));
 
-			Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
+			Rdv rdv = new Rdv(rdvDate, student.getId(), student.getPatronymicName(), student.getFirstname1(), isRavel);
 
 			databaseRdvManager.addRdv(rdv);
 
