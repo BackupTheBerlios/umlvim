@@ -75,7 +75,10 @@
 	<definition name="user.stats" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/stats.jsp" />
 	</definition>
-
+	
+	<definition name="user.stats.result" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/statsRes.jsp" />
+	</definition>
 
 	<!-- Admin's pages definitions -->
 
