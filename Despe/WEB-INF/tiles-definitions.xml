@@ -51,8 +51,7 @@
 	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>
-
-
+	
 	<definition name="student.cancel.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/CancelRdv.jsp" />
 	</definition>
