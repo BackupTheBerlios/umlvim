@@ -77,8 +77,8 @@
 		<put name="body-content"	value="/pages/form/SearchStudent.jsp" />
 	</definition>
 	
-	<definition name="user.add.student" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/AddStudent.jsp" />
+	<definition name="user.edit.student" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/EditStudent.jsp" />
 	</definition>
 	
 	<definition name="user.stats" extends="userBaseDef">

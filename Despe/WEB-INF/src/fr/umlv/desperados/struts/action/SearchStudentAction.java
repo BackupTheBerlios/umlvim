@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.diploma.DiplomaManager;
 import fr.umlv.desperados.struts.form.SearchStudentForm;
 import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.util.Constants;
@@ -52,6 +53,16 @@ public final class SearchStudentAction extends AdminAction {
 			return (mapping.findForward("searchstudent"));
 		}
 
+		DiplomaManager diplomaManager =
+					(DiplomaManager) servlet.getServletContext().getAttribute(
+						Constants.DIPLOMA_DATABASE_KEY);
+
+		List diplomaList = diplomaManager.listDiploma();
+			if(diplomaList != null) {
+				request.setAttribute("diplomaList", diplomaList);
+			}
+	
+
 		// validate the form
 		ActionErrors errors = searchForm.validate(mapping, request);
 		if(!errors.isEmpty()) {
@@ -63,7 +74,9 @@ public final class SearchStudentAction extends AdminAction {
 //COMMENTED FOR TEST
 		StudentManager manager = (StudentManager)servlet.getServletContext().
 								getAttribute(Constants.STUDENT_DATABASE_KEY);
-		if(manager == null) {
+				
+		
+		if(manager == null || diplomaManager==null) {
 			errors.add("database",
 			   new ActionError("error.database.missing"));
 			log.warn("SearchUserAction: Database is missing");
@@ -74,12 +87,16 @@ public final class SearchStudentAction extends AdminAction {
 			return (mapping.findForward("error"));
 		}
 
-		List studentList = manager.searchStudent(searchForm.getIne(),searchForm.getName(), searchForm.getFirstname(),Integer.parseInt(searchForm.getDiploma()));
+		String ine = (searchForm.getIne()).replace('*','%');
+		String name = (searchForm.getName()).replace('*','%');
+		String firstname = (searchForm.getFirstname()).replace('*','%');
+		int diplomaId = Integer.parseInt(searchForm.getDiploma());
+		List studentList = manager.searchStudent(ine,name,firstname,diplomaId);
 
-		if(studentList != null) {
-			request.setAttribute("studentlist", studentList);
-		}
-
+			if(studentList != null) {
+				
+				request.setAttribute("studentlist", studentList);
+			}
 		return (mapping.findForward("searchstudent"));
 	}
 

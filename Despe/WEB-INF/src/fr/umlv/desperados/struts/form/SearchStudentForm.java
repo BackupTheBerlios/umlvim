@@ -33,18 +33,7 @@ public class SearchStudentForm extends ActionForm {
 	/** diploma property */
 	private String ine;
 
-	/** byDiploma property */
-	private boolean byIne;
-
-	/** byDiploma property */
-	private boolean byDiploma;
-
-	/** byFirstname property */
-	private boolean byFirstname;
-
-	/** byName property */
-	private boolean byName;
-
+	
 	// --------------------------------------------------------- Methods
 
 	/** 
@@ -56,12 +45,8 @@ public class SearchStudentForm extends ActionForm {
 		name = null;
 		firstname = null;
 		 ine= null;
-		diploma = "0";
-		byDiploma = false;
-		byFirstname = false;
-		byName = false;
-		byIne = false;
-	}
+		 diploma = "0";
+			}
 
 	/** 
 	 * Method validate
@@ -74,56 +59,16 @@ public class SearchStudentForm extends ActionForm {
 		HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
-		if (!byFirstname && !byName && !byDiploma && !byIne) {
-			errors.add(
-				"choice",
-				new ActionError("error.search.specify.oneatleast"));
-		} else {
-			if (byFirstname && (firstname == null || firstname.equals(""))) {
-				errors.add("firstname",new ActionError("error.search.specify"));
+			if ((firstname == null || firstname.equals("")) && (name == null || name.equals("")) && (name == null || name.equals("")) && diploma.equals("0") && (ine == null || ine.equals(""))) {
+					errors.add(
+										"choice",
+										new ActionError("error.search.specify.oneatleast"));
 			}
-			if (byName && (name == null || name.equals(""))) {
-				errors.add("name", new ActionError("error.search.specify"));
-			}
-			if (byDiploma && (diploma == null || diploma.equals(""))) {
-				errors.add("diploma", new ActionError("error.search.specify"));
-			}
-			if (byIne && (ine == null || ine.equals(""))) {
-						errors.add("ine", new ActionError("error.search.specify"));
-					}
+			return errors;
 		}
-		return errors;
-	}
 
 	
 
-	/**
-	 * @return
-	 */
-	public boolean isByDiploma() {
-		return byDiploma;
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isByFirstname() {
-		return byFirstname;
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isByIne() {
-		return byIne;
-	}
-
-	/**
-	 * @return
-	 */
-	public boolean isByName() {
-		return byName;
-	}
 
 	/**
 	 * @return
@@ -151,34 +96,6 @@ public class SearchStudentForm extends ActionForm {
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * @param b
-	 */
-	public void setByDiploma(boolean b) {
-		byDiploma = b;
-	}
-
-	/**
-	 * @param b
-	 */
-	public void setByFirstname(boolean b) {
-		byFirstname = b;
-	}
-
-	/**
-	 * @param b
-	 */
-	public void setByIne(boolean b) {
-		byIne = b;
-	}
-
-	/**
-	 * @param b
-	 */
-	public void setByName(boolean b) {
-		byName = b;
 	}
 
 	/**
