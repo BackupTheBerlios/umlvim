@@ -120,10 +120,6 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 					rs.getString(prop.get("phoneTmpAdd").toString()));
 				student.setEmployed(
 					rs.getBoolean(prop.get("isEmployed").toString()));
-				student.setStudEmplType(
-					rs.getString(prop.get("studEmplType").toString()));
-				student.setHeadFamProf(
-					rs.getString(prop.get("headFamProf").toString()));
 				student.setNatSport(
 					rs.getBoolean(prop.get("isNatSport").toString()));
 				student.setRegSport(
