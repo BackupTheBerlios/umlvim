@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    
+<!DOCTYPE preferences SYSTEM 'http://java.sun.com/dtd/preferences.dtd'>
+    
+<preferences EXTERNAL_XML_VERSION="1.0">
+	<root type="user">
+		<map />
+		<node name="systemInfos">
+			<map>
+				<entry key="universiteName" value="Universite de Marne-La-Vallee" />
+				<entry key="mailAddress" value="webmaster@univ-mlv.fr" />
+				<entry key="smtpServer" value="smtp.9online.fr" />
+			</map>
+		</node>
+		<node name="accountCreatedMail">
+			<map>
+				<entry key="object" value="Creation de votre compte pour l'outil d'inscription des etudiants" />
+				<entry key="body" value="Bonjour #firstname #name. \nVotre compte #admin, pour acceder a l'application, a ete cree avec les parametres suivants : \n login : #login \n mot de passe : #password" />
+			</map>
+		</node>
+		<node name="accountModifiedMail">
+			<map>
+				<entry key="object" value="Modification de votre compte pour l'outil d'inscription des etudiants" />
+				<entry key="body" value="Bonjour #firstname #name. \nVotre compte #admin, pour acceder a l'application, a ete modifie avec les parametres suivants : \n login : #login \n mot de passe : #password" />
+			</map>
+		</node>
+		<node name="accountRemovedMail">
+			<map>
+				<entry key="object" value="Suppression de votre compte pour l'outil d'inscription des etudiants" />
+				<entry key="body" value="Bonjour #firstname #name. \nVotre compte #admin, pour acceder a l'application, a ete supprime." />
+			</map>
+		</node>
+	</root>
+</preferences>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+	"http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+
+	<!-- ========== Data Source Configuration ============================= -->
+	<data-sources />
+
+	<!-- ========== Form Bean Definitions ================================= -->
+	<form-beans>
+
+		<form-bean dynamic="false" name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm">
+			<form-property name="password" type="java.lang.String" />
+			<form-property name="login" type="java.lang.String" />
+		</form-bean>
+
+		<form-bean dynamic="false" name="UserForm" type="fr.umlv.desperados.struts.form.UserForm">
+			<form-property name="admin" type="boolean" initial="false" />
+			<form-property name="email" type="java.lang.String" />
+			<form-property name="firstname" type="java.lang.String" />
+			<form-property name="login" type="java.lang.String" />
+			<form-property name="name" type="java.lang.String" />
+			<form-property name="modifyPassword" type="boolean" initial="false" />
+		</form-bean>
+
+	</form-beans>
+
+	<!-- ========== Global Exception Definitions ========================== -->
+	<global-exceptions />
+
+	<!-- ========== Global Forward Definitions ============================ -->
+	<global-forwards />
+
+	<!-- ========== Action Mapping Definitions ============================ -->
+	<action-mappings>
+
+		<action
+			path="/userLogon"
+			type="fr.umlv.desperados.struts.action.UserLogonAction"
+			name="UserLogonForm"
+			scope="request"
+			input="/pages/form/UserLogon.jsp"
+			validate="false">
+			<forward name="success"			path="home.page" />
+			<forward name="failure"			path="logon.page" />
+		</action>
+
+		<action
+			path="/userLogoff"
+			type="fr.umlv.desperados.struts.action.UserLogoffAction">
+			<forward name="success"			path="logon.page" />
+		</action>
+
+		<action
+			path="/edit*"
+			type="fr.umlv.desperados.struts.action.Edit{1}Action"
+		    attribute="{1}Form"
+		    scope="request"
+			input="/pages/form/{1]Details.jsp"
+		    validate="false">
+			<forward name="success"			path="/{1}.edit"/>
+		</action>
+<!--
+		<action
+			path="/editUser"
+			type="fr.umlv.desperados.struts.action.EditUserAction"
+			attribute="UserForm"
+			scope="request"
+			input="/pages/form/UserDetails.jsp"
+			validate="false">
+			<forward name="success"			path="User.edit" />
+		</action>
+-->
+		<action
+			path="/saveUser"
+			type="fr.umlv.desperados.struts.action.SaveUserAction"
+			attribute="UserForm"
+			name="userForm"
+			scope="request"
+			input="/pages/form/UserDetails.jsp"
+			validate="false">
+		</action>
+
+	</action-mappings>
+
+	<!-- ========== Controller Configuration ============================== -->
+	<controller
+		bufferSize="4096"
+		contentType="text/html"
+		debug="0"
+		locale="false"
+		maxFileSize="250M"
+		multipartClass="org.apache.struts.upload.CommonsMultipartRequestHandler"
+		nocache="false"
+		processorClass="org.apache.struts.action.RequestProcessor"
+		inputForward="false" />
+
+	<!-- ========== Message Resources Definitions ========================= -->
+	<message-resources
+		factory="org.apache.struts.util.PropertyMessageResourcesFactory"
+		key="org.apache.struts.action.MESSAGE"
+		null="false"
+		parameter="fr.umlv.desperados.struts.ApplicationResources" />
+
+	<!-- ========== Plug Ins Configuration ================================ -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config"
+					value="/WEB-INF/tiles-definitions.xml" />
+		<set-property property="definitions-parser-validate" value="true" />
+	</plug-in>
+
+	<plug-in className="fr.umlv.desperados.struts.plugin.ManagersPlugin" />
+
+	<plug-in className="fr.umlv.desperados.struts.plugin.PrefsPlugin">
+		<set-property property="mailConfPath" value="/WEB-INF/mail-conf.xml" />
+	</plug-in>
+
+</struts-config>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration//EN"
+       "http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="baseDef" path="/pages/layouts/DefaultLayout.jsp">
+		<put name="header"			value="/pages/common/Header.jsp" />
+		<put name="footer"			value="/pages/common/Copyright.jsp" />
+		<put name="menubar"			value="/pages/UserMenu.jsp" />
+		<put name="body-content"	value="" />
+	</definition>
+
+	<definition name="home.page" extends="baseDef">
+		<put name="body-content"	value="/pages/Main.jsp" />
+	</definition>
+
+	<definition name="logon.page" extends="baseDef">
+		<put name="menubar"			value="" />
+		<put name="body-content"	value="/pages/form/UserLogon.jsp" />
+	</definition>
+
+	<definition name="User.edit" extends="baseDef">
+		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
+	</definition>
+
+</tiles-definitions>
