@@ -4,12 +4,15 @@
 
 package fr.umlv.desperados.struts.form;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.util.MessageResources;
 
 import fr.umlv.desperados.util.Constants;
 
@@ -47,6 +50,8 @@ public class StudentLogonForm extends ActionForm {
 		HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
+		MessageResources resources = servlet.getInternal();
+
 		if((patronymicName == null) || (patronymicName.equals(""))) {
 			errors.add("patronymicName", new ActionError("error.required"));
 		}
@@ -55,9 +60,13 @@ public class StudentLogonForm extends ActionForm {
 		}
 		if((birthday == null) || (birthday).equals("")) {
 			errors.add("birthday", new ActionError("error.required"));
-		} else if (!birthday.matches(Constants.DATE_FORMAT)) {
-			errors.add("birthday", new ActionError("error.date.matches",
-															Constants.DATE_FORMAT.replaceAll("\\d", "X")));
+		} else {
+			String formatRegexp = "\\d\\d/\\d\\d/\\d\\d\\d\\d"; // resources.getMessage("date.format.regexp");
+			if (!birthday.matches(formatRegexp)) {
+				errors.add("birthday", new ActionError("error.date.format",
+																	"jj/mm/aaaa"));
+//																	resources.getMessage("date.format")));
+			}
 		}
 		return errors;
 	}

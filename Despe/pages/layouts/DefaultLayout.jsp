@@ -16,11 +16,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td width="200" bgcolor="#945dac" valign="top">
+				<td width="200" bgcolor="#b17fcb" valign="top">
 					<!-- Menu bar -->
-					<tiles:insert attribute="menubar"/>  
+					<tiles:insert attribute="menubar"/>
 				</td>
-				<td align="center" bgcolor="#9c71b4">
+				<td align="center" bgcolor="#d0aed9">
 					<!-- Main body information -->
 					<tiles:insert attribute="body-content"/>
 				</td>

@@ -8,10 +8,8 @@ package fr.umlv.desperados.struts.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -80,10 +78,11 @@ public class PrintInscriptionFileAction extends Action {
 			return (mapping.findForward("failure"));
 		}
 
-		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")+"/stylesheet/dossier.xsl");
+		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")
+																								+"/stylesheet/dossier.xsl");
 		InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
 		InputStream is = PDFTools.generatePDF(isStudent,isStyleSheet);
-		
+
 		response.setContentType("application/pdf");
 		OutputStream writer = response.getOutputStream();
 		byte[] buffer = new byte[1024];
@@ -91,6 +90,5 @@ public class PrintInscriptionFileAction extends Action {
 			writer.write(buffer);
 		}
 		return null;
-		
 	}
 }
