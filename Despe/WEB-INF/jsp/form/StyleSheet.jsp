@@ -39,9 +39,10 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td align="left"><html:submit/><html:cancel/></td>
+			<td align="left"><html:submit/></td>
 		</tr>
 	</table>
+	
 </html:form>
 <hr>
 <html:form action="/add/styleSheet" enctype="multipart/form-data">
@@ -59,7 +60,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td align="left"><html:submit/><html:cancel/></td>
+			<td align="left"><html:submit/></td>
 		</tr>	 
 	</table>
 </html:form>
@@ -84,7 +85,7 @@
 		</tr>
 		<tr>
 			<td></td>
-			<td align="left"><html:submit/><html:cancel/></td>
+			<td align="left"><html:submit/></td>
 		</tr>
 	</table>
 </html:form>

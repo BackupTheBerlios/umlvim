@@ -141,7 +141,7 @@
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
 			<forward name="success"				path="admin.stylesheet" />
 		</action>
-
+		
 		<action
 			path="/set/StyleSheet"
 			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
