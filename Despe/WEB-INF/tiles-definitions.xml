@@ -55,7 +55,11 @@
 	<definition name="student.edit.secu" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/StudentSecu.jsp" />
 	</definition>
-
+	
+	<definition name="student.edit.financial" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/StudentFinancial.jsp" />
+	</definition>
+	
 	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>

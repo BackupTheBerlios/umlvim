@@ -57,6 +57,8 @@
 							type="fr.umlv.desperados.struts.form.StudentPersoForm" />
 		<form-bean	name="StudentSecuForm"
 							type="fr.umlv.desperados.struts.form.StudentSecuForm" />
+		<form-bean	name="StudentFinancialForm"
+							type="fr.umlv.desperados.struts.form.StudentFinancialForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -65,7 +67,7 @@
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
 		<forward	name="ident"					path="student.ident" />
-		<forward	name="error"					path="common.operation.error" />
+		<forward 	name="error"					path="common.operation.error" />
 		<forward	name="success"				path="common.operation.ok" />
 		<forward	name="studenthome"		path="student.home" />
 		<forward	name="editstudent"		path="user.edit.student" />
@@ -74,7 +76,7 @@
 
 	<!-- ========== Action Mapping Definitions ============================ -->
 	<action-mappings>
-		<action path="/home/user"				forward="user.home" />
+		<action path="/home/user"			forward="user.home" />
 
 		<action
 			path="/userLogon"
@@ -83,14 +85,14 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/UserLogon.jsp"
 			validate="false">
-			<forward	name="itself"				path="user.logon"/>
-			<forward	name="home"				path="/do/home/user"/>
+			<forward	name="itself"			path="user.logon"/>
+			<forward	name="home"			path="/do/home/user"/>
 		</action>
 
 		<action
 			path="/userLogoff"
 			type="fr.umlv.desperados.struts.action.UserLogoffAction">
-			<forward	name="success"			path="user.logon"/>
+			<forward	name="success"		path="user.logon"/>
 		</action>
 
 		<action
@@ -100,7 +102,7 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/UserDetails.jsp"
 			validate="false">
-			<forward	name="success"			path="admin.edit.user"/>
+			<forward	name="success"		path="admin.edit.user"/>
 		</action>
 
 		<action
@@ -111,10 +113,10 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/UserDetails.jsp"
 			validate="false">
-			<forward	name="home"				path="/do/home/user"/>
+			<forward	name="home"			path="/do/home/user"/>
 		</action>
 
-		<action	path="/search/user"			forward="admin.search.user"/>
+		<action	path="/search/user"		forward="admin.search.user"/>
 		<action
 			path="/searchuser"
 			type="fr.umlv.desperados.struts.action.SearchUserAction"
@@ -123,14 +125,15 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/SearchUser.jsp"
 			validate="false">
-			<forward	name="itself"				path="admin.search.user" />
+			<forward	name="itself"			path="admin.search.user" />
 		</action>
 
 		<action
 			path="/new/password"
 			type="fr.umlv.desperados.struts.action.ChangePasswordAction"/>
 
-		<action path="/confPlanning" 			forward="planning.configure"/>
+		<action path="/confPlanning" 		forward="planning.configure"/>
+
 		<action
 			path="/setupConf"
 			type="fr.umlv.desperados.struts.action.SetupPlanningAction"
@@ -139,13 +142,13 @@
 			attribute="PlanningConfForm"
 			input="/WEB-INF/jsp/form/SetupPlanning.jsp"
 			validate="false">
-			<forward	name="conf"					path="planning.configure"/>
+			<forward	name="conf"			path="planning.configure"/>
 		</action>
 			
 		<action
 			path="/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
-			<forward name="success"				path="admin.stylesheet.list" />
+			<forward name="success"			path="admin.stylesheet" />
 		</action>
 
 		<action
@@ -178,7 +181,7 @@
 		<action
         	path="/stats/prepare"
         	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
-            <forward name="success" 			path="user.stats" />
+            <forward name="success" 		path="user.stats" />
         </action>
 
         <action
@@ -188,11 +191,11 @@
 			attribute="StatsForm"
 			input="/WEB-INF/jsp/form/Stats.jsp"
 			validate="false">
-			<forward name="success" 			path="user.stats.result" />
+			<forward name="success" 		path="user.stats.result" />
 		</action>
 
-		<action path="/identPage"					forward="student.ident" />
-		<action path="/home/student"			forward="student.home" />
+		<action path="/identPage"				forward="student.ident" />
+		<action path="/home/student"		forward="student.home" />
 
 		<action
 			path="/studentLogon"
@@ -220,8 +223,8 @@
 			type="fr.umlv.desperados.struts.action.EditStudentFileAction">
 			<forward name="1"							path="student.edit.perso"/>
 			<forward name="2"							path="student.edit.secu"/>
-			<forward name="3"							path="student.edit.secu"/>
-			<forward name="4"							path="student.edit.secu"/>
+			<forward name="3"						path="student.edit.secu"/>
+			<forward name="4"						path="student.edit.financial"/>
 		</action>
 
 		<action
@@ -234,18 +237,27 @@
 			validate="false"/>
 
 		<action
-			path="/save/student"
+			path="/save/student/secu"
 			type="fr.umlv.desperados.struts.action.SaveStudentAction"
 			name="StudentSecuForm"
 			attribute="StudentSecuForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/StudentSecu.jsp"
 			validate="false"/>
+			
+		<action
+			path="/save/student/financial"
+			type="fr.umlv.desperados.struts.action.SaveStudentAction"
+			name="StudentFinancialForm"
+			attribute="StudentFinancialForm"
+			scope="request"
+			input="/WEB-INF/jsp/form/StudentFinancial.jsp"
+			validate="false"/>
 
 		<action
         	path="/search/student"
         	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
-            <forward name="success"				path="user.search.student" />
+            <forward name="success"			path="user.search.student" />
         </action>
 		<action
 			path="/searchstudent"
@@ -255,7 +267,7 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/SearchStudent.jsp"
 			validate="false">
-			<forward	name="itself"				path="/do/search/student" />
+			<forward	name="itself"			path="/do/search/student" />
 		</action>
 
 		<action
@@ -287,7 +299,7 @@
 			validate="false">
 		</action>
 		
-		<action path="/cancel/rdv"					forward="student.cancel.rdv"/>
+		<action path="/cancel/rdv"				forward="student.cancel.rdv"/>
 		<action
 			path="/cancelRdv"
 			type="fr.umlv.desperados.struts.action.CancelRdvAction"

@@ -60,7 +60,7 @@ public class StudentFinancialForm extends ActionForm {
 	/**
 	 * @return
 	 */
-	public String GetFinancialAssistance() {
+	public String getFinancialAssistance() {
 		return financialAssistance;
 	}
 
