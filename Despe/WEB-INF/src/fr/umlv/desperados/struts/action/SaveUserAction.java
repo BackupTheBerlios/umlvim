@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -31,17 +28,7 @@ import fr.umlv.desperados.util.Constants;
  * XDoclet definition:
  * @struts:action path="/saveUser" name="userForm" attribute="userForm" input="/form/userDetails.jsp" validate="true"
  */
-public class SaveUserAction extends Action {
-
-	// ----------------------------------------------------- Instance Variables
-
-
-	/**
-	 * The <code>Log</code> instance for this application.
-	 */
-	private Log log =
-		LogFactory.getLog("fr.umlv.desperados.struts");
-
+public class SaveUserAction extends AdminAction {
 
 	// --------------------------------------------------------- Public Methods
 
@@ -54,7 +41,7 @@ public class SaveUserAction extends Action {
 	 * @return ActionForward
 	 * @throws Exception
 	 */
-	public ActionForward execute(
+	public ActionForward doExecute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,

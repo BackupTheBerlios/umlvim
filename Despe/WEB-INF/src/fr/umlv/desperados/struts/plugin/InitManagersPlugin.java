@@ -40,9 +40,6 @@ public class InitManagersPlugin implements PlugIn {
 		//DataSource datasource=(DataSource)context.getAttribute(Action.DATA_SOURCE_KEY);
 
 		try {
-
-			ServletContext context = servlet.getServletContext();
-
 			// db requestor init
 			Driver dDriverOracle =
 				(java.sql.Driver) Class
@@ -61,29 +58,23 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseRdvManager.getInstance(strutsDatabaseRequestor);
 			databaseUserManager =
 				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
-
-			// context visible manager init
-			context.setAttribute(
-				Constants.RDV_DATABASE_KEY,
-				databaseRdvManager);
-			context.setAttribute(
-				Constants.USER_DATABASE_KEY,
-				databaseUserManager);
-
 		} catch (ClassNotFoundException e) {
-			System.err.println("\n\\nclasse not found exceptionn\n\n");
 			e.printStackTrace();
 		} catch (InstantiationException e1) {
-			System.err.println("\n\nInstantiationException\n\n");
 			e1.printStackTrace();
 		} catch (IllegalAccessException e1) {
-			System.err.println("IllegalException");
 			e1.printStackTrace();
 		} catch (SQLException e2) {
-			System.err.println("\n\nSQLException\n\n");
 			e2.printStackTrace();
 		}
-
+		// context visible manager init
+		ServletContext context = servlet.getServletContext();
+		context.setAttribute(
+			Constants.RDV_DATABASE_KEY,
+			databaseRdvManager);
+		context.setAttribute(
+			Constants.USER_DATABASE_KEY,
+			databaseUserManager);
 	}
 
 	/* (non-Javadoc)

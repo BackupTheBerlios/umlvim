@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -19,6 +16,7 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.account.User;
 import fr.umlv.desperados.account.UserManager;
+import fr.umlv.desperados.account.UserNotFoundException;
 import fr.umlv.desperados.struts.form.UserForm;
 import fr.umlv.desperados.struts.util.FormUtilities;
 import fr.umlv.desperados.util.Constants;
@@ -31,17 +29,7 @@ import fr.umlv.desperados.util.Constants;
  * XDoclet definition:
  * @struts:action path="/editUser" name="userForm" attribute="userForm" input="/form/userDetails.jsp" validate="true"
  */
-public class EditUserAction extends Action {
-
-	// ----------------------------------------------------- Instance Variables
-
-
-	/**
-	 * The <code>Log</code> instance for this application.
-	 */
-	private Log log =
-		LogFactory.getLog("fr.umlv.desperados.struts");
-
+public class EditUserAction extends AdminAction {
 
 	// --------------------------------------------------------- Public Methods
 
@@ -54,7 +42,7 @@ public class EditUserAction extends Action {
 	 * @return ActionForward
 	 * @throws Exception
 	 */
-	public ActionForward execute(
+	public ActionForward doExecute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,
@@ -65,20 +53,6 @@ public class EditUserAction extends Action {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 
-		// Is there a currently logged on user?
-		User user = (User) session.getAttribute(Constants.USER_KEY);
-		if (user == null || !user.getAdmin()) {
-			
-			if (log.isWarnEnabled()) {
-				log.warn(" User is not logged on as admin in session "
-							+ session.getId());
-				errors.add(ActionErrors.GLOBAL_ERROR,
-							new ActionError("error.mustbeloggedasadmin"));
-				saveErrors(request, errors);
-			}
-			return (mapping.findForward("error"));
-		}
-
 		if (action == null)
 			action = "create";
 
@@ -87,14 +61,19 @@ public class EditUserAction extends Action {
 						" action");
 		}
 
-		// Is there a currently logged on user?
 		User userToEdit = null;
 		if (!"create".equals(action)) {
 			UserManager manager = (UserManager) servlet.getServletContext()
 										.getAttribute(Constants.USER_DATABASE_KEY);
 			String login = (String)request.getParameter("login");
-			System.out.println("**LOGIN="+login+"**");
-			userToEdit = manager.getUser(login);
+			try {
+				userToEdit = manager.getUser(login);
+			} catch(UserNotFoundException e) {
+				errors.add("database",
+						   new ActionError("error.user.dontexist"));
+				saveErrors(request, errors);
+				return (mapping.findForward("failure"));
+			}
 		}
 
 		// Populate the user registration form
