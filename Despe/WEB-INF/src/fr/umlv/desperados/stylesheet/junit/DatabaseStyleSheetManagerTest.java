@@ -108,6 +108,7 @@ public class DatabaseStyleSheetManagerTest extends TestCase {
 	public void testListStyleSheet() {
 		List l = dssm.listStyleSheet();
 		System.out.println(l.size());
+		assertFalse(l.isEmpty());
 		assertTrue(l.size() > 0);
 	}
 	

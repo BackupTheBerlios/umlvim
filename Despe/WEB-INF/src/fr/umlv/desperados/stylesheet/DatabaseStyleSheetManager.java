@@ -132,6 +132,7 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 			ResultSet rs =
 				requestor.doQuery(
 					"SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE");
+			//rs.first();
 			l = new DatabaseStyleSheetList(rs);
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré

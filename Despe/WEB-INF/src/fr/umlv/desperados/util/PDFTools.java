@@ -191,90 +191,89 @@ public class PDFTools {
 			replace(sbuff, "#heure#", sdate.substring(8,14));
 		}
 		// inscription
-		else {
-			replace(sbuff,"#nom_pat#", student.getPatronymicName());	
-			replace(sbuff,"#prenom2#", student.getFirstname2());
-			DateFormat d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
-			String sdate = d.format(student.getBirthday());
-			replace(sbuff, "#date_naissance#", sdate);
-			replace(sbuff,"#INE#", student.getIne());
-			String nat = new Integer(student.getNationalityId()).toString();
-			replace(sbuff,"#code_nationalite#", nat);
-			//replace(sbuff, "#nationalite#", manager.get(DatabaseInformationListManager.NATIONALITY, nat));
-			//replace(sbuff,"#ville_naissance#", student.getTownOfBirth());
-			replace(sbuff, "#sexe#", student.getSex());
-		
-			// faire des tests ...
-			replace(sbuff, "#lieu_naissance#", new Integer(student.getForeignBirthplaceId()).toString());
-		
-			replace(sbuff,"#inscr1_an1#", student.getFirstInsSupEduc());
-			replace(sbuff,"#inscr1_an2#", student.getFirstInsFrenchUniv());
-			replace(sbuff, "#inscr1_eta#", student.getEstaFirstInsFrenchUniv());
-			replace(sbuff, "#inscr1_dep#", new Integer(student.getFirstInsFrUnivDepId()).toString());
-			replace(sbuff, "#inscr1_an3#", student.getFirstInsEstablishment());
-		
-			/*************************** Baccalaureat *********************************/
-			// replace(sbuff, "#code_bac#", student.getBaccalaureatId());
-			replace(sbuff, "#annee_bac#", student.getBacYear());
-			String mention = manager.get(DatabaseInformationListManager.BAC_MENTION, new Integer(student.getBacMentionId()).toString());
-			//replace(sbuff, "#mention#", mention);
-			Integer year = new Integer(student.getBacYear());
-			String resource;
-			if(year.intValue() >= 1995)
-				resource = DatabaseInformationListManager.BAC_POST_95;
-			else resource = DatabaseInformationListManager.BAC_PRE_95;
-			//replace(sbuff, "#serie#", manager.get(resource, student.getBaccalaureatId()));
-			//replace(sbuff, "#bac_ville#", student.getb)
-			replace(sbuff, "#bac_eta#", student.getEstablishmentBacObtaining());
-		
-			/********************************Fix and Temp Addresses*********************************/
-			replace(sbuff, "#fixe_adr#", student.getNumFixAdd() 
-							+ "-" + student.getBuildingFixAdd()
-							+ "-" + student.getStreetFixAdd());
-			replace(sbuff, "#fixe_pays#", student.getForeignCityFixAdd());
-			replace(sbuff, "#fixe_tel#", student.getPhoneFixAdd());
-		
-			replace(sbuff, "#tmp_adr#", student.getNumTmpAdd()
-							+ "-" + student.getBuildingTmpAdd()
-							+ "-" + student.getStreetTmpAdd());
-			replace(sbuff, "#tmp_ville#", student.getCityTmpAdd());
-			replace(sbuff, "#tmp_tel#", student.getPhoneTmpAdd());
-		
-			/********************** Job ************************/
-			replace(sbuff, "#emploi#", student.isEmployed()?"oui":"non");
-			String emploi = student.getStudEmplType();
-			System.out.println("emploi = "+emploi);
-			//replace(sbuff, "#emploi_nom#", manager.get(DatabaseInformationListManager.SOCIAL_ECONOMIC_CATEGORY, emploi));
-			//replace(sbuff, "#emploi_code#", student.getStudEmplType());
-			//replace(sbuff, "#prof_chef#", student.getHeadFamProf());
-		
-			//replace(sbuff, "#sport#", student.getPractisedSport());
-		
-			/******************Financial Aid*****************/
-			//replace(sbuff, "#aide_code#", student.getFinancialAssistanceId());
-			//replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
-		
-			/***************** Inscriptions ******************/
-			String diploma = new Integer(student.getMLVDiplomaId()).toString();
-			//replace(sbuff, "#inscr_principale#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
-			//replace(sbuff, "#nb1#", new Integer(student.getPrincCycleInsNum()).toString());
-			//replace(sbuff, "#nb2#", new Integer(student.getPrincDiplInsNum()).toString());
-			//replace(sbuff, "#nb3#", new Integer(student.getPrincInsYearNum()).toString());
-			//diploma = new Integer(student.getMLVDiplomaComplId()).toString();
-			//replace(sbuff, "#inscr_complementaire#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
-			//replace(sbuff, "#nb4#", new Integer(student.getComplCycleInsNum()).toString());
-			//replace(sbuff, "#nb5#", new Integer(student.getComplDipInsNum()).toString());
-			//replace(sbuff, "#nb6#", new Integer(student.getCompInsYearNum()).toString());
-		
-		
-			//replace(sbuff, "#numero_boursier#", new Integer(student.getStockBrokerNum()).toString());
-			//replace(sbuff, "#prolongation_motif#", student.getMotifProlSocSec());
-			//replace(sbuff, "#SS#", student.getSocialSecurityNum());
-			//replace(sbuff, "#nom_pere#", student.getFatherName());
-			//replace(sbuff, "#prenom_pere#", student.getFatherFirstName());
-			//replace(sbuff, "#prenom_mere#", student.getMotherName());
-			//replace(sbuff, "#nom_mere#", student.getMotherPatronymicName());
-		}	
+		replace(sbuff,"#nom_pat#", student.getPatronymicName());	
+		replace(sbuff,"#prenom2#", student.getFirstname2());
+		DateFormat d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
+		String sdate = d.format(student.getBirthday());
+		replace(sbuff, "#date_naissance#", sdate);
+		replace(sbuff,"#INE#", student.getIne());
+		String nat = new Integer(student.getNationalityId()).toString();
+		replace(sbuff,"#code_nationalite#", nat);
+		//replace(sbuff, "#nationalite#", manager.get(DatabaseInformationListManager.NATIONALITY, nat));
+		//replace(sbuff,"#ville_naissance#", student.getTownOfBirth());
+		replace(sbuff, "#sexe#", student.getSex());
+	
+		// faire des tests ...
+		replace(sbuff, "#lieu_naissance#", new Integer(student.getForeignBirthplaceId()).toString());
+	
+		replace(sbuff,"#inscr1_an1#", student.getFirstInsSupEduc());
+		replace(sbuff,"#inscr1_an2#", student.getFirstInsFrenchUniv());
+		replace(sbuff, "#inscr1_eta#", student.getEstaFirstInsFrenchUniv());
+		replace(sbuff, "#inscr1_dep#", new Integer(student.getFirstInsFrUnivDepId()).toString());
+		replace(sbuff, "#inscr1_an3#", student.getFirstInsEstablishment());
+	
+		/*************************** Baccalaureat *********************************/
+		// replace(sbuff, "#code_bac#", student.getBaccalaureatId());
+		replace(sbuff, "#annee_bac#", student.getBacYear());
+		String mention = manager.get(DatabaseInformationListManager.BAC_MENTION, new Integer(student.getBacMentionId()).toString());
+		//replace(sbuff, "#mention#", mention);
+		Integer year = new Integer(student.getBacYear());
+		String resource;
+		if(year.intValue() >= 1995)
+			resource = DatabaseInformationListManager.BAC_POST_95;
+		else resource = DatabaseInformationListManager.BAC_PRE_95;
+		//replace(sbuff, "#serie#", manager.get(resource, student.getBaccalaureatId()));
+		//replace(sbuff, "#bac_ville#", student.getb)
+		replace(sbuff, "#bac_eta#", student.getEstablishmentBacObtaining());
+	
+		/********************************Fix and Temp Addresses*********************************/
+		replace(sbuff, "#fixe_adr#", student.getNumFixAdd() 
+						+ "-" + student.getBuildingFixAdd()
+						+ "-" + student.getStreetFixAdd());
+		replace(sbuff, "#fixe_pays#", student.getForeignCityFixAdd());
+		replace(sbuff, "#fixe_tel#", student.getPhoneFixAdd());
+	
+		replace(sbuff, "#tmp_adr#", student.getNumTmpAdd()
+						+ "-" + student.getBuildingTmpAdd()
+						+ "-" + student.getStreetTmpAdd());
+		replace(sbuff, "#tmp_ville#", student.getCityTmpAdd());
+		replace(sbuff, "#tmp_tel#", student.getPhoneTmpAdd());
+	
+		/********************** Job ************************/
+		replace(sbuff, "#emploi#", student.isEmployed()?"oui":"non");
+		String emploi = student.getStudEmplType();
+		System.out.println("emploi = "+emploi);
+		//replace(sbuff, "#emploi_nom#", manager.get(DatabaseInformationListManager.SOCIAL_ECONOMIC_CATEGORY, emploi));
+		//replace(sbuff, "#emploi_code#", student.getStudEmplType());
+		//replace(sbuff, "#prof_chef#", student.getHeadFamProf());
+	
+		//replace(sbuff, "#sport#", student.getPractisedSport());
+	
+		/******************Financial Aid*****************/
+		//replace(sbuff, "#aide_code#", student.getFinancialAssistanceId());
+		//replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
+	
+		/***************** Inscriptions ******************/
+		String diploma = new Integer(student.getMLVDiplomaId()).toString();
+		//replace(sbuff, "#inscr_principale#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
+		//replace(sbuff, "#nb1#", new Integer(student.getPrincCycleInsNum()).toString());
+		//replace(sbuff, "#nb2#", new Integer(student.getPrincDiplInsNum()).toString());
+		//replace(sbuff, "#nb3#", new Integer(student.getPrincInsYearNum()).toString());
+		//diploma = new Integer(student.getMLVDiplomaComplId()).toString();
+		//replace(sbuff, "#inscr_complementaire#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
+		//replace(sbuff, "#nb4#", new Integer(student.getComplCycleInsNum()).toString());
+		//replace(sbuff, "#nb5#", new Integer(student.getComplDipInsNum()).toString());
+		//replace(sbuff, "#nb6#", new Integer(student.getCompInsYearNum()).toString());
+	
+	
+		//replace(sbuff, "#numero_boursier#", new Integer(student.getStockBrokerNum()).toString());
+		//replace(sbuff, "#prolongation_motif#", student.getMotifProlSocSec());
+		//replace(sbuff, "#SS#", student.getSocialSecurityNum());
+		//replace(sbuff, "#nom_pere#", student.getFatherName());
+		//replace(sbuff, "#prenom_pere#", student.getFatherFirstName());
+		//replace(sbuff, "#prenom_mere#", student.getMotherName());
+		//replace(sbuff, "#nom_mere#", student.getMotherPatronymicName());
+	
 		changeContentFile(sbuff.toString().getBytes());
 	} catch (IOException e) {
 		// TODO Bloc catch auto-généré

@@ -27,6 +27,13 @@ public abstract class DatabaseAbstractList extends AbstractList {
 	 */
 	public DatabaseAbstractList(ResultSet rs) {
 		this.rs = rs;
+		try {
+			if(rs.getRow() == 0)
+				rs.first();
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
 	}
 
 	/**
