@@ -25,6 +25,11 @@ public class StudentStudiesForm extends ActionForm {
 	private String establishment;
 	private String frenchDep;
 	private String yearsEstab;
+	private String baccalaureat;
+	private String bacMention;
+	private String bacPre95;
+	private String yearsBac;
+	private String baccalaureatEstablishmentType;
 
 
 	// --------------------------------------------------------- Methods
@@ -60,7 +65,21 @@ public class StudentStudiesForm extends ActionForm {
 		if((yearsEstab == null) || (yearsEstab.equals(""))) {
 			errors.add("yearsEstab", new ActionError("error.required"));
 		}
-		
+		if((baccalaureat == null) || (baccalaureat.equals(""))) {
+			errors.add("baccalaureat", new ActionError("error.required"));
+		}
+		if((bacMention == null) || (bacMention.equals(""))) {
+			errors.add("bacMention", new ActionError("error.required"));
+		}
+		if((bacPre95 == null) || (bacPre95.equals(""))) {
+			errors.add("bacPre95", new ActionError("error.required"));
+		}
+		if((yearsBac == null) || (yearsBac.equals(""))) {
+			errors.add("yearsBac", new ActionError("error.required"));
+		}
+		if((baccalaureatEstablishmentType == null) || (baccalaureatEstablishmentType.equals(""))) {
+			errors.add("baccalaureatEstablishmentType", new ActionError("error.required"));
+		}
 		return errors;
 	}
 
@@ -76,6 +95,11 @@ public class StudentStudiesForm extends ActionForm {
 		establishment="";
 		frenchDep="";
 		yearsEstab="";
+		baccalaureat="";
+		bacMention="";
+		bacPre95="";
+		yearsBac="";
+		baccalaureatEstablishmentType="";
 	}
 
 
@@ -164,6 +188,76 @@ public class StudentStudiesForm extends ActionForm {
 	 */
 	public void setYearsEstab(String string) {
 		yearsEstab = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getBaccalaureat() {
+		return baccalaureat;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setBaccalaureat(String string) {
+		baccalaureat = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getBacMention() {
+		return bacMention;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setBacMention(String string) {
+		bacMention = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getBacPre95() {
+		return bacPre95;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setBacPre95(String string) {
+		bacPre95 = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getYearsBac() {
+		return yearsBac;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setYearsBac(String string) {
+		yearsBac = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getBaccalaureatEstablishmentType() {
+		return baccalaureatEstablishmentType;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setBaccalaureatEstablishmentType(String string) {
+		baccalaureatEstablishmentType = string;
 	}
 
 }

@@ -76,22 +76,31 @@ public class EditStudentFileAction extends StudentAction {
 							request.setAttribute( "yearsList",yearsList);
 			Set frenchDepList=manager.list(DatabaseInformationListManager .FRENCH_DEP);
 						request.setAttribute( "frenchDepList",frenchDepList);
+			Set baccalaureatList=manager.list(DatabaseInformationListManager .BAC_POST_95);
+						request.setAttribute( "baccalaureatList",baccalaureatList);
+			Set bacPre95List=manager.list(DatabaseInformationListManager .BAC_PRE_95);
+						request.setAttribute( "bacPre95List",bacPre95List);									
+			Set bacMentionList=manager.list(DatabaseInformationListManager .BAC_MENTION);
+						request.setAttribute( "bacMentionList",bacMentionList);		
+			Set baccalaureatEstablishmentTypeList=manager.list(DatabaseInformationListManager .BAC_ESTABLISHMENT_TYPE);
+						request.setAttribute( "baccalaureatEstablishmentTypeList",baccalaureatEstablishmentTypeList);	
+			
 		}
 		if ("3".equals(page)) {
 				Set SocialSecurityAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
-				request.setAttribute( "socialSecurityAffList",SocialSecurityAffList);
+					request.setAttribute( "socialSecurityAffList",SocialSecurityAffList);
 				Set SocialSecurityNonAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_NON_AFF);
-				request.setAttribute( "socialSecurityNonAffList",SocialSecurityNonAffList);
+					request.setAttribute( "socialSecurityNonAffList",SocialSecurityNonAffList);
 				Set centerPaymentList=manager.list(DatabaseInformationListManager .PAYMENT_CENTER);
-				request.setAttribute( "centerPaymentList",centerPaymentList);		
+					request.setAttribute( "centerPaymentList",centerPaymentList);		
 				Set mutualInsuranceCompanyList=manager.list(DatabaseInformationListManager .MUTUAL_COMPANY);
-				request.setAttribute( "mutualInsuranceCompanyList",mutualInsuranceCompanyList);		
+					request.setAttribute( "mutualInsuranceCompanyList",mutualInsuranceCompanyList);		
 			}
 			if("4".equals(page)){
 				Set financialAssistanceList=manager.list(DatabaseInformationListManager .FINANCIAL_AID);
-				request.setAttribute( "financialAssistanceList",financialAssistanceList);		
+					request.setAttribute( "financialAssistanceList",financialAssistanceList);		
 				Set purseList=manager.list(DatabaseInformationListManager .PURSE);
-						request.setAttribute( "purseList",purseList);		
+					request.setAttribute( "purseList",purseList);		
 			}
 
 		System.out.println("*****\nEditStudentAction: forwarding to "+page+"\n*****");

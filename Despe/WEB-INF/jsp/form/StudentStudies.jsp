@@ -17,8 +17,8 @@
 		</td>
 		<td align="left">
 			<html:select property="wasMLVLastYear">
-				<option value="0" selected="selected">NON</option>
-				<option value="1" selected="selected">OUI</option>
+				<option value="0">NON</option>
+				<option value="1">OUI</option>
 			</html:select>
 		</td>
 	</tr> 	
@@ -62,10 +62,16 @@
 		<tr>
 			<td>
 				<bean:message key="inscription.firstInscription.frenchUniv.establishment"/>
-				<html:text property="establishment" />
 			</td>
 			<td>
+				<html:text property="establishment" />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<bean:message key="inscription.firstInscription.frenchUniv.zip"/>
+			</td>
+			<td>
 				<html:select property="frenchDep">
 				<logic:iterate name="frenchDepList" id="entry"
 									type="Map.Entry">
@@ -92,6 +98,84 @@
 				</html:select>
 			</td>
 		</tr>
+		<tr>
+			<td align="center">
+				<b><bean:message key="inscription.bac.title"/></b><font size=-1><bean:message key="inscription.bac.comment"/></font>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<bean:message key="inscription.bac.year"/>
+			</td>
+			<td>
+					<html:select property="yearsBac" onchange="if(form.yearsBac.value>1995){form.baccalaureat.disabled=false;form.bacPre95.disabled=true;}else{form.baccalaureat.disabled=true;form.bacPre95.disabled=false;}">
+					<logic:iterate name="yearsList" id="entry"
+											type="Map.Entry">
+						<option value="<bean:write name="entry" property="key" />">
+							<bean:write name="entry" property="value" />
+						</option>
+					</logic:iterate>
+				</html:select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<bean:message key="inscription.bac.serie"/>
+				<html:select property="baccalaureat">
+				<logic:iterate name="baccalaureatList" id="entry"
+									type="Map.Entry">
+					<option value="<bean:write name="entry" property="key" />">
+						<bean:write name="entry" property="value" />
+					</option>
+				</logic:iterate>
+				</html:select>
+			</td>
+			<td>
+				<html:select property="bacPre95">
+				<logic:iterate name="bacPre95List" id="entry"
+									type="Map.Entry">
+					<option value="<bean:write name="entry" property="key" />">
+						<bean:write name="entry" property="value" />
+					</option>
+				</logic:iterate>
+				</html:select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<bean:message key="inscription.bac.mention"/>
+			</td>
+			<td>
+				<html:select property="bacMention">
+				<logic:iterate name="bacMentionList" id="entry"
+									type="Map.Entry">
+					<option value="<bean:write name="entry" property="key" />">
+						<bean:write name="entry" property="value" />
+					</option>
+				</logic:iterate>
+				</html:select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b><bean:message key="inscription.bac.estab"/></b>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<bean:message key="inscription.bac.estab.type"/>
+			</td>
+			<td>
+					<html:select property="baccalaureatEstablishmentType">
+				<logic:iterate name="baccalaureatEstablishmentTypeList" id="entry"
+									type="Map.Entry">
+					<option value="<bean:write name="entry" property="key" />">
+						<bean:write name="entry" property="value" />
+					</option>
+				</logic:iterate>
+				</html:select>
+			</td>
+		</tr>	
 	</table>
 	<html:submit><bean:message key="button.next"/></html:submit>
 	</html:form>
