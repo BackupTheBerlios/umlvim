@@ -60,39 +60,81 @@ public class DatabaseRdvManager implements RdvManager {
 	 * @param rdv
 	 * @roseuid 3FF869CD00E6
 	 */
-	public void addRdv(Rdv rdv) {
+	public boolean addRdv(Rdv rdv) {
+		boolean res = true;
 		DateFormat dtf =
 			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		java.util.Date date = rdv.getDate();
 		String formatedDate = dtf.format(date);
+		String reqSql;
+		ResultSet rs = null;
+		int nbRdvDispo;
 //		String requete="UPDATE TABLE Etudiant SET DATE_DE_RDV=TO_DATE('"+ formatedDate+ "','DD/MM/YY HH24:MI') WHERE ID_ETU="	+ Integer.parseInt(rdv.getStudentId();
 		//add the rdv date in the student table
 		try {
-			requestor.executeQuery(
-				"UPDATE Etudiant SET DATE_DE_RDV=TO_DATE('"
+			// if the student is Ravel : descrease the available rdv
+			if (rdv.getRavel()) {
+				reqSql = "select DATE_RDV, NB_RAV_DSP from RDV_DISPO where DATE_RDV=to_date('"
 					+ formatedDate
-					+ "','DD/MM/YY HH24:MI') WHERE ID_ETU="
-					+ Integer.parseInt(rdv.getStudentId()));
+					+ "','DD/MM/YY HH24:MI') for update of NB_RAV_DSP";
+				rs = requestor.doQuery(reqSql);
+				
+				rs.first();
+				nbRdvDispo = rs.getInt(2);
+				
+				// if the place is always free, we allot it to the student
+				if(nbRdvDispo > 0) {	
+					requestor.executeQuery(
+						"UPDATE Rdv_Dispo SET NB_RAV_DSP=NB_RAV_DSP-1 WHERE DATE_RDV=TO_DATE('"
+							+ formatedDate
+							+ "','DD/MM/YY HH24:MI') ");
+					
+					requestor.executeQuery(
+						"UPDATE Etudiant SET DATE_DE_RDV=TO_DATE('"
+							+ formatedDate
+							+ "','DD/MM/YY HH24:MI') WHERE ID_ETU="
+							+ Integer.parseInt(rdv.getStudentId()));
+				}
+				else
+					res = false;
+			}
 
-			//if the student is Ravel : descrease the available rdv
-			if (rdv.getRavel())
-				requestor.executeQuery(
-					"UPDATE Rdv_Dispo SET NB_RAV_DSP=NB_RAV_DSP-1 WHERE DATE_RDV=TO_DATE('"
-						+ formatedDate
-						+ "','DD/MM/YY HH24:MI') ");
-
-			else
-				//if the student is a  not: Ravel descrease the available rdv for the not Ravel
-
-				requestor.executeQuery(
-					"UPDATE Rdv_Dispo SET NB_ETU_DSP=NB_ETU_DSP-1 WHERE DATE_RDV=TO_DATE('"
-						+ formatedDate
-						+ "','DD/MM/YY HH24:MI') ");
+			// if the student is a not Ravel, descrease the available rdv for the not Ravel
+			else {
+				reqSql = "select DATE_RDV, NB_ETU_DSP from RDV_DISPO where DATE_RDV=to_date('"
+					+ formatedDate
+					+ "','DD/MM/YY HH24:MI') for update of NB_ETU_DSP";
+				rs = requestor.doQuery(reqSql);
+				
+				rs.first();
+				nbRdvDispo = rs.getInt(2);
+				
+				// if the place is always free, we allot it to the student
+				if(nbRdvDispo > 0) {	
+					requestor.executeQuery(
+						"UPDATE Rdv_Dispo SET NB_ETU_DSP=NB_ETU_DSP-1 WHERE DATE_RDV=TO_DATE('"
+							+ formatedDate
+							+ "','DD/MM/YY HH24:MI') ");
+				
+					requestor.executeQuery(
+						"UPDATE Etudiant SET DATE_DE_RDV=TO_DATE('"
+							+ formatedDate
+							+ "','DD/MM/YY HH24:MI') WHERE ID_ETU="
+							+ Integer.parseInt(rdv.getStudentId()));
+				}
+				else
+					res = false;
+			}
+			
+			requestor.executeQuery("commit");
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return res;
 	}
 
 	/**

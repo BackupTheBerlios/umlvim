@@ -26,7 +26,7 @@ public interface RdvManager
     * @param rdv the Rdv to add.
     * @roseuid 3FBF56BA004D
     */
-   public void addRdv(Rdv rdv);
+   public boolean addRdv(Rdv rdv);
    
    /**
     * Gets the days when Rdv can still be reserved (a day which is not full).

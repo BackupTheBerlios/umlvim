@@ -73,7 +73,8 @@ public class TakeRdvAction extends Action {
 			boolean isRavel = (  bYear == calCurrent.get(Calendar.YEAR));
 		
 			Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
-			databaseRdvManager.addRdv(rdv);
+			if(! databaseRdvManager.addRdv(rdv))
+				errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.not.more.available"));
 			
 			student.setAppointmentDate(rdvDate);
 		
