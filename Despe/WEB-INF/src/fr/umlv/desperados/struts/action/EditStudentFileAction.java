@@ -60,7 +60,14 @@ public class EditStudentFileAction extends StudentAction {
 		if ("1".equals(page)) {
 			Set lodgingTypeList=manager.list(DatabaseInformationListManager .LODGING_TYPE);
 						request.setAttribute( "lodgingTypeList",lodgingTypeList);
-			
+			Set famSituationList=manager.list(DatabaseInformationListManager .FAMILIAL_SITUATION);
+						request.setAttribute( "famSituationList",famSituationList);
+			Set handicapList=manager.list(DatabaseInformationListManager .HANDICAP);
+						request.setAttribute( "handicapList",handicapList);
+			Set militarySituationList=manager.list(DatabaseInformationListManager .MILITARY_SITUATION);
+						request.setAttribute( "militarySituationList",militarySituationList);
+			Set workedShareList=manager.list(DatabaseInformationListManager .WORKED_SHARED);
+						request.setAttribute( "workedShareList",workedShareList);
 			
 		
 		}

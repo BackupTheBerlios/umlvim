@@ -8,10 +8,14 @@
 	<jsp:useBean id="dossier" class="java.lang.String" scope="request"/>
 	<html:form action="/save/file/perso">
 		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/MaritalStatus.jsp"/>
+		<br/>
 		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/FamilySituation.jsp"/>
+		<br/>
 		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/MilitarySituation.jsp"/>
+		<br/>
 		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/Address.jsp"/>
+		<br/>
 		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/SocioProfSituation.jsp"/>
-		<html:submit/>
+		<html:submit><bean:message key="button.next"/></html:submit>
 	</html:form>
 </app:checkIdent>

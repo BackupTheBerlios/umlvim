@@ -44,6 +44,22 @@
 			<td> <bean:message key="inscription.address.temp"/> </td>
 			<td> <html:text property="addressTemp" /> </td>
 		</tr>
+				<tr>
+			<td> <bean:message key="inscription.address.zip"/> </td>
+			<td> <html:text property="zipTemp" /> </td>
+		</tr>
+				<tr>
+			<td> <bean:message key="inscription.address.city"/> </td>
+			<td> <html:text property="cityTemp" /> </td>
+		</tr>
+				<tr>
+			<td> <bean:message key="inscription.address.country"/> </td>
+			<td> <html:text property="countryTemp" /> </td>
+		</tr>
+				<tr>
+			<td> <bean:message key="inscription.address.phone"/> </td>
+			<td> <html:text property="phoneTemp" /> </td>
+		</tr>
 	</table>
 
 </logic:present>

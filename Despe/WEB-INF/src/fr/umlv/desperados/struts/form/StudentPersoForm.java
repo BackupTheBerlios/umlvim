@@ -33,10 +33,21 @@ public class StudentPersoForm extends ActionForm {
 	private String addressTemp;
 	private String addressFixe;
 	private String zip;
+	private String zipTemp;
 	private String city;
+	private String cityTemp;
 	private String country;
+	private String countryTemp;
 	private String phone;
+	private String phoneTemp;
 	private String lodgingType;
+	private String famSituation;
+	private String handicap;
+	private String militarySituation;
+	private String workedShare;
+	private String emlpoyed;
+	private String workNature;
+	private String headFamilyProfession;
 
 	// --------------------------------------------------------- Methods
 
@@ -92,19 +103,51 @@ public class StudentPersoForm extends ActionForm {
 		if((zip == null) || (zip.equals(""))) {
 			errors.add("zip", new ActionError("error.required"));
 		}
+		if((zipTemp == null) || (zipTemp.equals(""))) {
+			errors.add("zipTemp", new ActionError("error.required"));
+		}
 		if((city == null) || (city.equals(""))) {
-			errors.add("frenchCity", new ActionError("error.required"));
+			errors.add("city", new ActionError("error.required"));
+		}
+		if((cityTemp == null) || (cityTemp.equals(""))) {
+			errors.add("cityTemp", new ActionError("error.required"));
 		}
 		if((country == null) || (country.equals(""))) {
 			errors.add("country", new ActionError("error.required"));
 		}
+		if((countryTemp == null) || (countryTemp.equals(""))) {
+			errors.add("countryTemp", new ActionError("error.required"));
+		}
 		if((phone == null) || (phone.equals(""))) {
 			errors.add("phone", new ActionError("error.required"));
+		}
+		if((phoneTemp == null) || (phoneTemp.equals(""))) {
+			errors.add("phoneTemp", new ActionError("error.required"));
 		}
 		if((lodgingType == null) || (lodgingType.equals(""))) {
 			errors.add("lodgingType", new ActionError("error.required"));
 		}
-		
+		if((famSituation == null) || (famSituation.equals(""))) {
+			errors.add("lodgingType", new ActionError("error.required"));
+		}
+		if((handicap == null) || (handicap.equals(""))) {
+			errors.add("handicap", new ActionError("error.required"));
+		}
+		if((militarySituation == null) || (militarySituation.equals(""))) {
+			errors.add("militarySituation", new ActionError("error.required"));
+		}
+		if((workedShare == null) || (workedShare.equals(""))) {
+			errors.add("workedShare", new ActionError("error.required"));
+		}
+		if((emlpoyed == null) || (emlpoyed.equals(""))) {
+			errors.add("emlpoyed", new ActionError("error.required"));
+		}
+		if((workNature == null) || (workNature.equals(""))) {
+			errors.add("workNature", new ActionError("error.required"));
+		}
+		if((headFamilyProfession == null) || (headFamilyProfession.equals(""))) {
+			errors.add("headFamilyProfession", new ActionError("error.required"));
+		}
 		return errors;
 	}
 
@@ -125,6 +168,18 @@ public class StudentPersoForm extends ActionForm {
 		sex = "";
 		nationality = "";
 		city="";
+		cityTemp="";
+		country="";
+		countryTemp="";
+		phone="";
+		phoneTemp="";
+		famSituation="";
+		handicap="";
+		militarySituation="";
+		workedShare="";
+		emlpoyed="";
+		workNature="";
+		headFamilyProfession="";
 	}
 
 	/**
@@ -363,6 +418,160 @@ public class StudentPersoForm extends ActionForm {
 	 */
 	public void setAddressTemp(String string) {
 		addressTemp = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getCityTemp() {
+		return cityTemp;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getCountryTemp() {
+		return countryTemp;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getPhoneTemp() {
+		return phoneTemp;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getZipTemp() {
+		return zipTemp;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setCityTemp(String string) {
+		cityTemp = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setCountryTemp(String string) {
+		countryTemp = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setPhoneTemp(String string) {
+		phoneTemp = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setZipTemp(String string) {
+		zipTemp = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getFamSituation() {
+		return famSituation;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setFamSituation(String string) {
+		famSituation = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getHandicap() {
+		return handicap;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setHandicap(String string) {
+		handicap = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getMilitarySituation() {
+		return militarySituation;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setMilitarySituation(String string) {
+		militarySituation = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getWorkedShare() {
+		return workedShare;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setWorkedShare(String string) {
+		workedShare = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getEmlpoyed() {
+		return emlpoyed;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getWorkNature() {
+		return workNature;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setEmlpoyed(String string) {
+		emlpoyed = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setWorkNature(String string) {
+		workNature = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getHeadFamilyProfession() {
+		return headFamilyProfession;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setHeadFamilyProfession(String string) {
+		headFamilyProfession = string;
 	}
 
 }
