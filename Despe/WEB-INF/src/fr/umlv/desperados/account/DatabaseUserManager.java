@@ -33,7 +33,6 @@ public class DatabaseUserManager implements UserManager {
 	 * The Cache of this manager.
 	 */
 	private Cache cache;
-	// TODO faire le système de cache 
 
 	/**
 	 * Private constructor.
@@ -56,7 +55,6 @@ public class DatabaseUserManager implements UserManager {
 	public static synchronized DatabaseUserManager getInstance(DatabaseRequestor requestor) {
 		if (theInstance == null)
 			theInstance = new DatabaseUserManager(requestor);
-
 		return theInstance;
 	}
 
@@ -67,43 +65,25 @@ public class DatabaseUserManager implements UserManager {
 	 */
 	public void addUser(User user) throws UserAlreadyExistsException, ManagerException {
 
-		//		TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-		//		try {
-		//		ResultSet rs = null;
-		//			rs = doSelectQuery(user.getLogin());
-		//			if (rs.first()) {
-		//				throw new UserAlreadyExistsException("User exists in the database");
-		//			} else {
-		//				rs.moveToInsertRow();
-		//				updateRow(rs, user);
-		//			}
-		//		} catch (SQLException e) {
-		//			throw new ManagerException("Unable to query the database");
-		//		} finally {
-		//			try {
-		//				rs.close();
-		//			} catch (SQLException e1) {
-		//				// TODO Auto-generated catch block
-		//				e1.printStackTrace();
-		//			}
-		//		}
-
-		if(existUser(user.getLogin())) {
-			throw new UserAlreadyExistsException("User '"+user.getLogin()+
-																					"' already exists in the database");
-		}
+		ResultSet rs = null;
 		try {
-			String query = "INSERT INTO Compte "
-					+ "(LOGIN_COM, NOM_COM,PRENOM_COM,MAIL_COM,EST_ADM_COM,PASS_COM)"
-					+ " VALUES('" + user.getLogin() + "','"
-					+ user.getName() + "','" + user.getFirstname() + "','"
-					+ user.getEmail() + "'," + (user.getAdmin() ? 1 : 0) + ",'"
-					+ user.getPassword() + "')";
-			if (requestor.executeQuery(query) == 0)
-				throw new ManagerException(
-					"Impossible to create student '" + user.getLogin() + "'");
+			rs = doSelectQueryLogin(user.getLogin());
+			if (rs.first()) {
+				throw new UserAlreadyExistsException("User exists in the database");
+			} else {
+				rs.moveToInsertRow();
+				updateRow(rs, user);
+				rs.insertRow();
+			}
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		cache.put(user.getLogin(), user);
 	}
@@ -117,7 +97,7 @@ public class DatabaseUserManager implements UserManager {
 
 		ResultSet rs = null;
 		try {
-			rs = doSelectQuery(login);
+			rs = doSelectQueryLogin(login);
 			return rs.first();
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
@@ -145,16 +125,11 @@ public class DatabaseUserManager implements UserManager {
 
 		ResultSet rs = null;
 		try {
-			rs = doSelectQuery(login);
+			rs = doSelectQueryLogin(login);
 			if (!rs.first()) {
 				throw new UserNotFoundException("User doesn't exist in the database");
 			}
-			user = new User(rs.getString("LOGIN_COM"));
-			user.setName(rs.getString("NOM_COM"));
-			user.setFirstname(rs.getString("PRENOM_COM"));
-			user.setEmail(rs.getString("MAIL_COM"));
-			user.setAdmin(rs.getBoolean("EST_ADM_COM"));
-			user.setPassword(rs.getString("PASS_COM"));
+			user = resultSetToUser(rs);
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
 		} finally {
@@ -177,38 +152,11 @@ public class DatabaseUserManager implements UserManager {
 	public void modifyUser(User user) throws UserNotFoundException, ManagerException {
 		ResultSet rs = null;
 		try {
-			rs = doSelectQuery(user.getLogin());
+			rs = doSelectQueryLogin(user.getLogin());
 			if (!rs.first()) {
 				throw new UserNotFoundException("User not found in the database");
 			} else {
-				//				TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-				//				updateRow(rs, user);
-				String query =
-					"UPDATE Compte SET "
-						+ "NOM_COM='"
-						+ user.getName()
-						+ "'"
-						+ ", PRENOM_COM='"
-						+ user.getFirstname()
-						+ "'"
-						+ ", MAIL_COM='"
-						+ user.getEmail()
-						+ "'"
-						+ ", EST_ADM_COM='"
-						+ (user.getAdmin() ? 1 : 0)
-						+ "'"
-						+ ", PASS_COM='"
-						+ user.getPassword()
-						+ "'"
-						+ " WHERE LOGIN_COM='"
-						+ user.getLogin()
-						+ "'";
-				System.out.println(query);
-				if (requestor.executeQuery(query) == 0)
-					throw new ManagerException(
-						"Impossible to modify student '"
-							+ user.getLogin()
-							+ "'");
+				updateRow(rs, user);
 			}
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
@@ -240,25 +188,15 @@ public class DatabaseUserManager implements UserManager {
 		User user = (User)cache.remove(login);
 		ResultSet rs = null;
 		try {
-			rs = doSelectQuery(login);
+			rs = doSelectQueryLogin(login);
 			if (!rs.first()) {
 				throw new UserNotFoundException("User doesn't exist in the database");
 			}
 			if(user == null) {
-				user = new User(rs.getString("LOGIN_COM"));
-				user.setName(rs.getString("NOM_COM"));
-				user.setFirstname(rs.getString("PRENOM_COM"));
-				user.setEmail(rs.getString("MAIL_COM"));
-				user.setAdmin(rs.getBoolean("EST_ADM_COM"));
-				user.setPassword(rs.getString("PASS_COM"));
+				// getting the deleted User to return him
+				user = resultSetToUser(rs);
 			}
-			//			TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-			//			rs.deleteRow();
-			String query =
-				"DELETE FROM Compte" + " WHERE LOGIN_COM='" + login + "'";
-			if (requestor.executeQuery(query) == 0)
-				throw new ManagerException(
-					"Impossible to remove student '" + login + "'");
+			rs.deleteRow();
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
 		} finally {
@@ -294,12 +232,12 @@ public class DatabaseUserManager implements UserManager {
 				name = name.replace('*', '%').replace('?', '_');
 			}
 		}
-		StringBuffer query = new StringBuffer("SELECT * FROM Compte WHERE");
-		query.append(" LOGIN_COM like '" + login + "'");
-		query.append(" AND NOM_COM like '" + name + "'");
+		StringBuffer cond = new StringBuffer();
+		cond.append(" LOGIN_COM like '" + login + "'");
+		cond.append(" AND NOM_COM like '" + name + "'");
 
 		try {
-			rs = requestor.doQuery(query.toString());
+			rs = doSelectQuery(cond.toString());
 			if ((rs != null) && (rs.first())) {
 				return (List) (new DatabaseUserList(rs));
 			}
@@ -319,17 +257,35 @@ public class DatabaseUserManager implements UserManager {
 		cache.setCapacity(size);
 	}
 
-	private ResultSet doSelectQuery(String login) throws SQLException {
+	private ResultSet doSelectQueryLogin(String login) throws SQLException {
+		return doSelectQuery("LOGIN_COM = '"+login+"'");
+	}
+
+	private ResultSet doSelectQuery(String condition) throws SQLException {
+		// CAUTION: order in SELECT is important : it is used in the updateRow and resultSetToUser methods
+		// 1: LOGIN_COM		2: NOM_COM				3: PRENOM_COM
+		// 4: MAIL_COM			5: EST_ADM_COM		6: PASS_COM
 		return requestor.doQuery(
-			"SELECT * FROM Compte WHERE LOGIN_COM = '" + login + "'");
+			"SELECT LOGIN_COM, NOM_COM, PRENOM_COM, MAIL_COM, EST_ADM_COM, PASS_COM" +
+			" FROM Compte WHERE " + condition);
 	}
 
 	private void updateRow(ResultSet rs, User user) throws SQLException {
-		rs.updateString("LOGIN_COM", user.getLogin());
-		rs.updateString("NOM_COM", user.getName());
-		rs.updateString("PRENOM_COM", user.getFirstname());
-		rs.updateString("MAIL_COM", user.getEmail());
-		rs.updateBoolean("EST_ADM_COM", user.getAdmin());
-		rs.updateString("PASS_COM", user.getPassword());
+		rs.updateString(1, user.getLogin());
+		rs.updateString(2, user.getName());
+		rs.updateString(3, user.getFirstname());
+		rs.updateString(4, user.getEmail());
+		rs.updateBoolean(5, user.getAdmin());
+		rs.updateString(6, user.getPassword());
+	}
+
+	private User resultSetToUser(ResultSet rs) throws SQLException {
+		User user = new User(rs.getString(1));
+		user.setName(rs.getString(2));
+		user.setFirstname(rs.getString(3));
+		user.setEmail(rs.getString(4));
+		user.setAdmin(rs.getBoolean(5));
+		user.setPassword(rs.getString(6));
+		return user;
 	}
 }
