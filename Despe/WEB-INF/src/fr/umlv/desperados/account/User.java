@@ -84,7 +84,7 @@ public class User {
 		  * @roseuid 3FE17053023E
 		  */
 	public String getEmail() {
-		return null;
+		return email;
 	}
 
 	/**
