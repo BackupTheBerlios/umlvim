@@ -89,7 +89,7 @@ public class MessageFactoryTest extends TestCase {
 		user.setName("FRICOTTEAU");
 		user.setPassword("123");
 		
-		message = messageFactory.createMessage(MessageFactory.CREATION_MESSAGE, user);
+		message = messageFactory.createMessage(Message.CREATION_MESSAGE, user);
 		
 		/*if((message.getObject()).equals(object))
 			System.out.println("Génération de l'objet du message de création : OK");
@@ -115,7 +115,7 @@ public class MessageFactoryTest extends TestCase {
 		user.setName("FRICOTTEAU");
 		user.setPassword("123");
 		
-		message = messageFactory.createMessage(MessageFactory.MODIFICATION_MESSAGE, user);
+		message = messageFactory.createMessage(Message.MODIFICATION_MESSAGE, user);
 		
 		assertTrue((message.getObject()).equals(object));
 		assertTrue((message.getBody()).equals(body));
@@ -133,7 +133,7 @@ public class MessageFactoryTest extends TestCase {
 		user.setName("FRICOTTEAU");
 		user.setPassword("123");
 		
-		message = messageFactory.createMessage(MessageFactory.SUPPRESSION_MESSAGE, user);
+		message = messageFactory.createMessage(Message.SUPPRESSION_MESSAGE, user);
 		
 		assertTrue((message.getObject()).equals(object));
 		assertTrue((message.getBody()).equals(body));

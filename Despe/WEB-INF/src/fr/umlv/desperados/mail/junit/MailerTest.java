@@ -85,7 +85,7 @@ public class MailerTest extends TestCase {
 		user.setName("FRICOTTEAU");
 		user.setPassword("123");
 		
-		message = messageFactory.createMessage(MessageFactory.CREATION_MESSAGE, user);
+		message = messageFactory.createMessage(Message.CREATION_MESSAGE, user);
 		
 		try {
 			mailer.sendMail("africott@etudiant.univ-mlv.fr", message);

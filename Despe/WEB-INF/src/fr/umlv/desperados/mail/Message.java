@@ -7,6 +7,10 @@ package fr.umlv.desperados.mail;
  */
 public class Message {
 
+	public static final String CREATION_MESSAGE = "accountCreatedMail";
+	public static final String MODIFICATION_MESSAGE = "accountModifiedMail";
+	public static final String SUPPRESSION_MESSAGE = "accountRemovedMail";
+
 	/**
 	 * The object of the Message.
 	 */

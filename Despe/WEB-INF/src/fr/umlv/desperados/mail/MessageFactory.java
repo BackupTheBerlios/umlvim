@@ -58,9 +58,6 @@ import fr.umlv.desperados.account.User;
  * </pre>
  */
 public class MessageFactory {
-	public static final String CREATION_MESSAGE = "accountCreatedMail";
-	public static final String MODIFICATION_MESSAGE = "accountModifiedMail";
-	public static final String SUPPRESSION_MESSAGE = "accountRemovedMail";
 
 	private String creationMessageObject;
 	private String creationMessageBody;
@@ -87,19 +84,19 @@ public class MessageFactory {
 		Preferences uroot = Preferences.userRoot();
 
 		// Getting the creation node ...
-		Preferences child = uroot.node(CREATION_MESSAGE);
+		Preferences child = uroot.node(Message.CREATION_MESSAGE);
 		// ... and read the object and the body of the creation mail
 		creationMessageObject = child.get("object", "");
 		creationMessageBody = child.get("body", "");
 
 		// Getting the creation node
-		child = uroot.node(MODIFICATION_MESSAGE);
+		child = uroot.node(Message.MODIFICATION_MESSAGE);
 		// ... and read the object and the body of the modification mail
 		modificationMessageObject = child.get("object", "");
 		modificationMessageBody = child.get("body", "");
 
 		// Getting the creation node
-		child = uroot.node(SUPPRESSION_MESSAGE);
+		child = uroot.node(Message.SUPPRESSION_MESSAGE);
 		// ... and read the object and the body of the suppression mail
 		suppressionMessageObject = child.get("object", "");
 		suppressionMessageBody = child.get("body", "");
@@ -131,8 +128,8 @@ public class MessageFactory {
 	 * according to the given type.
 	 * 
 	 * @param type the type of message to send.
-	 * It must be one of MessageFactory.CREATION_MESSAGE, 
-	 * MessageFactory.MODIFICATION_MESSAGE and MessageFactory.SUPPRESSION_MESSAGE.
+	 * It must be one of Message.CREATION_MESSAGE, 
+	 * Message.MODIFICATION_MESSAGE and Message.SUPPRESSION_MESSAGE.
 	 * @param user the User the message contains (used to fill the blanks in the mail 
 	 * model).
 	 * 
@@ -144,15 +141,15 @@ public class MessageFactory {
 		// Select the message according to the type
 		String object = "";
 		String body = "";
-		if(CREATION_MESSAGE.equals(type)) {
+		if(Message.CREATION_MESSAGE.equals(type)) {
 			object = creationMessageObject;
 			body = creationMessageBody;
 		}
-		else if(MODIFICATION_MESSAGE.equals(type)) {
+		else if(Message.MODIFICATION_MESSAGE.equals(type)) {
 			object = modificationMessageObject;
 			body = modificationMessageBody;
 		}
-		else if(SUPPRESSION_MESSAGE.equals(type)) {
+		else if(Message.SUPPRESSION_MESSAGE.equals(type)) {
 			object = suppressionMessageObject;
 			body = suppressionMessageBody;
 		}
