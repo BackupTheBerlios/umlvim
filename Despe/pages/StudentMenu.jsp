@@ -18,6 +18,13 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
+				<html:link action="/cancelRdv">
+					<bean:message key="menu.student.cancelrdv" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
 				<html:link action="/printInscriptionFile">
 					<bean:message key="menu.student.printfile" />
 				</html:link>

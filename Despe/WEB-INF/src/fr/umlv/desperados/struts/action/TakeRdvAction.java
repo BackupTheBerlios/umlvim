@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -40,12 +42,13 @@ public class TakeRdvAction extends Action {
 
 		RdvTackingForm viewConfForm = (RdvTackingForm) form;
 
-		String target = "success";
+		ActionErrors errors = new ActionErrors();
 
 		// Use the LoginForm to get the request parameters			
 		String date = viewConfForm.getDate();
 		System.out.println("date :" + date);
 		try {
+			
 			Date rdvDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).parse(date);
 			System.out.println("date :" + rdvDate);
 			ServletContext context = servlet.getServletContext();
@@ -54,26 +57,38 @@ public class TakeRdvAction extends Action {
 			// get student info
 			Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
 
-			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
-			Date dateBac = df.parse(student.getBacYear());
+			// check if the student already have a rdv
+			if (student.getAppointmentDate() != null) {
+				errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.allready.taken"));
+			} else { // set the rdv date in the db
 
-			Calendar calDateBac = new GregorianCalendar();
-			Calendar calCurrent = GregorianCalendar.getInstance();
-			calDateBac.setTime(dateBac);
+				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+				//Date dateBac = df.parse(student.getBacYear());
 
-			boolean isRavel = (calDateBac.get(Calendar.MONTH) == calCurrent.get(Calendar.MONTH));
+				//Calendar calDateBac = new GregorianCalendar();
+				Calendar calCurrent = GregorianCalendar.getInstance();
+				//calDateBac.setTime(dateBac);
+				
 
-			Rdv rdv = new Rdv(rdvDate, student.getId(), student.getPatronymicName(), student.getFirstname1(), isRavel);
+				int bYear = new Integer(student.getBacYear()).intValue();
+				boolean isRavel = (  bYear == calCurrent.get(Calendar.YEAR));
 
-			databaseRdvManager.addRdv(rdv);
+				Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
 
+				databaseRdvManager.addRdv(rdv);
+
+			}
 		} catch (ParseException e) {
-			e.printStackTrace();
-			target = "error";
-
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.global"));
 		}
 
 		request.setAttribute("date", date);
-		return mapping.findForward(target);
+
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return mapping.findForward("error");
+		}
+
+		return mapping.findForward("success");
 	}
 }

@@ -51,8 +51,13 @@
 		<put name="menubar"			value="/pages/StudentMenu.jsp" />
 	</definition>
 	
-	<definition name="student.rdv" extends="baseDef">
+	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/pages/form/takeRdv.jsp" />
+		<put name="menubar"			value="/pages/StudentMenu.jsp" />
+	</definition>
+	
+	<definition name="student.cancel.rdv" extends="baseDef">
+		<put name="body-content"	value="/pages/form/cancelRdv.jsp" />
 		<put name="menubar"			value="/pages/StudentMenu.jsp" />
 	</definition>
 

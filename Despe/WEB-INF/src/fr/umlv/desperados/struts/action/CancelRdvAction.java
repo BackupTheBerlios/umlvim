@@ -3,10 +3,8 @@
 package fr.umlv.desperados.struts.action;
 
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
+
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
@@ -14,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -37,40 +37,30 @@ public class CancelRdvAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
-		String target = "success";
+		ActionErrors errors = new ActionErrors();
 
 		// get student info
 		Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
 
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
 		Date dateBac;
-		try {
-			dateBac = df.parse(student.getBacYear());
 
-			ServletContext context = servlet.getServletContext();
-			DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
+		ServletContext context = servlet.getServletContext();
+		DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
 
-			Rdv rdv = databaseRdvManager.getRdv(2);
+		Rdv rdv = databaseRdvManager.getRdv(student.getId());
 
-			if (rdv == null)
-				target = "error";
-			else
-				databaseRdvManager.removeRdv(rdv);
+		if (rdv == null)
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.not.allready.taken"));
+		else
+			databaseRdvManager.removeRdv(rdv);
 
-		} catch (ParseException e) {
-			// TODO generer l'erreur
-			target = "error";
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return mapping.findForward("error");
 		}
 
-		return mapping.findForward(target);
-	}
-
-	/**
-	 * @param rdv
-	 */
-	private void removeRdv(Rdv rdv) {
-		// TODO Raccord de méthode auto-généré
-
+		return mapping.findForward("success");
 	}
 
 }

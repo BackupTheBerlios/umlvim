@@ -13,7 +13,7 @@ import ="java.util.*, fr.umlv.desperados.planning.DatabaseRdvManager"%>
 <body>
 
 
-le rendez-vous le xxxx a xxxx sera annul&eacute;.<br> 
+Votre rendez-vous  sera annule.<br> 
 Voulez effectuer cette action ?<br>
 
 <html:link action="/cancel/rdv" >ok</html:link>
