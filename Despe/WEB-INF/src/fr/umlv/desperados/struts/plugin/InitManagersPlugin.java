@@ -74,11 +74,11 @@ public class InitManagersPlugin implements PlugIn {
 					strutsDatabaseRequestor, path
 						+ "/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 
-			System.out.println(path + "/WEB-INF/planningConf.xml");
+			//System.out.println(path + "/WEB-INF/planningConf.xml");
 
-			planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
+			//planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
 
-			System.out.println(planningConf);
+			//System.out.println(planningConf);
 
 			// context visible manager init
 			ServletContext context = servlet.getServletContext();
@@ -94,9 +94,9 @@ public class InitManagersPlugin implements PlugIn {
 			context.setAttribute(
 				Constants.STYLESHEET_DATABASE_KEY,
 				databaseStyleSheetManager);
-			context.setAttribute(
-				Constants.PLANNING_CONF_DATABASE_KEY,
-				planningConf);
+//			context.setAttribute(
+//				Constants.PLANNING_CONF_DATABASE_KEY,
+//				planningConf);
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -106,13 +106,13 @@ public class InitManagersPlugin implements PlugIn {
 			e1.printStackTrace();
 		} catch (SQLException e2) {
 			e2.printStackTrace();
-		} catch (ParserConfigurationException e3) {
+		} /*catch (ParserConfigurationException e3) {
 			e3.printStackTrace();
 		} catch (SAXException e3) {
 			e3.printStackTrace();
 		} catch (IOException e3) {
 			e3.printStackTrace();
-		}
+		}*/
 
 	}
 
