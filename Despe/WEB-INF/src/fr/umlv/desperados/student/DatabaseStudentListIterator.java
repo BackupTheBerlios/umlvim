@@ -2,9 +2,6 @@
 
 package fr.umlv.desperados.student;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -24,17 +21,10 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 	 * @param rs the ResultSet containing a Student list.
 	 * @roseuid 3FE188330307
 	 */
-	DatabaseStudentListIterator(ResultSet rs, String propertiesPath) {
+	DatabaseStudentListIterator(ResultSet rs, Properties propertiesPath) {
 		super(rs);
-		prop = new Properties();
-		try {
-			prop.load(new FileInputStream(propertiesPath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		prop= propertiesPath;
 		}
-	}
 
 	/**
 		* Constructor.
@@ -45,17 +35,10 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 	DatabaseStudentListIterator(
 		ResultSet rs,
 		int index,
-		String propertiesPath) {
+		Properties propertiesPath) {
 		super(rs, index);
-		prop = new Properties();
-		try {
-			prop.load(new FileInputStream(propertiesPath));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+		prop =propertiesPath;
+}
 
 	public Object next() {
 		index++;

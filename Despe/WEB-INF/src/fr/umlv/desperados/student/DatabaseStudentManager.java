@@ -5,11 +5,9 @@ package fr.umlv.desperados.student;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import fr.umlv.desperados.database.DatabaseRequestor;
@@ -47,7 +45,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @param requestor the DatabaseRequestor of this manager.
 	 * @roseuid 3FE3136B035E
 	 */
-	private DatabaseStudentManager(
+	DatabaseStudentManager(
 		DatabaseRequestor requestor,
 		String propertiesPath) {
 		this.requestor = requestor;
@@ -84,31 +82,32 @@ public class DatabaseStudentManager implements StudentManager {
 	public void addStudent(Student student)
 		throws StudentAlreadyExistsException {
 		StringBuffer insert =
-			new StringBuffer("INSERT INTO" + prop.get("tableName") + " (");
+			new StringBuffer("INSERT INTO " + prop.get("tableName") + " (");
 		StringBuffer values = new StringBuffer(" VALUES (");
 		if (!(student.getName().equals(null))) {
-			insert.append(prop.get("name") + ",");
-			values.append(student.getName() + ",");
+			insert.append(prop.get("patronymicName") + ",");
+			values.append("'"+student.getName() + "',");
 		}
 
 		if (!student.getBirthday().equals(null)) {
 			insert.append(prop.get("birthday") + ",");
-			values.append(
-				"TO_DATE("
+			values.append("'11-jan-2004',");
+			/*	"TO_DATE('"
 					+ DateFormat.getDateInstance(DateFormat.SHORT).format(
 						student.getBirthday())
-					+ ",'DD/MM/YY'),");
+					+ "','DD/MM/YY'),");*/
 		}
 
 		if (!student.getFirstname1().equals(null)) {
 			insert.append(prop.get("firstname1") + ",");
-			values.append(student.getFirstname1() + ",");
+			values.append("'"+student.getFirstname1() + "',");
 		}
 
 		insert.replace(insert.length() - 1, insert.length(), ")");
 		values.replace(values.length() - 1, values.length(), ");");
 
 		try {
+			String test=insert.append(values).toString();
 			requestor.doQuery(insert.append(values).toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -128,7 +127,7 @@ public class DatabaseStudentManager implements StudentManager {
 		java.util.Date birthday) {
 		ResultSet result = null;
 		String query =
-			"SELECT id_etud FROM Etudiant WHERE nom_usage=\""
+			"SELECT id_etud FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE=\""
 				+ name
 				+ "\"prenom1=\""
 				+ firstName

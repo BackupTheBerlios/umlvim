@@ -257,31 +257,7 @@ class DatabaseStudentList extends DatabaseAbstractList {
 			}
 		}
 		
-		ResultSet result = null;
-		String query = null;
-		try {
-			query =
-				"SELECT * FROM A_UN_HANDICAP Where id_etu='"
-					+ rs.getInt(prop.get("studentId").toString())
-					+ "';";
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
-			try {
-				result = requestor.doQuery(query);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			try {
-				if (result.next()) {
-					student.setHandic(result.getString("ID_HAN"));
-				}
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-				
-		return student;
+			return student;
 	}
 
 
@@ -289,14 +265,14 @@ class DatabaseStudentList extends DatabaseAbstractList {
 	 * @see fr.umlv.desperados.database.DatabaseAbstractList#iterator()
 	 */
 	public Iterator iterator() {
-		return new DatabaseStudentListIterator(rs);
+		return new DatabaseStudentListIterator(rs,prop);
 	}
 
 	/* (non-Javadoc)
 	 * @see fr.umlv.desperados.database.DatabaseAbstractList#listIterator(int)
 	 */
 	public ListIterator listIterator(int index) {
-		DatabaseStudentListIterator it = new DatabaseStudentListIterator(rs, index);
+		DatabaseStudentListIterator it = new DatabaseStudentListIterator(rs, index,prop);
 		return it;
 	}
 
