@@ -76,7 +76,7 @@ public class DatabaseRdvManager implements RdvManager {
 			if (rdv.getRavel()) {
 				reqSql = "select DATE_RDV, NB_RAV_DSP from RDV_DISPO where DATE_RDV=to_date('"
 					+ formatedDate
-					+ "','DD/MM/YY HH24:MI') for update of NB_RAV_DSP";
+					+ "','DD/MM/YY HH24:MI')"; // for update of NB_RAV_DSP"; //Ne marche pas à cause du driver Oracle
 				rs = requestor.doQuery(reqSql);
 				
 				rs.first();
@@ -103,7 +103,7 @@ public class DatabaseRdvManager implements RdvManager {
 			else {
 				reqSql = "select DATE_RDV, NB_ETU_DSP from RDV_DISPO where DATE_RDV=to_date('"
 					+ formatedDate
-					+ "','DD/MM/YY HH24:MI') for update of NB_ETU_DSP";
+					+ "','DD/MM/YY HH24:MI')"; // for update of NB_ETU_DSP"; //Ne marche pas à cause du driver Oracle
 				rs = requestor.doQuery(reqSql);
 				
 				rs.first();
