@@ -43,6 +43,7 @@ public class DatabaseUserManager implements UserManager {
 	 */
 	private DatabaseUserManager(DatabaseRequestor requestor) {
 		this.requestor = requestor;
+		cache = new Cache(16);
 	}
 
 	/**
@@ -64,45 +65,47 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserAlreadyExistsException
 	 * @roseuid 3FF869B902D2
 	 */
-	public void addUser(User user)
-		throws UserAlreadyExistsException, ManagerException {
+	public void addUser(User user) throws UserAlreadyExistsException, ManagerException {
 
-			//		TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-			//		try {
-			//		ResultSet rs = null;
-			//			rs = doSelectQuery(user.getLogin());
-			//			if (rs.first()) {
-			//				throw new UserAlreadyExistsException("User exists in the database");
-			//			} else {
-			//				rs.moveToInsertRow();
-			//				updateRow(rs, user);
-			//			}
-			//		} catch (SQLException e) {
-			//			throw new ManagerException("Unable to query the database");
-			//		} finally {
-			//			try {
-			//				rs.close();
-			//			} catch (SQLException e1) {
-			//				// TODO Auto-generated catch block
-			//				e1.printStackTrace();
-			//			}
-			//		}
+		//		TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
+		//		try {
+		//		ResultSet rs = null;
+		//			rs = doSelectQuery(user.getLogin());
+		//			if (rs.first()) {
+		//				throw new UserAlreadyExistsException("User exists in the database");
+		//			} else {
+		//				rs.moveToInsertRow();
+		//				updateRow(rs, user);
+		//			}
+		//		} catch (SQLException e) {
+		//			throw new ManagerException("Unable to query the database");
+		//		} finally {
+		//			try {
+		//				rs.close();
+		//			} catch (SQLException e1) {
+		//				// TODO Auto-generated catch block
+		//				e1.printStackTrace();
+		//			}
+		//		}
+
+		if(existUser(user.getLogin())) {
+			throw new UserAlreadyExistsException("User '"+user.getLogin()+
+																					"' already exists in the database");
+		}
 		try {
 			String query = "INSERT INTO Compte "
 					+ "(LOGIN_COM, NOM_COM,PRENOM_COM,MAIL_COM,EST_ADM_COM,PASS_COM)"
-					+ " VALUES('" + user.getLogin()
-					+ "','" + user.getName()
-					+ "','" + user.getFirstname()
-					+ "','" + user.getEmail()
-					+ "'," + (user.getAdmin() ? 1 : 0)
-					+ ",'" + user.getPassword()
-					+ "')";
+					+ " VALUES('" + user.getLogin() + "','"
+					+ user.getName() + "','" + user.getFirstname() + "','"
+					+ user.getEmail() + "'," + (user.getAdmin() ? 1 : 0) + ",'"
+					+ user.getPassword() + "')";
 			if (requestor.executeQuery(query) == 0)
 				throw new ManagerException(
 					"Impossible to create student '" + user.getLogin() + "'");
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
 		}
+		cache.put(user.getLogin(), user);
 	}
 
 	/**
@@ -111,6 +114,7 @@ public class DatabaseUserManager implements UserManager {
 	 * @roseuid 3FF869B902F0
 	 */
 	public boolean existUser(String login) throws ManagerException {
+
 		ResultSet rs = null;
 		try {
 			rs = doSelectQuery(login);
@@ -132,9 +136,13 @@ public class DatabaseUserManager implements UserManager {
 	 * @return fr.umlv.desperados.account.User
 	 * @roseuid 3FF869B9030F
 	 */
-	public User getUser(String login)
-		throws UserNotFoundException, ManagerException {
-		User user = null;
+	public User getUser(String login) throws UserNotFoundException, ManagerException {
+		
+		User user = (User)cache.get(login);
+		if(user != null) {
+			return user;
+		}
+
 		ResultSet rs = null;
 		try {
 			rs = doSelectQuery(login);
@@ -157,6 +165,7 @@ public class DatabaseUserManager implements UserManager {
 				e1.printStackTrace();
 			}
 		}
+		cache.put(user.getLogin(), user);
 		return user;
 	}
 
@@ -165,26 +174,41 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserNotFoundException
 	 * @roseuid 3FF869B90323
 	 */
-	public void modifyUser(User user)
-		throws UserNotFoundException, ManagerException {
+	public void modifyUser(User user) throws UserNotFoundException, ManagerException {
 		ResultSet rs = null;
 		try {
 			rs = doSelectQuery(user.getLogin());
 			if (!rs.first()) {
 				throw new UserNotFoundException("User not found in the database");
 			} else {
-//				TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-//				updateRow(rs, user);
-				String query = "UPDATE Compte SET "
-						+ "NOM_COM='" + user.getName() + "'"
-						+ ", PRENOM_COM='" + user.getFirstname() + "'"
-						+ ", MAIL_COM='" + user.getEmail() + "'"
-						+ ", EST_ADM_COM='" + (user.getAdmin() ? 1 : 0) + "'"
-						+ ", PASS_COM='" + user.getPassword() + "'"
-						+ " WHERE LOGIN_COM='" + user.getLogin() + "'";
+				//				TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
+				//				updateRow(rs, user);
+				String query =
+					"UPDATE Compte SET "
+						+ "NOM_COM='"
+						+ user.getName()
+						+ "'"
+						+ ", PRENOM_COM='"
+						+ user.getFirstname()
+						+ "'"
+						+ ", MAIL_COM='"
+						+ user.getEmail()
+						+ "'"
+						+ ", EST_ADM_COM='"
+						+ (user.getAdmin() ? 1 : 0)
+						+ "'"
+						+ ", PASS_COM='"
+						+ user.getPassword()
+						+ "'"
+						+ " WHERE LOGIN_COM='"
+						+ user.getLogin()
+						+ "'";
 				System.out.println(query);
 				if (requestor.executeQuery(query) == 0)
-					throw new ManagerException("Impossible to modify student '" + user.getLogin() + "'");
+					throw new ManagerException(
+						"Impossible to modify student '"
+							+ user.getLogin()
+							+ "'");
 			}
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
@@ -195,6 +219,14 @@ public class DatabaseUserManager implements UserManager {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		}
+		User userInCache =(User)cache.get(user.getLogin());
+		if(userInCache != null) {
+			userInCache.setAdmin(user.getAdmin());
+			userInCache.setEmail(user.getEmail());
+			userInCache.setFirstname(user.getFirstname());
+			userInCache.setName(user.getName());
+			userInCache.setPassword(user.getPassword());
 		}
 	}
 
@@ -204,28 +236,29 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserNotFoundException
 	 * @roseuid 3FF869B90341
 	 */
-	public User removeUser(String login)
-		throws UserNotFoundException, ManagerException {
-		User user = null;
+	public User removeUser(String login) throws UserNotFoundException, ManagerException {
+		User user = (User)cache.remove(login);
 		ResultSet rs = null;
 		try {
 			rs = doSelectQuery(login);
 			if (!rs.first()) {
 				throw new UserNotFoundException("User doesn't exist in the database");
 			}
-			user = new User(rs.getString("LOGIN_COM"));
-			user.setName(rs.getString("NOM_COM"));
-			user.setFirstname(rs.getString("PRENOM_COM"));
-			user.setEmail(rs.getString("MAIL_COM"));
-			user.setAdmin(rs.getBoolean("EST_ADM_COM"));
-			user.setPassword(rs.getString("PASS_COM"));
-//			TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
-//			rs.deleteRow();
-			String query = "DELETE FROM Compte"
-					+ " WHERE LOGIN_COM='" + login + "'";
-			System.out.println(query);
+			if(user == null) {
+				user = new User(rs.getString("LOGIN_COM"));
+				user.setName(rs.getString("NOM_COM"));
+				user.setFirstname(rs.getString("PRENOM_COM"));
+				user.setEmail(rs.getString("MAIL_COM"));
+				user.setAdmin(rs.getBoolean("EST_ADM_COM"));
+				user.setPassword(rs.getString("PASS_COM"));
+			}
+			//			TODO à décommenter quand les ResulSet seront updatable (autant dire quand les poules auront des dents)
+			//			rs.deleteRow();
+			String query =
+				"DELETE FROM Compte" + " WHERE LOGIN_COM='" + login + "'";
 			if (requestor.executeQuery(query) == 0)
-				throw new ManagerException("Impossible to remove student '" + login + "'");
+				throw new ManagerException(
+					"Impossible to remove student '" + login + "'");
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
 		} finally {
@@ -247,13 +280,23 @@ public class DatabaseUserManager implements UserManager {
 	 */
 	public List searchUser(String login, String name) throws ManagerException {
 		ResultSet rs = null;
-		StringBuffer query = new StringBuffer("SELECT * FROM Compte WHERE");
 		if (login != null) {
-			query.append(" LOGIN_COM like '" + login + "%'");
-			if (name != null)
-				query.append(" AND NOM_COM like '" + name + "%'");
-		} else
-			query.append(" NOM_COM like '" + name + "%'");
+			if("".equals(login)) {
+				login = "%";
+			} else {
+				login = login.replace('*', '%').replace('?', '_');
+			}
+		}
+		if (name != null) {
+			if("".equals(name)) {
+				name="%";
+			} else {
+				name = name.replace('*', '%').replace('?', '_');
+			}
+		}
+		StringBuffer query = new StringBuffer("SELECT * FROM Compte WHERE");
+		query.append(" LOGIN_COM like '" + login + "'");
+		query.append(" AND NOM_COM like '" + name + "'");
 
 		try {
 			rs = requestor.doQuery(query.toString());
@@ -273,7 +316,7 @@ public class DatabaseUserManager implements UserManager {
 	 * @roseuid 3FF9BC6C0105
 	 */
 	public void setCacheSize(int size) {
-		//cache.setCapacity(10);
+		cache.setCapacity(size);
 	}
 
 	private ResultSet doSelectQuery(String login) throws SQLException {
