@@ -102,7 +102,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		 try {
 			ddm.addDiploma(diploma);
 		 } catch (DiplomaAlreadyExistsException e) {
-			// TODO Bloc catch auto-g?n?r?
+			// TODO Bloc catch auto-généré
 			e.printStackTrace();
 		 }
 		 
