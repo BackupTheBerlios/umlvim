@@ -168,7 +168,7 @@ public class DatabaseStudentManager implements StudentManager {
 		}
 
 		try {
-			if (result.next()) {
+			if (result.first()) {
 
 				student = new Student(studentId);
 				student.setName(result.getString(prop.get("name").toString()));
@@ -291,7 +291,7 @@ public class DatabaseStudentManager implements StudentManager {
 							.getProperty("insuranceCivilLiability")
 							.toString()));
 				student.setAppointmentDate(
-					result.getTimestamp(
+					result.getDate(
 						prop.get("appointmentDate").toString()));
 				student.setWorkedShareId(
 					result.getInt(prop.get("workedShareId").toString()));
@@ -406,11 +406,11 @@ public class DatabaseStudentManager implements StudentManager {
 		ResultSet result = null;
 		String query =
 			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+" = "
-				+ student.getStudentId();
+				+ student.getId();
 				
 			try {
 			result = requestor.doQuery(query);
-			if (result.next()) {
+			if (result.first()) {
 				result.updateString(
 					prop.get("name").toString(),
 					student.getName());
@@ -720,7 +720,7 @@ public class DatabaseStudentManager implements StudentManager {
 			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+"='" + studentId + "'";
 				try {
 			result = requestor.doQuery(query);
-			if (result.next()) {
+			if (result.first()) {
 				result.deleteRow();
 			}
 		} catch (SQLException e) {

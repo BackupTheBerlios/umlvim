@@ -1725,6 +1725,13 @@ public class Student implements XMLable {
 		
 	}
 
+	/**
+	 * @param i
+	 */
+	public void setId(int i) {
+		id = i;
+	}
+
 }
 /**
  * 

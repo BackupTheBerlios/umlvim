@@ -261,7 +261,6 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 				student.setMLVDiplomaComplId(
 					rs.getInt(prop.get("MLVDiplomaComplId").toString()));
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				try {
@@ -269,7 +268,6 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 						rs.absolute(current);
 					}
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}

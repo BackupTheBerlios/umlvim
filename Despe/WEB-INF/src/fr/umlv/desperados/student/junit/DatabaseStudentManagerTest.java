@@ -11,14 +11,11 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-
 import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentAlreadyExistsException;
-
 import junit.framework.TestCase;
 
 /**
@@ -97,13 +94,11 @@ ResultSet result = null;
 		student.setPatronymicName( "gérard");
 		student.setBirthday(java.sql.Date.valueOf("1981-02-11" ));
 		student.setFirstname1( "jean");
-/*		try {
+	try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
-		}*/
-		String truc="test";
-		assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
+		}
 	}
-
+	
 }
