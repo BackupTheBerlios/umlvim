@@ -8,6 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +24,13 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.planning.RdvList;
+import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.student.DatabaseInformationListManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
+import fr.umlv.desperados.stylesheet.DatabaseStyleSheetManager;
 import fr.umlv.desperados.stylesheet.StyleSheet;
 import fr.umlv.desperados.stylesheet.StyleSheetManager;
 import fr.umlv.desperados.util.Constants;
@@ -53,9 +59,25 @@ public class PrintInscriptionFileAction extends Action {
 		HttpSession session = request.getSession();
 
 		Student student = (Student) session.getAttribute(Constants.STUDENT_KEY);
+		User user = (User) session.getAttribute(Constants.USER_KEY);
 		String type = request.getParameter("type");
 
-		if (student == null) {
+		int docType;
+		if (type.equals("inscr"))
+			docType =  DatabaseStyleSheetManager.INSCRIPTION_DOCUMENT;
+		else if(type.equals("conf")) {
+			docType = DatabaseStyleSheetManager.CONFIRMATION_DOCUMENT;
+			if (student.getAppointmentDate() == null) {
+				errors.add(
+					ActionErrors.GLOBAL_ERROR,
+					new ActionError("error.rdv.not.taken"));
+			}
+		}
+		else
+			docType = DatabaseStyleSheetManager.RDV_LIST_DOCUMENT;
+
+
+		if (student == null && user==null) {
 			if (log.isWarnEnabled()) {
 				errors.add(
 					ActionErrors.GLOBAL_ERROR,
@@ -77,22 +99,14 @@ public class PrintInscriptionFileAction extends Action {
 			(DatabaseInformationListManager)servlet.getServletContext().getAttribute(
 				Constants.INFORMATION_DATABASE_KEY);
 		
+		DatabaseRdvManager rdvManager =
+			(DatabaseRdvManager) servlet.getServletContext().getAttribute(
+				Constants.RDV_DATABASE_KEY);
+		
 		if (manager == null) {
 			errors.add(
 				ActionErrors.GLOBAL_ERROR,
 				new ActionError("error.database.missing"));
-		}
-
-		int docType;
-		if (type.equals("inscr"))
-			docType = 1;
-		else {
-			docType = 2;
-			if (student.getAppointmentDate() == null) {
-				errors.add(
-					ActionErrors.GLOBAL_ERROR,
-					new ActionError("error.rdv.not.taken"));
-			}
 		}
 
 		if (!errors.isEmpty()) {
@@ -108,7 +122,7 @@ public class PrintInscriptionFileAction extends Action {
 	
 		InputStream is;
 	
-		if(docType==1 || docType==2) {
+		if(fileName.endsWith("sxw")) {
 			String destFile = stringWorkingDirectory+"/";
 			int index = fileName.lastIndexOf(".");
 			destFile += fileName.substring(0, index) + student.getId() + fileName.substring(index,fileName.length());
@@ -122,8 +136,15 @@ public class PrintInscriptionFileAction extends Action {
 				
 		else {
 			InputStream isStyleSheet = new FileInputStream(filePath);
-			InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
-			is = XSLTools.generatePDF(isStudent,isStyleSheet);
+			InputStream isObj;
+			if(docType==2 || docType==1) {
+				isObj = new ByteArrayInputStream(student.toXML().getBytes());
+			}
+			else {
+				RdvList rdvList = new RdvList(rdvManager.listRdv(new Date()));
+				isObj = new ByteArrayInputStream(rdvList.toXML().getBytes());
+			}
+			is = XSLTools.generatePDF(isObj, isStyleSheet);
 		}
 		response.setContentType("application/pdf");	
 		OutputStream writer = response.getOutputStream();

@@ -59,7 +59,6 @@ public class StyleSheet implements XMLable
     */
    public String toXML() 
    {
-   	// TODO
    	String xmlString = "";
    	try {
 		InputStream is = new FileInputStream(fileName);

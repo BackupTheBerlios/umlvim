@@ -31,6 +31,13 @@
 			</td>
 		</tr>
 		<tr>
+			<td align="right" valign"bottom">
+				<html:link action="/printInscriptionFile?type=planning">
+					<bean:message key="menu.user.planning.print" />
+				</html:link>
+			</td>
+		</tr>		
+		<tr>
 			<td align="right" valign="bottom">
 				<html:link action="/stats/prepare">
 					<bean:message key="menu.user.stats" />
