@@ -157,7 +157,9 @@
 			validate="false">
 		</action>
 
-        <action path="/list/diploma" type="fr.umlv.desperados.struts.action.ListDiplomaAction">
+        <action
+        	path="/list/diploma"
+        	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
             <forward name="success" path="user.stats" />
         </action>
         
