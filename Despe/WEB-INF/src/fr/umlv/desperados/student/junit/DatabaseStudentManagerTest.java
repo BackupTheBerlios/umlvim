@@ -9,6 +9,7 @@ package fr.umlv.desperados.student.junit;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -32,6 +33,7 @@ private DatabaseRequestor requestor;
 private Student student=null;
 private static DatabaseStudentManager databaseStudentManager=null;
 public static StrutsDatabaseRequestor strutsDatabaseRequestor;
+ResultSet result = null;
 
 	/**
 	 * Constructor for DatabaseStudentManagerTest.
@@ -87,21 +89,21 @@ public static StrutsDatabaseRequestor strutsDatabaseRequestor;
 				e.printStackTrace();
 			} catch (InstantiationException e1) {
 				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
+			} catch (IllegalAccessException e1) { 
 				e1.printStackTrace();
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
-		student.setName( "gabriel");
-		student.setBirthday(new Date(300000));
-		student.setFirstname1( "dupont");
+		student.setName( "dupont");
+		student.setBirthday(new Date(1981,02,10));
+		student.setFirstname1( "gabriel");
 		try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
 		}
 		String truc="test";
-		assertTrue(databaseStudentManager.existStudent("dupont","gabriel",new Date(300000))==null);
+		assertFalse(databaseStudentManager.existStudent("dupont","gabriel",new Date(1981,02,10))==null);
 	}
 
 }

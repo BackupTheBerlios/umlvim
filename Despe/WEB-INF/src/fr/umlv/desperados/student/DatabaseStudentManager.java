@@ -79,11 +79,14 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @throws fr.umlv.desperados.student.StudentAlreadyExistsException
 	 * @roseuid 3FF869BD015C
 	 */
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//TODO transformer tous les name en name patronymique/////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void addStudent(Student student)
 		throws StudentAlreadyExistsException {
 		StringBuffer insert =
-			new StringBuffer("INSERT INTO " + prop.get("tableName") + " (");
-		StringBuffer values = new StringBuffer(" VALUES (");
+			new StringBuffer("insert into " + prop.get("tableName") + " (");
+		StringBuffer values = new StringBuffer(" values (");
 		if (!(student.getName().equals(null))) {
 			insert.append(prop.get("patronymicName") + ",");
 			values.append("'"+student.getName() + "',");
@@ -91,11 +94,11 @@ public class DatabaseStudentManager implements StudentManager {
 
 		if (!student.getBirthday().equals(null)) {
 			insert.append(prop.get("birthday") + ",");
-			values.append("'11-jan-2004',");
-			/*	"TO_DATE('"
+	//		values.append("'11-jan-2004',");
+			values.append("TO_DATE('"
 					+ DateFormat.getDateInstance(DateFormat.SHORT).format(
 						student.getBirthday())
-					+ "','DD/MM/YY'),");*/
+					+ "','DD/MM/YY'),");
 		}
 
 		if (!student.getFirstname1().equals(null)) {
@@ -104,12 +107,13 @@ public class DatabaseStudentManager implements StudentManager {
 		}
 
 		insert.replace(insert.length() - 1, insert.length(), ")");
-		values.replace(values.length() - 1, values.length(), ");");
+		values.replace(values.length() - 1, values.length(), ")");
 
 		try {
-			String test=insert.append(values).toString();
-			requestor.doQuery(insert.append(values).toString());
-		} catch (SQLException e) {
+			String stringTemp=insert.append(values).toString();
+			requestor.doQuery(stringTemp);
+	//requestor.doQuery("insert into etudiant (nom_patronymique,date_naiss,prenom1) values ('test3','10-jan-2000','test4')");
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -127,14 +131,14 @@ public class DatabaseStudentManager implements StudentManager {
 		java.util.Date birthday) {
 		ResultSet result = null;
 		String query =
-			"SELECT id_etu FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE='"
+			"SELECT "+ prop.get("studentId") +" FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE='"
 				+ name
 				+ "' and prenom1='"
 				+ firstName
-				+ "' and date_naiss='"
-				+ "11-jan-2004"//birthday
-				+ "';";
-		try {
+				+ "' and TO_DATE(date_naiss,'DD/MM/YY')='"
+				+ DateFormat.getDateInstance(DateFormat.SHORT).format(birthday)
+				+ "'";
+		try {	
 			result = requestor.doQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
