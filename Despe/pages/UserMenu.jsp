@@ -4,24 +4,24 @@
 <%@ taglib uri="/WEB-INF/app.tld" prefix="app"%>
 
 <app:checkLogon page="">
-	<table border="1">
-		<tr>
+	<table>
+		<tr align="left">
 			<th><bean:message key="title.user.menu"/></th>
 		</tr>
-		<tr>
-			<td width="120" valign="top">
+		<tr align="right">
+			<td width="120">
 				<html:link action="/editUser.do?action=create">
 					<bean:message key="menu.user.addstudent"/>
 				</html:link>
 			</td>
 		</tr>
-		<tr>
-			<td width="120" valign="top">
+		<tr align="right">
+			<td width="120">
 				<bean:message key="menu.user.searchstudent"/>
 			</td>
 		</tr>
-		<tr>
-			<td width="120" valign="top">
+		<tr align="right">
+			<td width="120">
 				<html:link action="/userLogoff.do">déconnexion</html:link>
 			</td>
 		</tr>
