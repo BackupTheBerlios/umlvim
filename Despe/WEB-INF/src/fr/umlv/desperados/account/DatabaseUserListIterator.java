@@ -3,160 +3,75 @@
 package fr.umlv.desperados.account;
 
 import java.sql.ResultSet;
-import java.util.ListIterator;
+import java.sql.SQLException;
 
+import fr.umlv.desperados.database.DatabaseListIterator;
 
 /**
  * Provides a implementation of java.util.ListIterator interface to iterate the 
  * elements contained by a DatabaseUserList.
  */
-final class DatabaseUserListIterator implements ListIterator 
-{
-   
-   /**
-    * The ResultSet containing the User list.
-    */
-   private ResultSet rs;
-   
-   /**
-    * Constructor.
-    * 
-    * @param rs the ResultSet containing a User list.
-    * @roseuid 3FE2F884035B
-    */
-   DatabaseUserListIterator(ResultSet rs) 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869B80104
-    */
-   public void add(Object obj) 
-   {
-    
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869B80118
-    */
-   public boolean hasNext() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869B80122
-    */
-   public boolean hasPrevious() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869B8012C
-    */
-   public Object next() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869B80136
-    */
-   public int nextIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869B80140
-    */
-   public Object previous() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869B8014A
-    */
-   public int previousIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @roseuid 3FF869B80154
-    */
-   public void remove() 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869B8015E
-    */
-   public void set(Object obj) 
-   {
-    
-   }
+final class DatabaseUserListIterator extends DatabaseListIterator {
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param rs the ResultSet containing a User list.
+	 * @roseuid 3FE2F884035B
+	 */
+	DatabaseUserListIterator(ResultSet rs) {
+		super(rs);
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869B8012C
+	 */
+	public Object next() {
+		int current;
+		User user = null;
+		try {
+			synchronized (rs) {
+				current = rs.getRow();
+				rs.absolute(index);
+				index++;
+				user = new User(rs.getString("LOGIN_COM"));
+				user.setName(rs.getString("NOM_COM"));
+				user.setFirstname(rs.getString("PRENOM_COM"));
+				user.setAdmin(rs.getBoolean("EST_ADM_COM"));
+				user.setPassword(rs.getString("PASS_COM"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			rs.absolute(current);
+		}
+
+		return user;
+
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869B80140
+	 */
+	public Object previous() {
+		User user = null;
+		try {
+			rs.previous();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			user = new User(rs.getString("LOGIN_COM"));
+			user.setName(rs.getString("NOM_COM"));
+			user.setFirstname(rs.getString("PRENOM_COM"));
+			user.setAdmin(rs.getBoolean("EST_ADM_COM"));
+			user.setPassword(rs.getString("PASS_COM"));
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+
+		return null;
+	}
 }
-/**
- * 
- * 
- *  
- * DatabaseUserListIterator.next(){
- *     return null;
- *    }
- *  
- *  
- * DatabaseUserListIterator.add(Object){
- *     
- *    }
- *  
- *  
- * DatabaseUserListIterator.set(Object){
- *     
- *    }
- *  
- *  
- * DatabaseUserListIterator.remove(){
- *     
- *    }
- *  
- *  
- * DatabaseUserListIterator.previous(){
- *     return null;
- *    }
- *  
- *  
- * DatabaseUserListIterator.nextIndex(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseUserListIterator.hasPrevious(){
- *     return true;
- *    }
- *  
- *  
- * DatabaseUserListIterator.previousIndex(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseUserListIterator.hasNext(){
- *     return true;
- *    }
- *  
- *  
- *  
- */
