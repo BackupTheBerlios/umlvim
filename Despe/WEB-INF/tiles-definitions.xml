@@ -65,6 +65,10 @@
 	<definition name="user.search.student" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/SearchStudent.jsp" />
 	</definition>
+	
+	<definition name="user.stats" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/stats.jsp" />
+	</definition>
 
 
 	<!-- Admin's pages definitions -->

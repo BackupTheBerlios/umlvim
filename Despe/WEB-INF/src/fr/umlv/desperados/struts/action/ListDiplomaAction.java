@@ -1,33 +1,30 @@
 /*
  * Créé le 23 janv. 2004
  *
- * Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
 package fr.umlv.desperados.struts.action;
 
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.stylesheet.StyleSheetManager;
+import fr.umlv.desperados.diploma.DiplomaManager;
 import fr.umlv.desperados.util.Constants;
 
 /**
  * @author africott
  *
  */
-public class ListDiplomaAction extends AdminAction {
+public class ListDiplomaAction extends Action {
 
-	public ActionForward doExecute(
+	public ActionForward execute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,
@@ -36,9 +33,9 @@ public class ListDiplomaAction extends AdminAction {
 
 		ActionErrors errors = new  ActionErrors();
 
-		StyleSheetManager manager =
-			(StyleSheetManager) servlet.getServletContext().getAttribute(
-				Constants.STYLESHEET_DATABASE_KEY);
+		DiplomaManager manager =
+			(DiplomaManager) servlet.getServletContext().getAttribute(
+				Constants.DIPLOMA_DATABASE_KEY);
 
 		if (manager == null) {
 			errors.add(
@@ -48,11 +45,8 @@ public class ListDiplomaAction extends AdminAction {
 			return (mapping.findForward("error"));
 		}
 
-		List styleSheetList = manager.listStyleSheet();
-		request.setAttribute("styleSheetList", styleSheetList);
-
-		Map docMap = manager.listDocType();
-		request.setAttribute("docMap", docMap);
+		List diplomaList = manager.listDiploma();
+		request.setAttribute("diplomaList", diplomaList);
 
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));

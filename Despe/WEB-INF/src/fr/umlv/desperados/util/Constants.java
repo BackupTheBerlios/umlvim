@@ -33,4 +33,6 @@ abstract public class Constants {
 	public final static String RDV_DATABASE_KEY = pack + "RDV_DATABASE_KEY";
 
 	public final static String STYLESHEET_DATABASE_KEY = pack + "STYLESHEET_DATABASE_KEY";
+	
+	public final static String DIPLOMA_DATABASE_KEY = pack + "DIPLOMA_DATABASE_KEY";
 }
