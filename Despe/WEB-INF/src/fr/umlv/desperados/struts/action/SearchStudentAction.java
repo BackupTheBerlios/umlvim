@@ -28,7 +28,7 @@ import fr.umlv.desperados.util.Constants;
  * XDoclet definition:
  * @struts:action path="/saveUser" name="userForm" attribute="userForm" input="/form/userDetails.jsp" validate="true"
  */
-public final class SearchStudentAction extends AdminAction {
+public final class SearchStudentAction extends UserAction {
 
 	// --------------------------------------------------------- Public Methods
 

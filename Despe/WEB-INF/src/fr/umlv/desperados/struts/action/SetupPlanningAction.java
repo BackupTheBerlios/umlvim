@@ -14,7 +14,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -26,9 +25,9 @@ import fr.umlv.desperados.planning.PlanningConf;
 import fr.umlv.desperados.struts.form.PlanningConfForm;
 import fr.umlv.desperados.util.Constants;
 
-public class SetupPlanningAction extends Action {
+public class SetupPlanningAction extends UserAction {
 
-	public ActionForward execute(
+	public ActionForward doExecute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,

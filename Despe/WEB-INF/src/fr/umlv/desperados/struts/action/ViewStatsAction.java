@@ -7,7 +7,6 @@ package fr.umlv.desperados.struts.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 // import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
@@ -23,8 +22,8 @@ import fr.umlv.desperados.util.Constants;
  * @author Arnaud FRICOTTEAU
  *
  */
-public class ViewStatsAction extends Action {
-	public ActionForward execute(
+public class ViewStatsAction extends UserAction {
+	public ActionForward doExecute(
 			ActionMapping mapping,
 			ActionForm form,
 			HttpServletRequest request,

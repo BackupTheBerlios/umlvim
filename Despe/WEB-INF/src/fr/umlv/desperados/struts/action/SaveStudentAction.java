@@ -26,7 +26,7 @@ import fr.umlv.desperados.util.Constants;
  * @author npetitde
 
  */
-public class SaveStudentAction extends AdminAction {
+public class SaveStudentAction extends UserAction {
 
 	/** 
 	 * Method execute

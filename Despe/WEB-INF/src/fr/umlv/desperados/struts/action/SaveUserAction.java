@@ -90,7 +90,6 @@ public class SaveUserAction extends AdminAction {
 			return (mapping.findForward("error"));
 		}
 
-
 		UserManager manager = (UserManager)servlet.getServletContext().
 								getAttribute(Constants.USER_DATABASE_KEY);
 
@@ -107,6 +106,10 @@ public class SaveUserAction extends AdminAction {
 				err = "error.user.alreadyexist";
 		} catch(UserNotFoundException e) {
 			err = "error.user.dontexist";
+		} catch(DeleteYourselfException e) {
+			err = "error.admin.deleteyourself";
+		} catch(LastAdminException e) {
+			err = "error.admin.lastadmin";
 		} catch(ManagerException e) {
 			err = e.getMessage();
 		}
@@ -140,8 +143,13 @@ public class SaveUserAction extends AdminAction {
 	}
 
 
+	// --------------------------------------------------------- Private Methods
+
+
 	private void doCreateUser(UserManager manager, UserForm form)
-	throws UserAlreadyExistsException, ManagerException, MailNotSentException {
+	throws UserAlreadyExistsException,
+				ManagerException,
+				MailNotSentException {
 
 		User userToSave = new User();
 		FormUtilities.userFormToUser(form, userToSave);
@@ -164,21 +172,29 @@ public class SaveUserAction extends AdminAction {
 		// add the User to the database
 		manager.addUser(userToSave);
 
-		mail("create", userToSave);
+		mail(Message.CREATION_MESSAGE, userToSave);
 	}
-
 
 	private void doDeleteUser(UserManager manager, UserForm form)
-		throws UserNotFoundException, ManagerException, MailNotSentException {
+		throws UserNotFoundException,
+					ManagerException,
+					MailNotSentException,
+					DeleteYourselfException {
 
-		User userDeleted = manager.removeUser(form.getLogin());
+		String login = form.getLogin();
+		if(loggedUser.getLogin().equals(login)) {
+			throw new DeleteYourselfException();
+		}
+		User userDeleted = manager.removeUser(login);
 
-		mail("delete", userDeleted);
+		mail(Message.SUPPRESSION_MESSAGE, userDeleted);
 	}
 
-
 	private void doEditUser(UserManager manager, UserForm form)
-		throws UserNotFoundException, ManagerException, MailNotSentException {
+		throws UserNotFoundException,
+					ManagerException,
+					MailNotSentException,
+					LastAdminException {
 
 		User userToSave = manager.getUser(form.getLogin());
 		FormUtilities.userFormToUser(form, userToSave);
@@ -188,26 +204,25 @@ public class SaveUserAction extends AdminAction {
 			userToSave.setPassword(UserUtilities.generatePassword());
 		}
 
+		if(userToSave.getLogin().equals(
+					loggedUser.getLogin())) {
+			throw new LastAdminException();
+		}
+
 		// update the User in the database
 		manager.modifyUser(userToSave);
 
-		mail("modify", userToSave);
+		mail(Message.MODIFICATION_MESSAGE, userToSave);
 	}
 
-	private void mail(String action, User user) throws MailNotSentException {
+	private void mail(String messageType, User user) throws MailNotSentException {
 		MessageFactory factory = new MessageFactory();
 		Mailer mailer = new Mailer();
 		Message message = null;
-		if("create".equals(action)) {
-			message = factory.createMessage(Message.CREATION_MESSAGE,
-																			user);
-		} else if("delete".equals(action)) {
-			message = factory.createMessage(Message.SUPPRESSION_MESSAGE,
-																			user);
-		} else {
-			message = factory.createMessage(Message.MODIFICATION_MESSAGE,
-																			user);
-		}
+		message = factory.createMessage(messageType, user);
 		mailer.sendMail(user.getEmail(), message);
 	}
+
+	private class DeleteYourselfException extends Exception {}
+	private class LastAdminException extends Exception {}
 }

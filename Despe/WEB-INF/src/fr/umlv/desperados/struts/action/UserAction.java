@@ -6,21 +6,25 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.util.Constants;
+
 /**
  * Implementation of <strong>Action</strong> that processes a
  * user logoff.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/02/07 16:57:47 $
+ * @version $Revision: 1.1 $ $Date: 2004/02/07 16:57:47 $
  */
 
-public abstract class AdminAction extends UserAction {
+public abstract class UserAction extends Action {
 
 	// ----------------------------------------------------- Instance Variables
 
@@ -28,6 +32,8 @@ public abstract class AdminAction extends UserAction {
 	 * The <code>Log</code> instance for this application.
 	 */
 	protected Log log = LogFactory.getLog("fr.umlv.fdesperados.struts");
+
+	protected User loggedUser = null;
 
 	// --------------------------------------------------------- Public Methods
 
@@ -56,24 +62,29 @@ public abstract class AdminAction extends UserAction {
 		ActionErrors errors = new ActionErrors();
 		HttpSession session = request.getSession();
 
-		if ((isUserLogged(session) == false)
-				 || (loggedUser.getAdmin() == false)) {
+		if (isUserLogged(session) == false) {
 			if (log.isWarnEnabled()) {
-				log.warn("AdminAction: User is not logged on as admin in session "
+				log.warn("UserAction: User is not logged on in session "
 						+ session.getId());
 			}
 			errors.add(ActionErrors.GLOBAL_ERROR,
-				new ActionError("error.mustbeloggedasadmin"));
+				new ActionError("error.mustbeloggedasuser"));
 			saveErrors(request, errors);
 			return (mapping.findForward("error"));
 		}
 		return doExecute(mapping, form, request, response);
 	}
 
+	protected final boolean isUserLogged(HttpSession session) {
+		// Is there a currently logged on user as admin?
+		loggedUser = (User) session.getAttribute(Constants.USER_KEY);
+		return (loggedUser != null);
+	}
+
 	protected abstract ActionForward doExecute(
-	ActionMapping mapping,
-	ActionForm form,
-	HttpServletRequest request,
-	HttpServletResponse response)
+		ActionMapping mapping,
+		ActionForm form,
+		HttpServletRequest request,
+		HttpServletResponse response)
 	throws Exception;
 }

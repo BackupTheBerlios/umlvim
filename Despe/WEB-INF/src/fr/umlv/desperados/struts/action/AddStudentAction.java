@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -37,7 +36,7 @@ import fr.umlv.desperados.util.Constants;
  * XDoclet definition:
  * @struts:action
  */
-public class AddStudentAction extends Action {
+public class AddStudentAction extends UserAction {
 
 	// --------------------------------------------------------- Instance Variables
 
@@ -56,7 +55,7 @@ public class AddStudentAction extends Action {
 	private Log log =
 			LogFactory.getLog("fr.umlv.desperados.struts");
 			
-	public ActionForward execute(
+	public ActionForward doExecute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,
