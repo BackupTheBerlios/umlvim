@@ -18,14 +18,14 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/take/rdv">
+				<html:link action="/list/rdv">
 					<bean:message key="menu.student.takerdv" />
 				</html:link>
 			</td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/cancel/rdv">
+				<html:link action="/cancelRdv">
 					<bean:message key="menu.student.cancelrdv" />
 				</html:link>
 			</td>
