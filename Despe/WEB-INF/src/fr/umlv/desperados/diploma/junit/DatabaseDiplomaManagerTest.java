@@ -70,8 +70,6 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		
-		//strutsDatabaseRequestor.closeConnection();
 	}
 	
 	/*public void testAddDiploma() {
@@ -97,6 +95,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 	public void testListDiploma() {
 		Diploma diploma = null;
 		boolean diplomaFinded = false;
+		boolean diplomaNotFinded = true;
 		Iterator iterator;
 		
 		List list = ddm.listDiploma();
@@ -104,16 +103,20 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		iterator = list.iterator();
 		 while(iterator.hasNext()) {
 		 	diploma = (Diploma)iterator.next();
-		 	String str = diploma.getName();
 		 	if( (diploma.getName().equals("default")) && (diploma.getCycle().equals("-1")) )
 				diplomaFinded = true;
+			if( (diploma.getName().equals("N'existe pas")) && (diploma.getCycle().equals("-100")) )
+				diplomaNotFinded = false;
 		 }
 		assertTrue(diplomaFinded);
+		assertTrue(diplomaNotFinded);
 	}
 	
 	public void testAddThenRemoveDiploma() {
 		String diplomaId;
-		Diploma diploma = new Diploma("DEA informatique", "3");
+		Diploma diploma = null;
+		 
+		diploma = new Diploma("DEA informatique", "3");
 		
 		 try {
 			ddm.addDiploma(diploma);
