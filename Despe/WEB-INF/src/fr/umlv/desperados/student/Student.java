@@ -3,6 +3,7 @@
 package fr.umlv.desperados.student;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 import fr.umlv.desperados.util.XMLable;
@@ -292,7 +293,7 @@ public class Student implements XMLable {
 	private int otherEstabInsPlaceId;
 	private int bacObtainingCountryId;
 	private int nationalityId;
-	private String handic;
+	private ArrayList handicapList;
 
 	/**
 	 * @see international exchange place identify
@@ -1683,22 +1684,46 @@ public class Student implements XMLable {
 	/**
 	 * @return
 	 */
-	public String getHandic() {
-		return handic;
+	public ArrayList getHandicapList() {
+		return handicapList;
 	}
 
 	/**
 	 * @param string
 	 */
-	public void setHandic(String string) {
-		handic = string;
+	public void addHandicapList(String string) {
+		handicapList.add(string);
 	}
+
+	/**
+		 * @param string
+		 */
+		public void clearHandicapList() {
+			handicapList.clear() ;
+		}
+	
+	
 
 	/**
 	 * @return
 	 */
 	public String getPrecYearSitTypeId() {
 		return precYearSitTypeId;
+	}
+
+	/**
+	 * @param list
+	 */
+	public void setHandicapList(ArrayList list) {
+		handicapList = list;
+	}
+
+	/**
+	 * @param array
+	 */
+	public int sizeHandicapList() {
+	return handicapList.size(); 
+		
 	}
 
 }

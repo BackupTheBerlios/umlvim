@@ -5,9 +5,11 @@ package fr.umlv.desperados.student;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import fr.umlv.desperados.database.DatabaseRequestor;
@@ -383,25 +385,11 @@ public class DatabaseStudentManager implements StudentManager {
 					result.getInt(prop.get("headFamJob").toString()));
 				student.setMLVDiplomaComplId(
 					result.getInt(prop.get("MLVDiplomaComplId").toString()));
-
+				//student.setHandicapList((ArrayList)(result.getArray ( prop.get("handicapList").toString()).getArray()));
+				//TODO a vérifier si ça fonctionne vraiment bien faire handicap 
 			}
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
-
-		query = "SELECT * FROM A_UN_HANDICAP Where id_etu='" + studentId + "';";
-		try {
-			result = requestor.doQuery(query);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			if (result.next()) {
-				student.setHandic(result.getString("ID_HAN"));
-			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
 		}
 		return student;
 	}
@@ -706,25 +694,11 @@ public class DatabaseStudentManager implements StudentManager {
 				result.updateInt(
 					prop.get("MLVDiplomaComplId").toString(),
 					student.getMLVDiplomaComplId());
-
+				//result.updateArray(prop.get("handicapList").toString(),Array(student.getHandicapList().getClass()  ));
+//TODO handicap à faire
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-
-		query =
-			"SELECT * FROM A_UN_HANDICAP WHERE id_etu = '"
-				+ student.getStudentId()
-				+ "';";
-
-		try {
-			result = requestor.doQuery(query);
-
-			if (result.next()) {
-				result.updateString("id_han", student.getHandic());
-			}
-		} catch (SQLException e2) {
-			e2.printStackTrace();
 		}
 	}
 
@@ -751,15 +725,6 @@ public class DatabaseStudentManager implements StudentManager {
 			e.printStackTrace();
 		}
 
-		query = "SELECT * FROM A_UN_HANDICAP WHERE id_etud='" + studentId + "'";
-		try {
-			result = requestor.doQuery(query);
-			if (result.next()) {
-				result.deleteRow();
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 		return newStudent;
 	}
 
@@ -808,7 +773,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF9BE4C01C4
 	 */
 	public void setCacheSize(int size) {
-		//cache.setCapacity(size); 
+//		cache.setCapacity(size);
 	}
 }
 /**
