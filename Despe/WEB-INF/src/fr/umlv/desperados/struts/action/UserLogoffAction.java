@@ -23,7 +23,7 @@ import fr.umlv.desperados.util.Constants;
  * user logoff.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2004/01/15 10:51:24 $
+ * @version $Revision: 1.2 $ $Date: 2004/01/15 20:39:35 $
  */
 
 public final class UserLogoffAction extends Action {
