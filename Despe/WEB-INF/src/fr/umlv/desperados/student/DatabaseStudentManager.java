@@ -605,7 +605,7 @@ public class DatabaseStudentManager implements StudentManager {
 			query.append(prop.get("firstName1")+" like " + firstname + "%' and ");
 		}
 		if (diplomaId != 0) {
-			query.append(prop.get("MLViplomaId")+"='" + diplomaId + "' and ");
+			query.append(prop.get("MLVDiplomaId")+"='" + diplomaId + "' and ");
 		}
 
 		query.replace(query.length() - 4, query.length(), "");
