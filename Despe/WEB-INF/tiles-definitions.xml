@@ -77,6 +77,10 @@
 		<put name="body-content"	value="/pages/form/SearchStudent.jsp" />
 	</definition>
 	
+	<definition name="user.add.student" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/AddStudent.jsp" />
+	</definition>
+	
 	<definition name="user.stats" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/stats.jsp" />
 	</definition>
@@ -97,6 +101,10 @@
 
 	<definition name="admin.search.user" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
+	</definition>
+	
+	<definition name="planning.configure" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
 	</definition>
 
 	<definition name="admin.stylesheet.list" extends="userBaseDef">

@@ -51,6 +51,8 @@
 		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
 		
 		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
+
+     <form-bean name="AddStudentForm" type="fr.umlv.desperados.struts.form.AddStudentForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -67,6 +69,7 @@
 		<forward	name="studenthome"		path="student.home" />
 		<forward	name="searchuser"		path="admin.search.user" />
 		<forward	name="searchstudent"	path="user.search.student" />
+       <forward name="addstudent" path="user.add.student" />
 	</global-forwards>
 
 	<!-- ========== Action Mapping Definitions ============================ -->
@@ -80,6 +83,14 @@
 		<action path="/identPage"				forward="student.ident" />
 		<action path="/home/user"				forward="userhome" />
 		<action path="/home/student"			forward="studenthome" />
+		<action path="/addStudent"		forward="user.add.student"  />
+    <action
+            attribute="AddStudentForm"
+             input="/pages/form/AddStudent.jsp"
+            name="AddStudentForm"
+            path="/add/student"
+            type="fr.umlv.desperados.struts.action.AddStudentAction"
+            validate="false" />
 
 		<action
 			path="/userLogon"
