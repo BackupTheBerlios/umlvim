@@ -5,7 +5,7 @@
 <h1>Gestion des feuilles de style</h1>
 
 <html:form action="/set/StyleSheet">
-	<table border="1" width="100%">
+	<table width="100%">
 		<tr>
 			<td aling="left"><h3>Appliquer une feuille de style</h3></td>
 		</tr>
@@ -42,7 +42,7 @@
 </html:form>
 <hr>
 <html:form action="/add/styleSheet" enctype="multipart/form-data">
-	<table border="1" width="100%">
+	<table width="100%">
 		<tr>
 			<td aling="left"><h3>Ajouter une feuille de style</h3></td>
 		</tr>
@@ -62,7 +62,7 @@
 </html:form>
 <hr>
 <html:form action="/remove/styleSheet">
-	<table border="1" width="100%">
+	<table width="100%">
 		<tr>
 			<td aling="left"><h3>Supprimer une feuille de style</h3></td>
 		</tr>
