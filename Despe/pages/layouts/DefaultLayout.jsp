@@ -10,23 +10,23 @@
 	<body bgcolor="#FFFFFF">
 		<table width="100%">
 			<tr>
-				<td  colspan="2" align="center" bgcolor="#945dac">
+				<td  colspan="2" align="center" bgcolor="#7363ac">
 					<!-- Header page information -->
 					<tiles:insert attribute="header"/>
 				</td>
 			</tr>
 			<tr>
-				<td width="200" bgcolor="#f6aeac">
+				<td width="200" bgcolor="#945dac" valign="top">
 					<!-- Menu bar -->
 					<tiles:insert attribute="menubar"/>  
 				</td>
-				<td align="center">
+				<td align="center" bgcolor="#9c71b4">
 					<!-- Main body information -->
 					<tiles:insert attribute="body-content"/>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" bgcolor="#9c71b4">
+				<td colspan="2" bgcolor="#7363ac">
 					<!-- Footer page information -->
 					<tiles:insert attribute="footer"/>
 				</td>

@@ -4,7 +4,10 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +18,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.account.User;
 import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.struts.form.SearchUserForm;
 import fr.umlv.desperados.util.Constants;
@@ -48,26 +52,43 @@ public final class SearchUserAction extends AdminAction {
 		throws Exception {
 
 		SearchUserForm searchForm = (SearchUserForm) form;
-		ActionErrors errors = searchForm.validate(mapping, request);
-////////////////////
-//COMMENTED FOR TEST
-		UserManager manager = (UserManager)servlet.getServletContext().
-								getAttribute(Constants.USER_DATABASE_KEY);
-		if(manager == null) {
-			errors.add("database",
-			   new ActionError("error.database.missing"));
-			log.warn("UserLogonAction: Database is missing");
+		if(form == null) {
+			return (mapping.findForward("searchuser"));
 		}
 
+		// validate the form
+		ActionErrors errors = searchForm.validate(mapping, request);
 		if(!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("searchuser"));
 		}
-//		PrintWriter pw = response.getWriter();
-//		pw.println("Searching login='"+searchForm.getLogin()+"' name='"+searchForm.getName()+"'");		
 
-		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
-		request.setAttribute("userList", userList);
+////////////////////
+//COMMENTED FOR TEST
+		UserManager manager = (UserManager)servlet.getServletContext().
+								getAttribute(Constants.USER_DATABASE_KEY);
+//		if(manager == null) {
+//			errors.add("database",
+//			   new ActionError("error.database.missing"));
+//			log.warn("SearchUserAction: Database is missing");
+//		}
+
+		if(!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
+
+//		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
+		LinkedList userList = new LinkedList();
+		for(int i=0 ; i<15 ; i++) {
+			User u = new User("login_"+i);
+			u.setName("name_"+i);
+			u.setFirstname("firstname_"+i);
+			userList.add(u);
+		}
+		if(userList != null) {
+			request.setAttribute("userlist", userList);
+		}
 ////////////////////
 
 		return (mapping.findForward("searchuser"));

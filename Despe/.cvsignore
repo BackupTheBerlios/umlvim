@@ -1,1 +1,6 @@
 work
+.easystrutsplugin
+.project
+.tomcatplugin
+.classpath
+WEB-INF/classes

@@ -2,22 +2,24 @@
 <%@ taglib uri="/WEB-INF/app.tld" prefix="app" %>
 
 <app:checkIdent page="">
-	<table>
+	<table width="100%">
 		<tr>
-			<th> <bean:message key="title.student.menu" /> </th>
+			<th align="left" valign="bottom">
+				<bean:message key="title.student.menu" />
+			</th>
 		</tr>
 		<tr>
-			<td align="right">
+			<td align="right" valign="top">
 			</td>
 		</tr>
 		<tr>
-			<td align="right>
+			<td align="right" valign="top">
 			</td>
 		</tr>
 		<tr>
-			<td align="right>
-				<html:link action="/do/studentLogoff">déconnexion</html:link>
+			<td align="right" valign="top">
+				<html:link action="/studentLogoff">déconnexion</html:link>
 			</td>
 		</tr>
 	</table>
-</app:checkLogon>
+</app:checkIdent>

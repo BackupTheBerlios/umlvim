@@ -15,10 +15,6 @@
 	</definition>
 
 	<definition name="userBaseDef"	extends="baseDef">
-		<put name="menubar"			value="/pages/UserMenu.jsp" />
-	</definition>
-
-	<definition name="adminBaseDef"	extends="baseDef">
 		<put name="menubar"			value="/pages/AdminMenu.jsp" />
 	</definition>
 
@@ -50,7 +46,7 @@
 		<put name="body-content"	value="/pages/form/StudentLogon.jsp" />
 	</definition>
 
-	<definition name="user.home" extends="baseDef">
+	<definition name="student.home" extends="baseDef">
 		<put name="body-content"	value="/pages/Main.jsp" />
 	</definition>
 
@@ -73,15 +69,15 @@
 
 	<!-- Admin's pages definitions -->
 
-	<definition name="admin.edit.user" extends="adminBaseDef">
+	<definition name="admin.edit.user" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
 	</definition>
 
-	<definition name="admin.search.user" extends="adminBaseDef">
+	<definition name="admin.search.user" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
 	</definition>
 
-	<definition name="admin.stylesheet.list" extends="adminBaseDef">
+	<definition name="admin.stylesheet.list" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/ListStyleSheet.jsp" />
 	</definition>
 

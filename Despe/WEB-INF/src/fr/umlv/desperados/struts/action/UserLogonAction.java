@@ -78,48 +78,51 @@ public class UserLogonAction extends Action {
 		UserManager manager = (UserManager)servlet.getServletContext().
 			getAttribute(Constants.USER_DATABASE_KEY);
 
-		if (manager == null) {
-			errors.add("database",
-			   new ActionError("error.database.missing"));
-			log.warn("UserLogonAction: Database is missing");
-		}
-		else {
-			try {
-				user = manager.getUser(userLogonForm.getLogin());
-				String password = userLogonForm.getPassword();
-				if (!password.equals(user.getPassword())) {
-					errors.add("password",
-					   new ActionError("error.password.mismatch"));
-				}
-			} catch (UserNotFoundException e) {
-				errors.add("database",
-				   new ActionError("error.user.dontexist"));
-			}
-		}
-
 /////////////////////
 // COMMENTED FOR TEST
+//		if (manager == null) {
+//			errors.add("database",
+//			   new ActionError("error.database.missing"));
+//			log.warn("UserLogonAction: Database is missing");
+//		}
+//		else {
+//			try {
+//				user = manager.getUser(userLogonForm.getLogin());
+//				String password = userLogonForm.getPassword();
+//				if (!password.equals(user.getPassword())) {
+//					errors.add("password",
+//					   new ActionError("error.password.mismatch"));
+//				}
+//			} catch (UserNotFoundException e) {
+//				errors.add("database",
+//				   new ActionError("error.user.dontexist"));
+//			}
+//		}
+/////////////////////
+
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("logon"));
 		}
-//		if(userLogonForm.getLogin().equals("ncuvelie")) {
-//			user = new User("ncuvelie");
-//			user.setName("CUVELIER");
-//			user.setFirstname("Nicolas");
-//			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
-//			user.setAdmin(true);
-//			user.setPassword("evvJRJ4J");
-//		} else {
-//			user = new User("niko");
-//			user.setName("CUVELIER");
-//			user.setFirstname("Nicolas");
-//			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
-//			user.setAdmin(false);
-//			user.setPassword("tototo");
-//		}
-///////////////////
+///////////
+// FOR TEST
+		if(userLogonForm.getLogin().equals("ncuvelie")) {
+			user = new User("ncuvelie");
+			user.setName("CUVELIER");
+			user.setFirstname("Nicolas");
+			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
+			user.setAdmin(true);
+			user.setPassword("evvJRJ4J");
+		} else {
+			user = new User("niko");
+			user.setName("CUVE");
+			user.setFirstname("Niko");
+			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
+			user.setAdmin(false);
+			user.setPassword("tototo");
+		}
+///////////
 
 		// Save our logged-in user in the session
 		HttpSession session = request.getSession();

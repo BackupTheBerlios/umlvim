@@ -57,7 +57,7 @@ public class SearchUserForm extends ActionForm {
 
 		ActionErrors errors = new ActionErrors();
 		if(!byLogin && !byName) {
-			errors.add(ActionErrors.GLOBAL_ERROR,
+			errors.add("choice",
 						new ActionError("error.search.specify.oneatleast"));
 		} else {
 			if(byLogin && (login == null || login.equals(""))) {

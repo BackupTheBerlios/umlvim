@@ -53,7 +53,7 @@ public class CancelRdvAction extends Action{
 				
 				Rdv rdv = databaseRdvManager.getRdv(2);
 				
-				if( rdv == null ) target = "failure";
+				if( rdv == null ) target = "error";
 				else
 				databaseRdvManager.removeRdv(rdv);		
 							

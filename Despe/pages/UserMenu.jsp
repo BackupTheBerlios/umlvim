@@ -3,27 +3,29 @@
 <%@ taglib uri="/WEB-INF/app.tld" prefix="app" %>
 
 <app:checkLogon page="">
-	<table>
-		<tr align="left">
-			<th><bean:message key="title.user.menu"/></th>
+	<table width="100%">
+		<tr>
+			<th align="left" valign="bottom">
+				<bean:message key="title.user.menu"/>
+			</th>
 		</tr>
-		<tr align="right">
-			<td width="120">
-				<html:link action="/do/edit/student?action=create">
+		<tr>
+			<td align="right" valign="top">
+				<html:link action="/edit/student?action=create">
 					<bean:message key="menu.user.addstudent"/>
 				</html:link>
 			</td>
 		</tr>
-		<tr align="right">
-			<td width="120">
-				<html:link action="/do/search/?type=student">
+		<tr>
+			<td align="right" valign="top">
+				<html:link action="/search/?type=student">
 					<bean:message key="menu.user.searchstudent"/>
 				</html:link>
 			</td>
 		</tr>
-		<tr align="right">
-			<td width="120">
-				<html:link action="/do/userLogoff">
+		<tr>
+			<td align="right" valign="top">
+				<html:link action="/userLogoff">
 					<bean:message key="link.logoff" />
 				</html:link>
 			</td>

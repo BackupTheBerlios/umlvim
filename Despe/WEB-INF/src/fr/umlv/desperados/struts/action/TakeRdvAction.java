@@ -75,7 +75,7 @@ public class TakeRdvAction extends Action {
 
 		} catch (ParseException e) {
 			e.printStackTrace();
-			target = "failure";
+			target = "error";
 
 		}
 

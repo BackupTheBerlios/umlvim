@@ -9,32 +9,28 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 import org.apache.struts.config.ModuleConfig;
 
-import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
 /**
  * Check for a valid User logged on in the current session.  If there is no
  * such user, forward control to the logon page.
+ *
  */
 
-public final class CheckLogonTag extends TagSupport {
+public final class CheckIdentTag extends TagSupport {
 
 	// --------------------------------------------------- Instance Variables
 
 	/**
 	 * The key of the session-scope bean we look for.
 	 */
-	private String name = Constants.USER_KEY;
+	private String name = Constants.STUDENT_KEY;
 
 	/**
 	 * The page to which we should forward for the user to log on.
 	 */
-	private String page = "/pages/form/UserLogon.jsp";
-
-	/**
-	 * Whether the user must be admin
-	 */
-	private boolean admin = false;
+	private String page = "/pages/form/StudentLogon.jsp";
 
 	// ----------------------------------------------------------- Properties
 
@@ -70,24 +66,6 @@ public final class CheckLogonTag extends TagSupport {
 		this.page = page;
 	}
 
-	/**
-	 * Get the admin status
-	 * 
-	 * @return the admin status
-	 */
-	public boolean getAdmin() {
-		return admin;
-	}
-
-	/**
-	 * Get the admin status
-	 * 
-	 * @param b the admin status
-	 */
-	public void setAdmin(boolean b) {
-		admin = b;
-	}
-
 	// ------------------------------------------------------- Public Methods
 
 	/**
@@ -99,27 +77,15 @@ public final class CheckLogonTag extends TagSupport {
 	 */
 	public int doStartTag() throws JspException {
 
-		// Is there a valid user logged on?
-		boolean valid = false;
+		// Is there a valid student logged on?
 		HttpSession session = pageContext.getSession();
-		if(session != null) {
-			User user = (User) session.getAttribute(name);
-			if (user != null) {
-				valid = true;
-				// Is the logged user is admin
-				if (admin && !user.getAdmin()) {
-					valid = false;
-				}
-			}
-		}
-
-		// include page based on the results
-		if (valid) {
+		Student student = (Student)session.getAttribute(name);
+		if ((session != null) && (student != null)) {
+			// include page based on the results
 			return (EVAL_BODY_INCLUDE);
 		} else {
-			ModuleConfig config =
-				(ModuleConfig) pageContext.getServletContext().getAttribute(
-					org.apache.struts.Globals.MODULE_KEY);
+			ModuleConfig config = (ModuleConfig)pageContext.getServletContext()
+						.getAttribute(org.apache.struts.Globals.MODULE_KEY);
 			try {
 				pageContext.include(config.getPrefix() + page);
 			} catch (ServletException e) {
@@ -145,7 +111,7 @@ public final class CheckLogonTag extends TagSupport {
 	 */
 	public void release() {
 		super.release();
-		this.name = Constants.USER_KEY;
-		this.page = "/pages/form/UserLogon.jsp";
+		this.name = Constants.STUDENT_KEY;
+		this.page = "/pages/form/StudentLogon.jsp";
 	}
 }

@@ -164,13 +164,13 @@ public class SetupPlanningAction extends Action {
 		}
 
 		} catch (ParseException e) {
-			target = "failure";
+			target = "error";
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
-			target = "failure";
+			target = "error";
 			e.printStackTrace();
 			} catch (IOException e1) {
-				target = "failure";
+				target = "error";
 					e1.printStackTrace();
 			}
 

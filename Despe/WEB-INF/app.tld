@@ -42,6 +42,30 @@
   </tag>
 
   <tag>
+    <name>checkIdent</name>
+    <tagclass>fr.umlv.desperados.struts.util.CheckIdentTag</tagclass>
+    <info>
+      Validate that there is a currently logged on student, by checking for
+      the existence of a session-scope bean under the specified name.
+      If there is no such bean, replace the tag body with the specified page,
+      which will typically be a logon form.
+
+      name - Name of the session-scope bean to check for [student]
+      page - Context-relative path to the logon page [/form/StudentLogon.jsp]
+    </info>
+    <attribute>
+      <name>name</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>page</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+
+  <tag>
     <name>linkUser</name>
     <tagclass>org.apache.struts.webapp.example.LinkUserTag</tagclass>
     <info>
