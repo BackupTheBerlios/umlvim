@@ -42,7 +42,6 @@
 		<tr>
 			<td align="center"  colspan="4">
 				<html:submit><bean:message key="button.submit"/></html:submit>
-				<html:cancel><bean:message key="button.cancel"/></html:cancel>
 			</td>
 		</tr>
 	</table>
