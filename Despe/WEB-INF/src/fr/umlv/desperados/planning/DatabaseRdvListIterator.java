@@ -3,160 +3,87 @@
 package fr.umlv.desperados.planning;
 
 import java.sql.ResultSet;
-import java.util.ListIterator;
+import java.sql.SQLException;
+import java.util.Date;
 
+import fr.umlv.desperados.database.DatabaseAbstractListIterator;
 
 /**
  * Provides a implementation of java.util.ListIterator interface to iterate the 
  * elements contained by a DatabaseRdvList.
  */
-final class DatabaseRdvListIterator implements ListIterator 
-{
-   
-   /**
-    * The ResultSet containing the Rdv list.
-    */
-   private ResultSet rs;
-   
-   /**
-    * Constructor.
-    * 
-    * @param rs the ResultSet containing a Rdv list.
-    * @roseuid 3FE5EA7D026D
-    */
-   DatabaseRdvListIterator(ResultSet rs) 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869CC02EE
-    */
-   public void add(Object obj) 
-   {
-    
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869CC0302
-    */
-   public boolean hasNext() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869CC0303
-    */
-   public boolean hasPrevious() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869CC030C
-    */
-   public Object next() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869CC0316
-    */
-   public int nextIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869CC0320
-    */
-   public Object previous() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869CC032A
-    */
-   public int previousIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @roseuid 3FF869CC0334
-    */
-   public void remove() 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869CC033E
-    */
-   public void set(Object obj) 
-   {
-    
-   }
+final class DatabaseRdvListIterator extends DatabaseAbstractListIterator {
+
+	/**
+	 * The ResultSet containing the Rdv list.
+	 */
+	private ResultSet rs;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param rs the ResultSet containing a Rdv list.
+	 * @roseuid 3FE5EA7D026D
+	 */
+	DatabaseRdvListIterator(ResultSet rs) {
+		super(rs);
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869CC030C
+	 */
+	public Object next() {
+		index++;
+		return rowToRdv();
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869CC0320
+	 */
+	public Object previous() {
+		index--;
+		return rowToRdv();
+	}
+
+	/**
+	 * transforme the current rs row in a Rdv
+	 * @return a Rdv
+	 */
+	private Object rowToRdv() {
+		int current = -1;
+		Rdv rdv = null;
+
+		synchronized (rs) {
+			try {
+				current = rs.getRow();
+				rs.absolute(index);
+				
+				String id = rs.getString("ID_ETUD");
+				String name = rs.getString("MON_PATRONYMIQUE");
+				String firstName = rs.getString("PRENOM1");
+			
+				// TODO deprecated, a changer en utilisant calendar
+				boolean isRavel = (rs.getDate("ANNEE_BAC").getYear() == new Date(System.currentTimeMillis()).getYear());				
+				Date dateRdv= rs.getDate("DATE_DE_RDV");
+				
+				rdv = new Rdv(dateRdv,id,name,firstName,isRavel);				
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} finally {
+				try {
+					if (current != -1)
+						rs.absolute(current);
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+
+		}
+
+		return rdv;
+	}
+
 }
-/**
- * 
- * 
- *  
- * DatabaseRdvListIterator.next(){
- *     return null;
- *    }
- *  
- *  
- * DatabaseRdvListIterator.add(Object){
- *     
- *    }
- *  
- *  
- * DatabaseRdvListIterator.hasPrevious(){
- *     return true;
- *    }
- *  
- *  
- * DatabaseRdvListIterator.set(Object){
- *     
- *    }
- *  
- *  
- * DatabaseRdvListIterator.remove(){
- *     
- *    }
- *  
- *  
- * DatabaseRdvListIterator.previousIndex(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseRdvListIterator.nextIndex(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseRdvListIterator.hasNext(){
- *     return true;
- *    }
- *  
- *  
- * DatabaseRdvListIterator.previous(){
- *     return null;
- *    }
- *  
- *  
- *  
- */
