@@ -124,7 +124,7 @@
 			<forward	name="cancelled"			path="/do/home/user" />
 		</action>
 
-		<action path="/confPlanning" 			forward="planning.configure" />
+		<action path="/config/planning" 			forward="planning.configure" />
 		<action
 			path="/setupConf"
 			type="fr.umlv.desperados.struts.action.SetupPlanningAction"
@@ -141,7 +141,7 @@
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
 			<forward name="success"				path="admin.stylesheet" />
 		</action>
-		
+
 		<action
 			path="/set/StyleSheet"
 			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
@@ -257,7 +257,7 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/StudentFinancial.jsp"
 			validate="false"/>
-			
+
 			<action
 			path="/save/file/studies"
 			type="fr.umlv.desperados.struts.action.SaveStudentFileAction"
@@ -316,8 +316,13 @@
 		<action
 			path="/cancelRdv"
 			type="fr.umlv.desperados.struts.action.CancelRdvAction"
+			name="ConfirmForm"
+			attribute="ConfirmForm"
 			scope="request"
-			validate="false"/>
+			input="/WEB-INF/jsp/form/ChangePassword.jsp"
+			validate="false">
+			<forward	name="cancelled"			path="/do/home/user" />
+		</action>
 
 		<action
 			path="/printInscriptionFile"
