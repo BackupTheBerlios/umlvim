@@ -197,7 +197,7 @@ public class DatabaseRdvManager implements RdvManager {
 			if (ravel)
 				rs =
 					requestor.doQuery(
-						"SELECT DATE_RDV FROM rdv_dispo WHERE O_DATE(DATE_RDV,'DD/MM/YY')="
+						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')="
 							+ formatedDate
 							+ "  AND NB_RAV_DSP>0");
 
@@ -359,6 +359,22 @@ public class DatabaseRdvManager implements RdvManager {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.desperados.planning.RdvManager#confRdv(java.util.Date, int, int)
+	 */
+	public void confRdv(Date date, int nbRavMax, int nbEtuMax) { 
+		DateFormat dtf =
+				DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+				String formatedDate = dtf.format(date);
+		try {
+			requestor.executeQuery("INSERT INTO Rdv_Dispo VALUES(TO_DATE('"+formatedDate+"','DD/MM/YY HH24:MI'),"+nbRavMax+","+nbEtuMax+","+nbRavMax+","+nbEtuMax+")");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+	
+		
 	}
 	
 

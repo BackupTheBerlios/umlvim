@@ -43,7 +43,9 @@ public class PlanningDtd {
 	static final String HOURPARAMMIN = "min";
 
 	/** the pah of the dtd */
-	static String dtdPath = "file:///e:/fac/eclipse/workspace/fichiers/planning.dtd";
+	
+	// TODO aaa changer si on change de compte
+	static String dtdPath = "file:///home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.18-LE-jdk14/webapps/tomcatDespe/WEB-INF/planningConf.dtd";
 
 	
 	/**

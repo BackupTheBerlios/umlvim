@@ -2,7 +2,6 @@
 
 package fr.umlv.desperados.struts.form;
 
-import java.util.Date;
 
 import org.apache.struts.action.ActionForm;
 
@@ -12,7 +11,6 @@ public class PlanningConfForm extends ActionForm {
 	private String beginPM;
 	private String endAM;
 	private String endPM;
-	private String fromDate;
 	private String nbCorrectorAM;
 	private String nbCorrectorPM;
 	private String nbRavelAM;
@@ -20,6 +18,7 @@ public class PlanningConfForm extends ActionForm {
 	private String rdvDurationAM;
 	private String rdvDurationPM;
 	private String toDate;
+	private String fromDate;
 
 	/**
 	 * @return
@@ -34,6 +33,7 @@ public class PlanningConfForm extends ActionForm {
 	public String getBeginPM() {
 		return beginPM;
 	}
+
 
 	/**
 	 * @return

@@ -79,6 +79,7 @@ public class StudentLogonAction extends Action {
 
 		StudentManager manager = (StudentManager)servlet.getServletContext().
 			getAttribute(Constants.STUDENT_DATABASE_KEY);
+		
 		if (manager == null) {
 			errors.add("database",
 			   new ActionError("error.database.missing"));

@@ -13,6 +13,14 @@ import java.util.List;
 public interface RdvManager 
 {
    
+	/**
+		* Used to configure a rdv period
+		* 
+		* @param rdv the Rdv to add.
+		* @roseuid 3FBF56BA004D
+		*/
+	   public void confRdv(java.util.Date date,int nbRavMax,int nbEtuMax);
+   
    /**
     * Adds a Rdv in the permanent storage.
     * 

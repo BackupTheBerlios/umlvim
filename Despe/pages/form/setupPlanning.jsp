@@ -11,19 +11,22 @@
 <body>
 
 
-<html:form action="/setupConf" >
-<table border="0" width="100%">
+<html:form action="/setupConf">
   
-    
-    periode :</font><BR>
+  
+    periode :<BR>
      Du <html:text property="fromDate" size="10" maxlength="20" value=""/>
      au <html:text property="toDate" size="10" maxlength="20" value=""/><BR><br>
-    
+  
+
     horaire :<BR>
+    
   	Matin :	  de <html:text property="beginAM" size="10" maxlength="20" value=""/>
-         a <html:text property="endAm" size="10" maxlength="20" value=""/><br>
+         a <html:text property="endAM" size="10" maxlength="20" value=""/><br>
+         
   	aprem :	  de <html:text property="beginPM" size="10" maxlength="20" value=""/>
          a <html:text property="endPM" size="10" maxlength="20" value=""/>
+         
    <br><br>
    
    Duree du rendez vous:<br>
@@ -38,13 +41,11 @@
  	Nombre d etudiants ravel:<br>
    Matin  <html:text property="nbRavelAM" size="10" maxlength="20" value=""/>
    Aprem <html:text property="nbRavelPM" size="10" maxlength="20" value=""/>
+
  	
    <br> <html:submit value="Ok"/>
    
-</table>
-</html:form>
-
-
+   </html:form>
 
 </body>
 </html:html>
