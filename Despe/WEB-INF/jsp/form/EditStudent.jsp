@@ -51,16 +51,17 @@
 				<td><html:errors property="birthday"/></td>
 			</tr>
 		</logic:notEqual> <!-- for action!='delete' -->
-		
+
 		<tr>
 			<logic:equal name="StudentForm" scope="request"
 								 property="action" value="delete">	
-				<td align="center"> <html:submit value="Supprimer"/> </td>
+				<td align="right"> <html:submit> <bean:message key="button.confirm"/> </html:submit> </td>
+				<td align="left"> <html:cancel> <bean:message key="button.cancel"/> </html:cancel> </td>
 			</logic:equal>
 			<logic:notEqual name="StudentForm" scope="request"
-										 property="action" value="delete">	
-				<td align="right"> <html:submit value="Ajouter"/> </td>
-				<td align="left"> <html:reset/> </td>
+									 property="action" value="delete">	
+				<td align="right"> <html:submit> <bean:message key="button.submit"/> </html:submit> </td>
+				<td align="left"> <html:cancel> <bean:message key="button.cancel"/> </html:cancel> </td>
 			</logic:notEqual> 
 		</tr>
 	</table>

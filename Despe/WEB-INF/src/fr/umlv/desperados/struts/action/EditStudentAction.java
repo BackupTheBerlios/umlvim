@@ -22,6 +22,7 @@ import org.apache.struts.action.ActionMapping;
 import fr.umlv.desperados.struts.form.StudentForm;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
+import fr.umlv.desperados.student.StudentNotFoundException;
 import fr.umlv.desperados.util.Constants;
 
 /**
@@ -61,15 +62,29 @@ public class EditStudentAction extends UserAction {
 				errors.add("database",
 					new ActionError("error.database.missing"));
 			} else {
-				Student student = manager.getStudent(Integer.parseInt(studentForm.getId()));
-				request.setAttribute("name", student.getPatronymicName());
-				request.setAttribute("firstname", student.getFirstname1());
-
-				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
-				String birthday = df.format(student.getBirthday());
-				request.setAttribute("birthday",birthday);
+				try {
+					Student student = manager.getStudent(Integer.parseInt(studentForm.getId()));
+					request.setAttribute("name", student.getPatronymicName());
+					request.setAttribute("firstname", student.getFirstname1());
+					
+					DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+					String birthday = df.format(student.getBirthday());
+					request.setAttribute("birthday",birthday);
+				} catch (NumberFormatException e) {
+					// TODO Bloc catch auto-généré
+					e.printStackTrace();
+				} catch (StudentNotFoundException e) {
+					errors.add("database",
+						new ActionError("error.student.dontexist"));					
+				}
 			}
 		}
+
+		if(!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
+
 		studentForm.setAction(action);
 		return (mapping.findForward("success"));
 	}

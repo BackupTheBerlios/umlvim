@@ -41,7 +41,7 @@
 
 	<bean:parameter id="offset" name="start" value="0" />
 	<bean:parameter id="lenght" name="size" value="10" />
-	<logic:present name="userlist">
+	<logic:present name="userlist" scope="session">
 		<table width="100%">
 			<tr>
 				<th> <bean:message key="prompt.user.login" /> </th>
@@ -50,7 +50,7 @@
 			</tr>
 				<%! boolean b = true; %>
 				<logic:iterate name="userlist" length="<%=lenght%>" offset="<%=offset%>"
-							id="oneuser" type="fr.umlv.desperados.account.User">
+							id="oneuser" type="fr.umlv.desperados.account.User" scope="session">
 					<% b = !b; %>
 					<tr bgcolor="<%= b?"#945da0":"#945da8" %>">
 						<td align="center">
@@ -75,7 +75,27 @@
 					</tr>
 				</logic:iterate>
 		</table>
-		
+
+		<table>
+			<tr>
+				<td>
+					<logic:greaterThan parameter="start" value="0">
+						<html:link action="search/user">
+							<bean:message key="button.previous"/>
+						</html:link>
+					</logic:greaterThan>
+				</td>
+				<td>
+					<jsp:useBean id="userlist" type="java.util.List" scope="session"/>
+					<logic:lessThan parameter="offset" value="<%= new Integer(userlist.size() - new Integer(lenght).intValue()).toString() %>">
+						<html:link action="search/user">
+							<bean:message key="button.next"/>
+						</html:link>
+					</logic:lessThan>
+				</td>
+			</tr>
+		</table>
+
 	</logic:present>
 
 </app:checkLogon>

@@ -128,8 +128,8 @@
 				</logic:equal>
 				<logic:notEqual name="UserForm" scope="request"
 							 property="action" value="view">
-					<td align="right"> <html:submit/> </td>
-					<td align="left"> <html:cancel/> </td>
+					<td align="right"> <html:submit> >bean:message key="button.confirm"/> </html:submit> </td>
+					<td align="left"> <html:cancel> <bean:message key="button.cancel"/> </html:cancel> </td>
 				</logic:notEqual>
 			</tr>
 

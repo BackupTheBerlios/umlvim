@@ -6,12 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Locale;
-
 
 import fr.umlv.desperados.database.DatabaseAbstractList;
 
@@ -19,7 +17,7 @@ import fr.umlv.desperados.database.DatabaseAbstractList;
  * Provides a concrete implementation of java.util.List interface that contains a 
  * list of Rdv.
  */
-final class DatabaseRdvList extends DatabaseAbstractList  {
+final class DatabaseRdvList extends DatabaseAbstractList {
 
 	/**
 	 * Constructor.
@@ -29,8 +27,6 @@ final class DatabaseRdvList extends DatabaseAbstractList  {
 	 */
 	DatabaseRdvList(ResultSet rs) {
 		super(rs);
-		if(rs == null)
-			System.out.println("constructeur : rs est nul");
 	}
 
 	/**
@@ -79,7 +75,7 @@ final class DatabaseRdvList extends DatabaseAbstractList  {
 	}
 
 	public ListIterator listIterator(int index) {
-		return new DatabaseRdvListIterator(rs, index);		
+		return new DatabaseRdvListIterator(rs, index);
 	}
 
 	/* (non-Javadoc)

@@ -357,7 +357,6 @@ public class DatabaseRdvManager implements RdvManager {
 		if (rs != null)
 			return (List) (new DatabaseRdvList(rs));
 		return null;
-
 	}
 
 	/**

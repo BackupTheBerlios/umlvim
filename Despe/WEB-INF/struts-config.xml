@@ -193,6 +193,8 @@
 			<forward name="success" 			path="user.stats.result" />
 		</action>
 
+
+
 		<action path="/home/student"			forward="student.home" />
 
 		<action
@@ -205,6 +207,7 @@
 			<forward	name="itself"				path="student.ident" />
 			<forward	name="home"				path="/do/home/student" />
 		</action>
+
 		<action
 			path="/studentLogoff"
 			type="fr.umlv.desperados.struts.action.StudentLogoffAction">
@@ -223,6 +226,14 @@
 		</action>
 
 		<action
+			path="/save/student"
+			type="fr.umlv.desperados.struts.action.SaveStudentAction"
+			name="StudentForm"
+			attribute="StudentForm"
+			scope="request"
+			validate="false"/>
+
+		<action
 			path="/edit/file"
 			type="fr.umlv.desperados.struts.action.EditStudentFileAction">
 			<forward name="1"							path="student.edit.perso"/>
@@ -230,14 +241,6 @@
 			<forward name="3"							path="student.edit.secu"/>
 			<forward name="4"							path="student.edit.financial"/>
 		</action>
-
-	<action
-			path="/save/student"
-			type="fr.umlv.desperados.struts.action.SaveStudentAction"
-			name="StudentForm"
-			attribute="StudentForm"
-			scope="request"
-			validate="false"/>
 
 		<action
 			path="/save/file/perso"

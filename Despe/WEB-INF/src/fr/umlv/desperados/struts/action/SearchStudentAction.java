@@ -83,7 +83,7 @@ public final class SearchStudentAction extends UserAction {
 																					diplomaId);
 
 		if(studentList != null) {
-			request.setAttribute("studentlist", studentList);
+			request.getSession().setAttribute("studentlist", studentList);
 		}
 
 		List diplomaList = diplomaManager.listDiploma();

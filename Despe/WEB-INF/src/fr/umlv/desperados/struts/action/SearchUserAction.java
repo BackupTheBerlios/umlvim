@@ -74,7 +74,7 @@ public final class SearchUserAction extends AdminAction {
 
 		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
 		if(userList != null) {
-			request.setAttribute("userlist", userList);
+			request.getSession().setAttribute("userlist", userList);
 		}
 
 		return (mapping.findForward("itself"));
