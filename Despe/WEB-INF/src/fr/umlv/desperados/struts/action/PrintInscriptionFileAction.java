@@ -103,12 +103,17 @@ public class PrintInscriptionFileAction extends Action {
 		StyleSheet s = ssManager.getStyleSheet(docType);
 
 		String stringWorkingDirectory = System.getProperty( "java.io.tmpdir" ).replace( '\\', '/' );
-		String filePath = servlet.getServletContext().getRealPath("/") + "stylesheet/" + s.getFilename();
+   		String fileName = s.getFilename();
+		String filePath = servlet.getServletContext().getRealPath("/") + "stylesheet/" + fileName;
 	
 		InputStream is;
 	
 		if(docType==1 || docType==2) {
-			String destFile = stringWorkingDirectory+"/"+s.getFilename();
+			String destFile = stringWorkingDirectory+"/";
+
+			int index = fileName.lastIndexOf(".");
+			destFile += fileName.substring(0, index) + student.getId() + fileName.substring(index,fileName.length());
+			System.out.println("destFile = "+destFile);
 			PDFTools.copy(filePath, destFile);
 			PDFTools tools = new PDFTools(destFile); 
 			
