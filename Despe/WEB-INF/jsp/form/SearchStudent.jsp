@@ -103,13 +103,15 @@
 							<bean:write name="onestudent" property="birthday" />
 						</td>
 						<td align="center">
-							<logic:iterate name="diplomaList" id="diploma"
-													type="fr.umlv.desperados.diploma.Diploma">
-								<logic:equal name="diploma" scope="page" property="id"
-													value="<%= new Integer(onestudent.getMLVDiplomaId()).toString() %>">
-									<bean:write name="diploma" property="name" />
-								</logic:equal>
-							</logic:iterate>
+							<logic:present name="diplomaList">
+								<logic:iterate name="diplomaList" id="diploma"
+														type="fr.umlv.desperados.diploma.Diploma">
+									<logic:equal name="diploma" scope="page" property="id"
+														value="<%= new Integer(onestudent.getMLVDiplomaId()).toString() %>">
+										<bean:write name="diploma" property="name" />
+									</logic:equal>
+								</logic:iterate>
+							</logic:present>
 						</td>
 					<td align="right">
 							<html:link action="/edit/student?action=edit"

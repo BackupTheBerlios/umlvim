@@ -49,14 +49,14 @@ public final class SearchUserAction extends AdminAction {
 
 		SearchUserForm searchForm = (SearchUserForm) form;
 		if(form == null) {
-			return (mapping.findForward("searchuser"));
+			return (mapping.findForward("itself"));
 		}
 
 		// validate the form
 		ActionErrors errors = searchForm.validate(mapping, request);
 		if(!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("searchuser"));
+			return (mapping.findForward("itself"));
 		}
 
 		UserManager manager = (UserManager)servlet.getServletContext().
@@ -77,7 +77,6 @@ public final class SearchUserAction extends AdminAction {
 			request.setAttribute("userlist", userList);
 		}
 
-		return (mapping.findForward("searchuser"));
+		return (mapping.findForward("itself"));
 	}
-
 }

@@ -4,10 +4,8 @@
 <%@ taglib uri="/WEB-INF/tlds/app.tld" prefix="app"%>
 
 <app:checkLogon>
-	<h1>
-		<bean:message key="title.stats" />
-	</h1>
-	<BR>
+	<h1>	<bean:message key="title.stats" />	</h1>
+	<br>
 <html:form action="/stats">
 	<table width="100%">
 		<tr>

@@ -58,163 +58,179 @@
 		<forward	name="success"				path="common.operation.ok" />
 		<forward	name="userhome"			path="user.home" />
 		<forward	name="studenthome"		path="student.home" />
-		<forward	name="searchuser"		path="admin.search.user" />
-		<forward	name="searchstudent"	path="user.search.student" />
-       <forward 	name="editstudent"		path="user.edit.student" />
 	</global-forwards>
 
 	<!-- ========== Action Mapping Definitions ============================ -->
 	<action-mappings>
-		<action path="/confPlanning" 	forward="planning.configure"/>
-		<action path="/takeRdv"			forward="student.take.rdv"/>
-		<action path="/cancelRdv"		forward="student.cancel.rdv"/>
 		<action path="/loginPage"			forward="user.logon" />
-		<action path="/identPage"			forward="student.ident" />
-		<action path="/home/user"		forward="userhome" />
-		<action path="/home/student"	forward="studenthome" />
+		<action path="/home/user"		forward="user.home" />
+
 		<action
 			path="/userLogon"
 			type="fr.umlv.desperados.struts.action.UserLogonAction"
 			name="UserLogonForm"
 			scope="request"
-			input="/pages/form/UserLogon.jsp"
+			input="/WEB-INF/jsp/form/UserLogon.jsp"
 			validate="false"/>
+
 		<action
 			path="/userLogoff"
 			type="fr.umlv.desperados.struts.action.UserLogoffAction"/>
+
 		<action
 			path="/edit/user"
 			type="fr.umlv.desperados.struts.action.EditUserAction"
 			attribute="UserForm"
 			scope="request"
-			input="/pages/form/UserDetails.jsp"
+			input="/WEB-INF/jsp/form/UserDetails.jsp"
 			validate="false"/>
+
 		<action
 			path="/save/user"
 			type="fr.umlv.desperados.struts.action.SaveUserAction"
 			attribute="UserForm"
 			name="UserForm"
 			scope="request"
-			input="/pages/form/UserDetails.jsp"
+			input="/WEB-INF/jsp/form/UserDetails.jsp"
 			validate="false"/>
+
+		<action	path="/search/user"	forward="admin.search.user"/>
 		<action
-			path="/search/user"
+			path="/searchuser"
 			type="fr.umlv.desperados.struts.action.SearchUserAction"
 			attribute="SearchUserForm"
 			name="SearchUserForm"
 			scope="request"
-			input="/pages/form/SearchUser.jsp"
-			validate="false"/>
+			input="/WEB-INF/jsp/form/SearchUser.jsp"
+			validate="false">
+			<forward	name="itself"	path="admin.search.user" />
+		</action>
+
+		<action path="/confPlanning" 	forward="planning.configure"/>
 		<action
 			path="/setupConf"
 			type="fr.umlv.desperados.struts.action.SetupPlanningAction"
 			scope="request"
 			attribute="PlanningConfForm"
 			name="PlanningConfForm"
-			input="/pages/form/setupPlanning.jsp"
+			input="/WEB-INF/jsp/form/SetupPlanning.jsp"
 			validate="false"/>
+
 		<action
 			path="/list/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
 			<forward name="success" path="admin.stylesheet.list" />
 		</action>
+
 		<action
 			path="/set/StyleSheet"
 			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
 			attribute="SetStyleSheetForm"
 			name="SetStyleSheetForm"
 			scope="request"
-			input="/pages/form/ListStyleSheet.jsp"
+			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
+
 		<action
 			path="/add/styleSheet"
 			type="fr.umlv.desperados.struts.action.AddStyleSheetAction"
 			attribute="UploadtStyleSheetForm"
 			name="UploadStyleSheetForm"
 			scope="request"
-			input="/pages/form/ListStyleSheet.jsp"
+			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
+
 		<action
 			path="/remove/styleSheet"
 			type="fr.umlv.desperados.struts.action.RemoveStyleSheetAction"
 			attribute="SetStyleSheetForm"
 			name="SetStyleSheetForm"
 			scope="request"
-			input="/pages/form/ListStyleSheet.jsp"
+			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
+
 		<action
         	path="/stats/prepare"
         	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
             <forward name="success" path="user.stats" />
         </action>
+
         <action
 			path="/stats"
 			type="fr.umlv.desperados.struts.action.ViewStatsAction"
-			input="/pages/form/stats.jsp"
 			name="StatsForm"
 			attribute="StatsForm"
+			input="/WEB-INF/jsp/form/Stats.jsp"
 			validate="false">
 			<forward name="success" path="user.stats.result" />
 		</action>
 
-		<action
-			path="/search"
-			type="fr.umlv.desperados.struts.action.SearchAction"/>
+		<action path="/identPage"			forward="student.ident" />
+		<action path="/home/student"	forward="student.home" />
 
 		<action
 			path="/studentLogon"
 			type="fr.umlv.desperados.struts.action.StudentLogonAction"
 			name="StudentLogonForm"
 			scope="request"
-			input="/pages/form/StudentLogon.jsp"
+			input="/WEB-INF/jsp/form/StudentLogon.jsp"
 			validate="false"/>
+
 		<action
 			path="/studentLogoff"
 			type="fr.umlv.desperados.struts.action.StudentLogoffAction"/>
+
 	    <action
 			path="/edit/student"
 			type="fr.umlv.desperados.struts.action.FormStudentAction"
 			attribute="StudentForm"
 			name="StudentForm"
-			input="/pages/form/EditStudent.jsp"
+			input="/WEB-INF/jsp/form/EditStudent.jsp"
 			scope="request"
-			validate="false">
-		</action>
+			validate="false"/>
+
 		<action
 			path="/save/student"
 			type="fr.umlv.desperados.struts.action.SaveStudentAction"
 			attribute="StudentForm"
 			name="StudentForm"
 			scope="request"
-			input="/pages/form/EditStudent.jsp"
-			validate="false">
-		</action>
+			input="/WEB-INF/jsp/form/EditStudent.jsp"
+			validate="false"/>
+
 		<action
-        	path="/search/student/prepare"
+        	path="/search/student"
         	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
             <forward name="success" path="user.search.student" />
         </action>
 		<action
-			path="/search/student"
+			path="/searchstudent"
 			type="fr.umlv.desperados.struts.action.SearchStudentAction"
 			attribute="SearchStudentForm"
 			name="SearchStudentForm"
 			scope="request"
-			input="/pages/form/SearchStudent.jsp"
-			validate="false"/>
+			input="/WEB-INF/jsp/form/SearchStudent.jsp"
+			validate="false">
+			<forward	name="itself"	path="user.search.student" />
+		</action>
+
+		<action path="/take/rdv"			forward="student.take.rdv"/>
 		<action
-			path="/take/rdv"
+			path="/takeRdv"
 			type="fr.umlv.desperados.struts.action.TakeRdvAction"
 			attribute="RdvTackingForm"
 			name="RdvTackingForm"
 			scope="request"
-			input="/pages/form/takeRdv.jsp"
+			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			validate="false"/>
+
+		<action path="/cancel/rdv"		forward="student.cancel.rdv"/>
 		<action
-			path="/cancel/rdv"
+			path="/cancelRdv"
 			type="fr.umlv.desperados.struts.action.CancelRdvAction"
 			scope="request"
 			validate="false"/>
+
 		<action
 			path="/printInscriptionFile"
 			type="fr.umlv.desperados.struts.action.PrintInscriptionFileAction"/>

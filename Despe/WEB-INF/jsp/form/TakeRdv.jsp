@@ -8,7 +8,7 @@ import ="java.util.*, fr.umlv.desperados.planning.DatabaseRdvManager,fr.umlv.des
 
 <app:checkIdent>
 	<br> 
-	<html:form action="/take/rdv" >
+	<html:form action="/takeRdv" >
 		Selectionnner le jour de rendez vous qui vous convient: 
 		<html:select property="date">
 <%

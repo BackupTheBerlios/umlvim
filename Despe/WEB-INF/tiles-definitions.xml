@@ -7,15 +7,11 @@
 
 	<!-- Base Definitions -->
 
-	<definition name="baseDef"		path="/pages/layouts/DefaultLayout.jsp">
-		<put name="header"			value="/pages/common/Header.jsp" />
-		<put name="footer"			value="/pages/common/Copyright.jsp" />
-		<put name="menubar"			value="/pages/StudentMenu.jsp" />
+	<definition name="baseDef"		path="/WEB-INF/jsp/layouts/DefaultLayout.jsp">
+		<put name="header"			value="/WEB-INF/jsp/common/Header.jsp" />
+		<put name="footer"			value="/WEB-INF/jsp/common/Copyright.jsp" />
+		<put name="menubar"			value="/WEB-INF/jsp/Menu.jsp" />
 		<put name="body-content"	value="" />
-	</definition>
-
-	<definition name="userBaseDef"	extends="baseDef">
-		<put name="menubar"			value="/pages/AdminMenu.jsp" />
 	</definition>
 
 
@@ -32,83 +28,79 @@
 	<!-- Common pages definitions -->
 
 	<definition name="common.operation.error" extends="baseDef">
-		<put name="body-content"	value="/pages/common/Error.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/common/Error.jsp" />
 	</definition>
 
 	<definition name="common.operation.ok" extends="baseDef">
-		<put name="body-content"	value="/pages/Ok.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/Ok.jsp" />
 	</definition>
 
 
 	<!-- Student's pages definitions -->
 
 	<definition name="student.ident" extends="baseDef">
-		<put name="body-content"	value="/pages/form/StudentLogon.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/form/StudentLogon.jsp" />
 	</definition>
 
 	<definition name="student.home" extends="baseDef">
-		<put name="body-content"	value="/pages/StudentMain.jsp" />
-		<put name="menubar"			value="/pages/StudentMenu.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/StudentMain.jsp" />
 	</definition>
 	
 	<definition name="student.take.rdv" extends="baseDef">
-		<put name="body-content"	value="/pages/form/takeRdv.jsp" />
-		<put name="menubar"			value="/pages/StudentMenu.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>
 	
 	<definition name="student.cancel.rdv" extends="baseDef">
-		<put name="body-content"	value="/pages/form/cancelRdv.jsp" />
-		<put name="menubar"			value="/pages/StudentMenu.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/form/CancelRdv.jsp" />
 	</definition>
 
 
 	<!-- User's pages definitions -->
 
-	<definition name="user.home" extends="userBaseDef">
-		<put name="body-content"	value="/pages/Main.jsp" />
+	<definition name="user.home" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/Main.jsp" />
 	</definition>
 
-	<definition name="user.logon" extends="userBaseDef">
-		<put name="menubar"			value="" />
-		<put name="body-content"	value="/pages/form/UserLogon.jsp" />
+	<definition name="user.logon" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/UserLogon.jsp" />
 	</definition>
 
-	<definition name="user.search.student" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/SearchStudent.jsp" />
+	<definition name="user.search.student" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/SearchStudent.jsp" />
 	</definition>
 	
-	<definition name="user.edit.student" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/EditStudent.jsp" />
+	<definition name="user.edit.student" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/EditStudent.jsp" />
 	</definition>
 	
-	<definition name="user.stats" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/stats.jsp" />
+	<definition name="user.stats" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/Stats.jsp" />
 	</definition>
 	
-	<definition name="user.stats.result" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/statsRes.jsp" />
+	<definition name="user.stats.result" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/StatsRes.jsp" />
 	</definition>
 
-	<definition name="planning.configure" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
+	<definition name="planning.configure" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/SetupPlanning.jsp" />
 	</definition>
 
 	<!-- Admin's pages definitions -->
 
-	<definition name="admin.edit.user" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
+	<definition name="admin.edit.user" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/UserDetails.jsp" />
 	</definition>
 
-	<definition name="admin.search.user" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
+	<definition name="admin.search.user" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/SearchUser.jsp" />
 	</definition>
 	
-	<definition name="planning.configure" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
+	<definition name="planning.configure" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/SetupPlanning.jsp" />
 	</definition>
 
-	<definition name="admin.stylesheet.list" extends="userBaseDef">
-		<put name="body-content"	value="/pages/form/ListStyleSheet.jsp" />
+	<definition name="admin.stylesheet.list" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/ListStyleSheet.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -8,6 +8,6 @@ import ="java.util.*, fr.umlv.desperados.planning.DatabaseRdvManager"%>
 Votre rendez-vous  sera annule.<br> 
 Voulez effectuer cette action ?<br>
 
-<html:link action="/cancel/rdv" >ok</html:link>
+<html:link action="/cancelRdv" >ok</html:link>
 
 </app:checkIdent>

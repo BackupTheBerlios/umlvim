@@ -50,32 +50,21 @@ public final class SearchStudentAction extends UserAction {
 
 		SearchStudentForm searchForm = (SearchStudentForm) form;
 		if(form == null) {
-			return (mapping.findForward("searchstudent"));
+			return (mapping.findForward("itself"));
 		}
-
-		DiplomaManager diplomaManager =
-					(DiplomaManager) servlet.getServletContext().getAttribute(
-						Constants.DIPLOMA_DATABASE_KEY);
-
-		List diplomaList = diplomaManager.listDiploma();
-			if(diplomaList != null) {
-				request.setAttribute("diplomaList", diplomaList);
-			}
-	
 
 		// validate the form
 		ActionErrors errors = searchForm.validate(mapping, request);
 		if(!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("searchstudent"));
+			return (mapping.findForward("itself"));
 		}
 
-////////////////////
-//COMMENTED FOR TEST
 		StudentManager manager = (StudentManager)servlet.getServletContext().
 								getAttribute(Constants.STUDENT_DATABASE_KEY);
-				
-		
+		DiplomaManager diplomaManager = (DiplomaManager) servlet.getServletContext().
+								getAttribute(Constants.DIPLOMA_DATABASE_KEY);
+
 		if(manager == null || diplomaManager==null) {
 			errors.add("database",
 			   new ActionError("error.database.missing"));
@@ -87,17 +76,24 @@ public final class SearchStudentAction extends UserAction {
 			return (mapping.findForward("error"));
 		}
 
+		// TODO à mettre dans DatabaseDiplomaManager.searchStudent()
 		String ine = (searchForm.getIne()).replace('*','%');
 		String name = (searchForm.getName()).replace('*','%');
 		String firstname = (searchForm.getFirstname()).replace('*','%');
+		//
 		int diplomaId = Integer.parseInt(searchForm.getDiploma());
 		List studentList = manager.searchStudent(ine,name,firstname,diplomaId);
 
-			if(studentList != null) {
-				
-				request.setAttribute("studentlist", studentList);
-			}
-		return (mapping.findForward("searchstudent"));
+		if(studentList != null) {
+			request.setAttribute("studentlist", studentList);
+		}
+
+		List diplomaList = diplomaManager.listDiploma();
+		if(diplomaList != null) {
+			request.setAttribute("diplomaList", diplomaList);
+		}
+
+		return (mapping.findForward("itself"));
 	}
 
 }

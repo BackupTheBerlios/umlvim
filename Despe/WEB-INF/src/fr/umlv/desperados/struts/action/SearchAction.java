@@ -44,6 +44,6 @@ public final class SearchAction extends Action {
 		if(type == null) {
 			type = "student";
 		}
-		return (mapping.findForward("search"+type));
+		return (mapping.findForward(type));
 	}
 }

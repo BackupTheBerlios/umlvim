@@ -87,4 +87,4 @@
 			<td align="left"><html:submit/><html:cancel/></td>
 	</table>
 </html:form>
-<app:checkLogon page="">
+</app:checkLogon>

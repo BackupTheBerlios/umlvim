@@ -103,7 +103,7 @@ public class SaveUserAction extends AdminAction {
 				doCreateUser(manager, userForm);
 			}
 		} catch(UserAlreadyExistsException e) {
-				err = "error.user.alreadyexist";
+			err = "error.user.alreadyexist";
 		} catch(UserNotFoundException e) {
 			err = "error.user.dontexist";
 		} catch(DeleteYourselfException e) {
