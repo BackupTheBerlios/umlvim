@@ -19,7 +19,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.student.DatabaseInformationListManager;
-import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
 /**
@@ -67,6 +66,12 @@ public class EditStudentAction extends StudentAction {
 			request.setAttribute( "centerPaymentList",centerPaymentList);		
 			Set mutualInsuranceCompanyList=manager.list(DatabaseInformationListManager .MUTUAL_COMPANY);
 			request.setAttribute( "mutualInsuranceCompanyList",mutualInsuranceCompanyList);		
+		}
+		if("4".equals(page)){
+			Set financialAssistanceList=manager.list(DatabaseInformationListManager .FINANCIAL_AID);
+			request.setAttribute( "financialAssistanceList",financialAssistanceList);		
+			Set purseList=manager.list(DatabaseInformationListManager .MUTUAL_COMPANY);
+					request.setAttribute( "purseList",purseList);		
 		}
 
 		System.out.println("*****\nEditStudentAction: forwarding to "+page+"\n*****");

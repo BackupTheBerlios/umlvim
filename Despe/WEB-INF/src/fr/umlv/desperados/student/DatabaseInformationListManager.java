@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Set;
 
@@ -112,7 +113,7 @@ public class DatabaseInformationListManager {
 	 * @roseuid 3FF869BD0210
 	 */
 	public Set list(String resource) {
-		HashMap map = (HashMap)allTheMap.get(resource);
+		LinkedHashMap map = (LinkedHashMap)allTheMap.get(resource);
 		if(map == null) {
 			String table = "table";
 			String id = "id";
@@ -170,8 +171,8 @@ public class DatabaseInformationListManager {
 		}
 	}
 
-	private HashMap getMapFromDatabase(String table, String id, String libel, String condition) {
-			HashMap map = new HashMap();
+	private LinkedHashMap getMapFromDatabase(String table, String id, String libel, String condition) {
+			LinkedHashMap map = new LinkedHashMap();
 			String where = null;
 
 			StringBuffer query = new StringBuffer();
@@ -181,6 +182,7 @@ public class DatabaseInformationListManager {
 				query.append(" WHERE "+condition);
 			}
 
+			query.append ("  ORDER BY "+id);
 			System.out.println("query : "+query);
 
 			try {
