@@ -127,13 +127,13 @@ public class DatabaseStudentManager implements StudentManager {
 		java.util.Date birthday) {
 		ResultSet result = null;
 		String query =
-			"SELECT id_etud FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE=\""
+			"SELECT id_etu FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE='"
 				+ name
-				+ "\"prenom1=\""
+				+ "' and prenom1='"
 				+ firstName
-				+ "\"date_naiss=\""
-				+ birthday
-				+ "\";";
+				+ "' and date_naiss='"
+				+ "11-jan-2004"//birthday
+				+ "';";
 		try {
 			result = requestor.doQuery(query);
 		} catch (SQLException e) {
@@ -141,7 +141,7 @@ public class DatabaseStudentManager implements StudentManager {
 		}
 		try {
 			if (result.next())
-				return Integer.toString(result.getInt("id_etud"));
+				return Integer.toString(result.getInt("id_etu"));
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}

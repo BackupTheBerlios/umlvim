@@ -92,15 +92,15 @@ public static StrutsDatabaseRequestor strutsDatabaseRequestor;
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
-	//	student.setName( "dupont");
-//		student.setBirthday(new Date(300000));
-		//student.setFirstname1( "gabriel");
-/*		try {
+		student.setName( "gabriel");
+		student.setBirthday(new Date(300000));
+		student.setFirstname1( "dupont");
+		try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
 		}
-		String truc="test";*/
+		String truc="test";
 		assertTrue(databaseStudentManager.existStudent("dupont","gabriel",new Date(300000))==null);
 	}
 
