@@ -250,10 +250,10 @@ public class DatabaseStudentManager implements StudentManager {
 					result.getString(prop.get("phoneTmpAdd").toString()));
 				student.setEmployed(
 					result.getBoolean(prop.get("isEmployed").toString()));
-				student.setStudEmplType(
-					result.getString(prop.get("studEmplType").toString()));
-				student.setHeadFamProf(
-					result.getString(prop.get("headFamProf").toString()));
+				//student.setStudEmplType(
+				//	result.getString(prop.get("studEmplType").toString()));
+				//student.setHeadFamProf(
+					//result.getString(prop.get("headFamProf").toString()));
 				student.setNatSport(
 					result.getBoolean(prop.get("isNatSport").toString()));
 				student.setRegSport(
@@ -311,6 +311,9 @@ public class DatabaseStudentManager implements StudentManager {
 				student.setAppointmentDate(
 					result.getTimestamp(
 						prop.get("appointmentDate").toString()));
+						
+				System.out.println("Rendez-vous :" + student.getAppointmentDate());
+						
 				student.setWorkedShareId(
 					result.getInt(prop.get("workedShareId").toString()));
 				student.setFinancialAssistanceId(
