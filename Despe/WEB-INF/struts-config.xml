@@ -123,7 +123,7 @@
 		<action
 			path="/list/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
-			<forward name="success" path="stylesheet" />
+			<forward name="success" path="admin.stylesheet.list" />
 		</action>
 		
 		<action

@@ -62,11 +62,11 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public void addStyleSheet(StyleSheet styleSheet) {
 		try {
 			requestor.doQuery(
-				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES ('"
+				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES (\""
 					+ styleSheet.getFilename()
-					+ "','"
+					+ "\",\""
 					+ styleSheet.getName()
-					+ "')");
+					+ "\")");
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();

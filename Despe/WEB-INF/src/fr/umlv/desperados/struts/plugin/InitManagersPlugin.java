@@ -10,20 +10,20 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletContext;
 import javax.xml.parsers.ParserConfigurationException;
-//import javax.sql.DataSource;
 
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 import org.xml.sax.SAXException;
-//import org.apache.struts.action.Action;
 
 import fr.umlv.desperados.account.DatabaseUserManager;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.planning.PlanningConf;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
+import fr.umlv.desperados.stylesheet.DatabaseStyleSheetManager;
 import fr.umlv.desperados.util.Constants;
+
 public class InitManagersPlugin implements PlugIn {
 
 	/* (non-Javadoc)
@@ -36,6 +36,7 @@ public class InitManagersPlugin implements PlugIn {
 	public DatabaseRdvManager databaseRdvManager;
 	public DatabaseUserManager databaseUserManager;
 	public DatabaseStudentManager databaseStudentManager;
+	public DatabaseStyleSheetManager databaseStyleSheetManager;
 	public PlanningConf planningConf;
 
 	public void init(ActionServlet servlet, ModuleConfig config)
@@ -66,6 +67,8 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseRdvManager.getInstance(strutsDatabaseRequestor);
 			databaseUserManager =
 				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
+			databaseStyleSheetManager =
+				DatabaseStyleSheetManager.getInstance(strutsDatabaseRequestor);
 			databaseStudentManager =
 				DatabaseStudentManager.getInstance(
 					strutsDatabaseRequestor, path
@@ -88,6 +91,9 @@ public class InitManagersPlugin implements PlugIn {
 			context.setAttribute(
 				Constants.STUDENT_DATABASE_KEY,
 				databaseStudentManager);
+			context.setAttribute(
+				Constants.STYLESHEET_DATABASE_KEY,
+				databaseStyleSheetManager);
 			context.setAttribute(
 				Constants.PLANNING_CONF_DATABASE_KEY,
 				planningConf);

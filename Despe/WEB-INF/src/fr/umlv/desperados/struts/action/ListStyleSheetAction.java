@@ -48,7 +48,7 @@ public class ListStyleSheetAction extends AdminAction {
 				ActionErrors.GLOBAL_ERROR,
 				new ActionError("error.database.missing"));
 			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
+			return (mapping.findForward("error"));
 		}
 
 		List styleSheetList = manager.listStyleSheet();
