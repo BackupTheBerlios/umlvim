@@ -82,6 +82,7 @@ public class UserLogonAction extends Action {
 		else {
 			try {
 				user = manager.getUser(userLogonForm.getLogin());
+				System.out.println("**"+user+"**");
 				String password = userLogonForm.getPassword();
 				if (!password.equals(user.getPassword())) {
 					errors.add("password",
@@ -95,26 +96,26 @@ public class UserLogonAction extends Action {
 
 /////////////////////
 // COMMENTED FOR TEST
-//		// Report any errors we have discovered back to the original form
-//		if (!errors.isEmpty()) {
-//			saveErrors(request, errors);
-//			return (mapping.findForward("failure"));
-//		}
-		if(userLogonForm.getLogin().equals("ncuvelie")) {
-			user = new User("ncuvelie");
-			user.setName("CUVELIER");
-			user.setFirstname("Nicolas");
-			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
-			user.setAdmin(true);
-			user.setPassword("evvJRJ4J");
-		} else {
-			user = new User("niko");
-			user.setName("CUVELIER");
-			user.setFirstname("Nicolas");
-			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
-			user.setAdmin(false);
-			user.setPassword("tototo");
+		// Report any errors we have discovered back to the original form
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("failure"));
 		}
+//		if(userLogonForm.getLogin().equals("ncuvelie")) {
+//			user = new User("ncuvelie");
+//			user.setName("CUVELIER");
+//			user.setFirstname("Nicolas");
+//			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
+//			user.setAdmin(true);
+//			user.setPassword("evvJRJ4J");
+//		} else {
+//			user = new User("niko");
+//			user.setName("CUVELIER");
+//			user.setFirstname("Nicolas");
+//			user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
+//			user.setAdmin(false);
+//			user.setPassword("tototo");
+//		}
 ///////////////////
 
 		// Save our logged-in user in the session
