@@ -5,7 +5,7 @@ package fr.umlv.desperados.struts.database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 import javax.sql.DataSource;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
@@ -16,15 +16,15 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	 * the source of the database.
 	 */
 	DataSource source;
-
+	Connection conn;
 	/**
 	 * Constructor.
 	 * 
 	 * @param source the source of the database.
 	 * @roseuid 3FE18C33015B
 	 */
-	public StrutsDatabaseRequestor(DataSource source) {
-		this.source = source;
+	public StrutsDatabaseRequestor(Connection conn) {
+		this.conn = conn;
 	}
 
 	/**
@@ -33,9 +33,16 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	 * @roseuid 3FF2CD41015A
 	 */
 	public ResultSet doQuery(String query) throws SQLException {
-		ResultSet rs = null;
-		Connection conn = source.getConnection();
-		conn.createStatement();
-		return rs;
+		Statement stat=conn.createStatement();
+		return stat.executeQuery(query);
+	}
+
+	public void closeConnection() {
+		try {
+			conn.close();
+		} catch (SQLException e) {
+		System.out.println("Erreur à la fermeture de la connection");
+			e.printStackTrace();
+		}
 	}
 }
