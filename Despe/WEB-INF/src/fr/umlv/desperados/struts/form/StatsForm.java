@@ -4,9 +4,17 @@
  */
 package fr.umlv.desperados.struts.form;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 
 //import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -20,16 +28,10 @@ public class StatsForm extends ActionForm {
 	// --------------------------------------------------------- Instance Variables
 
 	/** periodeDeb property */
-	private String dayStartId = "1";
+	private String dayStart = "01/01";
 
 	/** periodeDeb property */
-	private String monthStartId = "1";
-
-	/** periodeDeb property */
-	private String dayEndId = "1";
-
-	/** periodeDeb property */
-	private String monthEndId = "1";
+	private String dayEnd = "01/01";
 	    
 	/** diplomaId property */
 	private String diplomaId = "-1";
@@ -45,7 +47,43 @@ public class StatsForm extends ActionForm {
 	public ActionErrors validate(ActionMapping mapping,
 				 HttpServletRequest resquest) {
 	
-	ActionErrors errors = new ActionErrors();
+		ActionErrors errors = new ActionErrors();
+		
+		// Test if dates formats are correct
+		String formatRegexp = "\\d\\d/\\d\\d"; // resources.getMessage("date.format.regexp");
+		
+		if (!dayStart.matches(formatRegexp))
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.format.date.start", dayStart));
+
+		if (!dayEnd.matches(formatRegexp))
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.format.date.end", dayEnd));
+
+		//	Parse the two dates and try an exeption if it don't exist
+		Calendar calendar = new GregorianCalendar();
+		int year = calendar.get(Calendar.YEAR);
+		
+		Date startDate = null;
+		Date endDate = null;
+	
+		DateFormat formatDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+		formatDate.setLenient(false);
+	
+		try {
+			startDate = formatDate.parse(dayStart + "/" + year);
+		} catch (ParseException e) {
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.date.start.no.exist", dayStart));
+		}
+		
+		try {
+				endDate = formatDate.parse(dayEnd + "/" + year);
+		} catch (ParseException e) {
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.date.end.no.exist", dayEnd));
+		}
+	
+		//	Test if the second date is after the first
+		if(((startDate != null)&&(endDate != null)) && (startDate.after(endDate)))
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.reversed.dates"));
+		
 	return errors;
 	}
 
@@ -55,10 +93,8 @@ public class StatsForm extends ActionForm {
 	 * @param HttpServletRequest request
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		dayStartId = "1";
-		monthStartId = "1";
-		dayEndId = "1";
-		monthEndId = "1";
+		dayStart = "01/01";
+		dayEnd = "01/01";
 		diplomaId = "-1";
 	}
 	
@@ -79,57 +115,29 @@ public class StatsForm extends ActionForm {
 	/**
 	 * @return
 	 */
-	public String getDayStartId() {
-		return dayStartId;
+	public String getDayStart() {
+		return dayStart;
 	}
 
 	/**
 	 * @param string
 	 */
-	public void setDayStartId(String string) {
-		dayStartId = string;
+	public void setDayStart(String string) {
+		dayStart = string;
 	}
 
 	/**
 	 * @return
 	 */
-	public String getDayEndId() {
-		return dayEndId;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getMonthEndId() {
-		return monthEndId;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getMonthStartId() {
-		return monthStartId;
+	public String getDayEnd() {
+		return dayEnd;
 	}
 
 	/**
 	 * @param string
 	 */
-	public void setDayEndId(String string) {
-		dayEndId = string;
-	}
-
-	/**
-	 * @param string
-	 */
-	public void setMonthEndId(String string) {
-		monthEndId = string;
-	}
-
-	/**
-	 * @param string
-	 */
-	public void setMonthStartId(String string) {
-		monthStartId = string;
+	public void setDayEnd(String string) {
+		dayEnd = string;
 	}
 
 }
