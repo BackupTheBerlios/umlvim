@@ -76,7 +76,7 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseInformationListManager.getInstance(strutsDatabaseRequestor ,path
 					+"/WEB-INF/src/fr/umlv/desperados/struts/Database.properties");
 				
-			//PlanningConf planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
+			PlanningConf planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
 
 			// context visible manager init
 			ServletContext context = servlet.getServletContext();
@@ -92,9 +92,9 @@ public class InitManagersPlugin implements PlugIn {
 												databaseStyleSheetManager);
 			context.setAttribute(Constants.INFORMATION_DATABASE_KEY,  databaseInformationListmanager);
 												
-//			context.setAttribute(
-//				Constants.PLANNING_CONF_DATABASE_KEY,
-//				planningConf);
+			context.setAttribute(
+				Constants.PLANNING_CONF_DATABASE_KEY,
+				planningConf);
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -104,13 +104,13 @@ public class InitManagersPlugin implements PlugIn {
 			e1.printStackTrace();
 		} catch (SQLException e2) {
 			e2.printStackTrace();
-		} /*catch (ParserConfigurationException e3) {
+		} catch (ParserConfigurationException e3) {
 			e3.printStackTrace();
 		} catch (SAXException e3) {
 			e3.printStackTrace();
 		} catch (IOException e3) {
 			e3.printStackTrace();
-		}*/
+		}
 
 	}
 
