@@ -23,6 +23,7 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.struts.form.StudentLogonForm;
 import fr.umlv.desperados.student.Student;
+import fr.umlv.desperados.student.StudentBirthdayException;
 import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.student.StudentNotFoundException;
 import fr.umlv.desperados.util.Constants;
@@ -92,9 +93,16 @@ public class StudentLogonAction extends Action {
 		else {
 			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 								.parse(studentLogonForm.getBirthday());
-			int studentId = manager.existStudent(studentLogonForm.getPatronymicName(),
+			int studentId = -1;
+			try{
+						studentId = manager.existStudent(studentLogonForm.getPatronymicName(),
 												studentLogonForm.getFirstname1(),
 												birthday);
+			}catch(StudentBirthdayException e){
+				errors.add(ActionErrors.GLOBAL_ERROR,
+								   new ActionError("error.student.badBirthday"));
+			}
+			
 			try {
 				student = manager.getStudent(studentId);
 			} catch(StudentNotFoundException e) {

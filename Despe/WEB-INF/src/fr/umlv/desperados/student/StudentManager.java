@@ -19,7 +19,7 @@ public interface StudentManager {
 	 * @roseuid 3FBF5F9A02AE
 	 */
 	public void addStudent(Student student)
-		throws StudentAlreadyExistsException;
+		throws StudentAlreadyExistsException,StudentBirthdayException;
 
 	/**
 	 * Checks if a Student exists in the permanent storage.
@@ -34,7 +34,7 @@ public interface StudentManager {
 	public int existStudent(
 		String name,
 		String firstname,
-		java.util.Date birthday);
+		java.util.Date birthday)  throws StudentBirthdayException;
 
 	/**
 	 * Gets a Student from the permanent storage.
@@ -54,7 +54,7 @@ public interface StudentManager {
 	 * not exists in the permanent storage.
 	 * @roseuid 3FBF5E1B0389
 	 */
-	public void modifyStudent(Student student) throws StudentNotFoundException;
+	public void modifyStudent(Student student) throws StudentNotFoundException,StudentBirthdayException;
 
 	/**
 	 * Removes a Student from the permanent storage.

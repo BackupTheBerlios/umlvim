@@ -80,11 +80,13 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF869BD015C
 	 */
 	
-	public void addStudent(Student student)
-		throws StudentAlreadyExistsException {
+	public void addStudent(Student student) throws StudentAlreadyExistsException, StudentBirthdayException {
 			
 		if(existStudent(student.getPatronymicName() ,student.getFirstname1() ,student.getBirthday())!=0)
 			throw new StudentAlreadyExistsException("impossible to add student : Student already exist in Database");
+			
+		if(dateControl(student.getBirthday()))
+			throw new StudentBirthdayException("Date of birthday is impossible");
 		
 		StringBuffer insert =
 			new StringBuffer("insert into " + prop.get("tableName") + " (");
@@ -129,7 +131,12 @@ public class DatabaseStudentManager implements StudentManager {
 	public int existStudent(
 		String patronymiqueName,
 		String firstName,
-		java.util.Date birthday) {
+		java.util.Date birthday) throws StudentBirthdayException {
+			
+			if(dateControl(birthday))
+					throw new StudentBirthdayException("Date of birthday is impossible");
+		
+			
 			//TODO gerer les erreurs de date (genre 77/88/9999)
 		ResultSet result = null;
 		String query =
@@ -162,10 +169,11 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @return fr.umlv.desperados.student.Student
 	 * @roseuid 3FF869BD01AC
 	 */
-	public Student getStudent(int studentId) throws StudentNotFoundException {
+	public Student getStudent(int studentId) throws StudentNotFoundException{
 			ResultSet result = null;
 		Student student = null;
-		String query =
+	
+	String query =
 			"SELECT * FROM "+prop.get("tableName")+" Where "+prop.get("studentId")+"=" + studentId;
 		try {
 			result = requestor.doQuery(query);
@@ -412,7 +420,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF869BD01CA
 	 */
 	public void modifyStudent(Student student)
-		throws StudentNotFoundException {
+		throws StudentNotFoundException,StudentBirthdayException {
 /*		ResultSet result = null;
 		String query =
 			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+" = "
@@ -426,6 +434,9 @@ public class DatabaseStudentManager implements StudentManager {
 			} catch (SQLException e) {
 					e.printStackTrace();
 				}*/
+			
+				if(dateControl(student.getBirthday()))
+						throw new StudentBirthdayException("Date of birthday is impossible");
 			
 			String query="UPDATE "+prop.get("tableName")+" SET "+
 			prop.get("name")+"='"+student.getName()+"',"+
@@ -613,9 +624,9 @@ public class DatabaseStudentManager implements StudentManager {
 //		cache.setCapacity(size);
 	}
 	
-	private java.util.Date dateControl(java.util.Date date){
+	private boolean dateControl(java.util.Date date){
 		if(date.getTime()>System.currentTimeMillis())
-		return new java.util.Date(System.currentTimeMillis());
-		return date;
+		return true;
+		return false;
 	}
 }
