@@ -51,7 +51,8 @@ public class RemoveStyleSheetAction extends AdminAction {
 		String styleSheetId = styleSheetForm.getStyleSheetId();
 		int docTypeId = styleSheetForm.getDocTypeId();
 
-		manager.removeStyleSheet(styleSheetId);
+		String path = servlet.getServletContext().getRealPath("/")+"/stylesheet/";
+		manager.removeStyleSheet(path+styleSheetId);
 
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));
