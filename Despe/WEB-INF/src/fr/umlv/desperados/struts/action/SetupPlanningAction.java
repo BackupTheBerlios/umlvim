@@ -95,10 +95,10 @@ public class SetupPlanningAction extends Action {
 			
 			Calendar calbeginPM = new GregorianCalendar();
 			calbeginPM.setTime(beginPMT);
-		//	calbeginPM.set(Calendar.PM,Calendar.PM);
+			calbeginPM.set(Calendar.AM_PM,Calendar.PM);
 			Calendar calbeginPMTmp = new GregorianCalendar();
 			calbeginPMTmp.setTime(beginPMT);
-		//	calbeginPMTmp.set(Calendar.PM,Calendar.PM);
+		calbeginPMTmp.set(Calendar.AM_PM,Calendar.PM);
 			
 			Calendar calendPM = new GregorianCalendar();
 			calendPM.setTime(endPMT);
@@ -116,7 +116,8 @@ public class SetupPlanningAction extends Action {
 			calFromDate.setTime(fromDateD);
 			Calendar calToDate = new GregorianCalendar();
 			calToDate.setTime(toDateD);
-			
+			calToDate.add(GregorianCalendar.DAY_OF_YEAR,1);
+		
 		
 			while(calFromDate.before((Object)calToDate))
 				{
@@ -139,6 +140,7 @@ public class SetupPlanningAction extends Action {
 						}
 						
 						//ajout des rendez-vous de l'aprés midi dans la bd
+						calFromDate.set(Calendar.AM_PM,Calendar.PM);
 						calFromDate.set(Calendar.HOUR,calbeginPM.get(Calendar.HOUR));
 						calFromDate.set(Calendar.MINUTE,calbeginPM.get(Calendar.MINUTE));
 						while(calbeginPMTmp.before(calendPM))
@@ -159,8 +161,8 @@ public class SetupPlanningAction extends Action {
 			calbeginPMTmp.set(Calendar.HOUR,calbeginPM.get(Calendar.HOUR));
 			//on avance d'un jour 
 					}
-			 calFromDate.add(Calendar.DATE,1);
-			
+			 calFromDate.add(GregorianCalendar.DAY_OF_YEAR,1);
+						
 		}
 
 		} catch (ParseException e) {

@@ -54,7 +54,7 @@
 	<!-- User's pages definitions -->
 
 	<definition name="user.home" extends="userBaseDef">
-		<put name="body-content"	value="/pages/StudentMain.jsp" />
+		<put name="body-content"	value="/pages/Main.jsp" />
 	</definition>
 
 	<definition name="user.logon" extends="userBaseDef">

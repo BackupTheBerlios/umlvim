@@ -153,6 +153,7 @@ public class DatabaseUserManager implements UserManager {
 	public void modifyUser(User user) throws UserNotFoundException {
 		ResultSet rs = null;
 		try {
+////////////this ResultSet implementation doesn't support update
 			rs = doSelectQuery(user.getLogin());
 			if (!rs.first()) {
 				throw new UserNotFoundException("User not found in the database");
