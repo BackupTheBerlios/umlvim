@@ -22,6 +22,7 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.upload.FormFile;
 
 import fr.umlv.desperados.struts.form.UploadStyleSheetForm;
+import fr.umlv.desperados.stylesheet.ExistStylesheetException;
 import fr.umlv.desperados.stylesheet.StyleSheet;
 import fr.umlv.desperados.stylesheet.StyleSheetManager;
 import fr.umlv.desperados.util.Constants;
@@ -50,11 +51,6 @@ public class AddStyleSheetAction extends AdminAction {
 			errors.add(
 				ActionErrors.GLOBAL_ERROR,
 				new ActionError("error.database.missing"));
-		}
-
-		if (!errors.isEmpty()) {
-			saveErrors(request, errors);
-			return (mapping.findForward("error"));
 		}
 
 
@@ -89,17 +85,32 @@ public class AddStyleSheetAction extends AdminAction {
 			stream.close();
 		}
 		catch (FileNotFoundException fnfe) {
-			return mapping.findForward("error");
+			errors.add(
+				ActionErrors.GLOBAL_ERROR,
+				new ActionError("error.stylesheet.notfound"));
 		}
 		catch (IOException ioe) {
-			return mapping.findForward("error");
+			errors.add(
+				ActionErrors.GLOBAL_ERROR,
+				new ActionError("error.stylesheet.io"));
 		}
 
 		file.destroy();
 		
 		StyleSheet styleSheet = new StyleSheet(fileName,name);
-		manager.addStyleSheet(styleSheet);
-
+		try {
+			manager.addStyleSheet(styleSheet);
+		} catch(ExistStylesheetException e) {
+			errors.add(
+					ActionErrors.GLOBAL_ERROR,
+					new ActionError("error.stylesheet.add"));
+		}
+		
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
+		
 		return mapping.findForward("success");
 	}
 }

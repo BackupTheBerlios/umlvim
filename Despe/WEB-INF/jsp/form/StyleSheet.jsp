@@ -19,7 +19,7 @@
 					<logic:iterate name="styleSheetList" id="styleSheet"
 											type="fr.umlv.desperados.stylesheet.StyleSheet">
 						<option value="<bean:write name="styleSheet" property="filename" />">
-							<bean:write name="styleSheet" property="name" />
+							<bean:write name="styleSheet" property="name" /> (<bean:write name="styleSheet" property="filename"/>)
 						</option>
 					</logic:iterate>
 				</html:select>
@@ -76,7 +76,7 @@
 					<logic:iterate name="styleSheetList" id="styleSheet"
 											type="fr.umlv.desperados.stylesheet.StyleSheet">
 						<option value="<bean:write name="styleSheet" property="filename" />">
-							<bean:write name="styleSheet" property="name" />
+							<bean:write name="styleSheet" property="name" /> (<bean:write name="styleSheet" property="filename"/>)
 						</option>
 					</logic:iterate>
 				</html:select>
@@ -85,6 +85,7 @@
 		<tr>
 			<td></td>
 			<td align="left"><html:submit/><html:cancel/></td>
+		</tr>
 	</table>
 </html:form>
 </app:checkLogon>

@@ -101,8 +101,8 @@
 		<put name="body-content"	value="/WEB-INF/jsp/form/SearchUser.jsp" />
 	</definition>
 
-	<definition name="admin.stylesheet.list" extends="baseDef">
-		<put name="body-content"	value="/WEB-INF/jsp/form/ListStyleSheet.jsp" />
+	<definition name="admin.stylesheet" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/StyleSheet.jsp" />
 	</definition>
 
 </tiles-definitions>

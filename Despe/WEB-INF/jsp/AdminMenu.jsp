@@ -26,7 +26,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign="bottom">
-				<html:link action="/list/styleSheet">
+				<html:link action="/styleSheet">
 					<bean:message key="menu.admin.stylesheet"/>
 				</html:link>
 			</td>

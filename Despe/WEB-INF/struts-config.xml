@@ -128,9 +128,9 @@
 			validate="false"/>
 
 		<action
-			path="/list/styleSheet"
+			path="/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
-			<forward name="success"			path="admin.stylesheet.list" />
+			<forward name="success"			path="admin.stylesheet" />
 		</action>
 
 		<action

@@ -48,8 +48,8 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @roseuid 3FF85111002D
 	 */
 	public static DatabaseStyleSheetManager getInstance(DatabaseRequestor requestor) {
-			if (theInstance == null)
-				theInstance = new DatabaseStyleSheetManager(requestor);
+		if (theInstance == null)
+			theInstance = new DatabaseStyleSheetManager(requestor);
 		return theInstance;
 	}
 
@@ -57,14 +57,21 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @param styleSheet
 	 * @roseuid 3FF869D00380
 	 */
-	public void addStyleSheet(StyleSheet styleSheet) {
+	public void addStyleSheet(StyleSheet styleSheet) throws ExistStylesheetException {
 		try {
+			ResultSet rs =
+				requestor.doQuery(
+					"select * from FEUILLE_DE_STYLE where NOM_FIC_FEU='"
+						+ styleSheet.getFilename()
+						+ "'");
+				if(rs.first()) 
+					throw new ExistStylesheetException("Cette feuille de style existe déjà");
 			requestor.doQuery(
 				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES ('"
 					+ styleSheet.getFilename()
 					+ "','"
 					+ styleSheet.getName()
-					+"')");
+					+ "')");
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();
@@ -75,16 +82,23 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @param styleSheetId
 	 * @roseuid 3FF869D00394
 	 */
-	public void removeStyleSheet(String styleSheetId, String path) throws UsedStylesheetException {
+	public void removeStyleSheet(String styleSheetId, String path)
+		throws UsedStylesheetException {
 		try {
-			ResultSet rs = requestor.doQuery("select * from DOCUMENT where FEUILLE_STYLE_DOC='"+styleSheetId+"'");
-			if(!rs.first()) {
+			ResultSet rs =
 				requestor.doQuery(
-					"DELETE FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU='" + styleSheetId+"'");
-				File f = new File(path+styleSheetId);
+					"select * from DOCUMENT where FEUILLE_STYLE_DOC='"
+						+ styleSheetId
+						+ "'");
+			if (!rs.first()) {
+				requestor.doQuery(
+					"DELETE FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU='"
+						+ styleSheetId
+						+ "'");
+				File f = new File(path + styleSheetId);
 				f.delete();
-			}
-			else throw new UsedStylesheetException("La feuille de style que vous voulez supprimer est actuellement utilisée.");
+			} else
+				throw new UsedStylesheetException("La feuille de style que vous voulez supprimer est actuellement utilisée.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +115,8 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 				"UPDATE DOCUMENT SET  FEUILLE_STYLE_DOC='"
 					+ StyleSheetId
 					+ "' WHERE ID_DOC='"
-					+ docTypeId+"'");
+					+ docTypeId
+					+ "'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -114,7 +129,9 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public List listStyleSheet() {
 		List l = null;
 		try {
-			ResultSet rs = requestor.doQuery("SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE");
+			ResultSet rs =
+				requestor.doQuery(
+					"SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE");
 			l = new DatabaseStyleSheetList(rs);
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
@@ -136,15 +153,20 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 					"SELECT FEUILLE_STYLE_DOC FROM DOCUMENT WHERE ID_DOC="
 						+ docType);
 			String fileName = null;
-			if(rs.first()) {
+			if (rs.first()) {
 				fileName = rs.getString("FEUILLE_STYLE_DOC");
 			}
 
 			rs =
 				requestor.doQuery(
-					"SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU = '" + fileName+"'");
-			if(rs.first())
-				ss = new StyleSheet(rs.getString("NOM_FIC_FEU"), rs.getString("NOM_FEU"));
+					"SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU = '"
+						+ fileName
+						+ "'");
+			if (rs.first())
+				ss =
+					new StyleSheet(
+						rs.getString("NOM_FIC_FEU"),
+						rs.getString("NOM_FEU"));
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();
@@ -155,8 +177,9 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public Map listDocType() {
 		Map map = new HashMap();
 		try {
-			ResultSet rs = requestor.doQuery("SELECT ID_DOC, LIB_DOC FROM DOCUMENT");
-			while(rs.next()) {
+			ResultSet rs =
+				requestor.doQuery("SELECT ID_DOC, LIB_DOC FROM DOCUMENT");
+			while (rs.next()) {
 				map.put(rs.getString("ID_DOC"), rs.getString("LIB_DOC"));
 			}
 		} catch (SQLException e) {
