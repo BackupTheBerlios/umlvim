@@ -25,8 +25,15 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/printInscriptionFile">
+				<html:link action="/printInscriptionFile?type=inscr">
 					<bean:message key="menu.student.printfile" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
+				<html:link action="/printInscriptionFile?type=conf">
+					<bean:message key="menu.student.printconf" />
 				</html:link>
 			</td>
 		</tr>

@@ -307,7 +307,7 @@ public class DatabaseStudentManager implements StudentManager {
 							.getProperty("insuranceCivilLiability")
 							.toString()));
 				student.setAppointmentDate(
-					result.getDate(
+					result.getTimestamp(
 						prop.get("appointmentDate").toString()));
 				student.setWorkedShareId(
 					result.getInt(prop.get("workedShareId").toString()));

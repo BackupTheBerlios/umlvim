@@ -53,9 +53,9 @@ public class PrintInscriptionFileAction extends Action {
 		ActionErrors errors = new ActionErrors();
 		HttpSession session = request.getSession();
 		
-		
-		
 		Student student = (Student)session.getAttribute(Constants.STUDENT_KEY);
+		String type = request.getParameter("type");
+		
 		if (student == null) {
 			if (log.isWarnEnabled()) {
 				errors.add(ActionErrors.GLOBAL_ERROR,
@@ -83,8 +83,12 @@ public class PrintInscriptionFileAction extends Action {
 			saveErrors(request, errors);
 			return (mapping.findForward("failure"));
 		}
-
-		StyleSheet s = ssManager.getStyleSheet(1);
+		
+		int docType;
+		if(type.equals("inscr")) docType = 1;
+		else docType = 2;
+		
+		StyleSheet s = ssManager.getStyleSheet(docType);
 		
 		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")
 																								+"/stylesheet/"+s.getFilename());

@@ -52,7 +52,8 @@ public class TakeRdvAction extends Action {
 			Date rdvDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).parse(date);
 			System.out.println("date :" + rdvDate);
 			ServletContext context = servlet.getServletContext();
-			DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
+			DatabaseRdvManager databaseRdvManager = 
+				(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
 
 			// get student info
 			Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
@@ -81,7 +82,7 @@ public class TakeRdvAction extends Action {
 		} catch (ParseException e) {
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.global"));
 		}
-
+		
 		request.setAttribute("date", date);
 
 		if (!errors.isEmpty()) {

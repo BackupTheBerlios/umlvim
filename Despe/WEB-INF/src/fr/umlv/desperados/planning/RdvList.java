@@ -55,14 +55,3 @@ public class RdvList implements XMLable
     return null;
    }
 }
-/**
- * 
- * 
- *  
- * RdvList.toXML(){
- *     return null;
- *    }
- *  
- *  
- *  
- */

@@ -2,6 +2,7 @@
 
 package fr.umlv.desperados.student;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -411,6 +412,12 @@ public class Student implements XMLable {
 		s += "<nationality>fr</nationality>";
 		s += "<famSituation>celibataire</famSituation>";
 		s += "<milSituation>ok</milSituation>";
+		Calendar c =Calendar.getInstance();
+		c.setTime(appointmentDate);
+		String tmp = c.get(Calendar.DAY_OF_MONTH)+"/"+(c.get(Calendar.MONTH)+1);
+		s += "<appointmentDay>"+tmp+"</appointmentDay>";
+		tmp = c.get(Calendar.HOUR_OF_DAY)+"h"+c.get(Calendar.MINUTE);
+		s += "<appointmentHour>"+tmp+"</appointmentHour>";
 		s += "</inscription>";
 		return s;
 	}
