@@ -84,7 +84,7 @@ public class EditStudentFileAction extends StudentAction {
 						request.setAttribute( "bacMentionList",bacMentionList);		
 			Set baccalaureatEstablishmentTypeList=manager.list(DatabaseInformationListManager .BAC_ESTABLISHMENT_TYPE);
 						request.setAttribute( "baccalaureatEstablishmentTypeList",baccalaureatEstablishmentTypeList);	
-			
+		
 		}
 		if ("3".equals(page)) {
 				Set SocialSecurityAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);

@@ -131,7 +131,7 @@
 				</html:select>
 			</td>
 			<td>
-				<html:select property="bacPre95">
+				<html:select property="bacPre95"  disabled='true'>
 				<logic:iterate name="bacPre95List" id="entry"
 									type="Map.Entry">
 					<option value="<bean:write name="entry" property="key" />">
@@ -176,6 +176,29 @@
 				</html:select>
 			</td>
 		</tr>	
+		<tr>
+			<td>
+				<bean:message key="inscription.bac.estab.city"/>
+			</td>
+			<td>
+				<html:text property="frenchCity" />
+			</td>
+		</tr>
+				<tr>
+			<td>
+				<bean:message key="inscription.firstInscription.frenchUniv.zip"/>
+			</td>
+			<td>
+				<html:select property="frenchDepBac">
+				<logic:iterate name="frenchDepList" id="entry"
+									type="Map.Entry">
+					<option value="<bean:write name="entry" property="key" />">
+						<bean:write name="entry" property="value" />
+					</option>
+				</logic:iterate>
+				</html:select>
+			</td>
+		</tr>
 	</table>
 	<html:submit><bean:message key="button.next"/></html:submit>
 	</html:form>

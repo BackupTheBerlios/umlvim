@@ -30,6 +30,8 @@ public class StudentStudiesForm extends ActionForm {
 	private String bacPre95;
 	private String yearsBac;
 	private String baccalaureatEstablishmentType;
+	private String frenchCity;
+	private String frenchDepBac;
 
 
 	// --------------------------------------------------------- Methods
@@ -80,6 +82,13 @@ public class StudentStudiesForm extends ActionForm {
 		if((baccalaureatEstablishmentType == null) || (baccalaureatEstablishmentType.equals(""))) {
 			errors.add("baccalaureatEstablishmentType", new ActionError("error.required"));
 		}
+		if((frenchCity == null) || (frenchCity.equals(""))) {
+			errors.add("frenchCity", new ActionError("error.required"));
+		}
+		if((frenchDepBac == null) || (frenchDepBac.equals(""))) {
+			errors.add("frenchDepBac", new ActionError("error.required"));
+		}
+		
 		return errors;
 	}
 
@@ -100,6 +109,8 @@ public class StudentStudiesForm extends ActionForm {
 		bacPre95="";
 		yearsBac="";
 		baccalaureatEstablishmentType="";
+		frenchCity="";
+		frenchDepBac="";
 	}
 
 
@@ -258,6 +269,35 @@ public class StudentStudiesForm extends ActionForm {
 	 */
 	public void setBaccalaureatEstablishmentType(String string) {
 		baccalaureatEstablishmentType = string;
+	}
+
+
+	/**
+	 * @return
+	 */
+	public String getFrenchCity() {
+		return frenchCity;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setFrenchCity(String string) {
+		frenchCity = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getFrenchDepBac() {
+		return frenchDepBac;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setFrenchDepBac(String string) {
+		frenchDepBac = string;
 	}
 
 }

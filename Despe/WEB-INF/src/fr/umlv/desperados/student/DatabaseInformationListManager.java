@@ -194,13 +194,21 @@ public class DatabaseInformationListManager {
 			String where = null;
 
 			StringBuffer query = new StringBuffer();
-			query.append("SELECT ").append(id).append(", ")
+			if(table.equals("VILLE_FRA"))
+				query.append("SELECT DISTINCT ").append(id).append(", ")
+							.append(libel).append(" FROM ").append(table);
+			else				
+				query.append("SELECT ").append(id).append(", ")
 						.append(libel).append(" FROM ").append(table);
 			if(condition != null) {
 				query.append(" WHERE "+condition);
 			}
 
-			query.append (" ORDER BY "+id);
+
+//			if(table.equals("VILLE_FRA"))
+//				query.append(" GROUP BY LIB_VIL_FRA");
+//			else
+				query.append (" ORDER BY "+id);
 
 			try {
 				ResultSet rs=requestor.doQuery(query.toString());
