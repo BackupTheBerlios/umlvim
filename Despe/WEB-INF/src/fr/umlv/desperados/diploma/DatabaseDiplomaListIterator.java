@@ -48,9 +48,8 @@ final class DatabaseDiplomaListIterator extends DatabaseAbstractListIterator
 		current = rs.getRow();
 		index++;
 		rs.absolute(index);
-		diploma = new Diploma(rs.getString("LIB_DIP_MLV"));
+		diploma = new Diploma(rs.getString("LIB_DIP_MLV"), rs.getString("ID_CYC"));
 		diploma.setId(rs.getString("ID_DIP_MLV"));
-		diploma.setCycle(rs.getString("ID_CYC"));
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -78,9 +77,8 @@ final class DatabaseDiplomaListIterator extends DatabaseAbstractListIterator
 		current = rs.getRow();
 		index--;
 		rs.absolute(index);
-		diploma = new Diploma(rs.getString("ID_DIP_MLV"));
+		diploma = new Diploma(rs.getString("ID_DIP_MLV"), rs.getString("ID_CYC"));
 		diploma.setId(rs.getString("LIB_DIP_MLV"));
-		diploma.setCycle(rs.getString("ID_CYC"));
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

@@ -28,11 +28,14 @@ public class Diploma
 	* Constructor.
 	* 
 	* @param name the name of the Diploma.
+	* @param cycle the cycle of the Diploma.
 	* @roseuid 3FE5C8720121
 	*/
-   public Diploma(String name) 
+   public Diploma(String name, String cycle) 
    {
+   	id = "0"; // set by the database
 	this.name = name;
+	this.cycle = cycle;
    }
    
    /**
@@ -78,15 +81,4 @@ public class Diploma
    {
 	this.id = id;
    }
-   
-   /**
-	* Sets the cycle of the Diploma.
-	* 
-	* @param cycle
-	* @roseuid 400958BE00BB
-	*/
-   void setCycle(String cycle)
-	{
-	 this.cycle = cycle;
-	}
 }

@@ -79,9 +79,10 @@ public class DatabaseDiplomaManager implements DiplomaManager
 	Diploma diploma = null;
 	try {
 		ResultSet rs = requestor.doQuery("SELECT * FROM DIPLOME_MLV WHERE ID_DIP_MLV="+diplomaId);
-		diploma = new Diploma(rs.getString("LIB_DIP_MLV"));
-		diploma.setId(rs.getString("ID_DIP_MLV"));
-		diploma.setCycle(rs.getString("ID_CYC"));
+		if(rs.first()) {
+			diploma = new Diploma(rs.getString("LIB_DIP_MLV"), rs.getString("ID_CYC"));
+			diploma.setId(diplomaId);
+		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -96,21 +97,32 @@ public class DatabaseDiplomaManager implements DiplomaManager
 	*/
    public void addDiploma(Diploma diploma) throws DiplomaAlreadyExistsException 
    {
-	String reqInsertDip = "INSERT INTO DIPLOME_MLV (LIB_DIP_MLV, ID_CYC) VALUES (\""
-		+diploma.getName()
-		+"\", \""
+	ResultSet rs = null;
+   	
+	String reqInsertDip = "INSERT INTO DIPLOME_MLV (ID_CYC, LIB_DIP_MLV) VALUES ("
 		+diploma.getCycle()
-		+"\")";
+		+", '"
+		+diploma.getName()
+		+"')";
     
-	String reqSelectId = "SELECT MAX(ID_DIP_MLV) FROM DIPLOME_MLV";
+	String reqSelectId = "SELECT * FROM DIPLOME_MLV WHERE (ID_CYC = "
+		+diploma.getCycle()
+		+" AND LIB_DIP_MLV = '"
+		+diploma.getName()
+		+"') order by ID_DIP_MLV";
     
 	try {
-		requestor.doQuery(reqInsertDip);
-		
-		// When a diploma is insert, the database attribute an unique id
-		// by incrementation of the max
-		ResultSet rs = requestor.doQuery(reqSelectId);
-		diploma.setId(rs.getString("ID_DIP_MLV"));
+		synchronized(requestor) {
+			requestor.doQuery(reqInsertDip);
+			
+			// When a diploma is insert, the database attribute an unique id
+			// by incrementation of the max
+			rs = requestor.doQuery(reqSelectId);
+		}
+		rs.last();
+		String idMax = rs.getString("ID_DIP_MLV"); 
+
+		diploma.setId(idMax);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

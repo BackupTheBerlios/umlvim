@@ -63,9 +63,8 @@ final class DatabaseDiplomaList extends DatabaseAbstractList
 	}
 	
 	try {
-		diploma = new Diploma(rs.getString("LIB_DIP_MLV"));
+		diploma = new Diploma(rs.getString("LIB_DIP_MLV"), rs.getString("ID_CYC"));
 		diploma.setId(rs.getString("ID_DIP_MLV"));
-		diploma.setCycle(rs.getString("ID_CYC"));
 	} catch (SQLException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
