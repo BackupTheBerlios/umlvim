@@ -91,7 +91,7 @@ public class StudentLogonAction extends Action {
 			log.warn("StudentLogonAction: Database is missing");
 		}
 		else {
-			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
+			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE)
 								.parse(studentLogonForm.getBirthday());
 			int studentId = -1;
 			try{

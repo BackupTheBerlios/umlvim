@@ -81,7 +81,7 @@ public final class SearchStudentAction extends UserAction {
 		String name = (searchForm.getName()).replace('*','%');
 		String firstname = (searchForm.getFirstname()).replace('*','%');
 		//
-		int diplomaId = Integer.parseInt(searchForm.getDiploma());
+		int diplomaId = Integer.parseInt(searchForm.getDiplomaId());
 		List studentList = manager.searchStudent(ine,name,firstname,diplomaId);
 
 		if(studentList != null) {

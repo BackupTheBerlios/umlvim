@@ -2,7 +2,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/tlds/app.tld" prefix="app" %>
 
-<app:checkIdent>
+<app:checkIdent page="">
 	<table width="100%">
 		<tr>
 			<th align="left" valign="top">
@@ -11,14 +11,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign="bottom">
-				<html:link action="/edit/student">
-					<bean:message key="menu.student.modifyInformation" />
-				</html:link>
-			</td>
-		</tr>
-		<tr>
-			<td align="right" valign="bottom">
-				<html:link action="/take/rdv">
+				<html:link action="/list/rdv">
 					<bean:message key="menu.student.takerdv" />
 				</html:link>
 			</td>
@@ -43,6 +36,9 @@
 					<bean:message key="menu.student.printconf" />
 				</html:link>
 			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">_____________</td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">

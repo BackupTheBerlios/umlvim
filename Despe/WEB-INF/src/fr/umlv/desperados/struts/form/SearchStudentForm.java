@@ -28,7 +28,7 @@ public class SearchStudentForm extends ActionForm {
 	private String name;
 
 	/** diploma property */
-	private String diploma;
+	private String diplomaId;
 
 	/** diploma property */
 	private String ine;
@@ -45,7 +45,7 @@ public class SearchStudentForm extends ActionForm {
 		name = null;
 		firstname = null;
 		 ine= null;
-		 diploma = "0";
+		 diplomaId = "0";
 			}
 
 	/** 
@@ -59,7 +59,7 @@ public class SearchStudentForm extends ActionForm {
 		HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
-			if ((firstname == null || firstname.equals("")) && (name == null || name.equals("")) && (name == null || name.equals("")) && diploma.equals("0") && (ine == null || ine.equals(""))) {
+			if ((firstname == null || firstname.equals("")) && (name == null || name.equals("")) && (name == null || name.equals("")) && diplomaId.equals("0") && (ine == null || ine.equals(""))) {
 					errors.add(
 										"choice",
 										new ActionError("error.search.specify.oneatleast"));
@@ -73,8 +73,8 @@ public class SearchStudentForm extends ActionForm {
 	/**
 	 * @return
 	 */
-	public String getDiploma() {
-		return diploma;
+	public String getDiplomaId() {
+		return diplomaId;
 	}
 
 	/**
@@ -101,8 +101,8 @@ public class SearchStudentForm extends ActionForm {
 	/**
 	 * @param string
 	 */
-	public void setDiploma(String string) {
-		diploma = string;
+	public void setDiplomaId(String string) {
+		diplomaId = string;
 	}
 
 	/**
