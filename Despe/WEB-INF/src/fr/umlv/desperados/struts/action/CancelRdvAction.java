@@ -3,8 +3,6 @@
 package fr.umlv.desperados.struts.action;
 
 import java.text.DateFormat;
-import java.util.Date;
-
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
@@ -35,7 +33,15 @@ public class CancelRdvAction extends Action {
 		 * @throws Exception
 		 */
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+	public ActionForward execute(
+		ActionMapping mapping,
+		ActionForm form,
+		HttpServletRequest request,
+		HttpServletResponse response)
+	{
+		if(isCancelled(request)) {
+			return (mapping.findForward("cancelled"));
+		}
 
 		ActionErrors errors = new ActionErrors();
 
@@ -43,20 +49,17 @@ public class CancelRdvAction extends Action {
 		Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
 
 		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
-		Date dateBac;
 
 		ServletContext context = servlet.getServletContext();
-		DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
+		DatabaseRdvManager databaseRdvManager =
+				(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
 
 		Rdv rdv = databaseRdvManager.getRdv(student.getId());
 
-	
-
 		if (rdv == null)
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.not.allready.taken"));
-		else
-		{
-				databaseRdvManager.removeRdv(rdv);
+		else {
+			databaseRdvManager.removeRdv(rdv);
 			student.setAppointmentDate(null);
 		}
 
@@ -64,8 +67,6 @@ public class CancelRdvAction extends Action {
 			saveErrors(request, errors);
 			return mapping.findForward("error");
 		}
-
 		return mapping.findForward("success");
 	}
-
 }
