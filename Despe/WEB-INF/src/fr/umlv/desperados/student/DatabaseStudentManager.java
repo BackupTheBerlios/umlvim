@@ -47,7 +47,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @param requestor the DatabaseRequestor of this manager.
 	 * @roseuid 3FE3136B035E
 	 */
-	DatabaseStudentManager(
+	private DatabaseStudentManager(
 		DatabaseRequestor requestor,
 		String propertiesPath) {
 		this.requestor = requestor;

@@ -38,13 +38,7 @@ public final class UserUtilities {
 	 * @roseuid 3FE55E4D002E
 	 */
 	public static String generateLogin(String name, String firstname) {
-
-		String firstLetter = firstname.substring(0, 1);
-		name = name.replaceAll("[ ]", "");
-		if (name.length() >= 7)
-			name = name.substring(0, 7);
-
-		return firstLetter.concat(name);
+		return createLogin(name, firstname, 7);
 	}
 
 	/**
@@ -66,14 +60,7 @@ public final class UserUtilities {
 	 */
 	public static String generateLogin(String name, String firstname, int number) {
 
-		String firstLetter = firstname.substring(0, 1);
-		String login;
-
-		name = name.replaceAll("[ ]", "");
-		if (name.length() >= 5)
-			name = name.substring(0, 5);
-
-		login = firstLetter.concat(name);
+		String login = createLogin(name, firstname, 5);
 
 		if (number < 10)
 			login = login.concat(String.valueOf(0));
@@ -82,4 +69,11 @@ public final class UserUtilities {
 		return login;
 	}
 
+	private static String createLogin(String name, String firstname, int length) {
+		String firstLetter = firstname.substring(0, 1);
+		if (name.length() >= length)
+			name = name.substring(0, length);
+		name = name.replaceAll("[ ]", "");
+		return firstLetter.concat(name).toLowerCase();
+	}
 }

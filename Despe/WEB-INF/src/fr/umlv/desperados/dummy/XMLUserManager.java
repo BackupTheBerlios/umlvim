@@ -38,7 +38,6 @@ public class XMLUserManager implements UserManager
     */
    public void load() 
    {
-    
    }
    
    /**
