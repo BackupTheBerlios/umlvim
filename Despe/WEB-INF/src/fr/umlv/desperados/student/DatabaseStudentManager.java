@@ -589,28 +589,44 @@ public class DatabaseStudentManager implements StudentManager {
 		String patronymiqueName,
 		String firstname,
 		int diplomaId) {
+			System.out.println("liste "+INE+","+patronymiqueName+","+firstname+","+diplomaId);
 		StringBuffer query =
-			new StringBuffer("SELECT "+prop.get("studentId")+" FROM "+prop.get("tableName")+" where ");
-		if (!(INE.equals(null))) {
+			new StringBuffer("SELECT * FROM "+prop.get("tableName")+" where ");
+		if (!(INE.equals(""))) {
 			query.append(prop.get("ine")+"='" + INE + "' and ");
 		}
-		if (!(patronymiqueName.equals(null))) {
-			query.append(prop.get("patronymicName")+"='" + patronymiqueName + "' and ");
+		if (!(patronymiqueName.equals(""))) {
+			query.append(prop.get("patronymicName")+" like '" + patronymiqueName + "%' and ");
 		}
-		if (!(firstname.equals(null))) {
-			query.append(prop.get("firstName1")+"='" + firstname + "' and ");
+		if (!(firstname.equals(""))) {
+			query.append(prop.get("firstName1")+" like " + firstname + "%' and ");
 		}
-		if (!(diplomaId == 0)) {
-			query.append(prop.get("MLVdiplomaId")+"='" + diplomaId + "' and ");
+		if (diplomaId != 0) {
+			query.append(prop.get("MLViplomaId")+"='" + diplomaId + "' and ");
 		}
 
-		query.replace(query.length() - 4, query.length(), " ;");
+		query.replace(query.length() - 4, query.length(), "");
+		
+		System.out.println("quey : "+query);
 
+		ResultSet rs = null;
 		try {
-			requestor.doQuery(query.toString());
+			rs=requestor.doQuery(query.toString());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+
+		try {
+			if((rs != null) && (rs.first())) {
+		//		System.out.println("liste"+new DatabaseStudentList(rs,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.29/webapps/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties"));
+				return (List)(new DatabaseStudentList(rs,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.29/webapps/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties"));
+			}
+		} catch (SQLException e1) {
+			// TODO Bloc catch auto-généré
+			e1.printStackTrace();
+		}
+		
 		return null;
 	}
 
