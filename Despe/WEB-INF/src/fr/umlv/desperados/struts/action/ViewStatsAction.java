@@ -18,7 +18,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Arnaud FRICOTTEAU
  *
  */
-public class ViewStatsAction extends Action{
+public class ViewStatsAction extends Action {
 	public ActionForward execute(
 			ActionMapping mapping,
 			ActionForm form,

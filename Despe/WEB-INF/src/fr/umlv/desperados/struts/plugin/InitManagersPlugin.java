@@ -17,6 +17,7 @@ import org.apache.struts.config.ModuleConfig;
 import org.xml.sax.SAXException;
 
 import fr.umlv.desperados.account.DatabaseUserManager;
+import fr.umlv.desperados.diploma.DatabaseDiplomaManager;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.planning.PlanningConf;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
@@ -38,6 +39,7 @@ public class InitManagersPlugin implements PlugIn {
 	public DatabaseStudentManager databaseStudentManager;
 	public DatabaseStyleSheetManager databaseStyleSheetManager;
 	public PlanningConf planningConf;
+	public DatabaseDiplomaManager databaseDiplomaManager;
 
 	public void init(ActionServlet servlet, ModuleConfig config)
 		throws javax.servlet.ServletException {
@@ -65,6 +67,8 @@ public class InitManagersPlugin implements PlugIn {
 			// managers init
 			databaseRdvManager =
 				DatabaseRdvManager.getInstance(strutsDatabaseRequestor);
+			databaseDiplomaManager =
+				DatabaseDiplomaManager.getInstance(strutsDatabaseRequestor);
 			databaseUserManager =
 				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
 			databaseStyleSheetManager =
@@ -85,6 +89,9 @@ public class InitManagersPlugin implements PlugIn {
 			context.setAttribute(
 				Constants.RDV_DATABASE_KEY,
 				databaseRdvManager);
+			context.setAttribute(
+				Constants.DIPLOMA_DATABASE_KEY,
+				databaseDiplomaManager);
 			context.setAttribute(
 				Constants.USER_DATABASE_KEY,
 				databaseUserManager);

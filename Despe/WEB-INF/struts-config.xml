@@ -26,13 +26,13 @@
 
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
-		<forward 	name="logon"				path="user.logon" />
-		<forward	name="ident"				path="student.ident" />
+		<forward 	name="logon"			path="user.logon" />
+		<forward	name="ident"			path="student.ident" />
 		<forward 	name="edituser"			path="admin.edit.user" />
-		<forward 	name="error"					path="common.operation.error" />
+		<forward 	name="error"			path="common.operation.error" />
 		<forward	name="success"			path="common.operation.ok" />
 		<forward	name="userhome"			path="user.home" />
-		<forward	name="studenthome"	path="student.home" />
+		<forward	name="studenthome"		path="student.home" />
 		<forward	name="searchuser"		path="admin.search.user" />
 		<forward	name="searchstudent"	path="user.search.student" />
 	</global-forwards>
@@ -43,7 +43,7 @@
 		<action path="/loginPage"				forward="user.logon" />
 		<action path="/identPage"				forward="student.ident" />
 		<action path="/home/user"				forward="userhome" />
-		<action path="/home/student"		forward="studenthome" />
+		<action path="/home/student"			forward="studenthome" />
 
 		<action
 			path="/userLogon"
@@ -178,11 +178,11 @@
         </action>
         
         <action
-            attribute="StatsForm"
-            input="/pages/form/stats.jsp"
-            name="StatsForm"
             path="/stats"
             type="fr.umlv.desperados.struts.action.ViewStatsAction"
+            input="/pages/form/stats.jsp"
+            name="StatsForm"
+            attribute="StatsForm"
             validate="false">
         </action>
 
