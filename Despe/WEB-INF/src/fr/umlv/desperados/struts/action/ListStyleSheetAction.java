@@ -10,18 +10,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.stylesheet.StyleSheet;
 import fr.umlv.desperados.stylesheet.StyleSheetManager;
-import fr.umlv.desperados.struts.form.SetStyleSheetForm;
 import fr.umlv.desperados.util.Constants;
 
 /**

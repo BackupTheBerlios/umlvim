@@ -61,7 +61,8 @@ public class UploadStyleSheetForm extends ActionForm
     }
 
     public void reset() {
-       // writeFile = false;
+       	theFile = null;
+       	theName = "";
     }
 
     /**
