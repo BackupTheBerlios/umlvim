@@ -102,12 +102,10 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		List list = ddm.listDiploma();
 		
 		iterator = list.iterator();
-		int i = 0;
 		 while(iterator.hasNext()) {
-		 	i++;
 		 	diploma = (Diploma)iterator.next();
 		 	String str = diploma.getName();
-		 	if( (diploma.getName().equals("DEA informatique")) && (diploma.getCycle().equals("3")) )
+		 	if( (diploma.getName().equals("default")) && (diploma.getCycle().equals("-1")) )
 				diplomaFinded = true;
 		 }
 		assertTrue(diplomaFinded);
