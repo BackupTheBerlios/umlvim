@@ -63,9 +63,10 @@
 <!-- A series of XSLT rules that produce fo:blocks to be inserted above -->
 
  <xsl:template match="studentNumber">
-    <fo:block text-align="justify"  space-before="0.5cm">
+    <fo:block text-align="left"  space-before="0.5cm" font-size="10pt" font-weight="bold">
 	Numero etudiant :
       <xsl:apply-templates/>
+      (reserve a l'administration)
     </fo:block>
  </xsl:template>
 

@@ -397,7 +397,6 @@ public class Student implements XMLable {
 	 * @roseuid 3FF869BB00F5
 	 */
 	public String toXML() {
-		System.out.println("***"+name+"***");
 		String s="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
 		s += "<!DOCTYPE inscription SYSTEM 'student.dtd'>\n";
 		s += "<inscription>";
