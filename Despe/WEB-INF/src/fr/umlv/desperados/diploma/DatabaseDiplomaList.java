@@ -1,66 +1,75 @@
-//Source file: C:\\DOCUMENTS AND SETTINGS\\NCUVELIE\\MES DOCUMENTS\\GÉNIE LOG\\SRC\\fr\\umlv\\desperados\\diploma\\DatabaseDiplomaList.java
+//Source file: C:\\Documents and Settings\\Arnaud FRICOTTEAU\\Mes documents\\fr\\umlv\\desperados\\diploma\\DatabaseDiplomaList.java
 
 package fr.umlv.desperados.diploma;
 
 import java.sql.ResultSet;
-import java.util.AbstractList;
+import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.ListIterator;
 
+import fr.umlv.desperados.database.DatabaseAbstractList;
 
 /**
  * Provides a concrete implementation of java.util.List interface that contains a 
  * list of Diploma.
  */
-class DatabaseDiplomaList extends AbstractList 
+final class DatabaseDiplomaList extends DatabaseAbstractList 
 {
    
    /**
-    * The ResultSet containing the Diploma list.
-    */
-   private ResultSet rs;
-   
-   /**
-    * Constructor.
-    * 
-    * @param rs the ResultSet containing the Diploma list.
-    * @roseuid 3FE5CF43012B
-    */
+	* Constructor.
+	* 
+	* @param rs the ResultSet containing the Diploma list.
+	* @roseuid 3FE5CF43012B
+	*/
    DatabaseDiplomaList(ResultSet rs) 
    {
-    
+	super(rs);
    }
    
    /**
-    * @param i
-    * @return java.lang.Object
-    * @roseuid 3FF869CF02AC
-    */
-   public Object get(int i) 
+	* @return java.util.Iterator
+	* @roseuid 400BCB81031C
+	*/
+   public Iterator iterator() 
    {
-    return null;
+	return new DatabaseDiplomaListIterator(rs);
    }
    
    /**
-    * @return int
-    * @roseuid 3FF869CF02C0
-    */
-   public int size() 
+	* @param index
+	* @return java.util.ListIterator
+	* @roseuid 400BCB81032C
+	*/
+   public ListIterator listIterator(int index) 
    {
-    return 0;
+	return new DatabaseDiplomaListIterator(rs, index);
+   }
+   
+   /**
+	* @param index
+	* @return java.lang.Object
+	* @roseuid 400BD29A01C5
+	*/
+   public Object get(int index) 
+   {
+	Diploma diploma = null;
+   	
+	try {
+		rs.absolute(index+1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	try {
+		diploma = new Diploma(rs.getString("LIB_DIP_MLV"));
+		diploma.setId(rs.getString("ID_DIP_MLV"));
+		diploma.setCycle(rs.getString("ID_CYC"));
+	} catch (SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	return diploma;
    }
 }
-/**
- * 
- * 
- *  
- * DatabaseDiplomaList.get(int){
- *     return null;
- *    }
- *  
- *  
- * DatabaseDiplomaList.size(){
- *     return 0;
- *    }
- *  
- *  
- *  
- */

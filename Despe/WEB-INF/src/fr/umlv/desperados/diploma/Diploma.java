@@ -10,56 +10,83 @@ public class Diploma
 {
    
    /**
-    * The identifiant of the Diploma (primary key in the permanent storage).
-    */
+	* The identifiant of the Diploma (primary key in the permanent storage).
+	*/
    private String id;
    
    /**
-    * The name of the Diploma.
-    */
+	* The name of the Diploma.
+	*/
    private String name;
    
    /**
-    * Constructor.
-    * 
-    * @param name the name of the Diploma.
-    * @roseuid 3FE5C8720121
-    */
+	* The cycle of the Diploma.
+	*/
+   private String cycle;
+   
+   /**
+	* Constructor.
+	* 
+	* @param name the name of the Diploma.
+	* @roseuid 3FE5C8720121
+	*/
    public Diploma(String name) 
    {
-    
+	this.name = name;
    }
    
    /**
-    * Returns the identifiant of the Diploma.
-    * 
-    * @return the id of the Diploma.
-    * @roseuid 3FE5C85201DA
-    */
+	* Returns the identifiant of the Diploma.
+	* 
+	* @return the id of the Diploma.
+	* @roseuid 3FE5C85201DA
+	*/
    public String getId() 
    {
-    return null;
+	return id;
    }
    
    /**
-    * Returns the name of the Diploma.
-    * 
-    * @return the name of the Diploma.
-    * @roseuid 3FE5C85C0007
-    */
+	* Returns the name of the Diploma.
+	* 
+	* @return the name of the Diploma.
+	* @roseuid 3FE5C85C0007
+	*/
    public String getName() 
    {
-    return null;
+	return name;
    }
    
    /**
-    * Sets the id of the Diploma.
-    * 
-    * @param id the identifiant of the Diploma.
-    * @roseuid 3FF6F5130395
-    */
+	* Returns the cycle of the Diploma.
+	* 
+	* @return int
+	* @roseuid 400958D8007D
+	*/
+   public String getCycle() 
+	{
+	 return cycle;
+	}
+   
+   /**
+	* Sets the id of the Diploma.
+	* 
+	* @param id the identifiant of the Diploma.
+	* @roseuid 3FF6F5130395
+	*/
    void setId(String id) 
    {
-    
+	this.id = id;
    }
+   
+   /**
+	* Sets the cycle of the Diploma.
+	* 
+	* @param cycle
+	* @roseuid 400958BE00BB
+	*/
+   void setCycle(String cycle)
+	{
+	 this.cycle = cycle;
+	}
 }
