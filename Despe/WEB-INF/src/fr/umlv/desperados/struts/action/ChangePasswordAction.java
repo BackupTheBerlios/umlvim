@@ -1,7 +1,3 @@
-// Created by Xslt generator for Eclipse.
-// XSL :  not found (java.io.FileNotFoundException:  (Bad file descriptor))
-// Default XSL used : easystruts.jar$org.easystruts.xslgen.JavaClass.xsl
-
 package fr.umlv.desperados.struts.action;
 
 import java.io.UnsupportedEncodingException;
@@ -20,20 +16,13 @@ import org.apache.struts.action.ActionMapping;
 import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.account.UserNotFoundException;
 import fr.umlv.desperados.account.UserUtilities;
+import fr.umlv.desperados.mail.MailNotSentException;
 import fr.umlv.desperados.mail.Mailer;
 import fr.umlv.desperados.mail.Message;
 import fr.umlv.desperados.mail.MessageFactory;
 import fr.umlv.desperados.util.Constants;
 import fr.umlv.desperados.util.ManagerException;
 
-/** 
- * SaveUserAction.java created by EasyStruts - XsltGen.
- * http://easystruts.sf.net
- * created on 01-07-2004
- * 
- * XDoclet definition:
- * @struts:action path="/saveUser" name="userForm" attribute="userForm" input="/form/userDetails.jsp" validate="true"
- */
 public class ChangePasswordAction extends UserAction {
 
 	// --------------------------------------------------------- Public Methods
@@ -53,6 +42,10 @@ public class ChangePasswordAction extends UserAction {
 		HttpServletRequest request,
 		HttpServletResponse response)
 		throws Exception {
+
+		if(isCancelled(request)) {
+			return (mapping.findForward("cancelled"));
+		}
 
 		ActionErrors errors = new ActionErrors();
 
@@ -106,8 +99,11 @@ public class ChangePasswordAction extends UserAction {
 			err = "error.user.dontexist";
 		} catch(ManagerException e) {
 			err = e.getMessage();
-		} // TODO catcher l'exception MailNotSentException
+		} catch(MailNotSentException e) {
+			err = "error.mail.notSent";
+		}
 		if(err != null) {
+			loggedUser.setPassword(oldPassword);
 			errors.add(ActionErrors.GLOBAL_ERROR,
 					   new ActionError(err));
 			saveErrors(request, errors);

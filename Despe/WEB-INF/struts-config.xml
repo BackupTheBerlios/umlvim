@@ -7,30 +7,7 @@
 
 	<!-- ========== Data Source Configuration ============================= -->
 	<data-sources/>
-<!--
-	<data-sources>
-		<data-source key="ORACLE">
-			<set-property	property="driverClassName"
-										value="oracle.jdbc.driver.OracleDriver" />
-			<set-property	property="url"
-										value="jdbc:oracle:thin:@hibiscus:1521:test" />
-			<set-property	property="username"
-										value="desperados" />
-			<set-property	property="password"
-										value="totofaitduvelo" />
-			<set-property	property="maxActive"
-										value="10" />
-			<set-property	property="maxWait"
-										value="5000" />
-			<set-property	property="defaultAutoCommit"
-										value="false" />
-			<set-property	property="defaultReadOnly"
-										value="false" />
-			<set-property	property="validationQuery"
-										value="SELECT COUNT(*) FROM COMPTE" />
-		</data-source>
-	</data-sources>
--->
+
 	<!-- ========== Form Bean Definitions ================================= -->
 	<form-beans>
 		<form-bean	name="UserLogonForm"
@@ -61,6 +38,8 @@
 							type="fr.umlv.desperados.struts.form.StudentSecuForm" />
 		<form-bean	name="StudentFinancialForm"
 							type="fr.umlv.desperados.struts.form.StudentFinancialForm" />
+		<form-bean	name="ConfirmForm"
+							type="fr.umlv.desperados.struts.form.ConfirmForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -68,11 +47,8 @@
 
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
-		<forward	name="ident"					path="student.ident" />
 		<forward	name="error"					path="common.operation.error" />
 		<forward	name="success"				path="common.operation.ok" />
-		<forward	name="studenthome"		path="student.home" />
-		<forward	name="editstudent"		path="user.edit.student" />
 		<forward	name="takerdv"				path="student.take.rdv" />
 	</global-forwards>
 
@@ -102,7 +78,7 @@
 			type="fr.umlv.desperados.struts.action.EditUserAction"
 			attribute="UserForm"
 			scope="request"
-			input="/WEB-INF/jsp/form/UserDetails.jsp"
+			input="/WEB-INF/jsp/form/EditUser.jsp"
 			validate="false">
 			<forward	name="success"			path="admin.edit.user" />
 		</action>
@@ -113,7 +89,7 @@
 			name="UserForm"
 			attribute="UserForm"
 			scope="request"
-			input="/WEB-INF/jsp/form/UserDetails.jsp"
+			input="/WEB-INF/jsp/form/EditUser.jsp"
 			validate="false">
 			<forward	name="home"				path="/do/home/user" />
 		</action>
@@ -131,8 +107,20 @@
 		</action>
 
 		<action
-			path="/new/password"
+			path="/lost/password"
 			type="fr.umlv.desperados.struts.action.ChangePasswordAction" />
+
+		<action	path="/new/password"		forward="user.change.password" />
+		<action
+			path="/changePassword"
+			type="fr.umlv.desperados.struts.action.ChangePasswordAction"
+			name="ConfirmForm"
+			attribute="ConfirmForm"
+			scope="request"
+			input="/WEB-INF/jsp/form/ChangePassword.jsp"
+			validate="false">
+			<forward	name="cancelled"			path="/do/home/user" />
+		</action>
 
 		<action path="/confPlanning" 			forward="planning.configure" />
 		<action
@@ -195,7 +183,6 @@
 			<forward name="success" 			path="user.stats.result" />
 		</action>
 
-		<action path="/identPage"					forward="student.ident" />
 		<action path="/home/student"			forward="student.home" />
 
 		<action
@@ -204,11 +191,15 @@
 			name="StudentLogonForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/StudentLogon.jsp"
-			validate="false"/>
-
+			validate="false">
+			<forward	name="itself"				path="student.ident" />
+			<forward	name="home"				path="/do/home/student" />
+		</action>
 		<action
 			path="/studentLogoff"
-			type="fr.umlv.desperados.struts.action.StudentLogoffAction"/>
+			type="fr.umlv.desperados.struts.action.StudentLogoffAction">
+			<forward	name="success"			path="student.ident" />
+		</action>
 
 		<action
 			path="/edit/student"
@@ -217,7 +208,9 @@
 			name="StudentForm"
 			input="/WEB-INF/jsp/form/EditStudent.jsp"
 			scope="request"
-			validate="false"/>
+			validate="false">
+			<forward	name="success"			path="user.edit.student" />
+		</action>
 
 		<action
 			path="/edit/file"

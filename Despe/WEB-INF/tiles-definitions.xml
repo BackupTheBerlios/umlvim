@@ -79,6 +79,10 @@
 		<put name="body-content"	value="/WEB-INF/jsp/form/UserLogon.jsp" />
 	</definition>
 
+	<definition name="user.change.password" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/ChangePassword.jsp" />
+	</definition>
+
 	<definition name="user.search.student" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/SearchStudent.jsp" />
 	</definition>
@@ -102,7 +106,7 @@
 	<!-- Admin's pages definitions -->
 
 	<definition name="admin.edit.user" extends="baseDef">
-		<put name="body-content"	value="/WEB-INF/jsp/form/UserDetails.jsp" />
+		<put name="body-content"	value="/WEB-INF/jsp/form/EditUser.jsp" />
 	</definition>
 
 	<definition name="admin.search.user" extends="baseDef">

@@ -158,7 +158,8 @@ public class DatabaseInformationListManager {
 			}
 			else if(NATIONALITY.equals(resource)) {
 				resource = FRENCH_DEP;
-				libel = (String)prop.get(resource+".nationality");
+				libel = "nationality";
+				condition = prop.get(resource+".nationality") + " IS NOT NULL ";
 			}
 
 			table = (String)prop.get(resource+"."+table);
@@ -189,7 +190,7 @@ public class DatabaseInformationListManager {
 				query.append(" WHERE "+condition);
 			}
 
-			query.append ("  ORDER BY "+id);
+			query.append (" ORDER BY "+id);
 
 			try {
 				ResultSet rs=requestor.doQuery(query.toString());

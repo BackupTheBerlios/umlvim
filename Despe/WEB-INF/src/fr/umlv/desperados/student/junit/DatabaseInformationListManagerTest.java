@@ -84,7 +84,7 @@ public class DatabaseInformationListManagerTest extends TestCase {
 	}
 
 	public void testList() {
-		Set set = manager.list(DatabaseInformationListManager.LAST_ESTAB_TYPE);
+		Set set = manager.list(DatabaseInformationListManager.NATIONALITY);
 		for(Iterator it = set.iterator() ; it.hasNext() ; ) {
 			Map.Entry entry =(Map.Entry)it.next();
 			System.out.println(entry.getKey()+" = "+entry.getValue());
