@@ -4,7 +4,7 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package fr.umlv.desperados.mail;
+package fr.umlv.desperados.mail.junit;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -17,6 +17,8 @@ import java.util.prefs.Preferences;
 import junit.framework.TestCase;
 
 import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.mail.Message;
+import fr.umlv.desperados.mail.MessageFactory;
 
 /**
  * @author Arnaud FRICOTTEAU
@@ -46,7 +48,7 @@ public class MessageFactoryTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
-		String confPath = "C:/fileConf/fileConf.xml";
+		String confPath = "WEB-INF/mail-conf.xml";
 		//	Create an input stream on a file
 		InputStream is = null;
 		try {

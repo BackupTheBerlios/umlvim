@@ -111,15 +111,18 @@ public class MessageFactory {
 	 * @return the updated body
 	 */
 	private String updateBodyMail(String body, User user) {
-		body = body.replaceAll("#firstname", user.getFirstname());
-		body = body.replaceAll("#name", user.getName());
-		if (user.getAdmin())
-			body = body.replaceAll("#admin", "administrateur");
-		else
-			body = body.replaceAll("#admin", "utilisateur");
-		body = body.replaceAll("#login", user.getLogin());
-		body = body.replaceAll("#password", user.getPassword());
-
+		
+		if(user != null) {
+			body = body.replaceAll("#firstname", user.getFirstname());
+			body = body.replaceAll("#name", user.getName());
+			if (user.getAdmin())
+				body = body.replaceAll("#admin", "administrateur");
+			else
+				body = body.replaceAll("#admin", "utilisateur");
+			body = body.replaceAll("#login", user.getLogin());
+			body = body.replaceAll("#password", user.getPassword());
+		}
+		
 		return body;
 	}
 

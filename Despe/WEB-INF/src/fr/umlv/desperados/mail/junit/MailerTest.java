@@ -4,12 +4,18 @@
  * To change the template for this generated file go to
  * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
-package fr.umlv.desperados.mail;
+package fr.umlv.desperados.mail.junit;
 
 import junit.framework.TestCase;
 
 import java.io.*;
 import java.util.prefs.*;
+
+import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.mail.MailNotSentException;
+import fr.umlv.desperados.mail.Mailer;
+import fr.umlv.desperados.mail.Message;
+import fr.umlv.desperados.mail.MessageFactory;
 
 
 /**
@@ -39,8 +45,7 @@ public class MailerTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		
-		String confPath = "C:/fileConf/fileConf.xml";
+		String confPath = "WEB-INF/mail-conf.xml";
 		//	Create an input stream on a file
 		InputStream is = null;
 		try {
@@ -70,9 +75,17 @@ public class MailerTest extends TestCase {
 	}
 
 	public void testCreateMessage() {
-		String object = "Message de test";
-		String body = "Test reussi !";
-		Message message = new Message(object, body);
+		Message message = null;
+		MessageFactory messageFactory = new MessageFactory();
+		
+		User user = new User("africott");
+		user.setAdmin(true);
+		user.setEmail("africott@etudiant.univ-mlv.fr");
+		user.setFirstname("Arnaud");
+		user.setName("FRICOTTEAU");
+		user.setPassword("123");
+		
+		message = messageFactory.createMessage(MessageFactory.CREATION_MESSAGE, user);
 		
 		try {
 			mailer.sendMail("africott@etudiant.univ-mlv.fr", message);
