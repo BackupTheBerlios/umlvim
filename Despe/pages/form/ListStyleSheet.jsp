@@ -2,8 +2,13 @@
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 
+<h1>Gestion des feuilles de style</h1>
+
 <html:form action="/setStyleSheet">
-	<table>
+	<table border="1" width="100%">
+		<tr>
+			<td aling="left"><h3>Appliquer une feuille de style</h3></td>
+		</tr>
 		<tr>
 			<th align="right"> <bean:message key="prompt.stylesheet.set"/></th>
 			<td>
@@ -37,13 +42,16 @@
 </html:form>
 <hr>
 <html:form action="/addStyleSheet" enctype="multipart/form-data">
-	<table>
+	<table border="1" width="100%">
+		<tr>
+			<td aling="left"><h3>Ajouter une feuille de style</h3></td>
+		</tr>
 		<tr>
 			<th align="right"'><bean:message key="prompt.stylesheet.add"/></th>
 			<td><html:file property="theFile"/></td>
 		</tr>
 		<tr>
-			<th aling="right">Nom de la feuille de style</th>
+			<th align="right">Nom de la feuille de style</th>
 			<td><html:text property="theName"/></td>
 		</tr>
 		<tr>
@@ -54,7 +62,10 @@
 </html:form>
 <hr>
 <html:form action="/removeStyleSheet">
-	<table>
+	<table border="1" width="100%">
+		<tr>
+			<td aling="left"><h3>Supprimer une feuille de style</h3></td>
+		</tr>
 		<tr>
 			<th align="right"> <bean:message key="prompt.stylesheet.remove"/> : </th>
 			<td>
