@@ -27,22 +27,32 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class PrefsPlugin implements PlugIn {
 
+	String confPath;
+
+	public String getConfPath() {
+		return confPath;
+	}
+
+	public void setConfPath(String path) {
+		confPath = path;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.apache.struts.action.PlugIn#init(org.apache.struts.action.ActionServlet, org.apache.struts.config.ModuleConfig)
 	 */
 	public void init(ActionServlet servlet, ModuleConfig config)
 		throws ServletException {
 
-		String path = (String) servlet.getServletContext().
-						getAttribute("mailConfPath");
+		String absoltuePath = (servlet.getServletContext()).getRealPath("/");
 		String prefix = config.getPrefix();
-		System.out.println("***" + prefix + path + "***");
+		String path = absoltuePath + prefix + confPath;
+		System.out.println("***" + path + "***");
 
 		InputStream is = null;
 		try {
 			is = new FileInputStream(path);
 		} catch (FileNotFoundException e) {
-			System.err.println(
+			System.out.println(
 				"Cannot found or open the file : " + path);
 		}
 
@@ -51,11 +61,11 @@ public class PrefsPlugin implements PlugIn {
 			Preferences.importPreferences(is);
 		} catch (InvalidPreferencesFormatException e) {
 			System.err.println(
-				"InvalidPreferencesFormatException in constructor of MessageFactory : "
+				"InvalidPreferencesFormatException in PlugIn PrefsPlugin : "
 					+ e);
 		} catch (IOException e) {
 			System.err.println(
-				"IOException in constructor of MessageFactory : " + e);
+				"IOException in PlugIn PrefsPlugin : " + e);
 		}
 	}
 
