@@ -50,6 +50,24 @@ public class User {
 	}
 
 	/**
+	 * Access method for the name property.
+	 * 
+	 * @return   the current value of the name property
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the value of the name property.
+	 * 
+	 * @param aName the new value of the name property
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
 	 * Returns the name of the User.
 	 * 
 	 * @return the name of the User.
@@ -60,13 +78,13 @@ public class User {
 	}
 
 	/**
-	 * Returns the e-mail address of the User.
-	 * 
-	 * @return the e-mail address of the User.
-	 * @roseuid 3FE17053023E
-	 */
+		  * Returns the e-mail address of the User.
+		  * 
+		  * @return the e-mail address of the User.
+		  * @roseuid 3FE17053023E
+		  */
 	public String getEmail() {
-		return email;
+		return null;
 	}
 
 	/**
@@ -90,15 +108,6 @@ public class User {
 	}
 
 	/**
-	 * Access method for the name property.
-	 * 
-	 * @return   the current value of the name property
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
 	 * Returns the password of the User, in plain text.
 	 * 
 	 * @return the password of the User.
@@ -114,8 +123,8 @@ public class User {
 	 * @param isAdmin whether the User is admin or not.
 	 * @roseuid 3FE170A1033B
 	 */
-	public void setAdmin(boolean isAdmin) {
-		admin = isAdmin;
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	/**
@@ -139,21 +148,12 @@ public class User {
 	}
 
 	/**
-	 * Sets the value of the login property.
+	 * Sets the login of the User.
 	 * 
-	 * @param login the new value of the login property
+	 * @param login the new login of the User.
 	 */
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	/**
-	 * Sets the value of the name property.
-	 * 
-	 * @param name the new value of the name property
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**

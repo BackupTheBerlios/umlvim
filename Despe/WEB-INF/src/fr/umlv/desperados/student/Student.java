@@ -326,7 +326,7 @@ public class Student implements XMLable
     * @param studentId
     * @roseuid 3FCA089F033C
     */
-   public Student(int studentId) 
+   public Student(String studentId) 
    {
     
    }

@@ -3,9 +3,8 @@
 package fr.umlv.desperados.account;
 
 
-/**
- * Class containing some tools for the User managment.
- */
+import java.util.Random;
+
 public final class UserUtilities 
 {
    
@@ -16,8 +15,16 @@ public final class UserUtilities
     * @roseuid 3FBBC3400147
     */
    public static String generatePassword() 
-   {
-    return null;
+   {   
+   	char [] tabChar ={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9'}; 
+   	
+   	 Random rand=new Random(System.currentTimeMillis());
+	byte[] passwordArray = new  byte[8];
+	for(int i=0;i<8;i++)
+	   passwordArray[i]=(byte)tabChar[rand.nextInt(62)];
+
+   return new String(passwordArray);
+  
    }
    
    /**
@@ -34,7 +41,17 @@ public final class UserUtilities
     */
    public static String generateLogin(String name, String firstname) 
    {
-    return null;
+	String firstLetter = firstname.substring(0,1);
+		String stringName;
+
+		if(name.length()<7)
+			stringName=name.substring(0,name.length());
+		else
+			stringName=name.substring(0,7);
+
+		String login=firstLetter.concat(stringName);
+
+		return login;
    }
    
    /**
@@ -56,6 +73,23 @@ public final class UserUtilities
     */
    public static String generateLogin(String name, String firstname, int number) 
    {
-    return null;
+	String firstLetter = firstname.substring(0,1);
+	String stringName;
+	String login;
+	
+	if(name.length()<5)
+		stringName=name.substring(0,name.length());
+	else
+		stringName=name.substring(0,5);
+	
+	login = firstLetter.concat(stringName);
+	
+	if(number<10)
+		login=login.concat(String.valueOf(0));
+		
+	login=login.concat(String.valueOf(number));
+			
+	return login;
    }
-}
+  
+  }

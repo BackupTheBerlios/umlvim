@@ -83,7 +83,7 @@ return theInstance;
     * @return fr.umlv.desperados.student.Student
     * @roseuid 3FF869BD01AC
     */
-   public Student getStudent(int studentId) 
+   public Student getStudent(String studentId) 
    {
     return null;
    }

@@ -44,7 +44,7 @@ public class DatabaseRdvManager implements RdvManager
     * @return the unique instance of DatabaseRdvManager.
     * @roseuid 3FF302030359
     */
-   public DatabaseRdvManager getInstance(DatabaseRequestor requestor) 
+   public static DatabaseRdvManager getInstance(DatabaseRequestor requestor) 
    {
     return null;
    }
@@ -119,44 +119,3 @@ public class DatabaseRdvManager implements RdvManager
     
    }
 }
-/**
- * 
- * 
- *  
- * DatabaseRdvManager.addRdv(Rdv){
- *     
- *    }
- *  
- *  
- * DatabaseRdvManager.removeRdv(Rdv){
- *     
- *    }
- *  
- *  
- * DatabaseRdvManager.getRdv(int){
- *     return null;
- *    }
- *  
- *  
- * DatabaseRdvManager.listRdv(java.util.Date){
- *     return null;
- *    }
- *  
- *  
- * DatabaseRdvManager.isDateFree(java.util.Date,boolean){
- *     return true;
- *    }
- *  
- *  
- * DatabaseRdvManager.getFreeHours(java.util.Date,boolean){
- *     return null;
- *    }
- *  
- *  
- * DatabaseRdvManager.getFreeDays(boolean){
- *     return null;
- *    }
- *  
- *  
- *  
- */
