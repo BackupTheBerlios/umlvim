@@ -4,6 +4,7 @@ package fr.umlv.desperados.planning;
 
 import java.util.Date;
 
+import fr.umlv.desperados.student.StudentAccountInfo;
 import fr.umlv.desperados.util.XMLable;
 
 /**
@@ -12,30 +13,23 @@ import fr.umlv.desperados.util.XMLable;
 public class Rdv implements XMLable {
 
 	/**
-	 * The date and hour of the Rdv.
-	 */
+	* The date and hour of the Rdv.
+	*/
 	private Date date;
-
-	/**
-	 * The firstname of the Student who has the Rdv.
-	 */
-	private String firstname;
-
-	/**
-	 * The name of the Student who has the Rdv.
-	 */
-	private String name;
-
-	/**
-	 * <code>true</code> if the Student who has the Rdv is RAVEL, <code>false</code> 
-	 * otherwise.
-	 */
-	private boolean ravel;
 
 	/**
 	 * The id of the Student who has the Rdv.
 	 */
-	private String studentId;
+	private StudentAccountInfo studentId;
+
+	/**
+		   * @param studentInfo
+		   */
+	public Rdv(StudentAccountInfo studentInfo, Date dateRdv) {
+
+		date = dateRdv;
+		this.studentId = studentInfo;
+	}
 
 	/**
 	 * Constructor.
@@ -48,12 +42,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FD5A04C01D4
 	 */
 	public Rdv(java.util.Date date, String studentId, String name, String firstname, boolean ravel) {
-		
-		this.date = date;
-		this.studentId = studentId;
-		this.name = name;
-		this.firstname = firstname;
-		this.ravel = ravel;		
+
 	}
 
 	/**
@@ -63,7 +52,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31BFF0093
 	 */
 	public Date getDate() {
-		return date;
+		return null;
 	}
 
 	/**
@@ -73,7 +62,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C1100FD
 	 */
 	public String getFirstname() {
-		return firstname;
+		return null;
 	}
 
 	/**
@@ -83,7 +72,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C1C0199
 	 */
 	public String getName() {
-		return name;
+		return null;
 	}
 
 	/**
@@ -94,7 +83,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE5FCAB0139
 	 */
 	public boolean getRavel() {
-		return ravel;
+		return true;
 	}
 
 	/**
@@ -104,7 +93,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C28015A
 	 */
 	public String getStudentId() {
-		return studentId;
+		return null;
 	}
 
 	/**
@@ -115,4 +104,3 @@ public class Rdv implements XMLable {
 		return null;
 	}
 }
-
