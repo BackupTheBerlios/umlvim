@@ -5,8 +5,13 @@
 <html:errors/>
 
 <app:checkIdent>
-	<br> 
-	<html:form action="/" >
+	<jsp:useBean id="dossier" class="java.lang.String" scope="request"/>
+	<html:form action="/save/student/perso">
+		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/MaritalStatus.jsp"/>
+		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/FamilySituation.jsp"/>
+		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/MilitarySituation.jsp"/>
+		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/Address.jsp"/>
+		<jsp:include page="/WEB-INF/jsp/form/dossier/perso/SocioProfSituation.jsp"/>
 		<html:submit/>
 	</html:form>
 </app:checkIdent>
