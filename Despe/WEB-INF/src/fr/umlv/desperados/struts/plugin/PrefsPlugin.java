@@ -27,7 +27,7 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class PrefsPlugin implements PlugIn {
 
-	String confPath;
+	private String confPath;
 
 	public String getConfPath() {
 		return confPath;
