@@ -6,9 +6,7 @@ package fr.umlv.desperados.struts.form;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,10 +26,10 @@ public class StatsForm extends ActionForm {
 	// --------------------------------------------------------- Instance Variables
 
 	/** periodeDeb property */
-	private String dayStart = "01/01";
+	private String dayStart = "01/01/2004";
 
 	/** periodeDeb property */
-	private String dayEnd = "01/01";
+	private String dayEnd = "01/01/2004";
 	    
 	/** diplomaId property */
 	private String diplomaId = "-1";
@@ -50,7 +48,7 @@ public class StatsForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 		
 		// Test if dates formats are correct
-		String formatRegexp = "\\d\\d/\\d\\d"; // resources.getMessage("date.format.regexp");
+		String formatRegexp = "\\d\\d/\\d\\d/\\d\\d\\d\\d"; // resources.getMessage("date.format.regexp");
 		
 		if (!dayStart.matches(formatRegexp))
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.format.date.start", dayStart));
@@ -59,9 +57,6 @@ public class StatsForm extends ActionForm {
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.format.date.end", dayEnd));
 
 		//	Parse the two dates and try an exeption if it don't exist
-		Calendar calendar = new GregorianCalendar();
-		int year = calendar.get(Calendar.YEAR);
-		
 		Date startDate = null;
 		Date endDate = null;
 	
@@ -69,13 +64,13 @@ public class StatsForm extends ActionForm {
 		formatDate.setLenient(false);
 	
 		try {
-			startDate = formatDate.parse(dayStart + "/" + year);
+			startDate = formatDate.parse(dayStart);
 		} catch (ParseException e) {
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.date.start.no.exist", dayStart));
 		}
 		
 		try {
-				endDate = formatDate.parse(dayEnd + "/" + year);
+				endDate = formatDate.parse(dayEnd);
 		} catch (ParseException e) {
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.date.end.no.exist", dayEnd));
 		}
@@ -93,8 +88,8 @@ public class StatsForm extends ActionForm {
 	 * @param HttpServletRequest request
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		dayStart = "01/01";
-		dayEnd = "01/01";
+		dayStart = "01/01/2004";
+		dayEnd = "01/01/2004";
 		diplomaId = "-1";
 	}
 	

@@ -101,9 +101,9 @@ public class DatabaseDiplomaManager implements DiplomaManager
    	
 	String reqInsertDip = "INSERT INTO DIPLOME_MLV (ID_CYC, LIB_DIP_MLV) VALUES ("
 		+diploma.getCycle()
-		+", '"
+		+", UPPER('"
 		+diploma.getName()
-		+"')";
+		+"'))";
     
 	String reqSelectMaxId = "SELECT MAX(ID_DIP_MLV) FROM DIPLOME_MLV";
     

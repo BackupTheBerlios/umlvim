@@ -70,7 +70,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 	
 	public void testGetDiploma() {
 		Diploma diploma = ddm.getDiploma("-1");
-		assertTrue(diploma.getName().equals("default"));
+		assertTrue(diploma.getName().equals("Non renseigné"));
 	}
 	
 	public void testListDiploma() {
@@ -84,7 +84,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		iterator = list.iterator();
 		 while(iterator.hasNext()) {
 		 	diploma = (Diploma)iterator.next();
-		 	if( (diploma.getName().equals("default")) && (diploma.getCycle().equals("-1")) )
+		 	if( (diploma.getName().equals("Non renseigné")) && (diploma.getCycle().equals("-1")) )
 				diplomaFinded = true;
 			if( (diploma.getName().equals("N'existe pas")) && (diploma.getCycle().equals("-100")) )
 				diplomaNotFinded = false;
@@ -97,7 +97,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		String diplomaId;
 		Diploma diploma = null;
 		 
-		diploma = new Diploma("DEA informatique", "3");
+		diploma = new Diploma("DEA info", "3");
 		
 		 try {
 			ddm.addDiploma(diploma);

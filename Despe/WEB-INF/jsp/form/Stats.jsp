@@ -11,10 +11,10 @@
 		<tr>
 			<th align="left"><bean:message key="prompt.stats.periode"/></th>
 			<td>
-				du <html:text property="dayStart" size="5" maxlength="5" /> (jj/mm)
+				du <html:text property="dayStart" size="10" maxlength="10" /> (jj/mm/aaaa)
 			</td>
 			<td>
-				au <html:text property="dayEnd" size="5" maxlength="5" /> (jj/mm)
+				au <html:text property="dayEnd" size="10" maxlength="10" /> (jj/mm/aaaa)
 			</td>
 			<td>
 				&nbsp;
