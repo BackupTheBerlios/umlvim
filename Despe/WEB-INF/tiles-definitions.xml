@@ -5,40 +5,84 @@
 
 <tiles-definitions>
 
-	<definition name="baseDef" path="/pages/layouts/DefaultLayout.jsp">
+	<!-- Base Definitions -->
+
+	<definition name="baseDef"		path="/pages/layouts/DefaultLayout.jsp">
 		<put name="header"			value="/pages/common/Header.jsp" />
 		<put name="footer"			value="/pages/common/Copyright.jsp" />
-		<put name="menubar"			value="/pages/AdminMenu.jsp" />
+		<put name="menubar"			value="/pages/StudentMenu.jsp" />
 		<put name="body-content"	value="" />
 	</definition>
 
-	<definition name="home.page" extends="baseDef">
+	<definition name="userBaseDef"	extends="baseDef">
+		<put name="menubar"			value="/pages/UserMenu.jsp" />
+	</definition>
+
+	<definition name="adminBaseDef"	extends="baseDef">
+		<put name="menubar"			value="/pages/AdminMenu.jsp" />
+	</definition>
+
+
+	<!--
+		the fallowing definition are form according to two points :
+			1/ the path begin with the actor who can access to the page
+			(one of 'admin', 'user', 'student' or 'common'), fallowed by
+			a dot
+			2/ the path continues with an explicit name of the page to
+			show. (ex. edit.user for a page that edit a User)
+	-->
+
+
+	<!-- Common pages definitions -->
+
+	<definition name="common.operation.error" extends="baseDef">
+		<put name="body-content"	value="/pages/common/Error.jsp" />
+	</definition>
+
+	<definition name="common.operation.ok" extends="baseDef">
+		<put name="body-content"	value="/pages/Ok.jsp" />
+	</definition>
+
+
+	<!-- Student's pages definitions -->
+
+	<definition name="student.ident" extends="baseDef">
+		<put name="body-content"	value="/pages/form/StudentLogon.jsp" />
+	</definition>
+
+	<definition name="user.home" extends="baseDef">
 		<put name="body-content"	value="/pages/Main.jsp" />
 	</definition>
 
-	<definition name="logon.page" extends="baseDef">
+
+	<!-- User's pages definitions -->
+
+	<definition name="user.home" extends="userBaseDef">
+		<put name="body-content"	value="/pages/Main.jsp" />
+	</definition>
+
+	<definition name="user.logon" extends="userBaseDef">
 		<put name="menubar"			value="" />
 		<put name="body-content"	value="/pages/form/UserLogon.jsp" />
 	</definition>
 
-	<definition name="error.page" extends="baseDef">
-		<put name="body-content"	value="/pages/common/Error.jsp" />
+	<definition name="user.search.student" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/SearchStudent.jsp" />
 	</definition>
 
-	<definition name="user.edit" extends="baseDef">
+
+	<!-- Admin's pages definitions -->
+
+	<definition name="admin.edit.user" extends="adminBaseDef">
 		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
 	</definition>
 
-	<definition name="user.research" extends="baseDef">
+	<definition name="admin.search.user" extends="adminBaseDef">
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
 	</definition>
 
-	<definition name="stylesheet" extends="baseDef">
+	<definition name="admin.stylesheet.list" extends="adminBaseDef">
 		<put name="body-content"	value="/pages/form/ListStyleSheet.jsp" />
-	</definition>
-
-	<definition name="operation.ok" extends="baseDef">
-		<put name="body-content"	value="/pages/Ok.jsp" />
 	</definition>
 
 </tiles-definitions>

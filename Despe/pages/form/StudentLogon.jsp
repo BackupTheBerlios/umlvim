@@ -2,6 +2,7 @@
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 
 <html:errors property="database" />
+
 <html:form action="/studentLogon" focus="name">
 	<table>
 		<tr>

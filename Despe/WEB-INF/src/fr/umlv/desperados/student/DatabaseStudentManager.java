@@ -156,7 +156,8 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @return fr.umlv.desperados.student.Student
 	 * @roseuid 3FF869BD01AC
 	 */
-	public Student getStudent(int studentId) {
+	public Student getStudent(int studentId) throws StudentNotFoundException {
+		//TODO propager l'exception si Student pas trouvé
 		ResultSet result = null;
 		Student student = null;
 		String query =

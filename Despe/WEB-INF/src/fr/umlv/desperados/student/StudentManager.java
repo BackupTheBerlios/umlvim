@@ -44,7 +44,7 @@ public interface StudentManager {
 	 * permanent storage.
 	 * @roseuid 3FBF5EA000BA
 	 */
-	public Student getStudent(int studentId);
+	public Student getStudent(int studentId) throws StudentNotFoundException;
 
 	/**
 	 * Modifies a Student in the permanent storage.

@@ -21,7 +21,7 @@
 
 <app:checkLogon admin="true" page="">
 
-	<html:form action="/saveUser">
+	<html:form action="/save/user">
 		<html:hidden property="action"/>
 		<table>
 

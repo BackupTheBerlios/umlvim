@@ -46,5 +46,4 @@ public final class SearchAction extends Action {
 		}
 		return (mapping.findForward("search"+type));
 	}
-
 }

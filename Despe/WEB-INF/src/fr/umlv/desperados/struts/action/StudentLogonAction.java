@@ -24,6 +24,7 @@ import org.apache.struts.action.ActionMapping;
 import fr.umlv.desperados.struts.form.StudentLogonForm;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
+import fr.umlv.desperados.student.StudentNotFoundException;
 import fr.umlv.desperados.util.Constants;
 
 /** 
@@ -66,12 +67,15 @@ public class StudentLogonAction extends Action {
 
 		Locale locale = request.getLocale();
 
+		if(form == null) {
+			return (mapping.findForward("ident"));
+		}
+
 		// validate the form
 		ActionErrors errors = form.validate(mapping, request);
-
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
+			return (mapping.findForward("ident"));
 		}
 
 		StudentLogonForm studentLogonForm = (StudentLogonForm) form;
@@ -87,21 +91,22 @@ public class StudentLogonAction extends Action {
 		}
 		else {
 			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
-											.parse(studentLogonForm.getBirthday());
+								.parse(studentLogonForm.getBirthday());
 			int studentId = manager.existStudent(studentLogonForm.getName(),
-																		studentLogonForm.getFirstname(),
-																		birthday);
-			if(studentId == 0) {
+												studentLogonForm.getFirstname(),
+												birthday);
+			try {
+				student = manager.getStudent(studentId);
+			} catch(StudentNotFoundException e) {
 				errors.add(ActionErrors.GLOBAL_ERROR,
 				   new ActionError("error.student.dontexist"));
 			}
-			student = manager.getStudent(studentId);
 		}
 
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
+			return (mapping.findForward("error"));
 		}
 
 		// Save our logged-in user in the session
@@ -121,6 +126,6 @@ public class StudentLogonAction extends Action {
 		}
 
 		// Forward control to the specified success URI
-		return (mapping.findForward("success"));
+		return (mapping.findForward("studenthome"));
 	}
 }

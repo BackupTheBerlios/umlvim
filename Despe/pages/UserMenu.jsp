@@ -9,19 +9,21 @@
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/editUser.do?action=create">
+				<html:link action="/do/edit/student?action=create">
 					<bean:message key="menu.user.addstudent"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<bean:message key="menu.user.searchstudent"/>
+				<html:link action="/do/search/?type=student">
+					<bean:message key="menu.user.searchstudent"/>
+				</html:link>
 			</td>
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/userLogoff.do">
+				<html:link action="/do/userLogoff">
 					<bean:message key="link.logoff" />
 				</html:link>
 			</td>

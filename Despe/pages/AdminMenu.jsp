@@ -10,21 +10,21 @@
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/editUser.do?action=create">
+				<html:link action="/do/edit/user?action=create">
 					<bean:message key="menu.admin.adduser"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/search.do?type=user">
+				<html:link action="/do/search?type=user">
 					<bean:message key="menu.admin.searchuser"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/listStyleSheet">
+				<html:link action="/do/list/styleSheet">
 					<bean:message key="menu.admin.stylesheet"/>
 				</html:link>
 			</td>

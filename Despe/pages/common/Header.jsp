@@ -4,7 +4,8 @@
 	<tr>
 		<td align="center">
 			<html:link href="http://www.univ-mlv.fr" target="blank">
-				<html:img src="<%= request.getContextPath()+"/pages/images/logo_umlv.gif" %>"/>
+				<html:img page="/pages/images/logo_umlv.gif"
+						border="0"/>
 			</html:link>
 		</td>
 		<td width="30">
@@ -12,14 +13,14 @@
 			<table>
 				<tr>
 					<td>
-						<html:img src="<%= request.getContextPath()+"/pages/images/english_flag.gif" %>"
-									height="20" width="30" />
+						<html:img page="/pages/images/english_flag.gif"
+								border="0" height="20" width="30" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<html:img src="<%= request.getContextPath()+"/pages/images/french_flag.gif" %>"
-									height="20" width="30" />
+						<html:img page="/pages/images/french_flag.gif"
+								border="0" height="20" width="30" />
 					</td>
 				</tr>
 			</table>

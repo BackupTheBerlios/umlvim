@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
 
@@ -20,10 +20,10 @@ import fr.umlv.desperados.util.Constants;
  * user logoff.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.4 $ $Date: 2004/01/21 22:12:03 $
+ * @version $Revision: 1.1 $ $Date: 2004/01/21 22:12:03 $
  */
 
-public final class UserLogoffAction extends Action {
+public final class StudentLogoffAction extends Action {
 
     // ----------------------------------------------------- Instance Variables
 
@@ -58,24 +58,24 @@ public final class UserLogoffAction extends Action {
 
 	// Extract attributes we will need
 	HttpSession session = request.getSession();
-	User user = (User) session.getAttribute(Constants.USER_KEY);
+	Student student = (Student) session.getAttribute(Constants.STUDENT_KEY);
 
 	// Process this user logoff
-	if (user != null) {
+	if (student != null) {
 		if (log.isDebugEnabled()) {
-			log.debug("UserLogoffAction: User '" + user.getLogin() +
+			log.debug("StudentLogoffAction: Student '" + student.getId() +
 						"' logged off in session " + session.getId());
 		}
 	} else {
 		if (log.isDebugEnabled()) {
-			log.debug("UserLogoffAction: User logged off in session " +
+			log.debug("StudentLogoffAction: Student logged off in session " +
 						session.getId());
 		}
 	}
-	session.removeAttribute(Constants.USER_KEY);
+	session.removeAttribute(Constants.STUDENT_KEY);
 	session.invalidate();
 
 	// Forward control to the specified success URI
-	return (mapping.findForward("logon"));
+	return (mapping.findForward("ident"));
     }
 }
