@@ -15,6 +15,16 @@ public class Rdv implements XMLable {
 	* The date and hour of the Rdv.
 	*/
 	private Date date;
+	
+	private String studentId;
+	
+	private String name;
+	
+	private String firstname;
+	
+	private boolean ravel;
+	
+	
 
 
 	/**
@@ -36,7 +46,11 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FD5A04C01D4
 	 */
 	public Rdv(java.util.Date date, String studentId, String name, String firstname, boolean ravel) {
-
+	this.date=date;
+	this.studentId=studentId;
+	this.name=name;
+	this.firstname=firstname;
+	this.ravel=ravel;
 	}
 
 	/**
@@ -46,7 +60,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31BFF0093
 	 */
 	public Date getDate() {
-		return null;
+		return date;
 	}
 
 	/**
@@ -56,7 +70,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C1100FD
 	 */
 	public String getFirstname() {
-		return null;
+		return firstname;
 	}
 
 	/**
@@ -66,7 +80,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C1C0199
 	 */
 	public String getName() {
-		return null;
+		return name;
 	}
 
 	/**
@@ -77,7 +91,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE5FCAB0139
 	 */
 	public boolean getRavel() {
-		return true;
+		return ravel;
 	}
 
 	/**
@@ -87,7 +101,7 @@ public class Rdv implements XMLable {
 	 * @roseuid 3FE31C28015A
 	 */
 	public String getStudentId() {
-		return null;
+		return studentId;
 	}
 
 	/**

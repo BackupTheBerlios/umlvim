@@ -38,24 +38,25 @@ final class DatabaseRdvList extends DatabaseAbstractList {
 	 */
 	public Object get(int i) {
 		Rdv rdv = null;
-		try {
-			rs.absolute(i);
-
-			String id = String.valueOf(rs.getString("ID_ETU"));
-			String name = rs.getString("NOM_PATRONYMIQUE");
-			String firstName = rs.getString("PRENOM1");
-
-			// TODO deprecated, a changer en utilisant calendar
-			boolean isRavel =
-				(rs.getDate("ANNEE_BAC").getYear()
-					== new Date(System.currentTimeMillis()).getYear());
-			Date dateRdv = rs.getDate("DATE_DE_RDV");
-
-			rdv = new Rdv(dateRdv, id, name, firstName, isRavel);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		synchronized (rs) {
+			try {
+				rs.absolute(i);
+	
+				String id = String.valueOf(rs.getString("ID_ETU"));
+				String name = rs.getString("NOM_PATRONYMIQUE");
+				String firstName = rs.getString("PRENOM1");
+	
+				// TODO deprecated, a changer en utilisant calendar
+				boolean isRavel =
+					(rs.getDate("ANNEE_BAC").getYear()
+						== new Date(System.currentTimeMillis()).getYear());
+				Date dateRdv = rs.getDate("DATE_DE_RDV");
+	
+				rdv = new Rdv(dateRdv, id, name, firstName, isRavel);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
 		return rdv;
 	}
 

@@ -18,6 +18,7 @@ import org.apache.struts.config.ModuleConfig;
 import fr.umlv.desperados.account.DatabaseUserManager;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
+import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.util.Constants;
 public class InitManagersPlugin implements PlugIn {
 
@@ -30,6 +31,7 @@ public class InitManagersPlugin implements PlugIn {
 	public StrutsDatabaseRequestor strutsDatabaseRequestor;
 	public DatabaseRdvManager databaseRdvManager;
 	public DatabaseUserManager databaseUserManager;
+	public DatabaseStudentManager databaseStudentManager;
 
 	public void init(ActionServlet servlet, ModuleConfig config)
 		throws javax.servlet.ServletException {
@@ -51,13 +53,15 @@ public class InitManagersPlugin implements PlugIn {
 					"jdbc:oracle:thin:@hibiscus:1521:test",
 					"desperados",
 					"totofaitduvelo");
-			strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
+			strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon); 
 
 			// managers init
 			databaseRdvManager =
 				DatabaseRdvManager.getInstance(strutsDatabaseRequestor);
 			databaseUserManager =
-				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
+				DatabaseUserManager.getInstance(strutsDatabaseRequestor); 
+			databaseStudentManager =			
+			DatabaseStudentManager.getInstance(strutsDatabaseRequestor,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.18-LE-jdk14/webapps/tomcatDespe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (InstantiationException e1) {
@@ -75,6 +79,9 @@ public class InitManagersPlugin implements PlugIn {
 		context.setAttribute(
 			Constants.USER_DATABASE_KEY,
 			databaseUserManager);
+			context.setAttribute(
+						Constants.STUDENT_DATABASE_KEY,
+						databaseStudentManager);
 	}
 
 	/* (non-Javadoc)
