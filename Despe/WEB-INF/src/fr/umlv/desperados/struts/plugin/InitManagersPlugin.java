@@ -79,9 +79,9 @@ public class InitManagersPlugin implements PlugIn {
 		context.setAttribute(
 			Constants.USER_DATABASE_KEY,
 			databaseUserManager);
-			context.setAttribute(
-						Constants.STUDENT_DATABASE_KEY,
-						databaseStudentManager);
+		context.setAttribute(
+			Constants.STUDENT_DATABASE_KEY,
+			databaseStudentManager);
 	}
 
 	/* (non-Javadoc)

@@ -13,6 +13,8 @@
 
 		<form-bean name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm" />
 
+		<form-bean name="StudentLogonForm" type="fr.umlv.desperados.struts.form.StudentLogonForm" />
+
 		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
 
 		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
@@ -121,6 +123,19 @@
 			scope="request"
 			input="/pages/form/ListStyleSheet.jsp"
 			validate="false">
+		</action>
+
+
+
+
+		<action
+			path="/studentLogon"
+			type="fr.umlv.desperados.struts.action.StudentLogonAction"
+			name="StudentLogonForm"
+			scope="request"
+			input="/pages/form/StudentLogon.jsp"
+			validate="false">
+			<forward name="success"			path="home.page" />
 		</action>
 
 	</action-mappings>

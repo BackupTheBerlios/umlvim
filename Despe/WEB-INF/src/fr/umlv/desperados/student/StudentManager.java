@@ -34,7 +34,7 @@ public interface StudentManager {
 	public int existStudent(
 		String name,
 		String firstname,
-		java.sql.Date birthday);
+		java.util.Date birthday);
 
 	/**
 	 * Gets a Student from the permanent storage.

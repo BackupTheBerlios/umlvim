@@ -65,8 +65,10 @@ public class StudentLogonAction extends Action {
 		throws Exception {
 
 		Locale locale = request.getLocale();
-		ActionErrors errors = form.validate(mapping, request);
+
 		// validate the form
+		ActionErrors errors = form.validate(mapping, request);
+
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("failure"));
@@ -77,34 +79,23 @@ public class StudentLogonAction extends Action {
 
 		StudentManager manager = (StudentManager)servlet.getServletContext().
 			getAttribute(Constants.STUDENT_DATABASE_KEY);
-// COMMENTED FOR TEST
-// TODO tester cette partie
-//		if (manager == null) {
-//			errors.add("database",
-//			   new ActionError("error.database.missing"));
-//			log.warn("StudentLogonAction: Database is missing");
-//		}
-//		else {
+		if (manager == null) {
+			errors.add("database",
+			   new ActionError("error.database.missing"));
+			log.warn("StudentLogonAction: Database is missing");
+		}
+		else {
 			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 											.parse(studentLogonForm.getBirthday());
-			String studentId = "1234567890";
-//			String studentId = manager.existStudent(studentLogonForm.getName(),
-//																					studentLogonForm.getFirstname(),
-//																					birthday);
-			if(studentId == null) {
+			int studentId = manager.existStudent(studentLogonForm.getName(),
+																		studentLogonForm.getFirstname(),
+																		birthday);
+			if(studentId == 0) {
 				errors.add(ActionErrors.GLOBAL_ERROR,
 				   new ActionError("error.student.dontexist"));
 			}
-			//student = manager.getStudent(studentId);
-			//***************
-			// Pour les tests
-			student = new Student(studentId);
-			student.setName(studentLogonForm.getName());
-			student.setFirstname(studentLogonForm.getFirstname());
-			student.setBirthday(birthday);
-			//***************
-// COMMENTED FOR TEST
-//		}
+			student = manager.getStudent(studentId);
+		}
 
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
@@ -115,10 +106,10 @@ public class StudentLogonAction extends Action {
 		// Save our logged-in user in the session
 		HttpSession session = request.getSession();
 		session.setAttribute(Constants.STUDENT_KEY, student);
-//		if (log.isDebugEnabled()) {
-//			log.trace("StudentLogonAction: Student '" + student.getId() +
-//					  "' logged on in session " + session.getId());
-//		}
+		if (log.isDebugEnabled()) {
+			log.trace("StudentLogonAction: Student '" + student.getId() +
+					  "' logged on in session " + session.getId());
+		}
 
 		// Remove the obsolete form bean
 		if (mapping.getAttribute() != null) {
@@ -131,5 +122,4 @@ public class StudentLogonAction extends Action {
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));
 	}
-
 }
