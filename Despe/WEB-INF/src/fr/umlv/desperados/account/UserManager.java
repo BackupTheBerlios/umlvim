@@ -2,6 +2,7 @@
 
 package fr.umlv.desperados.account;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -39,7 +40,7 @@ public interface UserManager
     * @return the User to get.
     * @roseuid 3FC8C1B3021D
     */
-   public User getUser(String login);
+   public User getUser(String login)  throws UserNotFoundException;
    
    /**
     * Modifies a User in the permanent storage.
@@ -71,5 +72,5 @@ public interface UserManager
     * storage.
     * @roseuid 3FBF5C2702AE
     */
-   public List searchUser(String login, String name);
+   public List searchUser(String login, String name) throws SQLException;
 }

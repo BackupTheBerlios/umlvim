@@ -3,6 +3,7 @@
 package fr.umlv.desperados.account;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.AbstractList;
 
 
@@ -26,7 +27,7 @@ final class DatabaseUserList extends AbstractList
     */
    DatabaseUserList(ResultSet rs) 
    {
-    
+    this.rs=rs;
    }
    
    /**
@@ -36,7 +37,24 @@ final class DatabaseUserList extends AbstractList
     */
    public Object get(int i) 
    {
-    return null;
+   	   	User user = null;
+   	try {
+		rs.absolute(i);
+	} catch (SQLException e) {
+		// TODO Bloc catch auto-généré
+		e.printStackTrace();
+	}
+   	try {
+		user = new User(rs.getString ("LOGIN_COM"));
+		user.setName(rs.getString("NOM_COM"));
+		user.setFirstname(rs.getString("PRENOM_COM"));
+		user.setAdmin(rs.getBoolean("EST_ADM_COM"));
+		user.setPassword(rs.getString("PASS_COM"));
+	} catch (SQLException e1) {
+		// TODO Bloc catch auto-généré
+		e1.printStackTrace();
+	}
+   	   	    return user;
    }
    
    /**
@@ -45,7 +63,15 @@ final class DatabaseUserList extends AbstractList
     */
    public int size() 
    {
-    return 0;
+	int i=0;
+   	try {
+		rs.last();
+		i=rs.getRow();
+	} catch (SQLException e) {
+				e.printStackTrace();
+	}   
+  
+    return i;
    }
 }
 /**
