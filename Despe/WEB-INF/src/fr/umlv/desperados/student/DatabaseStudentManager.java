@@ -722,24 +722,22 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF869BD01F2
 	 */
 
-	public Student removeStudent(String studentId)
+	public Student removeStudent(int studentId)
 		throws StudentNotFoundException {
 		ResultSet result = null;
-		Student newStudent = getStudent((new Integer(studentId)).intValue());
-
-		String query =
-			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+"='" + studentId + "'";
-				try {
+		Student newStudent=null;
+		try{
+		newStudent = getStudent((new Integer(studentId)).intValue());
+		}
+		catch(StudentNotFoundException e){
+			throw new StudentNotFoundException("Impossible to remove student : Student not found in Database");
+		}
+			String query="DELETE FROM ETUDIANT WHERE "+prop.get("studentId")+"="+studentId;
+		try {
 			result = requestor.doQuery(query);
-			if (!result.first()) {
-				throw new StudentNotFoundException("Impossible to remove student : Student not found in Database");
-			}
-			result.deleteRow();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return newStudent;
 	}
 

@@ -24,7 +24,7 @@ import junit.framework.TestCase;
  * Pour changer le modèle de ce commentaire de type généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class DatabaseStudentManagerTest extends TestCase {
+public class DatabaseStudentManagerTestAdd extends TestCase {
 
 private DatabaseRequestor requestor;
 private Student student=null;
@@ -36,13 +36,13 @@ ResultSet result = null;
 	 * Constructor for DatabaseStudentManagerTest.
 	 * @param arg0
 	 */
-	public DatabaseStudentManagerTest(String arg0) {
+	public DatabaseStudentManagerTestAdd(String arg0) {
 		super(arg0);
 	}
 
 	public static void main(String[] args) {
 
-		junit.textui.TestRunner.run(DatabaseStudentManagerTest.class);
+		junit.textui.TestRunner.run(DatabaseStudentManagerTestAdd.class);
 	}
 
 	/*

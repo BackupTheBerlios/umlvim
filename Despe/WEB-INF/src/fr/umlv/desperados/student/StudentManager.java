@@ -66,7 +66,7 @@ public interface StudentManager {
 	 * not exists in the permanent storage.
 	 * @roseuid 3FBF60780389
 	 */
-	public Student removeStudent(String studentId)
+	public Student removeStudent(int studentId)
 		throws StudentNotFoundException;
 
 	/**

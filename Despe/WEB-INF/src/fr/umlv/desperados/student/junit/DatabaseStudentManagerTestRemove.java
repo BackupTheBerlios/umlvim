@@ -1,5 +1,5 @@
 /*
- * Créé le 21 janv. 2004
+ * Créé le 22 janv. 2004
  *
  * Pour changer le modèle de ce fichier généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
@@ -16,6 +16,7 @@ import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
+import fr.umlv.desperados.student.StudentNotFoundException;
 import junit.framework.TestCase;
 
 /**
@@ -24,7 +25,7 @@ import junit.framework.TestCase;
  * Pour changer le modèle de ce commentaire de type généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class DatabaseStudentManagerTest1 extends TestCase {
+public class DatabaseStudentManagerTestRemove extends TestCase {
 
 	private DatabaseRequestor requestor;
 	private Student student=null;
@@ -33,10 +34,10 @@ public class DatabaseStudentManagerTest1 extends TestCase {
 	ResultSet result = null;
 
 	/**
-	 * Constructor for DatabaseStudentManagerTest1.
+	 * Constructor for DatabaseStudentManagerTestRemove.
 	 * @param arg0
 	 */
-	public DatabaseStudentManagerTest1(String arg0) {
+	public DatabaseStudentManagerTestRemove(String arg0) {
 		super(arg0);
 	}
 
@@ -48,7 +49,6 @@ public class DatabaseStudentManagerTest1 extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		student=new Student();
 	}
 
 	/*
@@ -56,38 +56,55 @@ public class DatabaseStudentManagerTest1 extends TestCase {
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		student=null;
 	}
 
-	public void testExistStudent() {
-		try {
-					// db requestor init
-					Driver dDriverOracle =
-						(java.sql.Driver) Class
-							.forName("oracle.jdbc.driver.OracleDriver")
-							.newInstance();
-					DriverManager.registerDriver(dDriverOracle);
-					Connection cCon =
-						DriverManager.getConnection(
-							"jdbc:oracle:thin:@hibiscus:1521:test",
-							"desperados",
-							"totofaitduvelo");
+	public void testRemoveStudent() {
+		// db requestor init
+					Driver dDriverOracle = null;
+					try {
+						dDriverOracle =
+							(java.sql.Driver) Class
+								.forName("oracle.jdbc.driver.OracleDriver")
+								.newInstance();
+					} catch (InstantiationException e) {
+						// TODO Bloc catch auto-généré
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						// TODO Bloc catch auto-généré
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						// TODO Bloc catch auto-généré
+						e.printStackTrace();
+					}
+					try {
+						DriverManager.registerDriver(dDriverOracle);
+					} catch (SQLException e1) {
+						// TODO Bloc catch auto-généré
+						e1.printStackTrace();
+					}
+					Connection cCon = null;
+					try {
+						cCon =
+							DriverManager.getConnection(
+								"jdbc:oracle:thin:@hibiscus:1521:test",
+								"desperados",
+								"totofaitduvelo");
+					} catch (SQLException e2) {
+						// TODO Bloc catch auto-généré
+						e2.printStackTrace();
+					}
 					strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
 
 					// managers init
 					databaseStudentManager =DatabaseStudentManager.getInstance(strutsDatabaseRequestor,"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
-					} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (InstantiationException e1) {
-					e1.printStackTrace();
-				} catch (IllegalAccessException e1) { 
-					e1.printStackTrace();
-				} catch (SQLException e2) {
-					e2.printStackTrace();
-				}
-			assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
-		}
 
+	try {
+		databaseStudentManager.removeStudent(39);
+	} catch (StudentNotFoundException e3) {
+		// TODO Bloc catch auto-généré
+		e3.printStackTrace();
+	}
+				
 	}
 
-
+}
