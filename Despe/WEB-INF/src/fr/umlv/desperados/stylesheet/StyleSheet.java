@@ -2,7 +2,10 @@
 
 package fr.umlv.desperados.stylesheet;
 
+import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import fr.umlv.desperados.util.XMLable;
 
@@ -18,20 +21,20 @@ public class StyleSheet implements XMLable
    private String fileName;
    
    /**
-    * The stream containing the datas of the StyleSheet.
+    * The name of the StyleSheet.
     */
-   private InputStream stream;
+   private String name;
    
    /**
     * Constructor.
-    * 
+    * @param name the name of the StyleSheet
     * @param filename the filename of the StyleSheet.
-    * @param stream the stream containing the datas of the StyleSheet.
     * @roseuid 3FE74A2B01AE
     */
-   public StyleSheet(String filename, InputStream stream) 
+   public StyleSheet(String filename, String name) 
    {
-    
+    this.fileName = filename;
+    this.name = name;
    }
    
    /**
@@ -42,7 +45,12 @@ public class StyleSheet implements XMLable
     */
    public String getFilename() 
    {
-    return null;
+    return fileName;
+   }
+   
+   public String getName()
+   {
+   	return name;
    }
    
    /**
@@ -51,17 +59,19 @@ public class StyleSheet implements XMLable
     */
    public String toXML() 
    {
-    return null;
+   	// TODO
+   	String xmlString = "";
+   	try {
+		InputStream is = new FileInputStream(fileName);
+		byte[] lu = new byte[10];
+		while(is.read(lu)!=-1)
+			xmlString += new String(lu);
+	} catch (FileNotFoundException e) {
+		e.printStackTrace();
+	}
+	catch(IOException e) {
+		e.printStackTrace();
+	}
+    return xmlString;
    }
 }
-/**
- * 
- * 
- *  
- * StyleSheet.toXML(){
- *     return null;
- *    }
- *  
- *  
- *  
- */

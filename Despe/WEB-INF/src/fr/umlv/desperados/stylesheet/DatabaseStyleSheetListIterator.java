@@ -3,160 +3,90 @@
 package fr.umlv.desperados.stylesheet;
 
 import java.sql.ResultSet;
-import java.util.ListIterator;
-
+import java.sql.SQLException;
+import fr.umlv.desperados.database.DatabaseAbstractListIterator;
 
 /**
  * Provides a implementation of java.util.ListIterator interface to iterate the 
  * elements contained by a DatabaseStyleSheetList.
  */
-final class DatabaseStyleSheetListIterator implements ListIterator 
-{
-   
-   /**
-    * The ResultSet containing the StyleSheet list.
-    */
-   private ResultSet rs;
-   
-   /**
-    * Constructor.
-    * 
-    * @param rs the ResultSet containing the StyleSheet list.
-    * @roseuid 3FE73B85027E
-    */
-   DatabaseStyleSheetListIterator(ResultSet rs) 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869D201D4
-    */
-   public void add(Object obj) 
-   {
-    
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869D201E8
-    */
-   public boolean hasNext() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return boolean
-    * @roseuid 3FF869D201F2
-    */
-   public boolean hasPrevious() 
-   {
-    return true;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869D201FC
-    */
-   public Object next() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869D20206
-    */
-   public int nextIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @return java.lang.Object
-    * @roseuid 3FF869D20210
-    */
-   public Object previous() 
-   {
-    return null;
-   }
-   
-   /**
-    * @return int
-    * @roseuid 3FF869D2021A
-    */
-   public int previousIndex() 
-   {
-    return 0;
-   }
-   
-   /**
-    * @roseuid 3FF869D20224
-    */
-   public void remove() 
-   {
-    
-   }
-   
-   /**
-    * @param obj
-    * @roseuid 3FF869D2022E
-    */
-   public void set(Object obj) 
-   {
-    
-   }
+final class DatabaseStyleSheetListIterator extends DatabaseAbstractListIterator {
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param rs the ResultSet containing the StyleSheet list.
+	 * @roseuid 3FE73B85027E
+	 */
+	DatabaseStyleSheetListIterator(ResultSet rs) {
+		super(rs);
+	}
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param rs the ResultSet containing the StyleSheet list.
+	 * @roseuid 3FE73B85027E
+	 */
+	DatabaseStyleSheetListIterator(ResultSet rs, int index) {
+		super(rs, index);
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869D201FC
+	 */
+	public Object next() {
+		int current = 0;
+		StyleSheet ss = null;
+		try {
+			synchronized (rs) {
+				current = rs.getRow();
+				index++;
+				rs.absolute(index);
+				ss = new StyleSheet(rs.getString("NOM_FIC"),
+													rs.getString("NOM"));
+			}
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.absolute(current);
+			} catch (SQLException e1) {
+				// TODO Bloc catch auto-généré
+				e1.printStackTrace();
+			}
+		}
+		return ss;
+	}
+
+	/**
+	 * @return java.lang.Object
+	 * @roseuid 3FF869D20210
+	 */
+	public Object previous() {
+		int current = 0;
+		StyleSheet ss = null;
+		try {
+			synchronized (rs) {
+				current = rs.getRow();
+				index--;
+				rs.absolute(index);
+				ss = new StyleSheet(rs.getString("NOM_FIC"),
+													rs.getString("NOM"));
+			}
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.absolute(current);
+			} catch (SQLException e1) {
+				// TODO Bloc catch auto-généré
+				e1.printStackTrace();
+			}
+		}
+		return ss;
+	}
 }
-/**
- * 
- * 
- *  
- * DatabaseStyleSheetListIterator.hasNext(){
- *     return true;
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.next(){
- *     return null;
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.add(Object){
- *     
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.previous(){
- *     return null;
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.set(Object){
- *     
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.remove(){
- *     
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.nextIndex(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.hasPrevious(){
- *     return true;
- *    }
- *  
- *  
- * DatabaseStyleSheetListIterator.previousIndex(){
- *     return 0;
- *    }
- *  
- *  
- *  
- */

@@ -3,6 +3,7 @@
 package fr.umlv.desperados.stylesheet;
 
 import java.util.List;
+import java.io.InputStream;
 
 
 /**
@@ -21,7 +22,7 @@ public interface StyleSheetManager
     * @param styleSheet the StyleSheet to add.
     * @roseuid 3FC0F46C0270
     */
-   public void addStyleSheet(StyleSheet styleSheet);
+   public void addStyleSheet(StyleSheet styleSheet, InputStream stream);
    
    /**
     * Removes a StyleSheet from the permanent storage.
