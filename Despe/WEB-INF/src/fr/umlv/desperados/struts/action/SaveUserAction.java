@@ -70,7 +70,7 @@ public class SaveUserAction extends AdminAction {
 				log.trace(" Transaction '" + action +
 						  "' was cancelled");
 			}
-			return (mapping.findForward("userhome"));
+			return (mapping.findForward("home"));
 		}
 
 		// Validate the transactional control token

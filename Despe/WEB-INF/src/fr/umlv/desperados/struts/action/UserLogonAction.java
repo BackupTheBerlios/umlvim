@@ -62,14 +62,14 @@ public class UserLogonAction extends Action {
 		throws Exception {
 
 		if(form == null) {
-			return (mapping.findForward("logon"));
+			return (mapping.findForward("itself"));
 		}
 
 		// validate the form
 		ActionErrors errors = form.validate(mapping, request);
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("logon"));
+			return (mapping.findForward("itself"));
 		}
 
 		UserLogonForm userLogonForm = (UserLogonForm) form;
@@ -100,7 +100,7 @@ public class UserLogonAction extends Action {
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("logon"));
+			return (mapping.findForward("itself"));
 		}
 
 		// Save our logged-in user in the session
@@ -120,6 +120,6 @@ public class UserLogonAction extends Action {
 		}
 
 		// Forward control to the specified success URI
-		return (mapping.findForward("userhome"));
+		return (mapping.findForward("home"));
 	}
 }

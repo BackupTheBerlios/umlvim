@@ -111,8 +111,8 @@ public class EditUserAction extends AdminAction {
 
 		// Forward control to the edit user registration page
 		if (log.isTraceEnabled()) {
-			log.trace(" Forwarding to 'edituser' page");
+			log.trace(" Forwarding to 'success' page");
 		}
-		return (mapping.findForward("edituser"));
+		return (mapping.findForward("success"));
 	}
 }
