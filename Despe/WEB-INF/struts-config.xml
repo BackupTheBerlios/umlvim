@@ -11,19 +11,9 @@
 	<!-- ========== Form Bean Definitions ================================= -->
 	<form-beans>
 
-		<form-bean dynamic="false" name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm">
-			<form-property name="password" type="java.lang.String" />
-			<form-property name="login" type="java.lang.String" />
-		</form-bean>
+		<form-bean name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm" />
 
-		<form-bean dynamic="false" name="UserForm" type="fr.umlv.desperados.struts.form.UserForm">
-			<form-property name="admin" type="boolean" initial="false" />
-			<form-property name="email" type="java.lang.String" />
-			<form-property name="firstname" type="java.lang.String" />
-			<form-property name="login" type="java.lang.String" />
-			<form-property name="name" type="java.lang.String" />
-			<form-property name="modifyPassword" type="boolean" initial="false" />
-		</form-bean>
+		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
 
 	</form-beans>
 
@@ -52,7 +42,7 @@
 			type="fr.umlv.desperados.struts.action.UserLogoffAction">
 			<forward name="success"			path="logon.page" />
 		</action>
-
+<!--
 		<action
 			path="/edit*"
 			type="fr.umlv.desperados.struts.action.Edit{1}Action"
@@ -62,7 +52,7 @@
 		    validate="false">
 			<forward name="success"			path="/{1}.edit"/>
 		</action>
-<!--
+-->
 		<action
 			path="/editUser"
 			type="fr.umlv.desperados.struts.action.EditUserAction"
@@ -72,15 +62,17 @@
 			validate="false">
 			<forward name="success"			path="User.edit" />
 		</action>
--->
+
 		<action
 			path="/saveUser"
 			type="fr.umlv.desperados.struts.action.SaveUserAction"
 			attribute="UserForm"
-			name="userForm"
+			name="UserForm"
 			scope="request"
 			input="/pages/form/UserDetails.jsp"
 			validate="false">
+			<forward name="sucess"			path="User.edit" />
+			<forward name="failure"			path="User.notSaved" />
 		</action>
 
 	</action-mappings>
@@ -108,13 +100,15 @@
 	<plug-in className="org.apache.struts.tiles.TilesPlugin">
 		<set-property property="definitions-config"
 					value="/WEB-INF/tiles-definitions.xml" />
-		<set-property property="definitions-parser-validate" value="true" />
+		<set-property property="definitions-parser-validate"
+					value="true" />
 	</plug-in>
 
 	<plug-in className="fr.umlv.desperados.struts.plugin.ManagersPlugin" />
 
 	<plug-in className="fr.umlv.desperados.struts.plugin.PrefsPlugin">
-		<set-property property="mailConfPath" value="/WEB-INF/mail-conf.xml" />
+		<set-property property="confPath"
+					value="/WEB-INF/mail-conf.xml" />
 	</plug-in>
 
 </struts-config>
