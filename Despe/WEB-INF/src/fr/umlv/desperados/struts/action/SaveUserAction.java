@@ -151,9 +151,9 @@ public class SaveUserAction extends AdminAction {
 																					userToSave.getFirstname());
 		int i = 1;
 		while(manager.existUser(login)) {
-			UserUtilities.generateLogin(userToSave.getName(),
-																userToSave.getFirstname(),
-																i);
+			login = UserUtilities.generateLogin(userToSave.getName(),
+																			userToSave.getFirstname(),
+																			i);
 			i++;
 		}
 		userToSave.setLogin(login);
