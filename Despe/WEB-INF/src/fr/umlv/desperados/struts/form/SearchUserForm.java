@@ -27,12 +27,6 @@ public class SearchUserForm extends ActionForm {
 	/** name property */
 	private String name;
 
-	/** byLogin property */
-	private boolean byLogin;
-
-	/** byName property */
-	private boolean byName;
-
 	// --------------------------------------------------------- Methods
 
 	/** 
@@ -43,8 +37,6 @@ public class SearchUserForm extends ActionForm {
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		login = null;
 		name = null;
-		byLogin = false;
-		byName = false;
 	}
 
 	/** 
@@ -56,39 +48,15 @@ public class SearchUserForm extends ActionForm {
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
-		if(!byLogin && !byName) {
+		if((login == null || login.equals(""))
+			&& (name == null || name.equals(""))) {
 			errors.add("choice",
 						new ActionError("error.search.specify.oneatleast"));
-		} else {
-			if(byLogin && (login == null || login.equals(""))) {
-				errors.add("login",
-							new ActionError("error.search.specify"));
-			}
-			if(byName && (name == null || name.equals(""))) {
-				errors.add("name",
-							new ActionError("error.search.specify"));
-			}
 		}
 		return errors;
 	}
 
-	/** 
-	 * Returns the byLogin.
-	 * @return boolean
-	 */
-	public boolean getByLogin() {
-		return byLogin;
-	}
-
-	/** 
-	 * Returns the byName.
-	 * @return boolean
-	 */
-	public boolean getByName() {
-		return byName;
-	}
-
-	/** 
+	/**
 	 * Returns the login.
 	 * @return String
 	 */
@@ -96,7 +64,7 @@ public class SearchUserForm extends ActionForm {
 		return login;
 	}
 
-	/** 
+	/**
 	 * Returns the name.
 	 * @return String
 	 */
@@ -104,23 +72,7 @@ public class SearchUserForm extends ActionForm {
 		return name;
 	}
 
-	/** 
-	 * Set the byLogin.
-	 * @param byLogin The byLogin to set
-	 */
-	public void setByLogin(boolean byLogin) {
-		this.byLogin = byLogin;
-	}
-
-	/** 
-	 * Set the byName.
-	 * @param byLogin The byName to set
-	 */
-	public void setByName(boolean byName) {
-		this.byName = byName;
-	}
-
-	/** 
+	/**
 	 * Set the login.
 	 * @param login The login to set
 	 */
@@ -128,7 +80,7 @@ public class SearchUserForm extends ActionForm {
 		this.login = login;
 	}
 
-	/** 
+	/**
 	 * Set the name.
 	 * @param name The name to set
 	 */

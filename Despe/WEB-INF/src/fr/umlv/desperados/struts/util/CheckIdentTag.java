@@ -30,7 +30,7 @@ public final class CheckIdentTag extends TagSupport {
 	/**
 	 * The page to which we should forward for the user to log on.
 	 */
-	private String page = "/pages/form/StudentLogon.jsp";
+	private String page = "/WEB-INF/jsp/form/StudentLogon.jsp";
 
 	// ----------------------------------------------------------- Properties
 
@@ -115,6 +115,6 @@ public final class CheckIdentTag extends TagSupport {
 	public void release() {
 		super.release();
 		this.name = Constants.STUDENT_KEY;
-		this.page = "/pages/form/StudentLogon.jsp";
+		this.page = "/WEB-INF/jsp/form/StudentLogon.jsp";
 	}
 }

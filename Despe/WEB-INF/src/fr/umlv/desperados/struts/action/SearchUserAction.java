@@ -19,7 +19,7 @@ import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.struts.form.SearchUserForm;
 import fr.umlv.desperados.util.Constants;
 
-/** 
+/**
  * SaveUserAction.java created by EasyStruts - XsltGen.
  * http://easystruts.sf.net
  * created on 01-07-2004
@@ -59,8 +59,6 @@ public final class SearchUserAction extends AdminAction {
 			return (mapping.findForward("searchuser"));
 		}
 
-////////////////////
-//COMMENTED FOR TEST
 		UserManager manager = (UserManager)servlet.getServletContext().
 								getAttribute(Constants.USER_DATABASE_KEY);
 		if(manager == null) {
@@ -75,17 +73,9 @@ public final class SearchUserAction extends AdminAction {
 		}
 
 		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
-//		LinkedList userList = new LinkedList();
-//		for(int i=0 ; i<15 ; i++) {
-//			User u = new User("login_"+i);
-//			u.setName("name_"+i);
-//			u.setFirstname("firstname_"+i);
-//			userList.add(u);
-//		}
 		if(userList != null) {
 			request.setAttribute("userlist", userList);
 		}
-////////////////////
 
 		return (mapping.findForward("searchuser"));
 	}

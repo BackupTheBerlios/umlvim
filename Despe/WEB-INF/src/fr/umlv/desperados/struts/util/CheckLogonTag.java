@@ -29,7 +29,7 @@ public final class CheckLogonTag extends TagSupport {
 	/**
 	 * The page to which we should forward for the user to log on.
 	 */
-	private String page = "/pages/form/UserLogon.jsp";
+	private String page = "/WEB-INF/jsp/form/UserLogon.jsp";
 
 	/**
 	 * Whether the user must be admin
@@ -146,6 +146,6 @@ public final class CheckLogonTag extends TagSupport {
 	public void release() {
 		super.release();
 		this.name = Constants.USER_KEY;
-		this.page = "/pages/form/UserLogon.jsp";
+		this.page = "/WEB-INF/jsp/form/UserLogon.jsp";
 	}
 }
