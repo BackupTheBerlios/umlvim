@@ -321,7 +321,7 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/ChangePassword.jsp"
 			validate="false">
-			<forward	name="cancelled"			path="/do/home/user" />
+			<forward	name="cancelled"			path="/do/home/student" />
 		</action>
 
 		<action

@@ -25,7 +25,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign"bottom">
-				<html:link action="/confPlanning">
+				<html:link action="/config/planning">
 					<bean:message key="planning.setup.conf" />
 				</html:link>
 			</td>
