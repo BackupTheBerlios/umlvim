@@ -19,6 +19,7 @@ import org.apache.struts.action.ActionMapping;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.planning.Rdv;
 import fr.umlv.desperados.struts.form.RdvTackingForm;
+import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
 public class TakeRdvAction extends Action {
@@ -33,11 +34,7 @@ public class TakeRdvAction extends Action {
 	 * @throws Exception
 	 */
 
-	public ActionForward execute(
-		ActionMapping mapping,
-		ActionForm form,
-		HttpServletRequest request,
-		HttpServletResponse response) {
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
 
 		RdvTackingForm viewConfForm = (RdvTackingForm) form;
 
@@ -47,29 +44,24 @@ public class TakeRdvAction extends Action {
 		String date = viewConfForm.getDate();
 		System.out.println("date :" + date);
 		try {
-			Date rdvDate =
-				DateFormat
-					.getDateTimeInstance(
-						DateFormat.SHORT,
-						DateFormat.SHORT,
-						Locale.FRANCE)
-					.parse(date);
+			Date rdvDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).parse(date);
 			System.out.println("date :" + rdvDate);
 			ServletContext context = servlet.getServletContext();
-			DatabaseRdvManager databaseRdvManager =
-				(DatabaseRdvManager) context.getAttribute(
-					Constants.RDV_DATABASE_KEY);
-			//
-			//			// get student info
-			//			Student student =
-			//				(Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
-			//				
-			//			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,Locale.FRANCE);
-			//			Date dateBac = df.parse(student.getBacYear());
+			DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
 
-			//		boolean isRavel =(dateBac.getMonth() == new Date(System.currentTimeMillis()).getYear());
+			// get student info
+			Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
 
-			Rdv rdv = new Rdv(rdvDate, "2", "test", "test", true);
+			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+			Date dateBac = df.parse(student.getBacYear());
+
+			Calendar calDateBac = new GregorianCalendar();
+			Calendar calCurrent = GregorianCalendar.getInstance() t;
+			calDateBac.setTime(dateBac);
+
+			boolean isRavel = (calDateBac.get(Calendar.MONTH) == calCurrent.get(Calendar.MONTH));
+
+			Rdv rdv = new Rdv(rdvDate, student.getId(), student.getPatronymicName(), student.getFirstname1(), isRavel);
 
 			databaseRdvManager.addRdv(rdv);
 

@@ -2,6 +2,13 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.planning.Rdv;
+import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
 
@@ -37,25 +45,39 @@ public class CancelRdvAction extends Action{
 			
 			String target = "success";
 				
-//				// get student info
-//				Student student =
-//					(Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
-//				
-//				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,Locale.FRANCE);
-//				Date dateBac = df.parse(student.getBacYear());
+				// get student info
+				Student student =
+					(Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
+				
+				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,Locale.FRANCE);
+				Date dateBac;
+				try {
+					dateBac = df.parse(student.getBacYear());
 			
-//				boolean isRavel =(dateBac.getMonth() == new Date(System.currentTimeMillis()).getYear());
+			
+			
+				Calendar calDateBac = new GregorianCalendar();
+				Calendar calCurrent = GregorianCalendar.getInstance();	
+				calDateBac.setTime(dateBac);
+				
+				
+				boolean isRavel =(calDateBac.get(Calendar.MONTH) ==  calCurrent.get(Calendar.MONTH));
 		
 				ServletContext context = servlet.getServletContext();
 				DatabaseRdvManager databaseRdvManager =
 					(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
 				
 				
-				Rdv rdv = databaseRdvManager.getRdv(2);
+				Rdv rdv = databaseRdvManager.getRdv(student.getId());
 				
 				if( rdv == null ) target = "error";
 				else
 				databaseRdvManager.removeRdv(rdv);		
+				
+				} catch (ParseException e) {
+					// TODO generer l'erreur
+					target = "error";
+				}
 							
 								
 				return mapping.findForward(target);
