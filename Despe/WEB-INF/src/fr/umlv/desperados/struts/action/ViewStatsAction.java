@@ -45,22 +45,14 @@ public class ViewStatsAction extends UserAction {
 
 			if (!errors.isEmpty()) {
 				saveErrors(request, errors);
-				return (mapping.findForward("failure"));
+				return (mapping.findForward("error"));
 			}
-
-			String start = "";
-			String end = "";
 			
-			String dayStart = statsForm.getDayStartId();
-			String monthStart = statsForm.getMonthStartId();
-			String dayEnd = statsForm.getDayEndId();
-			String monthEnd = statsForm.getMonthEndId();
+			String start = statsForm.getDayStart();
+			String end = statsForm.getDayEnd();
 			String diploma = statsForm.getDiplomaId();
 			
-			start =  dayStart + "/" + monthStart;
-			end =  dayEnd + "/" + monthEnd;
-			
-			if(diploma.equals("-1"))
+			if(diploma.equals("-2"))
 				diploma = "";	
 			
 			String result = manager.giveRdVNumber(start,end,diploma);
