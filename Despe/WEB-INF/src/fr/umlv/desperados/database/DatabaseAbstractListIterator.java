@@ -42,7 +42,11 @@ public abstract class DatabaseAbstractListIterator implements ListIterator {
 				int current = rs.getRow();
 				rs.last();
 				size = rs.getRow();
-				rs.absolute(current);
+				if(current != 0) {
+					rs.absolute(current);
+				} else {
+					rs.first();
+				}
 			} catch (SQLException e) {
 				// TODO Bloc catch auto-généré
 				e.printStackTrace();
