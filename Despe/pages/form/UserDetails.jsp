@@ -3,11 +3,11 @@
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
 
 <h1>
-	<logic:equal name="userForm" scope="request"
+	<logic:equal name="UserForm" scope="request"
 				 property="action" value="create">
 		<bean:message key="title.user.create" />
 	</logic:equal>
-	<logic:equal name="userForm" scope="request"
+	<logic:equal name="UserForm" scope="request"
 				 property="action" value="edit">
 		<bean:message key="title.user.edit" arg0="<%= (String)request.getParameter("login") %>" />
 	</logic:equal>
@@ -16,11 +16,11 @@
 <html:form action="/saveUser">
 	<html:hidden property="action"/>
 	<table>
-		<logic:equal name="userForm" scope="request"
+		<logic:equal name="UserForm" scope="request"
 					 property="action" value="edit">
 			<tr>
 				<th align="right"> <bean:message key="prompt.user.login"/> : </th>
-				<td align="left"> <bean:write name="userForm" property="login"/> </td>
+				<td align="left"> <bean:write name="UserForm" property="login"/> </td>
 			</tr>
 			<html:hidden property="login"/>
 		</logic:equal>
