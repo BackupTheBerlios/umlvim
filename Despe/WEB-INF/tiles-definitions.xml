@@ -48,6 +48,10 @@
 		<put name="body-content"	value="/WEB-INF/jsp/StudentMain.jsp" />
 	</definition>
 	
+	<definition name="student.edit.secu" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/StudentSecu.jsp" />
+	</definition>
+	
 	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>

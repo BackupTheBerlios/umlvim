@@ -34,11 +34,6 @@
 				</html:select>
 			</td>
 		</tr>
-		</tr>
-			<td>
-				&nbsp;
-			</td>
-		<tr>
 		<tr>
 			<td align="center"  colspan="4">
 				<html:submit><bean:message key="button.submit"/></html:submit>

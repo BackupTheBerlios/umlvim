@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseInformationListManager;
@@ -83,8 +84,8 @@ public class DatabaseInformationListManagerTest extends TestCase {
 	}
 
 	public void testList() {
-		Map map = manager.list(DatabaseInformationListManager.LAST_ESTAB_TYPE);
-		for(Iterator it = map.entrySet().iterator() ; it.hasNext() ; ) {
+		Set set = manager.list(DatabaseInformationListManager.LAST_ESTAB_TYPE);
+		for(Iterator it = set.iterator() ; it.hasNext() ; ) {
 			Map.Entry entry =(Map.Entry)it.next();
 			System.out.println(entry.getKey()+" = "+entry.getValue());
 		}

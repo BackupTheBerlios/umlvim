@@ -191,7 +191,7 @@
 			path="/studentLogoff"
 			type="fr.umlv.desperados.struts.action.StudentLogoffAction"/>
 
-	    <action
+	<!--   <action
 			path="/edit/student"
 			type="fr.umlv.desperados.struts.action.FormStudentAction"
 			attribute="StudentForm"
@@ -199,6 +199,12 @@
 			input="/WEB-INF/jsp/form/EditStudent.jsp"
 			scope="request"
 			validate="false"/>
+-->
+		<action
+			path="/edit/student"
+			type="fr.umlv.desperados.struts.action.EditStudentAction">
+			<forward name="3"						path="student.edit.secu"/>
+		</action>
 
 		<action
 			path="/save/student"
@@ -225,9 +231,8 @@
 			<forward	name="itself"			path="/do/search/student" />
 		</action>
 
-		<action path="/take/rdv"					forward="student.take.rdv"/>
 		<action
-			path="/takeRdv"
+			path="/take/rdv"
 			type="fr.umlv.desperados.struts.action.TakeRdvAction"
 			attribute="RdvTackingForm"
 			name="RdvTackingForm"
@@ -241,7 +246,7 @@
 			attribute="RdvTackingForm"
 			name="RdvTackingForm"
 			scope="request"
-			input="/WEB-INF/jsp/form/takeRdv.jsp"
+			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			validate="false">
          </action>
 					
@@ -250,7 +255,7 @@
 			type="fr.umlv.desperados.struts.action.ListHourAction"
 			attribute="RdvTackingForm"
 			name="RdvTackingForm"
-			input="/WEB-INF/jsp/form/takeRdv.jsp"
+			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			scope="request"
 			validate="false">
 		</action>

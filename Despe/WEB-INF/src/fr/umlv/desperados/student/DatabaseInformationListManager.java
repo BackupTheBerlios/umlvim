@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 
@@ -110,7 +111,7 @@ public class DatabaseInformationListManager {
 	 * @return java.util.List
 	 * @roseuid 3FF869BD0210
 	 */
-	public HashMap list(String resource) {
+	public Set list(String resource) {
 		HashMap map = (HashMap)allTheMap.get(resource);
 		if(map == null) {
 			String table = "table";
@@ -125,11 +126,11 @@ public class DatabaseInformationListManager {
 				condition = prop.get(resource+".post95") + " = 1";
 			}
 			else if(SOCIAL_SECURITY_AFF.equals(resource)) {
-				condition = prop.get(resource+".nonAff") + " = 0";
+				condition = prop.get(resource+".regsec") + " = 1";
 			}
 			else if(SOCIAL_SECURITY_NON_AFF.equals(resource)) {
 				resource = SOCIAL_SECURITY_AFF;
-				condition = prop.get(resource+".nonAff") + " = 1";
+				condition = prop.get(resource+".regsec") + " = 0 ";
 			}
 			else if(FRENCH_DEP.equals(resource)) {
 				condition = prop.get(resource+".nationality")
@@ -155,9 +156,10 @@ public class DatabaseInformationListManager {
 			table = (String)prop.get(resource+"."+table);
 			id = (String)prop.get(resource+"."+id);
 			libel = (String)prop.get(resource+"."+libel);
-			map = getListFromDatabase(table, id, libel, condition);
+			map = getMapFromDatabase(table, id, libel, condition);
+			allTheMap.put( resource,map);
 		}
-		return new HashMap(map);
+		return map.entrySet() ;
 	}
 
 	public void reset() {
@@ -168,7 +170,7 @@ public class DatabaseInformationListManager {
 		}
 	}
 
-	private HashMap getListFromDatabase(String table, String id, String libel, String condition) {
+	private HashMap getMapFromDatabase(String table, String id, String libel, String condition) {
 			HashMap map = new HashMap();
 			String where = null;
 

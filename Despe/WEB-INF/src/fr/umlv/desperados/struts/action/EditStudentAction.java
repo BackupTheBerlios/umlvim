@@ -6,6 +6,8 @@
  */
 package fr.umlv.desperados.struts.action;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.student.DatabaseInformationListManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.util.Constants;
@@ -27,7 +30,7 @@ import fr.umlv.desperados.util.Constants;
  * Pour changer le modèle de ce commentaire de type généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class ModifyStudentInformation extends Action {
+public class EditStudentAction extends Action {
 	
 	public ActionForward execute(
 		ActionMapping mapping,
@@ -37,12 +40,14 @@ public class ModifyStudentInformation extends Action {
 		throws Exception {
 
 		ActionErrors errors = new  ActionErrors();
-		String requete;
-		Student student;
-		StudentManager manager =
-			(StudentManager) servlet.getServletContext().getAttribute(
-				Constants.STUDENT_DATABASE_KEY);
 
+		// Load student
+		HttpSession session = request.getSession();
+		Student student=(Student) session.getAttribute(Constants.STUDENT_KEY);
+
+		DatabaseInformationListManager manager =
+			(DatabaseInformationListManager) servlet.getServletContext().getAttribute(
+				Constants.INFORMATION_DATABASE_KEY);
 		if (manager == null) {
 			errors.add(
 				ActionErrors.GLOBAL_ERROR,
@@ -51,28 +56,18 @@ public class ModifyStudentInformation extends Action {
 			return (mapping.findForward("error"));
 		}
 
-		// Load student
-		HttpSession session = request.getSession();
-		student=(Student) session.getAttribute(Constants.STUDENT_KEY);
+		String page = request.getParameter("page");
+		if(page == null) {
+			//TODO mettre 1 au lieu de 3
+			page = "3";
+		} 
+		if ("3".equals(page))
+		{
+			Set list=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
+			request.setAttribute( "socialSecurityAffList",list);
+		}
 
-//TODO faire les requetes
-
-
-//		List diplomaList = manager.listDiploma();
-//		request.setAttribute("diplomaList", diplomaList);
-
-//		List daysList = new ArrayList();
-//		for(int i =1; i<=31; i++)
-//			daysList.add((new Integer(i)).toString());
-//		request.setAttribute("daysList", daysList);
-		
-//		List monthsList = new ArrayList();
-//		for(int i =1; i<=12; i++)
-//			monthsList.add((new Integer(i)).toString());
-//		request.setAttribute("monthsList", monthsList);
-
-		// Forward control to the specified success URI
-		return (mapping.findForward("success"));
+		return (mapping.findForward(page));
 	}
 
 }

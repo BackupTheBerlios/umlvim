@@ -21,6 +21,7 @@ import fr.umlv.desperados.diploma.DatabaseDiplomaManager;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
 import fr.umlv.desperados.planning.PlanningConf;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
+import fr.umlv.desperados.student.DatabaseInformationListManager;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.stylesheet.DatabaseStyleSheetManager;
 import fr.umlv.desperados.util.Constants;
@@ -69,7 +70,12 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseStudentManager.getInstance(
 					strutsDatabaseRequestor, path
 						+ "/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
-
+						
+						
+			DatabaseInformationListManager databaseInformationListmanager =
+				DatabaseInformationListManager.getInstance(strutsDatabaseRequestor ,path
+					+"/WEB-INF/src/fr/umlv/desperados/struts/Database.properties");
+				
 			//System.out.println(path + "/WEB-INF/planningConf.xml");
 			//PlanningConf planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
 			//System.out.println(planningConf);
@@ -86,6 +92,8 @@ public class InitManagersPlugin implements PlugIn {
 												databaseStudentManager);
 			context.setAttribute(Constants.STYLESHEET_DATABASE_KEY,
 												databaseStyleSheetManager);
+			context.setAttribute(Constants.INFORMATION_DATABASE_KEY,  databaseInformationListmanager);
+												
 //			context.setAttribute(
 //				Constants.PLANNING_CONF_DATABASE_KEY,
 //				planningConf);

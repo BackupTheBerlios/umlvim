@@ -88,7 +88,7 @@ public class DatabaseStudentManagerTestExist extends TestCase {
 					e2.printStackTrace();
 				}
 			try {
-				assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
+				assertFalse(databaseStudentManager.existStudent("gégé","jeannot",java.sql.Date.valueOf("1981-02-11" ))==0);
 			} catch (StudentBirthdayException e3) {
 				// TODO Bloc catch auto-généré
 				e3.printStackTrace();
