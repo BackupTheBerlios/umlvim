@@ -15,7 +15,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.account.User;
+import fr.umlv.desperados.account.UserAlreadyExistsException;
 import fr.umlv.desperados.account.UserManager;
+import fr.umlv.desperados.account.UserNotFoundException;
 import fr.umlv.desperados.struts.form.UserForm;
 import fr.umlv.desperados.struts.util.FormUtilities;
 import fr.umlv.desperados.util.Constants;
@@ -63,16 +65,6 @@ public class SaveUserAction extends AdminAction {
 					  " action");
 		}
 
-		// Is there a currently logged on user (unless creating)?
-		User user = (User) session.getAttribute(Constants.USER_KEY);
-		if (!"Create".equals(action) && (user == null)) {
-			if (log.isTraceEnabled()) {
-				log.trace(" User is not logged on in session "
-						  + session.getId());
-			}
-			return (mapping.findForward("logon"));
-		}
-
 		// Was this transaction cancelled?
 		if (isCancelled(request)) {
 			if (log.isTraceEnabled()) {
@@ -93,21 +85,24 @@ public class SaveUserAction extends AdminAction {
 		}
 		resetToken(request);
 
-		// Report any errors we have discovered back to the original form
-		if (!errors.isEmpty()) {
-			saveErrors(request, errors);
-			saveToken(request);
-			return (mapping.getInputForward());
-		}
-
 		// Update the user's persistent profile information
-		User userToSave = FormUtilities.userFormToUser(userForm);
+		User userToSave = new User(userForm.getLogin());
+		FormUtilities.userFormToUser(userForm, userToSave);
 
-		if("create".equals(action)) {
-			manager.addUser(userToSave);
+		String err = null;
+		try {
+			if("create".equals(action))
+				manager.addUser(userToSave);
+			else
+				manager.modifyUser(userToSave);
+		} catch(UserAlreadyExistsException e) {
+				err = "error.user.alreadyexist";
+		} catch(UserNotFoundException e) {
+			err = "error.user.dontexist";
 		}
-		else {
-			manager.modifyUser(userToSave);
+		if(err != null) {
+			errors.add("database",
+					   new ActionError(err));
 		}
 
 		// Remove the obsolete form bean
@@ -116,6 +111,13 @@ public class SaveUserAction extends AdminAction {
 				request.removeAttribute(mapping.getAttribute());
 			else
 				session.removeAttribute(mapping.getAttribute());
+		}
+
+		// Report any errors we have discovered back to the original form
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			saveToken(request);
+			return (mapping.findForward("error"));
 		}
 
 		// Forward control to the specified success URI

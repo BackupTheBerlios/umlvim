@@ -6,7 +6,7 @@ package fr.umlv.desperados.account;
 /**
  * Happens when a User is not found in the permanent storage.
  */
-public final class UserNotFoundException extends Exception 
+public final class UserNotFoundException extends UserException
 {
    
    /**

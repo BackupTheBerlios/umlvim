@@ -4,7 +4,6 @@
 
 package fr.umlv.desperados.struts.action;
 
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

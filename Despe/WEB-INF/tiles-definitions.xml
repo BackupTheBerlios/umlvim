@@ -33,4 +33,8 @@
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
 	</definition>
 
+	<definition name="operation.ok" extends="baseDef">
+		<put name="body-content"	value="/pages/Ok.jsp" />
+	</definition>
+
 </tiles-definitions>

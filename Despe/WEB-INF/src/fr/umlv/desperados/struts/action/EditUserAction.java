@@ -50,9 +50,8 @@ public class EditUserAction extends AdminAction {
 		throws Exception {
 
 		ActionErrors errors = new ActionErrors();
-		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
-
+		String action = request.getParameter("action");
 		if (action == null)
 			action = "create";
 
@@ -61,43 +60,48 @@ public class EditUserAction extends AdminAction {
 						" action");
 		}
 
-		User userToEdit = null;
-		// get the userToEdit (unless creation action
+		// Save the user form into the context
+		UserForm userForm = (UserForm)form;
+		if(userForm == null) {
+			userForm = new UserForm();
+		}
+		if ("request".equals(mapping.getScope()))
+			request.setAttribute(mapping.getAttribute(), userForm);
+		else
+			session.setAttribute(mapping.getAttribute(), userForm);
+
+
+		// get the userToEdit to fill the form (unless action is 'creation')
 		if (!"create".equals(action)) {
+			User userToEdit = null;
 			UserManager manager = (UserManager) servlet.getServletContext()
 										.getAttribute(Constants.USER_DATABASE_KEY);
-			String login = (String)request.getParameter("login");
-			try {
-				userToEdit = manager.getUser(login);
-			} catch(UserNotFoundException e) {
+			if(manager == null) {
 				errors.add("database",
-						   new ActionError("error.user.dontexist"));
-				saveErrors(request, errors);
-				return (mapping.findForward("failure"));
+							new ActionError("error.database.missing"));
+			} else {
+				String login = (String)request.getParameter("login");
+				try {
+					userToEdit = manager.getUser(login);
+				} catch(UserNotFoundException e) {
+					errors.add("database",
+							   new ActionError("error.user.dontexist"));
+				}
 			}
-		}
-
-		// Populate the user registration form
-		if (form == null) {
-			if (log.isTraceEnabled()) {
-				log.trace(" Creating new RegistrationForm bean under key "
-						  + mapping.getAttribute());
+			if (userToEdit != null) {
+				if (log.isTraceEnabled()) {
+					log.trace(" Populating form from " + userToEdit);
+				}
+				FormUtilities.UserToUserForm(userToEdit, userForm);
+				userForm.setGeneratePassword(false);
 			}
-			form = new UserForm();
-			if ("request".equals(mapping.getScope()))
-				request.setAttribute(mapping.getAttribute(), form);
-			else
-				session.setAttribute(mapping.getAttribute(), form);
-		}
-		UserForm userForm = (UserForm) form;
-		if (userToEdit != null) {
-			if (log.isTraceEnabled()) {
-				log.trace(" Populating form from " + userToEdit);
-			}
-			userForm = FormUtilities.UserToUserForm(userToEdit);
-			userForm.setGeneratePassword(false);
 		}
 		userForm.setAction(action);
+
+		if(!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
 
 		// Set a transactional control token to prevent double posting
 		if (log.isTraceEnabled()) {
