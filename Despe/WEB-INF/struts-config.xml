@@ -18,6 +18,7 @@
 		<form-bean name="UploadStyleSheetForm" type="fr.umlv.desperados.struts.form.UploadStyleSheetForm" />
 		<form-bean name="RdvTackingForm" type="fr.umlv.desperados.struts.form.RdvTackingForm" />
 		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
+		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -156,9 +157,18 @@
 			validate="false">
 		</action>
 
-
-
-
+        <action path="/ListDiploma" type="fr.umlv.desperados.struts.action.ListDiplomaAction">
+            <forward name="success" path="user.stats" />
+        </action>
+        
+        <action
+            attribute="StudentLogonForm"
+            input="/pages/form/stats.jsp"
+            name="StatsForm"
+            path="/stats"
+            type="fr.umlv.desperados.struts.action.ViewStatsAction"
+            validate="false" />
+            
 		<action
 			path="/studentLogon"
 			type="fr.umlv.desperados.struts.action.StudentLogonAction"
