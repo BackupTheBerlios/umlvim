@@ -58,8 +58,9 @@ public class DatabaseStudentManagerTestRemove extends TestCase {
 		super.tearDown();
 	}
 
-	public void testRemoveStudent() {
+	public void testRemoveStudent() throws SQLException {
 		// db requestor init
+		Connection cCon;
 					Driver dDriverOracle = null;
 					try {
 						dDriverOracle =
@@ -82,7 +83,7 @@ public class DatabaseStudentManagerTestRemove extends TestCase {
 						// TODO Bloc catch auto-généré
 						e1.printStackTrace();
 					}
-					Connection cCon = null;
+					cCon = null;
 					try {
 						cCon =
 							DriverManager.getConnection(
@@ -104,6 +105,7 @@ public class DatabaseStudentManagerTestRemove extends TestCase {
 		// TODO Bloc catch auto-généré
 		e3.printStackTrace();
 	}
+	cCon.close();
 				
 	}
 

@@ -59,7 +59,8 @@ public class DatabaseStudentManagerTestExist extends TestCase {
 		student=null;
 	}
 
-	public void testExistStudent() {
+	public void testExistStudent() throws SQLException {
+		Connection cCon = null;
 		try {
 					// db requestor init
 					Driver dDriverOracle =
@@ -67,7 +68,7 @@ public class DatabaseStudentManagerTestExist extends TestCase {
 							.forName("oracle.jdbc.driver.OracleDriver")
 							.newInstance();
 					DriverManager.registerDriver(dDriverOracle);
-					Connection cCon =
+					cCon =
 						DriverManager.getConnection(
 							"jdbc:oracle:thin:@hibiscus:1521:test",
 							"desperados",
@@ -86,6 +87,7 @@ public class DatabaseStudentManagerTestExist extends TestCase {
 					e2.printStackTrace();
 				}
 			assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
+			cCon.close();
 		}
 
 	}

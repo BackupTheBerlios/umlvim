@@ -29,11 +29,11 @@ import junit.framework.TestCase;
  */
 public class DatabaseStudentManagerTest extends TestCase {
 
-private DatabaseRequestor requestor;
-private Student student=null;
-private static DatabaseStudentManager databaseStudentManager=null;
-public static StrutsDatabaseRequestor strutsDatabaseRequestor;
-ResultSet result = null;
+	private DatabaseRequestor requestor;
+	private Student student = null;
+	private static DatabaseStudentManager databaseStudentManager = null;
+	public static StrutsDatabaseRequestor strutsDatabaseRequestor;
+	ResultSet result = null;
 
 	/**
 	 * Constructor for DatabaseStudentManagerTest.
@@ -53,10 +53,9 @@ ResultSet result = null;
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		student=new Student();
-//		databaseStudentManager=new DatabaseStudentManager(requestor,"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
+		student = new Student();
+		//		databaseStudentManager=new DatabaseStudentManager(requestor,"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 
-		
 	}
 
 	/*
@@ -64,46 +63,57 @@ ResultSet result = null;
 	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		student=null;
+		student = null;
 
 	}
 
-	public void testAddStudent() {
+	public void testAddStudent() throws SQLException {
+		Connection cCon = null;
 		try {
-				// db requestor init
-				Driver dDriverOracle =
-					(java.sql.Driver) Class
-						.forName("oracle.jdbc.driver.OracleDriver")
-						.newInstance();
-				DriverManager.registerDriver(dDriverOracle);
-				Connection cCon =
-					DriverManager.getConnection(
-						"jdbc:oracle:thin:@hibiscus:1521:test",
-						"desperados",
-						"totofaitduvelo");
-				strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
+			// db requestor init
+			Driver dDriverOracle =
+				(java.sql.Driver) Class
+					.forName("oracle.jdbc.driver.OracleDriver")
+					.newInstance();
+			DriverManager.registerDriver(dDriverOracle);
+			cCon =
+				DriverManager.getConnection(
+					"jdbc:oracle:thin:@hibiscus:1521:test",
+					"desperados",
+					"totofaitduvelo");
+			strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
 
-				// managers init
-				databaseStudentManager =DatabaseStudentManager.getInstance(strutsDatabaseRequestor,"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
-				} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (InstantiationException e1) {
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) { 
-				e1.printStackTrace();
-			} catch (SQLException e2) {
-				e2.printStackTrace();
-			}
-		student.setName( "dupont");       
-		student.setBirthday(new Date(1981,02,10));
-		student.setFirstname1( "gabriel");
+			// managers init
+			databaseStudentManager =
+				DatabaseStudentManager.getInstance(
+					strutsDatabaseRequestor,
+					"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
+		student.setName("dupont");
+		student.setBirthday(new Date(1981, 02, 10));
+		student.setFirstname1("gabriel");
 		try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
 		}
-		String truc="test";
-		assertFalse(databaseStudentManager.existStudent("dupont","gabriel",new Date(1981,02,10)) == 0);
+		String truc = "test";
+		assertFalse(
+			databaseStudentManager.existStudent(
+				"dupont",
+				"gabriel",
+				new Date(1981, 02, 10))
+				== 0);
+				
+			cCon.close() ;
 	}
 
 }

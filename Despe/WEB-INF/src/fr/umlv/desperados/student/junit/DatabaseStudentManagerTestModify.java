@@ -64,8 +64,8 @@ public class DatabaseStudentManagerTestModify extends TestCase {
 		student=null;
 	}
 
-	public void testModifyStudent() {
-
+	public void testModifyStudent() throws SQLException {
+		Connection cCon = null;
 		try {
 						// db requestor init
 						Driver dDriverOracle =
@@ -73,7 +73,7 @@ public class DatabaseStudentManagerTestModify extends TestCase {
 								.forName("oracle.jdbc.driver.OracleDriver")
 								.newInstance();
 						DriverManager.registerDriver(dDriverOracle);
-						Connection cCon =
+						cCon =
 							DriverManager.getConnection(
 								"jdbc:oracle:thin:@hibiscus:1521:test",
 								"desperados",
@@ -92,27 +92,27 @@ public class DatabaseStudentManagerTestModify extends TestCase {
 						e2.printStackTrace();
 					}
 		student.setId(38);
-		student.setName("dupont");
+		student.setName("dupont2");
 		student.setBirthday(java.sql.Date.valueOf("1981-02-11" ));
-		student.setFirstname1("gabriel");
+		student.setFirstname1("jeannot");
 		student.setIne("11137");
 		student.setWasToUmlvLastYear(true);
-		student.setPatronymicName("millet");
+		student.setPatronymicName("gégé");
 		student.setFirstname2("truc");
 		student.setTownOfBirth("tours");
 		student.setSex("m");
 		student.setFirstInsSupEduc("1ermachin");
-		student.setFirstInsFrenchUniv("firstInsFrenchUniv");
-		student.setEstaFirstInsFrenchUniv("estaFirstInsFrenchUniv");
-		student.setFirstInsEstablishment("firstInsEstablishment");
-		student.setBacYear("bacYear");
-		student.setEstablishmentBacObtaining("EstablishmentBacObtaining");
-		student.setForeignCityBac("ForeignCityBac");
+		student.setFirstInsFrenchUniv("chUniv");
+		student.setEstaFirstInsFrenchUniv("sFchUniv");
+		student.setFirstInsEstablishment("stablish");
+		student.setBacYear("1902");
+		student.setEstablishmentBacObtaining("acObtaining");
+		student.setForeignCityBac("ForeiBac");
 		student.setHaveFixAddFr(true);
 		student.setNumFixAdd("numFixAdd");
 		student.setStreetFixAdd("streetFixAdd");
 		student.setBuildingFixAdd("builingFixAdd");
-		student.setForeignCityFixAdd("foreignCityFixAdd");
+		student.setForeignCityFixAdd("foityFixAdd");
 		student.setPhoneFixAdd("phoneFixAdd");
 		student.setHaveTmpAddFr(true);
 		student.setNumTmpAdd("numTmpAdd");
@@ -127,72 +127,73 @@ public class DatabaseStudentManagerTestModify extends TestCase {
 		student.setRegSport(true);
 		student.setPractisedSport("practisedSport");
 		student.setHaveFinancialAss(true);
-		student.setInternaExchOriEstab("internaExchOriEstab");
-		student.setInternaExchRecEstab("internaExchRecEstab");
-		student.setLastAttendedEstab("lastAttendedEstab");
-		student.setLastAttendedEstabYear("lastAttendedEstabYear");
-		student.setPrecedentYearEstab("precedentYearEstab");
-		student.setOtherInsEstab("otherInsEstab");
-		student.setPrincCycleInsNum(21);
-		student.setComplCycleInsNum(22);
-		student.setPrincDiplInsNum(23);
-		student.setComplDipInsNum(24);
-		student.setPrincInsYearNum(25);
-		student.setCompInsYearNum(26);
+		student.setInternaExchOriEstab("intetab");
+		student.setInternaExchRecEstab("intab");
+		student.setLastAttendedEstab("lastAttab");
+		student.setLastAttendedEstabYear("lbYear");
+		student.setPrecedentYearEstab("pretab");
+		student.setOtherInsEstab("otstab");
+		student.setPrincCycleInsNum(1);
+		student.setComplCycleInsNum(2);
+		student.setPrincDiplInsNum(3);
+		student.setComplDipInsNum(4);
+		student.setPrincInsYearNum(5);
+		student.setCompInsYearNum(6);
 		student.setStockBrokerNum(27);
-		student.setSocialSecurityNum("socialSecurityNum");
-		student.setFatherName("fatherName");
-		student.setFatherFirstName("fatherFirstName");
-		student.setMotherPatronymicName("herPatronymicName");
-		student.setMotherName("motherName");
+		student.setSocialSecurityNum("som");
+		student.setFatherName("fatherNa");
+		student.setFatherFirstName("fathe");
+		student.setMotherPatronymicName("hcName");
+		student.setMotherName("mote");
 		student.setInsuranceCivilLiability(true);
 		student.setAppointmentDate(java.sql.Date.valueOf("1981-02-11" ));
-		student.setWorkedShareId(28);
-		student.setFinancialAssistanceId("financialAssistanceId");
-		student.setSocialEconomicCategoryId(29);
-		student.setMLVDiplomaId(30);
-		student.setBaccalaureatId("baccalaureatId");
-		student.setLodgingTypeId(31);
-		student.setInscriptionModeId(32);
-		student.setInscriptionTypeId(33);
-		student.setCenterPaymentId(34);
-		student.setInternationalExchangeTypeId(35);
-		student.setMutualInsuranceCompanyId(36);
-		student.setSocialSecurityId(36);
-		student.setPaymentModeId(37);
-		student.setPurseId(38);
-		student.setLastDiplomaTypeId("lastDiplomaTypeId");
-		student.setBacMentionId(39);
-		student.setBaccalaureatEstablishmentTypeId(40);
-		student.setLastEstabTypeId(41);
-		student.setMilitarySituationId(42);
-		student.setFixeAddFrenchCityId(43);
-		student.setTmpAdressFrenchCityId(44);
-		student.setFrenchBirthplaceId(45);
-		student.setFrenchBacCityId(46);
-		student.setFirstInsFrUnivDepId(47);
-		student.setLastAttendedEstabPlaceId(48);
-		student.setPrecYearEstabPlaceId(49);
-		student.setOtherEstabInsPlaceId(50);
-		student.setBacObtainingCountryId(51);
-		student.setNationalityId(52);
-		student.setIntExchPlaceId(53);
-		student.setForeignBirthplaceId(54);
-		student.setFixeAddCountryId(55);
-		student.setTmpAddCountryId(56);
-		student.setPrecYearSitTypeId("precYearSitTypeId");
-		student.setFamSituation(57);
-		student.setMotifProlSocSec("motifProlSocSec");
+		student.setWorkedShareId(1);
+		student.setFinancialAssistanceId("1");
+		student.setSocialEconomicCategoryId(-1);
+		student.setMLVDiplomaId(-1);
+		student.setBaccalaureatId("vide");
+		student.setLodgingTypeId(-1);
+		student.setInscriptionModeId(-1);
+		student.setInscriptionTypeId(-1);
+		student.setCenterPaymentId(-1);
+		student.setInternationalExchangeTypeId(-1);
+		student.setMutualInsuranceCompanyId(1);
+		student.setSocialSecurityId(-1);
+		student.setPaymentModeId(-1);
+		student.setPurseId(-1);
+		student.setLastDiplomaTypeId("0");
+		student.setBacMentionId(-1);
+		student.setBaccalaureatEstablishmentTypeId(-1);
+		student.setLastEstabTypeId(-1);
+		student.setMilitarySituationId(-1);
+		student.setFixeAddFrenchCityId(-1);
+		student.setTmpAdressFrenchCityId(-1);
+		student.setFrenchBirthplaceId(-1);
+		student.setFrenchBacCityId(-1);
+		student.setFirstInsFrUnivDepId(-1);
+		student.setLastAttendedEstabPlaceId(-1);
+		student.setPrecYearEstabPlaceId(-1);
+		student.setOtherEstabInsPlaceId(-1);
+		student.setBacObtainingCountryId(-1);
+		student.setNationalityId(-1);
+		student.setIntExchPlaceId(-1);
+		student.setForeignBirthplaceId(-1);
+		student.setFixeAddCountryId(-1);
+		student.setTmpAddCountryId(-1);
+		student.setPrecYearSitTypeId("0");
+		student.setFamSituation(-1);
+		student.setMotifProlSocSec("motifPrc");
 		student.setNoSocSecStu(true);
-		student.setOtherEtabIns(58);
-		student.setHeadFamJob(59);
-		student.setMLVDiplomaComplId(60);
+		student.setOtherEtabIns(-1);
+		student.setHeadFamJob(-1);
+		student.setMLVDiplomaComplId(-1);
 					
 		try {
 			databaseStudentManager.modifyStudent(student);
 		} catch (StudentNotFoundException e3) {
 			e3.printStackTrace();
 		}
+	cCon.close();
 			}
 
 		

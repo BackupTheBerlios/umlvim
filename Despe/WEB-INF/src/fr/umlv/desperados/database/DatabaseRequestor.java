@@ -16,6 +16,6 @@ public interface DatabaseRequestor {
 	 * @roseuid 3FE0AE3500F0
 	 */
 	public ResultSet doQuery(String query) throws SQLException;
-	public void executeQuery(String query) throws SQLException;
+	public int executeQuery(String query) throws SQLException;
 	public void closeConnection();
 }

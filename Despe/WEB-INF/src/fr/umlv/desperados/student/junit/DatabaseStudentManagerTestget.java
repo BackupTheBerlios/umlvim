@@ -62,8 +62,8 @@ public class DatabaseStudentManagerTestget extends TestCase {
 		super.tearDown();
 	}
 
-	public void testGetStudent() {
-
+	public void testGetStudent() throws SQLException {
+		Connection cCon = null;
 		try {
 			// db requestor init
 			Driver dDriverOracle =
@@ -71,7 +71,7 @@ public class DatabaseStudentManagerTestget extends TestCase {
 					.forName("oracle.jdbc.driver.OracleDriver")
 					.newInstance();
 			DriverManager.registerDriver(dDriverOracle);
-			Connection cCon =
+			cCon =
 				DriverManager.getConnection(
 					"jdbc:oracle:thin:@hibiscus:1521:test",
 					"desperados",
@@ -100,6 +100,7 @@ public class DatabaseStudentManagerTestget extends TestCase {
 			e3.printStackTrace();
 		}
 		assertTrue(student.getId() == 38);
+		cCon.close();
 	}
 
 }

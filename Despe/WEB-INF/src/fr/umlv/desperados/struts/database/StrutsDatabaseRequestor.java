@@ -40,10 +40,10 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	}
 
 
-	public void executeQuery(String modificationQuery) throws SQLException{
+	public int executeQuery(String modificationQuery) throws SQLException{
 		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 									sStat=conn.createStatement();
-									sStat.executeUpdate(modificationQuery);
+									return(sStat.executeUpdate(modificationQuery));
 									}
 
 
