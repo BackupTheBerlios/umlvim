@@ -26,6 +26,8 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
+import fr.umlv.desperados.stylesheet.StyleSheet;
+import fr.umlv.desperados.stylesheet.StyleSheetManager;
 import fr.umlv.desperados.util.Constants;
 import fr.umlv.desperados.util.PDFTools;
 
@@ -66,6 +68,10 @@ public class PrintInscriptionFileAction extends Action {
 		StudentManager manager =
 			(StudentManager) servlet.getServletContext().getAttribute(
 				Constants.STUDENT_DATABASE_KEY);
+				
+		StyleSheetManager ssManager = 
+			(StyleSheetManager)servlet.getServletContext().getAttribute(
+				Constants.STYLESHEET_DATABASE_KEY);
 
 		if (manager == null) {
 			errors.add(
@@ -78,8 +84,10 @@ public class PrintInscriptionFileAction extends Action {
 			return (mapping.findForward("failure"));
 		}
 
+		StyleSheet s = ssManager.getStyleSheet(1);
+		
 		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")
-																								+"/stylesheet/dossier.xsl");
+																								+"/stylesheet/"+s.getFilename());
 		InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
 		InputStream is = PDFTools.generatePDF(isStudent,isStyleSheet);
 

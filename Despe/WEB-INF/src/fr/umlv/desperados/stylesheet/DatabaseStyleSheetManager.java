@@ -130,11 +130,15 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 				requestor.doQuery(
 					"SELECT FEUILLE_STYLE_DOC FROM DOCUMENT WHERE ID_DOC="
 						+ docType);
-			String fileName = rs.getString("FEUILLE_STYLE_DOC");
+			String fileName = null;
+			if(rs.first()) {
+				fileName = rs.getString("FEUILLE_STYLE_DOC");
+			}
 			rs =
 				requestor.doQuery(
-					"SELECT * FROM FEUILLE_DE_STYLE WHERE NOM_FIC = " + fileName);
-			ss = new StyleSheet(rs.getString("NOM_FIC_FEU"), rs.getString("NOM_FEU"));
+					"SELECT * FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU = '" + fileName+"'");
+			if(rs.first())
+				ss = new StyleSheet(rs.getString("NOM_FIC_FEU"), rs.getString("NOM_FEU"));
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();

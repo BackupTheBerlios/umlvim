@@ -33,9 +33,27 @@
 
  <fo:page-sequence master-reference="first">
   <fo:flow flow-name="xsl-region-body" font-size="16pt" line-height="16pt">
-    <fo:block>
-	      Dossier d'inscription
-    </fo:block>
+    <fo:table>
+    	<fo:table-column column-width="60%"/>
+    	<fo:table-column column-width="40%"/>
+    	
+    	<fo:table-body>
+    		<fo:table-row>
+    			<fo:table-cell>
+    			     <fo:external-graphic src="/home/dslg00/ndedanil/despe/pages/images/logo_blanc.gif" 
+    			    					height="80pt"
+                     					width="150pt"/>
+                    <fo:block font-size="8pt">5, boulevard Descartes - CHAMPS SUR MARNE</fo:block>
+                    <fo:block font-size="8pt">77454 MARNE-LA-VALLEE - Cedex 2</fo:block>
+                </fo:table-cell>
+     			<fo:table-cell background-color="silver">  			 
+    			<fo:block text-align="center">ANNEE UNIVERSITAIRE 2003/2004
+    			DOSSIER D'INSCRIPTION</fo:block>
+    			</fo:table-cell>
+    		</fo:table-row>
+    	</fo:table-body>
+   
+    </fo:table>
     <xsl:apply-templates/>
   </fo:flow>  
  </fo:page-sequence> 
@@ -63,7 +81,7 @@
     <xsl:apply-templates/></fo:block>
  </xsl:template>
 
- <xsl:template match="firstname">
+ <xsl:template match="firstName">
     <fo:block font-size="12pt" text-align="start" space-before="0.7cm" font-style="italic">
 	 Prenom :
     <xsl:apply-templates/></fo:block>
