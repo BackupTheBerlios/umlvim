@@ -74,11 +74,11 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @param styleSheetId
 	 * @roseuid 3FF869D00394
 	 */
-	public void removeStyleSheet(String styleSheetId) {
+	public void removeStyleSheet(String styleSheetId, String path) {
 		try {
 			requestor.doQuery(
 				"DELETE FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU='" + styleSheetId+"'");
-			File f = new File(styleSheetId);
+			File f = new File(path+styleSheetId);
 			f.delete();
 		} catch (SQLException e) {
 			e.printStackTrace();

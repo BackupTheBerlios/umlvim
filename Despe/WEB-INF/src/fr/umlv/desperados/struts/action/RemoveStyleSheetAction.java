@@ -4,6 +4,8 @@
  */
 package fr.umlv.desperados.struts.action;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -52,7 +54,7 @@ public class RemoveStyleSheetAction extends AdminAction {
 		int docTypeId = styleSheetForm.getDocTypeId();
 
 		String path = servlet.getServletContext().getRealPath("/")+"/stylesheet/";
-		manager.removeStyleSheet(path+styleSheetId);
+		manager.removeStyleSheet(styleSheetId, path);
 
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));
