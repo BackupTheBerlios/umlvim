@@ -36,6 +36,8 @@ public class DatabaseStudentManager implements StudentManager {
 	 * The Cache of this manager.
 	 */
 	private Cache cache;
+	
+	private  String propertiesPath;
 
 	private Properties prop;
 
@@ -49,6 +51,7 @@ public class DatabaseStudentManager implements StudentManager {
 		DatabaseRequestor requestor,
 		String propertiesPath) {
 		this.requestor = requestor;
+		this.propertiesPath =propertiesPath ;
 		prop = new Properties();
 		try {
 			prop.load(new FileInputStream(propertiesPath));
@@ -620,7 +623,7 @@ public class DatabaseStudentManager implements StudentManager {
 		try {
 			if((rs != null) && (rs.first())) {
 		//		System.out.println("liste"+new DatabaseStudentList(rs,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.29/webapps/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties"));
-				return (List)(new DatabaseStudentList(rs,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.29/webapps/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties"));
+				return (List)(new DatabaseStudentList(rs,propertiesPath ));
 			}
 		} catch (SQLException e1) {
 			// TODO Bloc catch auto-généré
