@@ -19,5 +19,10 @@
 				<html:submit> <bean:message key="button.submit"/> </html:submit>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2" align="left">
+				<html:link action="/lost/password"> mot de passe perdu ? </html:link>
+			</td>
+		</tr>
 	</table>
 </html:form>

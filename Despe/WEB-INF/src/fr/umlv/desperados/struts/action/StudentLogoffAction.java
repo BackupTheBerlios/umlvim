@@ -20,7 +20,7 @@ import fr.umlv.desperados.util.Constants;
  * user logoff.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2004/01/21 22:12:03 $
+ * @version $Revision: 1.2 $ $Date: 2004/02/19 12:27:12 $
  */
 
 public final class StudentLogoffAction extends Action {
@@ -76,6 +76,6 @@ public final class StudentLogoffAction extends Action {
 	session.invalidate();
 
 	// Forward control to the specified success URI
-	return (mapping.findForward("ident"));
+	return (mapping.findForward("success"));
     }
 }

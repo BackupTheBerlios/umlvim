@@ -52,6 +52,7 @@ public class DatabaseInformationListManager {
 	public final static String FRENCH_ZIP = "frenchZip";
 	public final static String FRENCH_DEP = "frenchDep";
 	public final static String FOREIGN_COUNTRY = "foreignCountry";
+	public final static String NATIONALITY = "nationality";
 
 	private HashMap allTheMap;
 
@@ -121,10 +122,12 @@ public class DatabaseInformationListManager {
 			String condition = null;
 			if(BAC_PRE_95.equals(resource)) {
 				resource = BAC_POST_95;
-				condition = prop.get(resource+".post95") + " = 0";
-			} 
+				String field= (String)prop.get(resource+".post95");
+				condition = field + " = 0 OR " + field + "=2";
+			}
 			else if(BAC_POST_95.equals(resource)) {
-				condition = prop.get(resource+".post95") + " = 1";
+				String field= (String)prop.get(resource+".post95");
+				condition = field + " = 1 OR " + field + "=2";
 			}
 			else if(SOCIAL_SECURITY_AFF.equals(resource)) {
 				condition = prop.get(resource+".regsec") + " = 1";
@@ -152,6 +155,10 @@ public class DatabaseInformationListManager {
 			else if(FRENCH_ZIP.equals(resource)) {
 				resource = "frenchCity";
 				libel = "zip";
+			}
+			else if(NATIONALITY.equals(resource)) {
+				resource = FRENCH_DEP;
+				libel = (String)prop.get(resource+".nationality");
 			}
 
 			table = (String)prop.get(resource+"."+table);

@@ -42,42 +42,35 @@ public class EditStudentAction extends UserAction {
 		ActionErrors errors = new  ActionErrors();
 		HttpSession session = request.getSession();
 
-	
 		 StudentForm studentForm = (StudentForm)form;
 		 if(studentForm == null) {
 				studentForm = new StudentForm();
-			 }
-				
-			if ("request".equals(mapping.getScope()))
+		 }
+
+		if ("request".equals(mapping.getScope()))
 			request.setAttribute(mapping.getAttribute(), studentForm);
-					else
-						session.setAttribute(mapping.getAttribute(), studentForm);
-			
+		else
+			session.setAttribute(mapping.getAttribute(), studentForm);
 	
 		String action = request.getParameter("action");
-		
-		if(action.equals("delete"))
-			{
-				StudentManager manager = (StudentManager) servlet.getServletContext()
-												.getAttribute(Constants.STUDENT_DATABASE_KEY);
-					if(manager == null) {
-						errors.add("database",
-									new ActionError("error.database.missing"));
-					} else {
-				
+
+		if(action.equals("delete")) {
+			StudentManager manager = (StudentManager) servlet.getServletContext()
+									.getAttribute(Constants.STUDENT_DATABASE_KEY);
+			if(manager == null) {
+				errors.add("database",
+					new ActionError("error.database.missing"));
+			} else {
 				Student student = manager.getStudent(Integer.parseInt(studentForm.getId()));
 				request.setAttribute("name", student.getPatronymicName());
 				request.setAttribute("firstname", student.getFirstname1());
-				
-				
+
 				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
 				String birthday = df.format(student.getBirthday());
-				
-				request.setAttribute("birthday",birthday); 
+				request.setAttribute("birthday",birthday);
 			}
-			}
+		}
 		studentForm.setAction(action);
-			
-		return (mapping.findForward("editstudent"));
+		return (mapping.findForward("success"));
 	}
 }

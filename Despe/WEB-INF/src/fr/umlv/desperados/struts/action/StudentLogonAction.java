@@ -69,14 +69,14 @@ public class StudentLogonAction extends Action {
 		Locale locale = request.getLocale();
 
 		if(form == null) {
-			return (mapping.findForward("ident"));
+			return (mapping.findForward("itself"));
 		}
 
 		// validate the form
 		ActionErrors errors = form.validate(mapping, request);
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("ident"));
+			return (mapping.findForward("itself"));
 		}
 
 		StudentLogonForm studentLogonForm = (StudentLogonForm) form;
@@ -134,6 +134,6 @@ public class StudentLogonAction extends Action {
 		}
 
 		// Forward control to the specified success URI
-		return (mapping.findForward("studenthome"));
+		return (mapping.findForward("home"));
 	}
 }
