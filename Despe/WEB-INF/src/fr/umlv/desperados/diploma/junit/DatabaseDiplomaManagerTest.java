@@ -9,6 +9,8 @@ package fr.umlv.desperados.diploma.junit;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.util.Iterator;
+import java.util.List;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.diploma.DatabaseDiplomaManager;
@@ -72,7 +74,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		//strutsDatabaseRequestor.closeConnection();
 	}
 	
-	public void testAddDiploma() {
+	/*public void testAddDiploma() {
 		String diplomaId;
 		Diploma diploma = new Diploma("DEA informatique", "3");
 		
@@ -85,14 +87,33 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		}
 		diplomaId = diploma.getId();
 		assertTrue(! (diplomaId.equals("0")));
-	}
+	}*/
 	
 	public void testGetDiploma() {
 		Diploma diploma = ddm.getDiploma("-1");
 		assertTrue(diploma.getName().equals("default"));
 	}
 	
-	public void testRemoveDiploma() {
+	public void testListDiploma() {
+		Diploma diploma = null;
+		boolean diplomaFinded = false;
+		Iterator iterator;
+		
+		List list = ddm.listDiploma();
+		
+		iterator = list.iterator();
+		int i = 0;
+		 while(iterator.hasNext()) {
+		 	i++;
+		 	diploma = (Diploma)iterator.next();
+		 	String str = diploma.getName();
+		 	if( (diploma.getName().equals("DEA informatique")) && (diploma.getCycle().equals("3")) )
+				diplomaFinded = true;
+		 }
+		assertTrue(diplomaFinded);
+	}
+	
+	public void testAddThenRemoveDiploma() {
 		String diplomaId;
 		Diploma diploma = new Diploma("DEA informatique", "3");
 		
@@ -103,6 +124,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 			e.printStackTrace();
 		 }
 		 
+		assertTrue(diploma != null);
 		 diplomaId = diploma.getId();
 				
 		 ddm.removeDiploma(diplomaId);
