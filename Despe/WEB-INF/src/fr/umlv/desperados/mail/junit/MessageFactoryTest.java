@@ -77,7 +77,7 @@ public class MessageFactoryTest extends TestCase {
 	}
 	
 	public void testCreateMessage() {
-		final String object = "Création de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String object = "Création de votre compte administrateur pour l'application d'inscription en ligne à l'université";
 		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été créé avec les paramètres suivants : \n profil : administrateur \n login : africott \n mot de passe : 123";
 		
 		Message message = null;
@@ -103,7 +103,7 @@ public class MessageFactoryTest extends TestCase {
 	}
 	
 	public void testModifyMessage() {
-		final String object = "Modification de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String object = "Modification de votre compte administrateur pour l'application d'inscription en ligne à l'université";
 		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été modifié avec les paramètres suivants : \n profil : administrateur \n login : africott \n mot de passe : 123";		
 		Message message = null;
 		User user = new User("africott");
@@ -120,7 +120,7 @@ public class MessageFactoryTest extends TestCase {
 	}
 		
 	public void testRemoveMessage() {
-		final String object = "Suppression de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String object = "Suppression de votre compte administrateur pour l'application d'inscription en ligne à l'université";
 		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été supprimé.";
 		
 		Message message = null;

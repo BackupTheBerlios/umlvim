@@ -14,19 +14,19 @@
 		</node>
 		<node name="accountCreatedMail">
 			<map>
-				<entry key="object" value="Création de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="object" value="Création de votre compte #admin pour l'application d'inscription en ligne à l'université" />
 				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été créé avec les paramètres suivants : #newLine profil : #admin #newLine login : #login #newLine mot de passe : #password" />
 			</map>
 		</node>
 		<node name="accountModifiedMail">
 			<map>
-				<entry key="object" value="Modification de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="object" value="Modification de votre compte #admin pour l'application d'inscription en ligne à l'université" />
 				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été modifié avec les paramètres suivants : #newLine profil : #admin #newLine login : #login #newLine mot de passe : #password" />
 			</map>
 		</node>
 		<node name="accountRemovedMail">
 			<map>
-				<entry key="object" value="Suppression de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="object" value="Suppression de votre compte #admin pour l'application d'inscription en ligne à l'université" />
 				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été supprimé." />
 			</map>
 		</node>
