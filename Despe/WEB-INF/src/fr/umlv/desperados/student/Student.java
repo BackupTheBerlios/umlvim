@@ -397,7 +397,22 @@ public class Student implements XMLable {
 	 * @roseuid 3FF869BB00F5
 	 */
 	public String toXML() {
-		return null;
+		String s="<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>";
+		s += "<!DOCTYPE inscription SYSTEM 'inscription.dtd'>\n";
+		s += "<inscription>";
+		s += "<studentNumber>"+id+"</studentNumber>";
+		s += "<name>"+name+"</name>";
+		s += "<namePatronymic>"+patronymicName+"</namePatronymic>";
+		s+= "<firstName>"+firstname1+"</firstName>";
+		s += "<INE>7894564</INE>";
+		s += "<birthdate>"+birthday+"</birthdate>";
+		s += "<birthplace>lagny</birthplace>";
+		s += "<sex>f</sex>";
+		s += "<nationality>fr</nationality>";
+		s += "<famSituation>celibataire</famSituation>";
+		s += "<milSituation>ok</milSituation>";
+		s += "</inscription>";
+		return s;
 	}
 	/**
 	 * @return
@@ -1733,14 +1748,3 @@ public class Student implements XMLable {
 	}
 
 }
-/**
- * 
- * 
- *  
- * Student.toXML(){
- *     return null;
- *    }
- *  
- *  
- *  
- */

@@ -58,8 +58,8 @@ public class XMLUserManager implements UserManager
     * @roseuid 3FF3025002FF
     */
    public static synchronized XMLUserManager getInstance(String databasePath) 
-   {if (theInstance == null)
-	theInstance = new XMLUserManager(databasePath);
+   {if (theInstance == null)
+	theInstance = new XMLUserManager(databasePath);
 return theInstance;    
    }
    

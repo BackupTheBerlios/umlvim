@@ -1,7 +1,9 @@
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
+<%@ taglib uri="/WEB-INF/app.tld" prefix="app"%>
 
+<app:checkLogon>
 <html:form action="/stats">
 	<table width="100%">
 		<tr width="100%" colspan="3">
@@ -27,7 +29,11 @@
 		</tr>
 		<tr width="100%" colspan="3">
 			<td></td>
-			<td align="center"><html:submit/><html:cancel/></td>
+			<td align="left">
+				<html:submit><bean:message key="button.submit"/></html:submit>
+				<html:cancel><bean:message key="button.cancel"/></html:cancel>
+			</td>
 		</tr>
 	</table>
 </html:form>
+</app:checkLogon>

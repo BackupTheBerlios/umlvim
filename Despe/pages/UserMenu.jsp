@@ -30,6 +30,13 @@
 				</html:link>
 			</td>
 		</tr>
+		<tr align="right">
+			<td width="120">
+				<html:link action="list/diploma">
+					<bean:message key="menu.user.stats" />
+				</html:link>
+			</td>
+		</tr>
 		<tr>
 			<td align="right" valign="top">
 				<html:link action="/userLogoff">

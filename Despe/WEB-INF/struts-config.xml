@@ -26,6 +26,7 @@
 		<form-bean name="RdvTackingForm" type="fr.umlv.desperados.struts.form.RdvTackingForm" />
 		
 		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
+		
 		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
 	</form-beans>
 
@@ -62,7 +63,7 @@
 			scope="request"
 			input="/pages/form/UserLogon.jsp"
 			validate="false">
-			</action>
+		</action>
 
 		<action
 			path="/userLogoff"
@@ -133,6 +134,11 @@
 
 	
 		<action
+			path="/printInscriptionFile"
+			type="fr.umlv.desperados.struts.action.PrintInscriptionFileAction">
+		</action>
+
+		<action
 			path="/list/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
 			<forward name="success" path="admin.stylesheet.list" />
@@ -167,9 +173,6 @@
 			input="/pages/form/ListStyleSheet.jsp"
 			validate="false">
 		</action>
-
-
-
 
 		<action
 			path="/studentLogon"

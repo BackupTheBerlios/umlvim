@@ -48,6 +48,7 @@
 
 	<definition name="student.home" extends="baseDef">
 		<put name="body-content"	value="/pages/StudentMain.jsp" />
+		<put name="menubar"			value="/pages/StudentMenu.jsp" />
 	</definition>
 
 

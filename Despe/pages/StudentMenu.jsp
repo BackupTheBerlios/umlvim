@@ -1,4 +1,5 @@
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/app.tld" prefix="app" %>
 
 <app:checkIdent page="">
@@ -10,12 +11,13 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link>
-				</html:link>
 			</td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
+				<html:link action="/printInscriptionFile">
+					<bean:message key="menu.student.printfile" />
+				</html:link>
 			</td>
 		</tr>
 		<tr>
