@@ -160,7 +160,7 @@ public class DatabaseStudentManager implements StudentManager {
 		ResultSet result = null;
 		Student student = null;
 		String query =
-			"SELECT * FROM "+prop.get("tableName")+" Where "+prop.get("studentId")+"=\"" + studentId + "\";";
+			"SELECT * FROM "+prop.get("tableName")+" Where "+prop.get("studentId")+"=" + studentId;
 		try {
 			result = requestor.doQuery(query);
 		} catch (SQLException e) {
@@ -405,9 +405,8 @@ public class DatabaseStudentManager implements StudentManager {
 		throws StudentNotFoundException {
 		ResultSet result = null;
 		String query =
-			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+" = '"
-				+ student.getStudentId()
-				+ "';";
+			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+" = "
+				+ student.getStudentId();
 				
 			try {
 			result = requestor.doQuery(query);
