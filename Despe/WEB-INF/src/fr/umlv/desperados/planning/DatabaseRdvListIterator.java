@@ -15,6 +15,15 @@ import fr.umlv.desperados.database.DatabaseAbstractListIterator;
 final class DatabaseRdvListIterator extends DatabaseAbstractListIterator {
 
 	/**
+	 * @param rs
+	 * @param index
+	 */
+	public DatabaseRdvListIterator(ResultSet rs, int index) {
+
+		super(rs, index);
+	}
+
+	/**
 	 * The ResultSet containing the Rdv list.
 	 */
 	private ResultSet rs;
@@ -59,17 +68,19 @@ final class DatabaseRdvListIterator extends DatabaseAbstractListIterator {
 			try {
 				current = rs.getRow();
 				rs.absolute(index);
-				
-				String id = rs.getString("ID_ETUD");
-				String name = rs.getString("MON_PATRONYMIQUE");
+
+				String id = String.valueOf(rs.getString("ID_ETU"));
+				String name = rs.getString("NOM_PATRONYMIQUE");
 				String firstName = rs.getString("PRENOM1");
-			
+
 				// TODO deprecated, a changer en utilisant calendar
-				boolean isRavel = (rs.getDate("ANNEE_BAC").getYear() == new Date(System.currentTimeMillis()).getYear());				
-				Date dateRdv= rs.getDate("DATE_DE_RDV");
-				
-				rdv = new Rdv(dateRdv,id,name,firstName,isRavel);				
-				
+				boolean isRavel =
+					(rs.getDate("ANNEE_BAC").getYear()
+						== new Date(System.currentTimeMillis()).getYear());
+				Date dateRdv = rs.getDate("DATE_DE_RDV");
+
+				rdv = new Rdv(dateRdv, id, name, firstName, isRavel);
+
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			} finally {
