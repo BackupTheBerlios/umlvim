@@ -23,9 +23,8 @@ import fr.umlv.desperados.planning.Rdv;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.util.Constants;
 
+public class CancelRdvAction extends Action {
 
-public class CancelRdvAction extends Action{
-	
 	/** 
 		 * Method execute
 		 * @param ActionMapping mapping
@@ -36,59 +35,42 @@ public class CancelRdvAction extends Action{
 		 * @throws Exception
 		 */
 
-		public ActionForward execute(
-			ActionMapping mapping,
-			ActionForm form,
-			HttpServletRequest request,
-			HttpServletResponse response) {
-				
-			
-			String target = "success";
-				
-				// get student info
-				Student student =
-					(Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
-				
-				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT,Locale.FRANCE);
-				Date dateBac;
-				try {
-					dateBac = df.parse(student.getBacYear());
-			
-			
-			
-				Calendar calDateBac = new GregorianCalendar();
-				Calendar calCurrent = GregorianCalendar.getInstance();	
-				calDateBac.setTime(dateBac);
-				
-				
-				boolean isRavel =(calDateBac.get(Calendar.MONTH) ==  calCurrent.get(Calendar.MONTH));
-		
-				ServletContext context = servlet.getServletContext();
-				DatabaseRdvManager databaseRdvManager =
-					(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
-				
-				
-				Rdv rdv = databaseRdvManager.getRdv(student.getId());
-				
-				if( rdv == null ) target = "error";
-				else
-				databaseRdvManager.removeRdv(rdv);		
-				
-				} catch (ParseException e) {
-					// TODO generer l'erreur
-					target = "error";
-				}
-							
-								
-				return mapping.findForward(target);
-			}
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) {
+
+		String target = "success";
+
+		// get student info
+		Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
+
+		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+		Date dateBac;
+		try {
+			dateBac = df.parse(student.getBacYear());
+
+			ServletContext context = servlet.getServletContext();
+			DatabaseRdvManager databaseRdvManager = (DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
+
+			Rdv rdv = databaseRdvManager.getRdv(2);
+
+			if (rdv == null)
+				target = "error";
+			else
+				databaseRdvManager.removeRdv(rdv);
+
+		} catch (ParseException e) {
+			// TODO generer l'erreur
+			target = "error";
+		}
+
+		return mapping.findForward(target);
+	}
 
 	/**
 	 * @param rdv
 	 */
 	private void removeRdv(Rdv rdv) {
 		// TODO Raccord de méthode auto-généré
-		
+
 	}
-	
+
 }

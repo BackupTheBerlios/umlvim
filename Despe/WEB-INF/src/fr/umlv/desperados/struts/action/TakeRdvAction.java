@@ -4,7 +4,9 @@ package fr.umlv.desperados.struts.action;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.servlet.ServletContext;
@@ -56,12 +58,12 @@ public class TakeRdvAction extends Action {
 			Date dateBac = df.parse(student.getBacYear());
 
 			Calendar calDateBac = new GregorianCalendar();
-			Calendar calCurrent = GregorianCalendar.getInstance() t;
+			Calendar calCurrent = GregorianCalendar.getInstance();
 			calDateBac.setTime(dateBac);
 
 			boolean isRavel = (calDateBac.get(Calendar.MONTH) == calCurrent.get(Calendar.MONTH));
 
-			Rdv rdv = new Rdv(rdvDate, student.getId(), student.getPatronymicName(), student.getFirstname1(), isRavel);
+			Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
 
 			databaseRdvManager.addRdv(rdv);
 
