@@ -50,10 +50,15 @@ public class CancelRdvAction extends Action {
 
 		Rdv rdv = databaseRdvManager.getRdv(student.getId());
 
+	
+
 		if (rdv == null)
 			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.not.allready.taken"));
 		else
-			databaseRdvManager.removeRdv(rdv);
+		{
+				databaseRdvManager.removeRdv(rdv);
+			student.setAppointmentDate(null);
+		}
 
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
