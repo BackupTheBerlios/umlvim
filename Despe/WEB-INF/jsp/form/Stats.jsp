@@ -24,7 +24,7 @@
 			<th align="left"> <bean:message key="prompt.stats.section"/></th>
 			<td>
 				<html:select property="diplomaId">
-					<option value="-2">TOUTES</option>
+					<option value="-2" selected="selected">TOUTES</option>
 					<logic:iterate name="diplomaList" id="diploma"
 											type="fr.umlv.desperados.diploma.Diploma">
 						<option value="<bean:write name="diploma" property="id" />">

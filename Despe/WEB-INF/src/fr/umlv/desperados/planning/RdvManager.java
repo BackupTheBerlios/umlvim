@@ -2,7 +2,6 @@
 
 package fr.umlv.desperados.planning;
 
-import java.util.Date;
 import java.util.List;
 
 
