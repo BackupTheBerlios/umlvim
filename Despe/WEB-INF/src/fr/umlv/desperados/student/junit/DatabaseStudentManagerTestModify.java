@@ -17,6 +17,7 @@ import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
+import fr.umlv.desperados.student.StudentBirthdayException;
 import fr.umlv.desperados.student.StudentNotFoundException;
 
 import junit.framework.TestCase;
@@ -189,7 +190,12 @@ public class DatabaseStudentManagerTestModify extends TestCase {
 		student.setMLVDiplomaComplId(-1);
 					
 		try {
-			databaseStudentManager.modifyStudent(student);
+			try {
+				databaseStudentManager.modifyStudent(student);
+			} catch (StudentBirthdayException e4) {
+				// TODO Bloc catch auto-généré
+				e4.printStackTrace();
+			}
 		} catch (StudentNotFoundException e3) {
 			e3.printStackTrace();
 		}

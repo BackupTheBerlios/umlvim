@@ -18,6 +18,7 @@ import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentAlreadyExistsException;
+import fr.umlv.desperados.student.StudentBirthdayException;
 
 import junit.framework.TestCase;
 
@@ -105,13 +106,21 @@ public class DatabaseStudentManagerTest extends TestCase {
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
 		}
+		catch (StudentBirthdayException e) {
+				   e.printStackTrace();
+			   }
 		String truc = "test";
-		assertFalse(
-			databaseStudentManager.existStudent(
-				"dupont",
-				"gabriel",
-				new Date(1981, 02, 10))
-				== 0);
+		try {
+			assertFalse(
+				databaseStudentManager.existStudent(
+					"dupont",
+					"gabriel",
+					new Date(1981, 02, 10))
+					== 0);
+		} catch (StudentBirthdayException e3) {
+			// TODO Bloc catch auto-généré
+			e3.printStackTrace();
+		}
 				
 			cCon.close() ;
 	}

@@ -16,6 +16,7 @@ import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentAlreadyExistsException;
+import fr.umlv.desperados.student.StudentBirthdayException;
 import junit.framework.TestCase;
 
 /**
@@ -96,7 +97,12 @@ ResultSet result = null;
 		student.setBirthday(java.sql.Date.valueOf("1981-02-11" ));
 		student.setFirstname1( "jeannot");
 	try {
-			databaseStudentManager.addStudent(student);
+			try {
+				databaseStudentManager.addStudent(student);
+			} catch (StudentBirthdayException e3) {
+				// TODO Bloc catch auto-généré
+				e3.printStackTrace();
+			}
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
 		}

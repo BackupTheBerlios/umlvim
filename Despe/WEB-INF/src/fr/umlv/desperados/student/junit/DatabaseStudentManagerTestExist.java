@@ -16,6 +16,7 @@ import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.struts.database.StrutsDatabaseRequestor;
 import fr.umlv.desperados.student.DatabaseStudentManager;
 import fr.umlv.desperados.student.Student;
+import fr.umlv.desperados.student.StudentBirthdayException;
 import junit.framework.TestCase;
 
 /**
@@ -86,7 +87,12 @@ public class DatabaseStudentManagerTestExist extends TestCase {
 				} catch (SQLException e2) {
 					e2.printStackTrace();
 				}
-			assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
+			try {
+				assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
+			} catch (StudentBirthdayException e3) {
+				// TODO Bloc catch auto-généré
+				e3.printStackTrace();
+			}
 			cCon.close();
 		}
 
