@@ -14,11 +14,13 @@ package fr.umlv.desperados.util;
  */
 abstract public class Constants {
 
-	public static String PLANNINGCONF = "PLANNINGCONF";
+	
 
 	public final static String DATE_FORMAT = "\\d\\d/\\d\\d/\\d\\d\\d\\d";
 
 	private final static String pack = "fr.umlv.desperados";
+	
+	public static String PLANNING_CONF_DATABASE_KEY = pack +"PLANNING_CONF_DATABASE_KEY";
 
 	public final static String USER_DATABASE_KEY = pack + "USER_DATABASE_KEY";
 
