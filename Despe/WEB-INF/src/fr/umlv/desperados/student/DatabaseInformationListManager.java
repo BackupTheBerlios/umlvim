@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Date;
@@ -165,9 +166,19 @@ public class DatabaseInformationListManager {
 			id = (String)prop.get(resource+"."+id);
 			libel = (String)prop.get(resource+"."+libel);
 			map = getMapFromDatabase(table, id, libel, condition);
-			allTheMap.put( resource,map);
+			allTheMap.put(resource,map);
 		}
 		return map.entrySet() ;
+	}
+
+	public String get(String resource, String id) {
+		Set list = list(resource);
+		for(Iterator it=list.iterator(); it.hasNext();) {
+			Map.Entry entry = (Map.Entry)it.next();
+			if(entry.getKey().equals(id))
+				return (String)entry.getValue();
+		}
+		return null;
 	}
 
 	public void reset() {
