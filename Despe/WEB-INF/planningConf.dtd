@@ -1,0 +1,27 @@
+<!ELEMENT planning (month*)>
+
+<!ELEMENT month (day*)>
+<!ATTLIST month number CDATA #REQUIRED>
+
+
+<!ELEMENT day (morning?,afternoon?)>
+<!ATTLIST day  number CDATA #REQUIRED>
+
+
+<!ELEMENT morning (beginingHour,endHour)>
+<!ATTLIST morning  correctorNumber CDATA #REQUIRED
+				   meetingDuration CDATA #REQUIRED
+				   ravelNumber CDATA #REQUIRED>
+
+<!ELEMENT afternoon (beginingHour,endHour)>
+<!ATTLIST afternoon  correctorNumber CDATA #REQUIRED
+					 meetingDuration CDATA #REQUIRED
+					 ravelNumber CDATA #REQUIRED>
+	
+<!ELEMENT endHour (Hour)>
+
+<!ELEMENT beginingHour (Hour)>
+
+<!ELEMENT Hour (#PCDATA)>
+<!ATTLIST Hour hour CDATA #REQUIRED
+			   min  CDATA #REQUIRED>
