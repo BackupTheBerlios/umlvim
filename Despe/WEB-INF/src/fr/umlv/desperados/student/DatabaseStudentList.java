@@ -84,7 +84,7 @@ class DatabaseStudentList extends DatabaseAbstractList {
 					rs.getString(
 						prop.get("establishmentBacObtaining").toString()));
 				student.setForeignCityBac(
-					rs.getString(prop.get("ForeignCityBac").toString()));
+					rs.getString(prop.get("foreignCityBac").toString()));
 				student.setHaveFixAddFr(
 					rs.getBoolean(prop.get("haveFixAddFr").toString()));
 				student.setNumFixAdd(

@@ -91,9 +91,9 @@ ResultSet result = null;
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
-		student.setPatronymicName( "gérard");
+		student.setPatronymicName( "gégé");
 		student.setBirthday(java.sql.Date.valueOf("1981-02-11" ));
-		student.setFirstname1( "jean");
+		student.setFirstname1( "jeannot");
 	try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {

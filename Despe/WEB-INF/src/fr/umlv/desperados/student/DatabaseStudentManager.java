@@ -82,9 +82,14 @@ public class DatabaseStudentManager implements StudentManager {
 	
 	public void addStudent(Student student)
 		throws StudentAlreadyExistsException {
+			
+		if(existStudent(student.getPatronymicName() ,student.getFirstname1() ,student.getBirthday())!=0)
+			throw new StudentAlreadyExistsException("impossible to add student : Student already exist in Database");
+		
 		StringBuffer insert =
 			new StringBuffer("insert into " + prop.get("tableName") + " (");
 		StringBuffer values = new StringBuffer(" values (");
+		
 		if (!(student.getPatronymicName().equals(null))) {
 			insert.append(prop.get("patronymicName") + ",");
 			values.append("'"+student.getPatronymicName() + "',");
@@ -157,8 +162,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF869BD01AC
 	 */
 	public Student getStudent(int studentId) throws StudentNotFoundException {
-		//TODO propager l'exception si Student pas trouvé
-		ResultSet result = null;
+			ResultSet result = null;
 		Student student = null;
 		String query =
 			"SELECT * FROM "+prop.get("tableName")+" Where "+prop.get("studentId")+"=" + studentId;
@@ -169,7 +173,9 @@ public class DatabaseStudentManager implements StudentManager {
 		}
 
 		try {
-			if (result.first()) {
+			if (!result.first()) {
+				throw new StudentNotFoundException("impossible to get Student : Student not found in Database");
+			}
 
 				student = new Student(studentId);
 				student.setName(result.getString(prop.get("name").toString()));
@@ -390,8 +396,10 @@ public class DatabaseStudentManager implements StudentManager {
 					result.getInt(prop.get("MLVDiplomaComplId").toString()));
 				//student.setHandicapList((ArrayList)(result.getArray ( prop.get("handicapList").toString()).getArray()));
 				//TODO a vérifier si ça fonctionne vraiment bien faire handicap 
-			}
-		} catch (SQLException e1) {
+			
+			
+			
+			} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		return student;
@@ -411,7 +419,9 @@ public class DatabaseStudentManager implements StudentManager {
 				
 			try {
 			result = requestor.doQuery(query);
-			if (result.first()) {
+			if (!result.first()) {
+				throw new StudentNotFoundException("Impossible modify student : Student not found in Database");
+			}
 				result.updateString(
 					prop.get("name").toString(),
 					student.getName());
@@ -699,7 +709,7 @@ public class DatabaseStudentManager implements StudentManager {
 					student.getMLVDiplomaComplId());
 				//result.updateArray(prop.get("handicapList").toString(),Array(student.getHandicapList().getClass()  ));
 //TODO handicap à faire
-			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -721,9 +731,11 @@ public class DatabaseStudentManager implements StudentManager {
 			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+"='" + studentId + "'";
 				try {
 			result = requestor.doQuery(query);
-			if (result.first()) {
-				result.deleteRow();
+			if (!result.first()) {
+				throw new StudentNotFoundException("Impossible to remove student : Student not found in Database");
 			}
+			result.deleteRow();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
