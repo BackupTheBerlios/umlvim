@@ -31,10 +31,10 @@ public interface StudentManager {
 	 * storage, the Student id otherwise.
 	 * @roseuid 3FC3693303B9
 	 */
-	public String existStudent(
+	public int existStudent(
 		String name,
 		String firstname,
-		java.util.Date birthday);
+		java.sql.Date birthday);
 
 	/**
 	 * Gets a Student from the permanent storage.

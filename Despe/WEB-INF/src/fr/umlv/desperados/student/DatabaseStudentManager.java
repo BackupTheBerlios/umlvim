@@ -79,26 +79,23 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @throws fr.umlv.desperados.student.StudentAlreadyExistsException
 	 * @roseuid 3FF869BD015C
 	 */
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//TODO transformer tous les name en name patronymique/////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	public void addStudent(Student student)
 		throws StudentAlreadyExistsException {
 		StringBuffer insert =
 			new StringBuffer("insert into " + prop.get("tableName") + " (");
 		StringBuffer values = new StringBuffer(" values (");
-		if (!(student.getName().equals(null))) {
+		if (!(student.getPatronymicName().equals(null))) {
 			insert.append(prop.get("patronymicName") + ",");
-			values.append("'"+student.getName() + "',");
+			values.append("'"+student.getPatronymicName() + "',");
 		}
 
 		if (!student.getBirthday().equals(null)) {
 			insert.append(prop.get("birthday") + ",");
-	//		values.append("'11-jan-2004',");
 			values.append("TO_DATE('"
-					+ DateFormat.getDateInstance(DateFormat.SHORT).format(
+					+ DateFormat.getDateInstance(DateFormat.LONG ).format(
 						student.getBirthday())
-					+ "','DD/MM/YY'),");
+					+ "','DD/MM/YYYY'),");
 		}
 
 		if (!student.getFirstname1().equals(null)) {
@@ -112,7 +109,6 @@ public class DatabaseStudentManager implements StudentManager {
 		try {
 			String stringTemp=insert.append(values).toString();
 			requestor.doQuery(stringTemp);
-	//requestor.doQuery("insert into etudiant (nom_patronymique,date_naiss,prenom1) values ('test3','10-jan-2000','test4')");
 			} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -125,31 +121,34 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @return java.lang.String return
 	 * @roseuid 3FF869BD0170
 	 */
-	public String existStudent(
-		String name,
+	public int existStudent(
+		String patronymiqueName,
 		String firstName,
-		java.util.Date birthday) {
+		java.sql.Date birthday) {
 		ResultSet result = null;
 		String query =
-			"SELECT "+ prop.get("studentId") +" FROM  "+ prop.get("tableName") +"  WHERE NOM_PATRONYMIQUE='"
-				+ name
-				+ "' and prenom1='"
+			"SELECT "+ prop.get("studentId")
+			 +" FROM  "+ prop.get("tableName") +"  WHERE "
+			+prop.get("patronymicName")+"='"
+				+ patronymiqueName
+				+ "' and "
+			+prop.get("firstname1")+"='"
 				+ firstName
-				+ "' and TO_DATE(date_naiss,'DD/MM/YY')='"
-				+ DateFormat.getDateInstance(DateFormat.SHORT).format(birthday)
-				+ "'";
-		try {	
+				+ "' and "
+				+" TO_CHAR("+prop.getProperty("birthday")+",'dd/mm/yyyy')="
+				+ "TO_DATE('"+DateFormat.getDateInstance(DateFormat.LONG).format(birthday)+"','dd/mm/yyyy')";
+			try {	
 			result = requestor.doQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
 			if (result.next())
-				return Integer.toString(result.getInt("id_etu"));
+				return result.getInt("id_etu");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
-		return null;
+		return 0;
 	}
 
 	/**
@@ -161,7 +160,7 @@ public class DatabaseStudentManager implements StudentManager {
 		ResultSet result = null;
 		Student student = null;
 		String query =
-			"SELECT * FROM Etudiant Where id_etu=\"" + studentId + "\";";
+			"SELECT * FROM "+prop.get("tableName")+" Where "+prop.get("studentId")+"=\"" + studentId + "\";";
 		try {
 			result = requestor.doQuery(query);
 		} catch (SQLException e) {
@@ -406,10 +405,11 @@ public class DatabaseStudentManager implements StudentManager {
 		throws StudentNotFoundException {
 		ResultSet result = null;
 		String query =
-			"SELECT * FROM Etudiant WHERE id_etu = '"
+			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+" = '"
 				+ student.getStudentId()
 				+ "';";
-		try {
+				
+			try {
 			result = requestor.doQuery(query);
 			if (result.next()) {
 				result.updateString(
@@ -718,8 +718,8 @@ public class DatabaseStudentManager implements StudentManager {
 		Student newStudent = getStudent((new Integer(studentId)).intValue());
 
 		String query =
-			"SELECT * FROM Etudiant WHERE id_etud='" + studentId + "'";
-		try {
+			"SELECT * FROM "+prop.get("tableName")+" WHERE "+prop.get("studentId")+"='" + studentId + "'";
+				try {
 			result = requestor.doQuery(query);
 			if (result.next()) {
 				result.deleteRow();
@@ -741,22 +741,22 @@ public class DatabaseStudentManager implements StudentManager {
 	 */
 	public List searchStudent(
 		String INE,
-		String name,
+		String patronymiqueName,
 		String firstname,
 		int diplomaId) {
 		StringBuffer query =
-			new StringBuffer("SELECT id_etud FROM Etudiant where ");
+			new StringBuffer("SELECT "+prop.get("studentId")+" FROM "+prop.get("tableName")+" where ");
 		if (!(INE.equals(null))) {
-			query.append("ine='" + INE + "' and ");
+			query.append(prop.get("ine")+"='" + INE + "' and ");
 		}
-		if (!(name.equals(null))) {
-			query.append("nom_usage='" + name + "' and ");
+		if (!(patronymiqueName.equals(null))) {
+			query.append(prop.get("patronymicName")+"='" + patronymiqueName + "' and ");
 		}
 		if (!(firstname.equals(null))) {
-			query.append("prenom1='" + firstname + "' and ");
+			query.append(prop.get("firstName1")+"='" + firstname + "' and ");
 		}
 		if (!(diplomaId == 0)) {
-			query.append("diplomaId='" + diplomaId + "' and ");
+			query.append(prop.get("MLVdiplomaId")+"='" + diplomaId + "' and ");
 		}
 
 		query.replace(query.length() - 4, query.length(), " ;");

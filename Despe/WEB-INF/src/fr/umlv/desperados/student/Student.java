@@ -2,9 +2,9 @@
 
 package fr.umlv.desperados.student;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 
 import fr.umlv.desperados.util.XMLable;
 
@@ -22,7 +22,7 @@ public class Student implements XMLable {
 	 * @see Current name
 	 */
 	private String name;
-	private Date birthday;
+	private java.sql.Date birthday;
 	private String ine;
 	private boolean wasToUmlvLastYear;
 	private String patronymicName;
@@ -328,6 +328,7 @@ public class Student implements XMLable {
 	 */
 	public Student(int studentId) {
 		this.studentId = studentId;
+//		DateFormat.getDateInstance(DateFormat.SHORT).format(birthday);
 	}
 
 	/**
@@ -335,6 +336,7 @@ public class Student implements XMLable {
 		* @roseuid 3FCA089F033C
 		*/
 	public Student() {
+//		DateFormat.getDateInstance(DateFormat.SHORT).format(birthday);
 	}
 
 	/**
@@ -349,7 +351,7 @@ public class Student implements XMLable {
 	 * @param birthday
 	 * @roseuid 3FCB618101F5
 	 */
-	public void setBirthday(java.util.Date birthday) {
+	public void setBirthday(java.sql.Date birthday) {
 		this.birthday = birthday;
 	}
 

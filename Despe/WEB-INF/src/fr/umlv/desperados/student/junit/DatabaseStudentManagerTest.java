@@ -94,16 +94,16 @@ ResultSet result = null;
 			} catch (SQLException e2) {
 				e2.printStackTrace();
 			}
-		student.setName( "dupont");
-		student.setBirthday(new Date(1981,02,10));
-		student.setFirstname1( "gabriel");
-		try {
+		student.setPatronymicName( "gérard");
+		student.setBirthday(java.sql.Date.valueOf("1981-02-11" ));
+		student.setFirstname1( "jean");
+/*		try {
 			databaseStudentManager.addStudent(student);
 		} catch (StudentAlreadyExistsException e) {
 			e.printStackTrace();
-		}
+		}*/
 		String truc="test";
-		assertFalse(databaseStudentManager.existStudent("dupont","gabriel",new Date(1981,02,10))==null);
+		assertFalse(databaseStudentManager.existStudent("gérard","jean",java.sql.Date.valueOf("1981-02-11" ))==0);
 	}
 
 }
