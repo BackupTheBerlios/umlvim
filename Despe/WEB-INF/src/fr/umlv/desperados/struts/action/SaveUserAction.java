@@ -4,6 +4,10 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -166,12 +170,27 @@ public class SaveUserAction extends AdminAction {
 		}
 		userToSave.setLogin(login);
 
-		// generate randomly a new password
-		userToSave.setPassword(UserUtilities.generatePassword());
-
-		// add the User to the database
-		manager.addUser(userToSave);
-
+		//TEST MD5 
+		String newPass = UserUtilities.generatePassword();
+		MessageDigest messageDigest;
+		try {
+			messageDigest = MessageDigest.getInstance("MD5");
+			byte[] crytpNewPass = messageDigest.digest(newPass.getBytes("US-ASCII"));
+			
+		// add the User to the database with the crypted password
+			userToSave.setPassword(new String(crytpNewPass,"US-ASCII")); 
+			manager.addUser(userToSave);
+		} catch (UnsupportedEncodingException e1) {
+					// TODO Bloc catch auto-généré
+					e1.printStackTrace();
+				
+		} catch (NoSuchAlgorithmException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			}
+			
+		//set the non-crypted password for the mail
+		userToSave.setPassword(newPass);
 		mail(Message.CREATION_MESSAGE, userToSave);
 	}
 
@@ -196,14 +215,30 @@ public class SaveUserAction extends AdminAction {
 					MailNotSentException,
 					LastAdminException {
 
+		String newPass = null;
 		User userToSave = manager.getUser(form.getLogin());
 		FormUtilities.userFormToUser(form, userToSave);
 
 		// generate randomly a new password
 		if(form.getGeneratePassword()) {
-			userToSave.setPassword(UserUtilities.generatePassword());
+				newPass = UserUtilities.generatePassword();
+				MessageDigest messageDigest;
+				try {
+					messageDigest = MessageDigest.getInstance("MD5");
+					byte[] crytpNewPass = messageDigest.digest(newPass.getBytes("US-ASCII"));
+							
+					userToSave.setPassword(new String(crytpNewPass,"US-ASCII")); 
+					//userToSave.setPassword(UserUtilities.generatePassword());
+		
+		
+				}catch (NoSuchAlgorithmException e) {
+					// TODO Bloc catch auto-généré
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Bloc catch auto-généré
+					e.printStackTrace();
+				}
 		}
-
 		if(userToSave.getLogin().equals(
 					loggedUser.getLogin())) {
 			throw new LastAdminException();
@@ -212,6 +247,11 @@ public class SaveUserAction extends AdminAction {
 		// update the User in the database
 		manager.modifyUser(userToSave);
 
+		//set the non-crypted password for the mail
+		if(form.getGeneratePassword())
+				userToSave.setPassword(newPass);
+				
+			
 		mail(Message.MODIFICATION_MESSAGE, userToSave);
 	}
 

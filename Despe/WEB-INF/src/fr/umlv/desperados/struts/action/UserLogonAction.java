@@ -4,6 +4,8 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.security.MessageDigest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -86,10 +88,19 @@ public class UserLogonAction extends Action {
 		else {
 			try {
 				user = manager.getUser(userLogonForm.getLogin());
-				String password = userLogonForm.getPassword();
+				
+				//********************A DECOMMENTER POUR IDENTIFICATION SANS MD5 (despe,despe)**********************
+						String password = userLogonForm.getPassword();
 				if (!password.equals(user.getPassword())) {
-					errors.add("password",
-					   new ActionError("error.password.mismatch"));
+				
+				
+				///**********************A DECOMMENTER POUR  MD5**********************************
+				//MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+				//byte[] crytpPass = messageDigest.digest(userLogonForm.getPassword().getBytes("US-ASCII"));
+				//String logonPass = new String(crytpPass,"US-ASCII");
+				//if(!logonPass.equals(user.getPassword())){
+						 				errors.add("password",
+					 new ActionError("error.password.mismatch"));
 				}
 			} catch (UserNotFoundException e) {
 				errors.add("database",

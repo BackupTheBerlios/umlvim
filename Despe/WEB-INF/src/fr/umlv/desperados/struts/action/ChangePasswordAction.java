@@ -4,6 +4,10 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -56,7 +60,27 @@ public class ChangePasswordAction extends UserAction {
 		String oldPassword = loggedUser.getPassword(); 
 
 		// generate randomly a new password
-		loggedUser.setPassword(UserUtilities.generatePassword());
+		String newPass = UserUtilities.generatePassword();
+			MessageDigest messageDigest;
+						try {
+							messageDigest = MessageDigest.getInstance("MD5");
+							byte[] crytpNewPass = messageDigest.digest(newPass.getBytes("US-ASCII"));
+							
+							loggedUser.setPassword(new String(crytpNewPass,"US-ASCII")); 
+							//userToSave.setPassword(UserUtilities.generatePassword());
+		
+		
+						}catch (NoSuchAlgorithmException e) {
+							// TODO Bloc catch auto-généré
+							e.printStackTrace();
+						} catch (UnsupportedEncodingException e) {
+							// TODO Bloc catch auto-généré
+							e.printStackTrace();
+						}
+		
+		
+		
+	//	loggedUser.setPassword(UserUtilities.generatePassword());
 
 		UserManager manager = (UserManager)servlet.getServletContext().
 								getAttribute(Constants.USER_DATABASE_KEY);
@@ -73,6 +97,7 @@ public class ChangePasswordAction extends UserAction {
 			manager.modifyUser(loggedUser);
 
 			// send mail to the user
+			loggedUser.setPassword(newPass);
 			MessageFactory factory = new MessageFactory();
 			Mailer mailer = new Mailer();
 			Message message = factory.createMessage(Message.MODIFICATION_MESSAGE, loggedUser);
