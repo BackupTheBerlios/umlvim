@@ -80,6 +80,10 @@
 	<definition name="admin.search.user" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
 	</definition>
+	
+	<definition name="planning.configure" extends="baseDef">
+		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
+	</definition>
 
 	<definition name="admin.stylesheet.list" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/ListStyleSheet.jsp" />

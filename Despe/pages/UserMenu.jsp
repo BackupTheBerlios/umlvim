@@ -23,6 +23,13 @@
 				</html:link>
 			</td>
 		</tr>
+		<tr align="right">
+			<td width="120">
+				<html:link action="/confPlanning">
+					<bean:message key="planning.setup.conf" />
+				</html:link>
+			</td>
+		</tr>
 		<tr>
 			<td align="right" valign="top">
 				<html:link action="/userLogoff">
@@ -30,5 +37,6 @@
 				</html:link>
 			</td>
 		</tr>
+
 	</table>
 </app:checkLogon>
