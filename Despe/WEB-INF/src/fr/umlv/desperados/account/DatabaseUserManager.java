@@ -8,6 +8,7 @@ import java.util.List;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.util.Cache;
+import fr.umlv.desperados.util.ManagerException;
 
 /**
  * Provides an implementation of the UserManager interface, using an relational 
@@ -62,7 +63,8 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserAlreadyExistsException
 	 * @roseuid 3FF869B902D2
 	 */
-	public void addUser(User user) throws UserAlreadyExistsException, UserException {	
+	public void addUser(User user) throws UserAlreadyExistsException, ManagerException {
+
 		try {
 		  int nbRows = requestor.executeQuery("INSERT INTO Compte (LOGIN_COM, NOM_COM,PRENOM_COM,MAIL_COM,EST_ADM_COM,PASS_COM) VALUES('"+user.getLogin()+"',''"+user.getName()+"','"+user.getFirstname()+"','"+user.getEmail()+"',"+user.getAdmin()+",'"+user.getPassword()+"'");
 			if (nbRows==0)
@@ -71,9 +73,9 @@ public class DatabaseUserManager implements UserManager {
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
-//TODO a décommenter quand les Resulset seront updatable
-//		ResultSet rs = null;
+//		TODO a décommenter quand les Resulset seront updatable
 //		try {
+//		ResultSet rs = null;
 //			rs = doSelectQuery(user.getLogin());
 //			if (rs.first()) {
 //				throw new UserAlreadyExistsException("User exists in the database");
@@ -82,8 +84,7 @@ public class DatabaseUserManager implements UserManager {
 //				updateRow(rs, user);
 //			}
 //		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
+//			throw new ManagerException("Unable to query the database");
 //		} finally {
 //			try {
 //				rs.close();
@@ -99,14 +100,13 @@ public class DatabaseUserManager implements UserManager {
 	 * @return boolean
 	 * @roseuid 3FF869B902F0
 	 */
-	public boolean existUser(String login) {
+	public boolean existUser(String login) throws ManagerException {
 		ResultSet rs = null;
 		try {
 			rs = doSelectQuery(login);
 			return rs.first();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ManagerException("Unable to query the database");
 		}
 		finally {
 			try {
@@ -116,7 +116,6 @@ public class DatabaseUserManager implements UserManager {
 				e1.printStackTrace();
 			}
 		}
-		return false;
 	}
 
 	/**
@@ -124,7 +123,7 @@ public class DatabaseUserManager implements UserManager {
 	 * @return fr.umlv.desperados.account.User
 	 * @roseuid 3FF869B9030F
 	 */
-	public User getUser(String login) throws UserNotFoundException {
+	public User getUser(String login) throws UserNotFoundException, ManagerException {
 		User user = null;
 		ResultSet rs = null;
 		try {
@@ -139,8 +138,7 @@ public class DatabaseUserManager implements UserManager {
 			user.setAdmin(rs.getBoolean("EST_ADM_COM"));
 			user.setPassword(rs.getString("PASS_COM"));
 		} catch(SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ManagerException("Unable to query the database");
 		}
 		finally {
 			try {
@@ -158,10 +156,9 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserNotFoundException
 	 * @roseuid 3FF869B90323
 	 */
-	public void modifyUser(User user) throws UserNotFoundException {
+	public void modifyUser(User user) throws UserNotFoundException, ManagerException {
 		ResultSet rs = null;
 		try {
-////////////this ResultSet implementation doesn't support update
 			rs = doSelectQuery(user.getLogin());
 			if (!rs.first()) {
 				throw new UserNotFoundException("User not found in the database");
@@ -169,8 +166,7 @@ public class DatabaseUserManager implements UserManager {
 				updateRow(rs, user);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ManagerException("Unable to query the database");
 		} finally {
 			try {
 				rs.close();
@@ -187,7 +183,7 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserNotFoundException
 	 * @roseuid 3FF869B90341
 	 */
-	public User removeUser(String login) throws UserNotFoundException {
+	public User removeUser(String login) throws UserNotFoundException, ManagerException {
 		User user = null;
 		ResultSet rs = null;
 		try {
@@ -203,8 +199,7 @@ public class DatabaseUserManager implements UserManager {
 			user.setPassword(rs.getString("PASS_COM"));
 			rs.deleteRow();
 		} catch(SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ManagerException("Unable to query the database");
 		}
 		finally {
 			try {
@@ -223,7 +218,7 @@ public class DatabaseUserManager implements UserManager {
 	 * @return java.util.List
 	 * @roseuid 3FF869B90369
 	 */
-	public List searchUser(String login, String name) throws SQLException {
+	public List searchUser(String login, String name) throws ManagerException {
 		ResultSet rs = null;
 		StringBuffer query = new StringBuffer("SELECT * FROM Compte WHERE");
 		if (login != null) {
@@ -233,10 +228,13 @@ public class DatabaseUserManager implements UserManager {
 		} else
 			query.append(" NOM_COM like '" + name + "%'");
 
-		rs = requestor.doQuery(query.toString());
-
-		if((rs != null) && (rs.first())) {
-			return (List)(new DatabaseUserList(rs));
+		try {
+			rs = requestor.doQuery(query.toString());
+			if((rs != null) && (rs.first())) {
+				return (List)(new DatabaseUserList(rs));
+			}
+		} catch (SQLException e) {
+			throw new ManagerException("Unable to query the database");
 		}
 		return null;
 	}

@@ -2,8 +2,9 @@
 
 package fr.umlv.desperados.account;
 
-import java.sql.SQLException;
 import java.util.List;
+
+import fr.umlv.desperados.util.ManagerException;
 
 
 /**
@@ -21,7 +22,7 @@ public interface UserManager
     * already exists in the permanent storage.
     * @roseuid 3FC46F9F007D
     */
-   public void addUser(User user) throws UserAlreadyExistsException,UserException;
+   public void addUser(User user) throws UserAlreadyExistsException, ManagerException;
    
    /**
     * Checks if a User exists in the permanent storage.
@@ -31,7 +32,7 @@ public interface UserManager
     * <code>false</code> otherwise.
     * @roseuid 3FC369F202AF
     */
-   public boolean existUser(String login);
+   public boolean existUser(String login) throws ManagerException;
    
    /**
     * Gets a User from the permanent storage.
@@ -40,7 +41,7 @@ public interface UserManager
     * @return the User to get.
     * @roseuid 3FC8C1B3021D
     */
-   public User getUser(String login)  throws UserNotFoundException;
+   public User getUser(String login)  throws UserNotFoundException, ManagerException;
    
    /**
     * Modifies a User in the permanent storage.
@@ -50,7 +51,7 @@ public interface UserManager
     * exist in the permanent storage.
     * @roseuid 3FC46EFE01B5
     */
-   public void modifyUser(User user) throws UserNotFoundException;
+   public void modifyUser(User user) throws UserNotFoundException, ManagerException;
    
    /**
     * Removes a User from the permanent storage.
@@ -61,7 +62,7 @@ public interface UserManager
     * exist in the permanent storage.
     * @roseuid 3FC46FC1000F
     */
-   public User removeUser(String login) throws UserNotFoundException;
+   public User removeUser(String login) throws UserNotFoundException, ManagerException;
    
    /**
     * Searches a User in the permanent storage.
@@ -72,5 +73,5 @@ public interface UserManager
     * storage.
     * @roseuid 3FBF5C2702AE
     */
-   public List searchUser(String login, String name) throws SQLException;
+   public List searchUser(String login, String name) throws ManagerException;
 }
