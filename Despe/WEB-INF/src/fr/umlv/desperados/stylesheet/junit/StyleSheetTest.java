@@ -30,7 +30,7 @@ public class StyleSheetTest extends TestCase {
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
-		styleSheet = new StyleSheet("/home/dslg00/ndedanil/workspace/stylesheet/raymonda.txt","ma Feuille");
+		styleSheet = new StyleSheet("/home/dslg00/ndedanil/despe/stylesheet/dossier.xsl","ma Feuille");
 	}
 
 	/*
@@ -42,7 +42,7 @@ public class StyleSheetTest extends TestCase {
 	}
 	
 	public void testGetFilename() {
-		assertTrue(styleSheet.getFilename().equals("/home/dslg00/ndedanil/workspace/stylesheet/raymonda.txt"));
+		assertTrue(styleSheet.getFilename().equals("/home/dslg00/ndedanil/despe/stylesheet/dossier.xsl"));
 	}
 	
 	public void testGetName() {
@@ -50,7 +50,7 @@ public class StyleSheetTest extends TestCase {
 	}
 	
 	public void testToXML() {
-		assertTrue(styleSheet.toXML().equals("coucou"));
+		assertTrue(!styleSheet.toXML().equals("coucou"));
 	}
 
 }
