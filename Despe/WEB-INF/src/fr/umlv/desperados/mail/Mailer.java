@@ -65,9 +65,6 @@ public class Mailer {
 		// Read system configuration in system preferences file
 		mailFrom = child.get("mailAddress", "");
 		smtpServer = child.get("smtpServer", "");
-
-		//System.out.println("mailAddress = " + mailAddress);
-		//System.out.println("smtpServer = " + smtpServer);
 	}
 
 	/**

@@ -183,7 +183,6 @@ public class DatabaseInformationListManager {
 			}
 
 			query.append ("  ORDER BY "+id);
-			System.out.println("query : "+query);
 
 			try {
 				ResultSet rs=requestor.doQuery(query.toString());

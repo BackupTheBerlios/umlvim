@@ -188,11 +188,10 @@ public class SetupPlanningAction extends UserAction {
 		} catch (NumberFormatException e) {
 			target = "error";
 			e.printStackTrace();
-			
 		} catch (IOException e) {
-				target = "error";
-				e.printStackTrace();
-				}
+			target = "error";
+			e.printStackTrace();
+		}
 
 		return mapping.findForward(target);
 	}

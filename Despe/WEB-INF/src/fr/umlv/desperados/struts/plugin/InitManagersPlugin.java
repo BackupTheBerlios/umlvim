@@ -76,9 +76,7 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseInformationListManager.getInstance(strutsDatabaseRequestor ,path
 					+"/WEB-INF/src/fr/umlv/desperados/struts/Database.properties");
 				
-			//System.out.println(path + "/WEB-INF/planningConf.xml");
 			//PlanningConf planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
-			//System.out.println(planningConf);
 
 			// context visible manager init
 			ServletContext context = servlet.getServletContext();

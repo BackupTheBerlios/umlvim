@@ -51,8 +51,7 @@ public class PrefsPlugin implements PlugIn {
 		try {
 			is = new FileInputStream(path);
 		} catch (FileNotFoundException e) {
-			System.out.println(
-				"Cannot found or open the file : " + path);
+			throw new ServletException("Cannot found or open the file : " + path);
 		}
 
 		//	Import preference data

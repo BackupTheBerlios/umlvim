@@ -33,12 +33,19 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	 * @roseuid 3FF2CD41015A
 	 */
 	public ResultSet doQuery(String query) throws SQLException {
-		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 																				ResultSet.CONCUR_UPDATABLE);
 		ResultSet myResultSet = null;
+		System.out.println("StrutsDatabaseRequestor.doQuery() : query="+query);
 		myResultSet = sStat.executeQuery(query);
 		if(myResultSet.getConcurrency() == ResultSet.CONCUR_READ_ONLY) {
 			System.out.println("StrutsDatabaseRequestor: ATTENTION: ResultSet non updatable");
+		}
+		if(myResultSet.getType() == ResultSet.TYPE_FORWARD_ONLY) {
+			System.out.println("StrutsDatabaseRequestor: ATTENTION: ResultSet de type FORWARD_ONLY");
+		}
+		if(myResultSet.getType() == ResultSet.TYPE_SCROLL_SENSITIVE) {
+			System.out.println("StrutsDatabaseRequestor: ATTENTION: ResultSet de type SCROLL_SENSITIVE");
 		}
 		return myResultSet;
 	}
@@ -55,8 +62,7 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-		System.out.println("Erreur à la fermeture de la connection");
-			e.printStackTrace();
+			System.err.println("StrutsDatabaseRequestor.closeConnection(): " +				"Erreur à la fermeture de la connection");
 		}
 	}
 }

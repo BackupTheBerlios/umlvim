@@ -199,7 +199,6 @@ public class DatabaseRdvManager implements RdvManager {
 
 			//we use DO WHILE because the cursor is already on the first row
 			do {
-				System.out.println("heure libres:"+rs.getTimestamp("DATE_RDV"));
 				freeHours[i] = dtfHour.format(rs.getTimestamp("DATE_RDV"));
 
 				i++;

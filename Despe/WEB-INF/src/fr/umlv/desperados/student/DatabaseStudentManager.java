@@ -612,8 +612,6 @@ public class DatabaseStudentManager implements StudentManager {
 		}
 
 		query.replace(query.length() - 4, query.length(), "");
-		
-		System.out.println("query : "+query);
 
 		ResultSet rs = null;
 		try {
@@ -625,7 +623,6 @@ public class DatabaseStudentManager implements StudentManager {
 
 		try {
 			if((rs != null) && (rs.first())) {
-		//		System.out.println("liste"+new DatabaseStudentList(rs,"/home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.29/webapps/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties"));
 				return (List)(new DatabaseStudentList(rs,propertiesPath ));
 			}
 		} catch (SQLException e1) {
