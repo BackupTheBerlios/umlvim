@@ -370,7 +370,10 @@ public class DatabaseRdvManager implements RdvManager {
 		ResultSet rs = null;
 		String reqSql = "";
 		String numberOfRdV = "";
-				
+		
+		// For search on every day of the period
+		dateEnd += " 23:59:59";
+		
 		if(diplomaId == "")
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 				+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
