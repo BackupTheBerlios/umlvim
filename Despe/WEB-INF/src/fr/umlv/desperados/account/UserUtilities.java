@@ -2,6 +2,9 @@
 
 package fr.umlv.desperados.account;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 public final class UserUtilities {
@@ -23,6 +26,23 @@ public final class UserUtilities {
 			passwordArray[i] = (byte) tabChar[rand.nextInt(tabChar.length)];
 
 		return new String(passwordArray);
+	}
+
+	public static String cryptPassword(String plainTextPassword) {
+		String cryptedPassword = null;
+		try {
+			MessageDigest messageDigest;
+			messageDigest = MessageDigest.getInstance("MD5");
+			byte[] b = messageDigest.digest(plainTextPassword.getBytes("US-ASCII"));
+			cryptedPassword = new String(b, "US-ASCII");
+		}catch (NoSuchAlgorithmException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+		return cryptedPassword;
 	}
 
 	/**

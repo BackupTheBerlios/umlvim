@@ -93,5 +93,4 @@ public class UserLogonForm extends ActionForm {
 	public void setLogin(String login) {
 		this.login = login;
 	}
-
 }

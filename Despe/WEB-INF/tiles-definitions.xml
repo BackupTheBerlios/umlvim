@@ -87,6 +87,10 @@
 		<put name="body-content"	value="/WEB-INF/jsp/form/ChangePassword.jsp" />
 	</definition>
 
+	<definition name="user.password.lost" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/PasswordLost.jsp" />
+	</definition>
+
 	<definition name="user.search.student" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/SearchStudent.jsp" />
 	</definition>

@@ -109,8 +109,16 @@
 		</action>
 
 		<action
-			path="/lost/password"
-			type="fr.umlv.desperados.struts.action.ChangePasswordAction" />
+			path="/lost/password"					forward="user.password.lost" />
+		<action
+			path="/lostPassword"
+			type="fr.umlv.desperados.struts.action.PasswordLostAction"
+			name="UserLogonForm"
+			attribute="UserLogonForm"
+			scope="request"
+			validate="false">
+			<forward	name="cancelled"			path="/do/home/user" />
+		</action>
 
 		<action	path="/new/password"		forward="user.change.password" />
 		<action

@@ -7,8 +7,8 @@
 	<html:form action="changePassword">
 		<table>
 			<tr>
-				<td> <html:submit/> </td>
-				<td> <html:cancel/> </td>
+				<td> <html:submit> <bean:message key="button.confirm"/> </html:submit> </td>
+				<td> <html:cancel> <bean:message key="button.cancel"/> </html:cancel> </td>
 			</tr>
 		</table>
 	</html:form>

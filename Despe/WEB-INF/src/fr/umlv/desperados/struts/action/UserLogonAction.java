@@ -4,8 +4,6 @@
 
 package fr.umlv.desperados.struts.action;
 
-import java.security.MessageDigest;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,6 +20,7 @@ import org.apache.struts.action.ActionMapping;
 import fr.umlv.desperados.account.User;
 import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.account.UserNotFoundException;
+import fr.umlv.desperados.account.UserUtilities;
 import fr.umlv.desperados.struts.form.UserLogonForm;
 import fr.umlv.desperados.util.Constants;
 
@@ -36,7 +35,6 @@ import fr.umlv.desperados.util.Constants;
 public class UserLogonAction extends Action {
 
 	// ----------------------------------------------------- Instance Variables
-
 
 	/**
 	 * The <code>Log</code> instance for this application.
@@ -88,19 +86,18 @@ public class UserLogonAction extends Action {
 		else {
 			try {
 				user = manager.getUser(userLogonForm.getLogin());
-				
+
 				//********************A DECOMMENTER POUR IDENTIFICATION SANS MD5 (despe,despe)**********************
-						String password = userLogonForm.getPassword();
-				if (!password.equals(user.getPassword())) {
-				
-				
+				String password = userLogonForm.getPassword();
+//				if (!password.equals(user.getPassword())) {
+//					errors.add("password",
+//						 new ActionError("error.password.mismatch"));
+//				}
 				///**********************A DECOMMENTER POUR  MD5**********************************
-				//MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-				//byte[] crytpPass = messageDigest.digest(userLogonForm.getPassword().getBytes("US-ASCII"));
-				//String logonPass = new String(crytpPass,"US-ASCII");
-				//if(!logonPass.equals(user.getPassword())){
-						 				errors.add("password",
-					 new ActionError("error.password.mismatch"));
+				String logonPass = UserUtilities.cryptPassword(userLogonForm.getPassword());
+				if(!logonPass.equals(user.getPassword())){
+					errors.add("password",
+						 new ActionError("error.password.mismatch"));
 				}
 			} catch (UserNotFoundException e) {
 				errors.add("database",
