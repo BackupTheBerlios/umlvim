@@ -3,9 +3,13 @@
 <%@ page import="fr.umlv.desperados.util.Constants" %>
 
 <app:checkLogon>
-	<h1>
-		Bienvenue,
-		<bean:write name="<%=Constants.USER_KEY%>" property="firstname"/>
-		<bean:write name="<%=Constants.USER_KEY%>" property="name"/> !!
-	</h1>
+	<html>
+		<body>
+			<h1>
+				Bienvenue,
+				<bean:write name="<%=Constants.USER_KEY%>" property="firstname"/>
+				<bean:write name="<%=Constants.USER_KEY%>" property="name"/> !!
+			</h1>
+		</body>
+	</html>
 </app:checkLogon>

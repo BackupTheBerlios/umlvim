@@ -6,26 +6,26 @@
 <app:checkLogon admin="true" page="">
 	<table width="100%">
 		<tr>
-			<th align="left" valign="bottom">
+			<th align="left" valign="top">
 				<bean:message key="title.admin.menu"/>
 			</th>
 		</tr>
 		<tr>
-			<td align="right" valign="top">
+			<td align="right" valign="bottom">
 				<html:link action="/edit/user?action=create">
 					<bean:message key="menu.admin.adduser"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr>
-			<td align="right" valign="top">
+			<td align="right" valign="bottom">
 				<html:link action="/search/user">
 					<bean:message key="menu.admin.searchuser"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr>
-			<td align="right" valign="top">
+			<td align="right" valign="bottom">
 				<html:link action="/list/styleSheet">
 					<bean:message key="menu.admin.stylesheet"/>
 				</html:link>
