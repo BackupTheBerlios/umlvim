@@ -401,10 +401,6 @@ public class DatabaseRdvManager implements RdvManager {
 		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY') "
 				+ "and (ID_DIP_MLV = "+diplomaId+")";
 		
-		System.err.println(dateStart);
-		System.err.println(dateEnd);
-		System.err.println(reqSql);
-		
 		try {
 			rs = requestor.doQuery(reqSql);
 				
@@ -417,6 +413,4 @@ public class DatabaseRdvManager implements RdvManager {
 		
 		return numberOfRdV;
 	}
-	
-
 }
