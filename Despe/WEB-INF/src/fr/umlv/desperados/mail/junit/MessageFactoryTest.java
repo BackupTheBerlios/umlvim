@@ -6,15 +6,14 @@
  */
 package fr.umlv.desperados.mail.junit;
 
-import java.io.BufferedInputStream;
+import junit.framework.TestCase;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.prefs.InvalidPreferencesFormatException;
 import java.util.prefs.Preferences;
-
-import junit.framework.TestCase;
 
 import fr.umlv.desperados.account.User;
 import fr.umlv.desperados.mail.Message;
@@ -49,21 +48,24 @@ public class MessageFactoryTest extends TestCase {
 		super.setUp();
 		
 		String confPath = "WEB-INF/mail-conf.xml";
-		//	Create an input stream on a file
+		
 		InputStream is = null;
 		try {
-			is = new BufferedInputStream(new FileInputStream(confPath));
+			is = new FileInputStream(confPath);
 		} catch (FileNotFoundException e) {
-			System.err.println ("Cannot found or open the file : " + confPath);
+			System.out.println(
+				"Cannot found or open the file : " + confPath);
 		}
 
-		// Import preference data
+		//	Import preference data
 		try {
 			Preferences.importPreferences(is);
 		} catch (InvalidPreferencesFormatException e) {
-			System.err.println ("InvalidPreferencesFormatException in constructor of MessageFactory : " + e);
+			System.err.println(
+				"InvalidPreferencesFormatException in PlugIn PrefsPlugin : " + e);
 		} catch (IOException e) {
-			System.err.println ("IOException in constructor of MessageFactory : " + e);
+			System.err.println(
+				"IOException in PlugIn PrefsPlugin : " + e);
 		}
 		
 		messageFactory = new MessageFactory();
