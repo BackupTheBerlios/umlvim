@@ -2,7 +2,6 @@
 
 package fr.umlv.desperados.mail;
 
-import java.io.InputStream;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 
@@ -58,7 +57,7 @@ public class Mailer {
 	 * @param conf the stream containing the configuration of the Mailer.
 	 * @roseuid 3FE194B901E4
 	 */
-	public Mailer(InputStream conf) {
+	public Mailer() {
 		// Search the preferences system infos
 		Preferences uroot = Preferences.userRoot();
 		Preferences child = uroot.node("systemInfos");

@@ -81,7 +81,7 @@ public class MessageFactory {
 	 * @param confPath the path of the file containing the configuration of the Mailer.
 	 * @roseuid 3FE566F401C4
 	 */
-	public MessageFactory(String confPath) {
+	public MessageFactory() {
 
 		// Getting the user root node
 		Preferences uroot = Preferences.userRoot();
