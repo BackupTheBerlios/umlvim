@@ -5,6 +5,7 @@ package fr.umlv.desperados.planning;
 import java.sql.ResultSet;
 import java.util.AbstractList;
 
+
 /**
  * Provides a concrete implementation of java.util.List interface that contains a 
  * list of Rdv.
@@ -44,3 +45,19 @@ final class DatabaseRdvList extends AbstractList {
 		return 0;
 	}
 }
+/**
+ * 
+ * 
+ *  
+ * DatabaseRdvList.size(){
+ *     return 0;
+ *    }
+ *  
+ *  
+ * DatabaseRdvList.get(int){
+ *     return null;
+ *    }
+ *  
+ *  
+ *  
+ */

@@ -4,7 +4,6 @@ package fr.umlv.desperados.planning;
 
 import java.util.Date;
 
-import fr.umlv.desperados.student.StudentAccountInfo;
 import fr.umlv.desperados.util.XMLable;
 
 /**
@@ -17,18 +16,13 @@ public class Rdv implements XMLable {
 	*/
 	private Date date;
 
-	/**
-	 * The id of the Student who has the Rdv.
-	 */
-	private StudentAccountInfo studentId;
 
 	/**
 		   * @param studentInfo
 		   */
-	public Rdv(StudentAccountInfo studentInfo, Date dateRdv) {
+	public Rdv(Date dateRdv) {
 
 		date = dateRdv;
-		this.studentId = studentInfo;
 	}
 
 	/**
