@@ -17,12 +17,11 @@ public class Stats
     * @param begin the <code>Date</code> when calculation begins.
     * @param end the <code>Date</code> when calculation ends.
     * @param diplomaId the identifiant of the diploma.
-    * @param ravel whether or not the ravel students are included in the calculation.
     * 
     * @return int
     * @roseuid 3FD49F4E0177
     */
-   public int getNbRdv(java.util.Date begin, java.util.Date end, String diplomaId, boolean ravel) 
+   public int getNbRdv(java.util.Date begin, java.util.Date end, String diplomaId) 
    {
     return 0;
    }

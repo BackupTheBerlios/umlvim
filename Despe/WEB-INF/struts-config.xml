@@ -162,7 +162,7 @@
         </action>
         
         <action
-            attribute="StudentLogonForm"
+            attribute="StatsForm"
             input="/pages/form/stats.jsp"
             name="StatsForm"
             path="/stats"
