@@ -33,7 +33,6 @@ public class ListStyleSheetAction extends AdminAction {
 		throws Exception {
 
 		ActionErrors errors = new  ActionErrors();
-
 		StyleSheetManager manager =
 			(StyleSheetManager) servlet.getServletContext().getAttribute(
 				Constants.STYLESHEET_DATABASE_KEY);
