@@ -62,7 +62,7 @@ public class EditStudentFileAction extends StudentAction {
 						request.setAttribute( "lodgingTypeList",lodgingTypeList);
 			
 			
-			
+		
 		}
 		if ("2".equals(page)) {
 		}

@@ -30,7 +30,8 @@ public class StudentPersoForm extends ActionForm {
 	private String birthdep;
 	private String sex;
 	private String nationality;
-	private String address;
+	private String addressTemp;
+	private String addressFixe;
 	private String zip;
 	private String city;
 	private String country;
@@ -82,14 +83,17 @@ public class StudentPersoForm extends ActionForm {
 		if((sex == null) || (sex.equals(""))) {
 			errors.add("sex", new ActionError("error.required"));
 		}
-		if((address == null) || (address.equals(""))) {
-			errors.add("address", new ActionError("error.required"));
+		if((addressTemp == null) || (addressTemp.equals(""))) {
+			errors.add("addressTemp", new ActionError("error.required"));
+		}
+		if((addressFixe == null) || (addressFixe.equals(""))) {
+			errors.add("addressFixe", new ActionError("error.required"));
 		}
 		if((zip == null) || (zip.equals(""))) {
 			errors.add("zip", new ActionError("error.required"));
 		}
 		if((city == null) || (city.equals(""))) {
-			errors.add("city", new ActionError("error.required"));
+			errors.add("frenchCity", new ActionError("error.required"));
 		}
 		if((country == null) || (country.equals(""))) {
 			errors.add("country", new ActionError("error.required"));
@@ -120,6 +124,7 @@ public class StudentPersoForm extends ActionForm {
 		birthdep = "";
 		sex = "";
 		nationality = "";
+		city="";
 	}
 
 	/**
@@ -265,13 +270,6 @@ public class StudentPersoForm extends ActionForm {
 	/**
 	 * @return
 	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @return
-	 */
 	public String getCity() {
 		return city;
 	}
@@ -288,13 +286,6 @@ public class StudentPersoForm extends ActionForm {
 	 */
 	public String getZip() {
 		return zip;
-	}
-
-	/**
-	 * @param string
-	 */
-	public void setAddress(String string) {
-		address = string;
 	}
 
 	/**
@@ -344,6 +335,34 @@ public class StudentPersoForm extends ActionForm {
 	 */
 	public void setLodgingType(String string) {
 		lodgingType = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getAddressFixe() {
+		return addressFixe;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getAddressTemp() {
+		return addressTemp;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setAddressFixe(String string) {
+		addressFixe = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setAddressTemp(String string) {
+		addressTemp = string;
 	}
 
 }

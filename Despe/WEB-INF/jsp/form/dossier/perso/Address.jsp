@@ -9,7 +9,7 @@
 			<tr align="center"><b> <bean:message key="inscription.address.title"/></b> </tr>
 		<tr>
 			<td> <bean:message key="inscription.address.fixe"/> </td>
-			<td> <html:text property="address" /> </td>
+			<td> <html:text property="addressFixe" /> </td>
 		</tr>
 		<tr>
 			<td> <bean:message key="inscription.address.zip"/> </td>
@@ -39,6 +39,10 @@
 					</logic:iterate>
 				</html:select>
 				</td>
+		</tr>
+		<tr>
+			<td> <bean:message key="inscription.address.temp"/> </td>
+			<td> <html:text property="addressTemp" /> </td>
 		</tr>
 	</table>
 
