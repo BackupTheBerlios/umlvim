@@ -55,7 +55,7 @@ public class EditStudentFileAction extends StudentAction {
 		String page = request.getParameter("page");
 		if(page == null) {
 			//TODO mettre 1 au lieu de 3
-			page = "1";
+			page = "2";
 		} 
 		if ("1".equals(page)) {
 			Set lodgingTypeList=manager.list(DatabaseInformationListManager .LODGING_TYPE);
@@ -72,6 +72,10 @@ public class EditStudentFileAction extends StudentAction {
 		
 		}
 		if ("2".equals(page)) {
+			Set yearsList=manager.years();
+							request.setAttribute( "yearsList",yearsList);
+			Set frenchDepList=manager.list(DatabaseInformationListManager .FRENCH_DEP);
+						request.setAttribute( "frenchDepList",frenchDepList);
 		}
 		if ("3".equals(page)) {
 				Set SocialSecurityAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);

@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Properties;
 import java.util.Set;
+import java.util.Date;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 
@@ -137,13 +138,11 @@ public class DatabaseInformationListManager {
 				condition = prop.get(resource+".regsec") + " = 0 ";
 			}
 			else if(FRENCH_DEP.equals(resource)) {
-				condition = prop.get(resource+".nationality")
-								+ " = '" + prop.get(resource+".nationality.french") + "'";
+				condition = prop.get(resource+".nationality")+" IS NULL";
 			}
 			else if(FOREIGN_COUNTRY.equals(resource)) {
 				resource = FRENCH_DEP;
-				condition = "NOT " + prop.get(resource+".nationality")
-								+ " = '" + prop.get(resource+".nationality.french") + "'";
+				condition = prop.get(resource+".nationality")+ "IS NOT NULL";
 			}
 			else if(LAST_ESTAB_TYPE.equals(resource)) {
 				condition = prop.get(resource+".last")	+ " = 1";
@@ -203,5 +202,18 @@ public class DatabaseInformationListManager {
 				e.printStackTrace();
 			}
 		return map;
+	}
+	
+	
+	public Set years(){
+	LinkedHashMap map = new LinkedHashMap();
+	Date actualTime=new Date(System.currentTimeMillis());
+	int actualYear=actualTime.getYear()+1900 ;
+	for(int i=actualYear-100;i<actualYear;i++)
+	{
+		map.put(new Integer(i),new Integer(i));	
+	}
+	
+	return map.entrySet() ;
 	}
 }

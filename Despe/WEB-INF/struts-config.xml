@@ -38,6 +38,8 @@
 							type="fr.umlv.desperados.struts.form.StudentSecuForm" />
 		<form-bean	name="StudentFinancialForm"
 							type="fr.umlv.desperados.struts.form.StudentFinancialForm" />
+		<form-bean	name="StudentStudiesForm"
+							type="fr.umlv.desperados.struts.form.StudentStudiesForm" />
 		<form-bean	name="ConfirmForm"
 							type="fr.umlv.desperados.struts.form.ConfirmForm" />
 	</form-beans>
@@ -216,7 +218,7 @@
 			path="/edit/file"
 			type="fr.umlv.desperados.struts.action.EditStudentFileAction">
 			<forward name="1"							path="student.edit.perso"/>
-			<forward name="2"							path="student.edit.secu"/>
+			<forward name="2"							path="student.edit.studies"/>
 			<forward name="3"							path="student.edit.secu"/>
 			<forward name="4"							path="student.edit.financial"/>
 		</action>
@@ -254,6 +256,15 @@
 			attribute="StudentFinancialForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/StudentFinancial.jsp"
+			validate="false"/>
+			
+			<action
+			path="/save/file/studies"
+			type="fr.umlv.desperados.struts.action.SaveStudentFileAction"
+			name="StudentStudiesForm"
+			attribute="StudentStudiesForm"
+			scope="request"
+			input="/WEB-INF/jsp/form/StudentStudies.jsp"
 			validate="false"/>
 
 		<action

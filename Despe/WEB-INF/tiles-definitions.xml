@@ -60,6 +60,10 @@
 		<put name="body-content"	value="/WEB-INF/jsp/form/StudentFinancial.jsp" />
 	</definition>
 
+	<definition name="student.edit.studies" extends="baseDef">
+		<put name="body-content"	value="/WEB-INF/jsp/form/StudentStudies.jsp" />
+	</definition>
+
 	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>
