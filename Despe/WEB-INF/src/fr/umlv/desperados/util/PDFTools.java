@@ -240,21 +240,21 @@ public class PDFTools {
 		String emploi = student.getStudEmplType();
 		System.out.println("emploi = "+emploi);
 		//replace(sbuff, "#emploi_nom#", manager.get(DatabaseInformationListManager.SOCIAL_ECONOMIC_CATEGORY, emploi));
-		replace(sbuff, "#emploi_code#", student.getStudEmplType());
-		replace(sbuff, "#prof_chef#", student.getHeadFamProf());
+		//replace(sbuff, "#emploi_code#", student.getStudEmplType());
+		//replace(sbuff, "#prof_chef#", student.getHeadFamProf());
 		
-		replace(sbuff, "#sport#", student.getPractisedSport());
+		//replace(sbuff, "#sport#", student.getPractisedSport());
 		
 		/******************Financial Aid*****************/
-		replace(sbuff, "#aide_code#", student.getFinancialAssistanceId());
-		replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
+		//replace(sbuff, "#aide_code#", student.getFinancialAssistanceId());
+		//replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
 		
 		/***************** Inscriptions ******************/
 		String diploma = new Integer(student.getMLVDiplomaId()).toString();
-		replace(sbuff, "#inscr_principale#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
-		replace(sbuff, "#nb1#", new Integer(student.getPrincCycleInsNum()).toString());
-		replace(sbuff, "#nb2#", new Integer(student.getPrincDiplInsNum()).toString());
-		replace(sbuff, "#nb3#", new Integer(student.getPrincInsYearNum()).toString());
+		//replace(sbuff, "#inscr_principale#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
+		//replace(sbuff, "#nb1#", new Integer(student.getPrincCycleInsNum()).toString());
+		//replace(sbuff, "#nb2#", new Integer(student.getPrincDiplInsNum()).toString());
+		//replace(sbuff, "#nb3#", new Integer(student.getPrincInsYearNum()).toString());
 		//diploma = new Integer(student.getMLVDiplomaComplId()).toString();
 		//replace(sbuff, "#inscr_complementaire#", manager.get(DatabaseInformationListManager.MLV_DIPLOMA, diploma));
 		//replace(sbuff, "#nb4#", new Integer(student.getComplCycleInsNum()).toString());
