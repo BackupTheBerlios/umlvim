@@ -112,6 +112,8 @@ public class InitManagersPlugin implements PlugIn {
 	 * @see org.apache.struts.action.PlugIn#destroy()
 	 */
 	public void destroy() {
-		strutsDatabaseRequestor.closeConnection();
+		if(strutsDatabaseRequestor != null) {
+			strutsDatabaseRequestor.closeConnection();
+		}
 	}
 }

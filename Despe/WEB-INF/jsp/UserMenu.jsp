@@ -11,14 +11,14 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/addStudent">
+				<html:link action="/add/student">
 					<bean:message key="menu.user.addstudent"/>
 				</html:link>
 			</td>
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/search?type=student">
+				<html:link action="/search/student">
 					<bean:message key="menu.user.searchstudent"/>
 				</html:link>
 			</td>
@@ -32,13 +32,20 @@
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="list/diploma">
+				<html:link action="/stats/prepare">
 					<bean:message key="menu.user.stats" />
 				</html:link>
 			</td>
 		</tr>
 		<tr>
-			<td align="right" valign="top">
+			<td align="right" valign="bottom">
+				<html:link action="/new/password">
+					<bean:message key="link.newpasswd" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="bottom">
 				<html:link action="/userLogoff">
 					<bean:message key="link.logoff" />
 				</html:link>

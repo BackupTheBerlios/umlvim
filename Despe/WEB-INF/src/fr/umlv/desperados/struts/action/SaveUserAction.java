@@ -112,7 +112,7 @@ public class SaveUserAction extends AdminAction {
 			err = "error.admin.lastadmin";
 		} catch(ManagerException e) {
 			err = e.getMessage();
-		}
+		} // TODO catcher l'exception MailNotSentException
 		if(err != null) {
 			errors.add(ActionErrors.GLOBAL_ERROR,
 					   new ActionError(err));
@@ -128,7 +128,7 @@ public class SaveUserAction extends AdminAction {
 			}
 		}
 
-		// Report any errors we have discovered back to the original form
+		// Report any errors we have discovered
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			saveToken(request);

@@ -16,12 +16,14 @@
 
 
 	<!--
-		the fallowing definition are form according to two points :
-			1/ the path begin with the actor who can access to the page
+		the fallowing definition are formed according to two points :
+			1/ the path begins with the actor who can access to the page
 			(one of 'admin', 'user', 'student' or 'common'), fallowed by
 			a dot
 			2/ the path continues with an explicit name of the page to
 			show. (ex. edit.user for a page that edit a User)
+
+		ex. 'admin.edit.user' is the page where the admin can edit a User
 	-->
 
 
@@ -93,10 +95,6 @@
 
 	<definition name="admin.search.user" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/SearchUser.jsp" />
-	</definition>
-	
-	<definition name="planning.configure" extends="baseDef">
-		<put name="body-content"	value="/WEB-INF/jsp/form/SetupPlanning.jsp" />
 	</definition>
 
 	<definition name="admin.stylesheet.list" extends="baseDef">
