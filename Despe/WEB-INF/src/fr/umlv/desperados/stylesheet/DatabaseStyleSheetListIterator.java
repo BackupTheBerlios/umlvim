@@ -44,8 +44,8 @@ final class DatabaseStyleSheetListIterator extends DatabaseAbstractListIterator 
 				current = rs.getRow();
 				index++;
 				rs.absolute(index);
-				ss = new StyleSheet(rs.getString("NOM_FIC"),
-													rs.getString("NOM"));
+				ss = new StyleSheet(rs.getString("NOM_FIC_FEU"),
+													rs.getString("NOM_FEU"));
 			}
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
@@ -73,8 +73,8 @@ final class DatabaseStyleSheetListIterator extends DatabaseAbstractListIterator 
 				current = rs.getRow();
 				index--;
 				rs.absolute(index);
-				ss = new StyleSheet(rs.getString("NOM_FIC"),
-													rs.getString("NOM"));
+				ss = new StyleSheet(rs.getString("NOM_FIC_FEU"),
+													rs.getString("NOM_FEU"));
 			}
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré

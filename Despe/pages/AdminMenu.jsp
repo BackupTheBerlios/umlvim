@@ -22,6 +22,13 @@
 				</html:link>
 			</td>
 		</tr>
+		<tr align="right">
+			<td width="120">
+				<html:link action="/listStyleSheet">
+					<bean:message key="menu.admin.stylesheet"/>
+				</html:link>
+			</td>
+		</tr>
 	</table>
 </app:checkLogon>
 

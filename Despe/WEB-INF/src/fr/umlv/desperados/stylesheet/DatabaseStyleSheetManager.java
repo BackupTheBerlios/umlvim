@@ -49,10 +49,9 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @return the unique instance of StyleSheetManager.
 	 * @roseuid 3FF85111002D
 	 */
-	public DatabaseStyleSheetManager getInstance(DatabaseRequestor requestor) {
-		if (theInstance == null)
-			theInstance = new DatabaseStyleSheetManager(requestor);
-
+	public static DatabaseStyleSheetManager getInstance(DatabaseRequestor requestor) {
+			if (theInstance == null)
+				theInstance = new DatabaseStyleSheetManager(requestor);
 		return theInstance;
 	}
 
@@ -60,24 +59,20 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	 * @param styleSheet
 	 * @roseuid 3FF869D00380
 	 */
-	public void addStyleSheet(StyleSheet styleSheet, InputStream stream) {
-
-		File f = new File(styleSheet.getFilename());
+	public void addStyleSheet(StyleSheet styleSheet) {
 		try {
-			FileOutputStream fos = new FileOutputStream(f);
-			byte[] lu = new byte[10];
-			while (stream.read(lu) != -1)
-				fos.write(lu);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
+			String s = "INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES ("
+			+ styleSheet.getFilename()
+			+ ","
+			+ styleSheet.getName()
+			+ ")";
+			System.out.println(s);
 			requestor.doQuery(
-				"INSERT INTO FEUILLE_DE_STYLE ("
+				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES (\""
 					+ styleSheet.getFilename()
-					+ ","
+					+ "\",\""
 					+ styleSheet.getName()
-					+ ")");
+					+ "\")");
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();
@@ -91,7 +86,7 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public void removeStyleSheet(String styleSheetId) {
 		try {
 			requestor.doQuery(
-				"DELETE * FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU=" + styleSheetId);
+				"DELETE FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU='" + styleSheetId+"'");
 			File f = new File(styleSheetId);
 			f.delete();
 		} catch (SQLException e) {
@@ -107,10 +102,10 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public void setStyleSheet(String StyleSheetId, int docTypeId) {
 		try {
 			requestor.doQuery(
-				"UPDATE DOCUMENT SET  FEUILLE_STYLE_DOC = "
+				"UPDATE DOCUMENT SET  FEUILLE_STYLE_DOC='"
 					+ StyleSheetId
-					+ " WHERE ID_DOC="
-					+ docTypeId);
+					+ "' WHERE ID_DOC='"
+					+ docTypeId+"'");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -147,7 +142,7 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 			String fileName = rs.getString("FEUILLE_STYLE_DOC");
 			rs =
 				requestor.doQuery(
-					"SELECT * FROM FEUILLE_DE_STYLE WHERE nom_fic = " + fileName);
+					"SELECT * FROM FEUILLE_DE_STYLE WHERE NOM_FIC = " + fileName);
 			ss = new StyleSheet(rs.getString("NOM_FIC_FEU"), rs.getString("NOM_FEU"));
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré

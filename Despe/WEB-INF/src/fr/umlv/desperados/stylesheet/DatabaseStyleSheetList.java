@@ -36,8 +36,8 @@ final class DatabaseStyleSheetList extends DatabaseAbstractList {
 			if (rs.absolute(i))
 				ss =
 					new StyleSheet(
-						rs.getString("nom_fic"),
-						rs.getString("nom"));
+						rs.getString("NOM_FIC_FEU"),
+						rs.getString("NOM_FIC"));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
