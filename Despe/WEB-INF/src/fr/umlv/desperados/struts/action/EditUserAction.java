@@ -62,6 +62,7 @@ public class EditUserAction extends AdminAction {
 		}
 
 		User userToEdit = null;
+		// get the userToEdit (unless creation action
 		if (!"create".equals(action)) {
 			UserManager manager = (UserManager) servlet.getServletContext()
 										.getAttribute(Constants.USER_DATABASE_KEY);
@@ -93,7 +94,7 @@ public class EditUserAction extends AdminAction {
 			if (log.isTraceEnabled()) {
 				log.trace(" Populating form from " + userToEdit);
 			}
-			FormUtilities.UserToUserForm(userToEdit, userForm);
+			userForm = FormUtilities.UserToUserForm(userToEdit);
 			userForm.setGeneratePassword(false);
 		}
 		userForm.setAction(action);
@@ -109,7 +110,5 @@ public class EditUserAction extends AdminAction {
 			log.trace(" Forwarding to 'edituser' page");
 		}
 		return (mapping.findForward("edituser"));
-
 	}
-
 }

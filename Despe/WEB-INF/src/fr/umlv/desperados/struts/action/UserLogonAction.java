@@ -82,7 +82,6 @@ public class UserLogonAction extends Action {
 		else {
 			try {
 				user = manager.getUser(userLogonForm.getLogin());
-				System.out.println("**"+user+"**");
 				String password = userLogonForm.getPassword();
 				if (!password.equals(user.getPassword())) {
 					errors.add("password",

@@ -52,23 +52,23 @@ public final class SearchUserAction extends AdminAction {
 		ActionErrors errors = searchForm.validate(mapping, request);
 ////////////////////
 //COMMENTED FOR TEST
-//		UserManager manager = (UserManager)servlet.getServletContext().
-//								getAttribute(Constants.USER_DATABASE_KEY);
-//		if(manager == null) {
-//			errors.add("database",
-//			   new ActionError("error.database.missing"));
-//			log.warn("UserLogonAction: Database is missing");
-//		}
-//
-//		if(!errors.isEmpty()) {
-//			saveErrors(request, errors);
-//			return (mapping.findForward("searchuser"));
-//		}
-		PrintWriter pw = response.getWriter();
-		pw.println("Searching login='"+searchForm.getLogin()+"' name='"+searchForm.getName()+"'");		
+		UserManager manager = (UserManager)servlet.getServletContext().
+								getAttribute(Constants.USER_DATABASE_KEY);
+		if(manager == null) {
+			errors.add("database",
+			   new ActionError("error.database.missing"));
+			log.warn("UserLogonAction: Database is missing");
+		}
 
-//		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
-//		request.setAttribute("userList", userList);
+		if(!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("searchuser"));
+		}
+//		PrintWriter pw = response.getWriter();
+//		pw.println("Searching login='"+searchForm.getLogin()+"' name='"+searchForm.getName()+"'");		
+
+		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
+		request.setAttribute("userList", userList);
 ////////////////////
 
 		return (mapping.findForward("searchuser"));

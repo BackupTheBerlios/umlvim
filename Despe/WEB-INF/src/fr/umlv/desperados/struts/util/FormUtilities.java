@@ -17,19 +17,22 @@ import fr.umlv.desperados.struts.form.UserForm;
  */
 public class FormUtilities {
 
-	public static void userFormToUser(UserForm form, User user) {
-		user.setLogin(form.getLogin());
+	public static User userFormToUser(UserForm form) {
+		User user = new User(form.getLogin());
 		user.setName(form.getName());
 		user.setFirstname(form.getFirstname());
 		user.setEmail(form.getEmail());
 		user.setAdmin(form.getAdmin());
+		return user;
 	}
 
-	public static void UserToUserForm(User user, UserForm form) {
+	public static UserForm UserToUserForm(User user) {
+		UserForm form = new UserForm();
 		form.setLogin(user.getLogin());
 		form.setName(user.getName());
 		form.setFirstname(user.getFirstname());
 		form.setEmail(user.getEmail());
 		form.setAdmin(user.getAdmin());
+		return form;
 	}
 }

@@ -101,8 +101,7 @@ public class SaveUserAction extends AdminAction {
 		}
 
 		// Update the user's persistent profile information
-		User userToSave = null;
-		FormUtilities.userFormToUser(userForm, userToSave);
+		User userToSave = FormUtilities.userFormToUser(userForm);
 
 		if("create".equals(action)) {
 			manager.addUser(userToSave);
