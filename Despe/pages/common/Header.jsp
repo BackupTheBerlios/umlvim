@@ -1,4 +1,4 @@
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html"%>
 
 <table width="100%">
 	<tr>

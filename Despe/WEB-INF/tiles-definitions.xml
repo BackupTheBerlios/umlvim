@@ -85,6 +85,10 @@
 		<put name="body-content"	value="/pages/form/statsRes.jsp" />
 	</definition>
 
+	<definition name="planning.configure" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
+	</definition>
+
 	<!-- Admin's pages definitions -->
 
 	<definition name="admin.edit.user" extends="userBaseDef">
@@ -93,10 +97,6 @@
 
 	<definition name="admin.search.user" extends="userBaseDef">
 		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
-	</definition>
-	
-	<definition name="planning.configure" extends="baseDef">
-		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
 	</definition>
 
 	<definition name="admin.stylesheet.list" extends="userBaseDef">

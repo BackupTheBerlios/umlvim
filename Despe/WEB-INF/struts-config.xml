@@ -6,8 +6,31 @@
 <struts-config>
 
 	<!-- ========== Data Source Configuration ============================= -->
-	<data-sources />
-
+	<data-sources/>
+<!--
+	<data-sources>
+		<data-source key="ORACLE">
+			<set-property	property="driverClassName"
+										value="oracle.jdbc.driver.OracleDriver" />
+			<set-property	property="url"
+										value="jdbc:oracle:thin:@hibiscus:1521:test" />
+			<set-property	property="username"
+										value="desperados" />
+			<set-property	property="password"
+										value="totofaitduvelo" />
+			<set-property	property="maxActive"
+										value="10" />
+			<set-property	property="maxWait"
+										value="5000" />
+			<set-property	property="defaultAutoCommit"
+										value="false" />
+			<set-property	property="defaultReadOnly"
+										value="false" />
+			<set-property	property="validationQuery"
+										value="SELECT COUNT(*) FROM COMPTE" />
+		</data-source>
+	</data-sources>
+-->
 	<!-- ========== Form Bean Definitions ================================= -->
 	<form-beans>
 

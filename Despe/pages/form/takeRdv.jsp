@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" 
 import ="java.util.*, fr.umlv.desperados.planning.DatabaseRdvManager,fr.umlv.desperados.util.Constants"%>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="/WEB-INF/tlds/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 
 
 <html:html>

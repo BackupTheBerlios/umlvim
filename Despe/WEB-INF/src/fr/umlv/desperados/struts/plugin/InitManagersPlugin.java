@@ -27,19 +27,7 @@ import fr.umlv.desperados.util.Constants;
 
 public class InitManagersPlugin implements PlugIn {
 
-	/* (non-Javadoc)
-	 * @see org.apache.struts.action.PlugIn#init(org.apache.struts.action.ActionServlet, org.apache.struts.config.ModuleConfig)
-	 */
-	public InitManagersPlugin() {
-	}
-
-	public StrutsDatabaseRequestor strutsDatabaseRequestor;
-	public DatabaseRdvManager databaseRdvManager;
-	public DatabaseUserManager databaseUserManager;
-	public DatabaseStudentManager databaseStudentManager;
-	public DatabaseStyleSheetManager databaseStyleSheetManager;
-	public PlanningConf planningConf;
-	public DatabaseDiplomaManager databaseDiplomaManager;
+	private StrutsDatabaseRequestor strutsDatabaseRequestor;
 
 	public void init(ActionServlet servlet, ModuleConfig config)
 		throws javax.servlet.ServletException {
@@ -65,42 +53,39 @@ public class InitManagersPlugin implements PlugIn {
 			strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
 
 			// managers init
-			databaseRdvManager =
+			DatabaseRdvManager databaseRdvManager =
 				DatabaseRdvManager.getInstance(strutsDatabaseRequestor);
-			databaseDiplomaManager =
+
+			DatabaseDiplomaManager databaseDiplomaManager =
 				DatabaseDiplomaManager.getInstance(strutsDatabaseRequestor);
-			databaseUserManager =
+
+			DatabaseUserManager databaseUserManager =
 				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
-			databaseStyleSheetManager =
+
+			DatabaseStyleSheetManager databaseStyleSheetManager =
 				DatabaseStyleSheetManager.getInstance(strutsDatabaseRequestor);
-			databaseStudentManager =
+
+			DatabaseStudentManager databaseStudentManager =
 				DatabaseStudentManager.getInstance(
 					strutsDatabaseRequestor, path
 						+ "/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 
 			//System.out.println(path + "/WEB-INF/planningConf.xml");
-
-			//planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
-
+			//PlanningConf planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
 			//System.out.println(planningConf);
 
 			// context visible manager init
 			ServletContext context = servlet.getServletContext();
-			context.setAttribute(
-				Constants.RDV_DATABASE_KEY,
-				databaseRdvManager);
-			context.setAttribute(
-				Constants.DIPLOMA_DATABASE_KEY,
-				databaseDiplomaManager);
-			context.setAttribute(
-				Constants.USER_DATABASE_KEY,
-				databaseUserManager);
-			context.setAttribute(
-				Constants.STUDENT_DATABASE_KEY,
-				databaseStudentManager);
-			context.setAttribute(
-				Constants.STYLESHEET_DATABASE_KEY,
-				databaseStyleSheetManager);
+			context.setAttribute(Constants.RDV_DATABASE_KEY,
+												databaseRdvManager);
+			context.setAttribute(Constants.DIPLOMA_DATABASE_KEY,
+												databaseDiplomaManager);
+			context.setAttribute(Constants.USER_DATABASE_KEY,
+												databaseUserManager);
+			context.setAttribute(Constants.STUDENT_DATABASE_KEY,
+												databaseStudentManager);
+			context.setAttribute(Constants.STYLESHEET_DATABASE_KEY,
+												databaseStyleSheetManager);
 //			context.setAttribute(
 //				Constants.PLANNING_CONF_DATABASE_KEY,
 //				planningConf);
@@ -127,9 +112,6 @@ public class InitManagersPlugin implements PlugIn {
 	 * @see org.apache.struts.action.PlugIn#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
-
 		strutsDatabaseRequestor.closeConnection();
-
 	}
 }
