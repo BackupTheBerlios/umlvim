@@ -9,7 +9,7 @@
 			<map>
 				<entry key="universiteName" value="Universite de Marne-La-Vallee" />
 				<entry key="mailAddress" value="webmaster@univ-mlv.fr" />
-				<entry key="smtpServer" value="smtp.9online.fr" />
+				<entry key="smtpServer" value="smtp.univ-mlv.fr" />
 			</map>
 		</node>
 		<node name="accountCreatedMail">

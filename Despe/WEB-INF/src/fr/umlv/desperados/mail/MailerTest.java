@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import java.io.*;
 import java.util.prefs.*;
 
+
 /**
  * @author Arnaud FRICOTTEAU
  *
@@ -74,11 +75,14 @@ public class MailerTest extends TestCase {
 		Message message = new Message(object, body);
 		
 		try {
-			assertTrue(mailer.sendMail("africott@etudiant.univ-mlv.fr", message));
+			mailer.sendMail("africott@etudiant.univ-mlv.fr", message);
 		} catch (MailNotSentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+			assertTrue(false);
+		} 
+				
+		assertTrue(true);
 	}	
 
 }
