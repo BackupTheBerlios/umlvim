@@ -110,7 +110,7 @@ public class MessageFactory {
 	private String updateBodyMail(String body, User user) {
 		
 		if(user != null) {
-			body = body.replaceAll("#firstname", user.getFirstname());
+			body = body.replaceAll("#firstName", user.getFirstname());
 			body = body.replaceAll("#name", user.getName());
 			if (user.getAdmin())
 				body = body.replaceAll("#admin", "administrateur");
@@ -118,6 +118,8 @@ public class MessageFactory {
 				body = body.replaceAll("#admin", "utilisateur");
 			body = body.replaceAll("#login", user.getLogin());
 			body = body.replaceAll("#password", user.getPassword());
+			
+			body = body.replaceAll("#newLine", "\n");
 		}
 		
 		return body;

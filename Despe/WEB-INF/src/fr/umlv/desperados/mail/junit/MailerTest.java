@@ -1,8 +1,6 @@
 /*
  * Created on 2 janv. 2004
  *
- * To change the template for this generated file go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package fr.umlv.desperados.mail.junit;
 
@@ -21,8 +19,6 @@ import fr.umlv.desperados.mail.MessageFactory;
 /**
  * @author Arnaud FRICOTTEAU
  *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class MailerTest extends TestCase {
 

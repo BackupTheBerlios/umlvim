@@ -1,8 +1,6 @@
 /*
  * Created on 2 janv. 2004
  *
- * To change the template for this generated file go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 package fr.umlv.desperados.mail.junit;
 
@@ -22,8 +20,6 @@ import fr.umlv.desperados.mail.MessageFactory;
 /**
  * @author Arnaud FRICOTTEAU
  *
- * To change the template for this generated type comment go to
- * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
  */
 public class MessageFactoryTest extends TestCase {
 
@@ -47,6 +43,7 @@ public class MessageFactoryTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		
+		// System.err.println(System.getProperty("user.dir"));
 		String confPath = "WEB-INF/mail-conf.xml";
 		
 		InputStream is = null;
@@ -81,7 +78,7 @@ public class MessageFactoryTest extends TestCase {
 	
 	public void testCreateMessage() {
 		final String object = "Creation de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \\nVotre compte administrateur, pour acceder a l'application, a ete cree avec les parametres suivants : \\n login : africott \\n mot de passe : 123";
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete cree avec les parametres suivants : \n login : africott \n mot de passe : 123";
 		
 		Message message = null;
 		User user = new User("africott");
@@ -107,8 +104,7 @@ public class MessageFactoryTest extends TestCase {
 	
 	public void testModifyMessage() {
 		final String object = "Modification de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \\nVotre compte administrateur, pour acceder a l'application, a ete modifie avec les parametres suivants : \\n login : africott \\n mot de passe : 123";
-		
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete modifie avec les parametres suivants : \n login : africott \n mot de passe : 123";		
 		Message message = null;
 		User user = new User("africott");
 		user.setAdmin(true);
@@ -125,7 +121,7 @@ public class MessageFactoryTest extends TestCase {
 		
 	public void testRemoveMessage() {
 		final String object = "Suppression de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \\nVotre compte administrateur, pour acceder a l'application, a ete supprime.";
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete supprime.";
 		
 		Message message = null;
 		User user = new User("africott");
