@@ -7,10 +7,7 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.InputStream;
-import java.io.FileOutputStream;
 import java.io.File;
-import java.io.IOException;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 
@@ -62,11 +59,11 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public void addStyleSheet(StyleSheet styleSheet) {
 		try {
 			requestor.doQuery(
-				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES (\""
+				"INSERT INTO FEUILLE_DE_STYLE (NOM_FIC_FEU, NOM_FEU) VALUES ('"
 					+ styleSheet.getFilename()
-					+ "\",\""
+					+ "','"
 					+ styleSheet.getName()
-					+ "\")");
+					+"')");
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
 			e.printStackTrace();
