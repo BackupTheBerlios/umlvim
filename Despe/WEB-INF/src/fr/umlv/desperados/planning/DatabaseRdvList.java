@@ -4,7 +4,8 @@ package fr.umlv.desperados.planning;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -41,18 +42,23 @@ final class DatabaseRdvList extends DatabaseAbstractList {
 		synchronized (rs) {
 			try {
 				rs.absolute(i);
-	
+
 				String id = String.valueOf(rs.getString("ID_ETU"));
 				String name = rs.getString("NOM_PATRONYMIQUE");
 				String firstName = rs.getString("PRENOM1");
-	
-				// TODO deprecated, a changer en utilisant calendar
-				boolean isRavel =
-					(rs.getDate("ANNEE_BAC").getYear()
-						== new Date(System.currentTimeMillis()).getYear());
-				Date dateRdv = rs.getDate("DATE_DE_RDV");
-	
+
+				java.util.Date dateBac = rs.getDate("ANNEE_BAC");
+				Calendar calBac = new GregorianCalendar();
+				calBac.setTime(dateBac);
+
+				java.util.Date dateRdv = rs.getDate("DATE_DE_RDV");
+				Calendar calRdv = new GregorianCalendar();
+				calRdv.setTime(dateRdv);
+
+				boolean isRavel = (calBac.get(Calendar.YEAR) == calRdv.get(Calendar.YEAR));
+
 				rdv = new Rdv(dateRdv, id, name, firstName, isRavel);
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
