@@ -79,14 +79,22 @@ public class PrintInscriptionFileAction extends Action {
 				new ActionError("error.database.missing"));
 		}
 
-		if (!errors.isEmpty()) {
-			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
-		}
 		
 		int docType;
 		if(type.equals("inscr")) docType = 1;
-		else docType = 2;
+		else {
+			 docType = 2; 
+			 if(student.getAppointmentDate()==null) {
+			 	errors.add(
+			 		ActionErrors.GLOBAL_ERROR,
+			 		new ActionError("error.rdv.not.taken"));
+			 }
+		} 
+		
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
 		
 		StyleSheet s = ssManager.getStyleSheet(docType);
 		
