@@ -4,10 +4,14 @@ package fr.umlv.desperados.planning;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.ListIterator;
+import java.util.Locale;
+
 
 import fr.umlv.desperados.database.DatabaseAbstractList;
 
@@ -15,12 +19,7 @@ import fr.umlv.desperados.database.DatabaseAbstractList;
  * Provides a concrete implementation of java.util.List interface that contains a 
  * list of Rdv.
  */
-final class DatabaseRdvList extends DatabaseAbstractList {
-
-	/**
-	 * The ResultSet containing the Rdv list.
-	 */
-	private ResultSet rs;
+final class DatabaseRdvList extends DatabaseAbstractList  {
 
 	/**
 	 * Constructor.
@@ -30,6 +29,8 @@ final class DatabaseRdvList extends DatabaseAbstractList {
 	 */
 	DatabaseRdvList(ResultSet rs) {
 		super(rs);
+		if(rs == null)
+			System.out.println("constructeur : rs est nul");
 	}
 
 	/**
@@ -78,22 +79,46 @@ final class DatabaseRdvList extends DatabaseAbstractList {
 	}
 
 	public ListIterator listIterator(int index) {
-		return new DatabaseRdvListIterator(rs, index);
+		return new DatabaseRdvListIterator(rs, index);		
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.desperados.util.XMLable#toXML()
+	 */
+	public String toXML() {
+		String s="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+		s += "<agenda><day>";
+	
+		int current = 0;
+		try {
+			current = rs.getRow();
+			rs.first();
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+			
+		for(Iterator it = iterator(); it.hasNext();) {
+			Rdv rdv = (Rdv)it.next();
+			DateFormat datef = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRENCH);
+			String sDate = datef.format(rdv.getDate());
+			String datePrec = sDate.substring(0,8);
+			s += "<date>" + sDate + "</date><rdv>";
+			if(datePrec.equals(sDate.substring(0,8))) {
+				s += "<beginHour>"+sDate+"</beginHour>";
+				s += "<studentsName>"+rdv.getName() + rdv.getFirstname()+ " ";
+			}
+			else
+				s += "</studentsName></rdv>";
+				
+		}
+		s += "</day></agenda>";
+		try {
+			rs.absolute(current);
+		} catch (SQLException e1) {
+			// TODO Bloc catch auto-généré
+			e1.printStackTrace();
+		}
+		return s;
 	}
 }
-/**
- * 
- * 
- *  
- * DatabaseRdvList.size(){
- *     return 0;
- *    }
- *  
- *  
- * DatabaseRdvList.get(int){
- *     return null;
- *    }
- *  
- *  
- *  
- */

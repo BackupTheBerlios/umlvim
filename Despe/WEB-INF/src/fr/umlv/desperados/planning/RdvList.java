@@ -2,7 +2,6 @@
 
 package fr.umlv.desperados.planning;
 
-import java.util.HashMap;
 import java.util.List;
 
 import fr.umlv.desperados.util.XMLable;
@@ -23,28 +22,32 @@ public class RdvList implements XMLable
    /**
     * The container mapping each list of Rdv by a day.
     */
-   private HashMap map;
+   private DatabaseRdvList list;
    
    /**
     * Constructor.
     * @roseuid 3FF2804C02A6
     */
-   public RdvList() 
+   public RdvList(List list) throws IllegalArgumentException
    {
-    
+   	try {
+		this.list = (DatabaseRdvList)list;
+   	} catch(ClassCastException e) {
+   		throw new IllegalArgumentException("The list is not a list of rendez-vous");
+   	}
    }
-   
-   /**
-    * Adds a Rdv list corresponding to the given day.
-    * 
-    * @param day the day the list of Rdv corrsponds to.
-    * @param list the list of Rdv to add.
-    * @roseuid 3FF280DB02F2
-    */
-   public void addRdvList(java.util.Date day, List list) 
-   {
-    
-   }
+
+//   /**
+//    * Adds a Rdv list corresponding to the given day.
+//    * 
+//    * @param day the day the list of Rdv corrsponds to.
+//    * @param list the list of Rdv to add.
+//    * @roseuid 3FF280DB02F2
+//    */
+//   public void addRdvList(java.util.Date day, List list) 
+//   {
+//    
+//   }
    
    /**
     * @return java.lang.String
@@ -52,6 +55,6 @@ public class RdvList implements XMLable
     */
    public String toXML() 
    {
-    return null;
+    return list.toXML();
    }
 }

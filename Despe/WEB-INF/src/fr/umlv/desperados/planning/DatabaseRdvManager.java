@@ -342,21 +342,21 @@ public class DatabaseRdvManager implements RdvManager {
 	public List listRdv(java.util.Date day) {
 		ResultSet rs = null;
 		DateFormat dtf =
-			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+			DateFormat.getDateInstance(DateFormat.SHORT);
 		String formatedDate = dtf.format(day);
 		Rdv[] rdvList = null;
 		try {
 			rs =
 				requestor.doQuery(
-					"SELECT RDV_DATE, NOM_PATRONYMIQUE, PRENOM1,ANNEE_BAC,ETU_ID FROM Etudiant WHERE TO_DATE(DATE_DE_RDV,'DD/MM/YY')="
-						+ formatedDate);
+					"SELECT DATE_DE_RDV, NOM_PATRONYMIQUE, PRENOM1, ANNEE_BAC, ID_ETU FROM Etudiant WHERE TO_DATE(DATE_DE_RDV,'DD/MM/YY')='"
+						+ formatedDate
+						+ "' ORDER BY DATE_DE_RDV");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		if (rs != null)
 			return (List) (new DatabaseRdvList(rs));
-
-		return (List) (new ArrayList());
+		return null;
 
 	}
 

@@ -77,7 +77,6 @@ public class TakeRdvAction extends Action {
 				errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.not.more.available"));
 			
 			student.setAppointmentDate(rdvDate);
-		
 		}
 		
 
