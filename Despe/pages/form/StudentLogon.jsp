@@ -6,13 +6,13 @@
 <html:form action="/studentLogon" focus="name">
 	<table>
 		<tr>
-			<th> <bean:message key="prompt.student.name" /> : </th>
-			<td> <html:text property="name" size="15" /> </td>
-			<td> <html:errors property="name" /> </td>
+			<th> <bean:message key="prompt.student.patronymicName" /> : </th>
+			<td> <html:text property="patronymicName" size="15" /> </td>
+			<td> <html:errors property="patronymicName" /> </td>
 			<td width="20">  </td>
-			<th> <bean:message key="prompt.student.firstname" /> : </th>
-			<td> <html:text property="firstname" size="15" /> </td>
-			<td> <html:errors property="firstname" /> </td>
+			<th> <bean:message key="prompt.student.firstname1" /> : </th>
+			<td> <html:text property="firstname1" size="15" /> </td>
+			<td> <html:errors property="firstname1" /> </td>
 		</tr>
 		<tr>
 			<th> <bean:message key="prompt.student.birthday" /> : </th>

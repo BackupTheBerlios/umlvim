@@ -47,14 +47,14 @@
 	</definition>
 
 	<definition name="student.home" extends="baseDef">
-		<put name="body-content"	value="/pages/Main.jsp" />
+		<put name="body-content"	value="/pages/StudentMain.jsp" />
 	</definition>
 
 
 	<!-- User's pages definitions -->
 
 	<definition name="user.home" extends="userBaseDef">
-		<put name="body-content"	value="/pages/Main.jsp" />
+		<put name="body-content"	value="/pages/StudentMain.jsp" />
 	</definition>
 
 	<definition name="user.logon" extends="userBaseDef">

@@ -4,3 +4,4 @@ work
 .tomcatplugin
 .classpath
 WEB-INF/classes
+.jetproperties

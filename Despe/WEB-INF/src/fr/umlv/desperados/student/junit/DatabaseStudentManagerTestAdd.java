@@ -81,7 +81,7 @@ ResultSet result = null;
 				strutsDatabaseRequestor = new StrutsDatabaseRequestor(cCon);
 
 				// managers init
-				databaseStudentManager =DatabaseStudentManager.getInstance(strutsDatabaseRequestor,"/home/dslg00/gdupont/genielog/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
+				databaseStudentManager =DatabaseStudentManager.getInstance(strutsDatabaseRequestor,"/home/dslg00/ncuvelie/workspace/despe/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 				} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (InstantiationException e1) {

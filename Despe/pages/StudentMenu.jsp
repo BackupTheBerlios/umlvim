@@ -10,6 +10,8 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
+				<html:link>
+				</html:link>
 			</td>
 		</tr>
 		<tr>
@@ -18,7 +20,9 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/studentLogoff">déconnexion</html:link>
+				<html:link action="/studentLogoff">
+					<bean:message key="link.logoff" />
+				</html:link>
 			</td>
 		</tr>
 	</table>

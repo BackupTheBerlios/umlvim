@@ -41,7 +41,7 @@
 		</table>
 	</html:form>
 
-	<bean:parameter id="offset" name="start" value="10" />
+	<bean:parameter id="offset" name="start" value="0" />
 	<bean:parameter id="lenght" name="size" value="10" />
 	<logic:present name="userlist">
 		<table width="100%">

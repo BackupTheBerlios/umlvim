@@ -26,10 +26,10 @@ public class StudentLogonForm extends ActionForm {
 	// --------------------------------------------------------- Instance Variables
 
 	/** name property */
-	private String name;
+	private String patronymicName;
 
 	/** firstname property */
-	private String firstname;
+	private String firstname1;
 
 	/** birthday property */
 	private String birthday;
@@ -47,11 +47,11 @@ public class StudentLogonForm extends ActionForm {
 		HttpServletRequest request) {
 
 		ActionErrors errors = new ActionErrors();
-		if((name == null) || (name.equals(""))) {
-			errors.add("name", new ActionError("error.required"));
+		if((patronymicName == null) || (patronymicName.equals(""))) {
+			errors.add("patronymicName", new ActionError("error.required"));
 		}
-		if((firstname == null) || (firstname).equals("")) {
-			errors.add("firstname", new ActionError("error.required"));
+		if((firstname1 == null) || (firstname1).equals("")) {
+			errors.add("firstname1", new ActionError("error.required"));
 		}
 		if((birthday == null) || (birthday).equals("")) {
 			errors.add("birthday", new ActionError("error.required"));
@@ -68,8 +68,8 @@ public class StudentLogonForm extends ActionForm {
 	 * @param HttpServletRequest request
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		name = "";
-		firstname = "";
+		patronymicName = "";
+		firstname1 = "";
 		birthday = "";
 	}
 
@@ -77,32 +77,32 @@ public class StudentLogonForm extends ActionForm {
 	 * Returns the name.
 	 * @return String
 	 */
-	public String getName() {
-		return name;
+	public String getPatronymicName() {
+		return patronymicName;
 	}
 
 	/** 
 	 * Set the name.
 	 * @param name The name to set
 	 */
-	public void setPassword(String name) {
-		this.name = name;
+	public void setPatronymicName(String name) {
+		this.patronymicName = name;
 	}
 
-	/** 
+	/**
 	 * Returns the firstname.
 	 * @return String
 	 */
-	public String getFirstname() {
-		return firstname;
+	public String getFirstname1() {
+		return firstname1;
 	}
 
 	/** 
 	 * Set the login.
 	 * @param login The login to set
 	 */
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstname1(String firstname) {
+		this.firstname1 = firstname;
 	}
 
 	/** 

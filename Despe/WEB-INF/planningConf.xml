@@ -1,13 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE planning SYSTEM 'file:///home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.18-LE-jdk14/webapps/tomcatDespe/WEB-INF/planningConf.dtd'>
-<planning>	
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE planning SYSTEM "workspace/despe/WEB-INF/planningConf.dtd">
 
-<month number="11">
-<day number="14">
-<morning correctorNumber="20" meetingDuration="20" ravelNumber="10">
-<beginingHour><Hour hour="8" min="0" /></beginingHour>
-<endHour><Hour hour="10" min="0" /></endHour>
-</morning><afternoon correctorNumber="20" meetingDuration="20" ravelNumber="10">
+<planning>
+	<month number="11">
+		<day number="14">
+			<morning correctorNumber="20" meetingDuration="20" ravelNumber="10">
+				<beginingHour>
+					<Hour hour="8" min="0" />
+				</beginingHour>
+				<endHour>
+					<Hour hour="10" min="0" />
+				</endHour>
+			</morning>
+			<afternoon correctorNumber="20" meetingDuration="20" ravelNumber="10">
 <beginingHour><Hour hour="2" min="0" /></beginingHour>
 <endHour><Hour hour="3" min="0" /></endHour>
 </afternoon>

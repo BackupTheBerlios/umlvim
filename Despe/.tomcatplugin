@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomcatProjectProperties>
+    <rootDir></rootDir>
+    <exportSource>false</exportSource>
+    <reloadable>false</reloadable>
+    <redirectLogger>true</redirectLogger>
+    <updateXml>true</updateXml>
+    <warLocation>/home/dslg00/ncuvelie/usr/jakarta-tomcat/webapps/despe.war</warLocation>
+    <webPath>/despe</webPath>
+</tomcatProjectProperties>

@@ -92,8 +92,8 @@ public class StudentLogonAction extends Action {
 		else {
 			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
 								.parse(studentLogonForm.getBirthday());
-			int studentId = manager.existStudent(studentLogonForm.getName(),
-												studentLogonForm.getFirstname(),
+			int studentId = manager.existStudent(studentLogonForm.getPatronymicName(),
+												studentLogonForm.getFirstname1(),
 												birthday);
 			try {
 				student = manager.getStudent(studentId);

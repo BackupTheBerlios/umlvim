@@ -4,7 +4,6 @@ package fr.umlv.desperados.account;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
@@ -227,10 +226,10 @@ public class DatabaseUserManager implements UserManager {
 
 		rs = requestor.doQuery(query.toString());
 
-		if(rs != null) {
+		if((rs != null) && (rs.first())) {
 			return (List)(new DatabaseUserList(rs));
 		}
-		return (List)(new ArrayList());
+		return null;
 	}
 
 	/**

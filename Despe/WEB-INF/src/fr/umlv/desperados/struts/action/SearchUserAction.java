@@ -67,25 +67,25 @@ public final class SearchUserAction extends AdminAction {
 //COMMENTED FOR TEST
 		UserManager manager = (UserManager)servlet.getServletContext().
 								getAttribute(Constants.USER_DATABASE_KEY);
-//		if(manager == null) {
-//			errors.add("database",
-//			   new ActionError("error.database.missing"));
-//			log.warn("SearchUserAction: Database is missing");
-//		}
+		if(manager == null) {
+			errors.add("database",
+			   new ActionError("error.database.missing"));
+			log.warn("SearchUserAction: Database is missing");
+		}
 
 		if(!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("error"));
 		}
 
-//		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
-		LinkedList userList = new LinkedList();
-		for(int i=0 ; i<15 ; i++) {
-			User u = new User("login_"+i);
-			u.setName("name_"+i);
-			u.setFirstname("firstname_"+i);
-			userList.add(u);
-		}
+		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
+//		LinkedList userList = new LinkedList();
+//		for(int i=0 ; i<15 ; i++) {
+//			User u = new User("login_"+i);
+//			u.setName("name_"+i);
+//			u.setFirstname("firstname_"+i);
+//			userList.add(u);
+//		}
 		if(userList != null) {
 			request.setAttribute("userlist", userList);
 		}

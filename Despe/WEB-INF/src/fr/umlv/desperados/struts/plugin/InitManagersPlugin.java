@@ -68,24 +68,29 @@ public class InitManagersPlugin implements PlugIn {
 				DatabaseUserManager.getInstance(strutsDatabaseRequestor);
 			databaseStudentManager =
 				DatabaseStudentManager.getInstance(
-					strutsDatabaseRequestor,path+ "/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
+					strutsDatabaseRequestor, path
+						+ "/WEB-INF/src/fr/umlv/desperados/struts/studentDatabase.properties");
 
 			System.out.println(path + "/WEB-INF/planningConf.xml");
-			
-			
-			planningConf =
-					new PlanningConf(path + "/WEB-INF/planningConf.xml");
-			
 
-		System.out.println(planningConf);
-			
-		// context visible manager init
-		ServletContext context = servlet.getServletContext();
-		context.setAttribute(Constants.RDV_DATABASE_KEY, databaseRdvManager);
-		context.setAttribute(Constants.USER_DATABASE_KEY, databaseUserManager);
-		context.setAttribute(Constants.STUDENT_DATABASE_KEY,	databaseStudentManager);
-		context.setAttribute(Constants.PLANNING_CONF_DATABASE_KEY,planningConf);
+			planningConf = new PlanningConf(path + "/WEB-INF/planningConf.xml");
 
+			System.out.println(planningConf);
+
+			// context visible manager init
+			ServletContext context = servlet.getServletContext();
+			context.setAttribute(
+				Constants.RDV_DATABASE_KEY,
+				databaseRdvManager);
+			context.setAttribute(
+				Constants.USER_DATABASE_KEY,
+				databaseUserManager);
+			context.setAttribute(
+				Constants.STUDENT_DATABASE_KEY,
+				databaseStudentManager);
+			context.setAttribute(
+				Constants.PLANNING_CONF_DATABASE_KEY,
+				planningConf);
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -95,14 +100,13 @@ public class InitManagersPlugin implements PlugIn {
 			e1.printStackTrace();
 		} catch (SQLException e2) {
 			e2.printStackTrace();
-		}
-		catch (ParserConfigurationException e3) {
+		} catch (ParserConfigurationException e3) {
 			e3.printStackTrace();
-	} catch (SAXException e3) {
-		e3.printStackTrace();
-	} catch (IOException e3) {
-		e3.printStackTrace();
-	}
+		} catch (SAXException e3) {
+			e3.printStackTrace();
+		} catch (IOException e3) {
+			e3.printStackTrace();
+		}
 
 	}
 

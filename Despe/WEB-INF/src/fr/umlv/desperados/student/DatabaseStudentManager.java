@@ -130,6 +130,7 @@ public class DatabaseStudentManager implements StudentManager {
 		String patronymiqueName,
 		String firstName,
 		java.util.Date birthday) {
+			//TODO gerer les erreurs de date (genre 77/88/9999)
 		ResultSet result = null;
 		String query =
 			"SELECT "+ prop.get("studentId")

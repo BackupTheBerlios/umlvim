@@ -79,8 +79,11 @@ public final class CheckIdentTag extends TagSupport {
 
 		// Is there a valid student logged on?
 		HttpSession session = pageContext.getSession();
-		Student student = (Student)session.getAttribute(name);
-		if ((session != null) && (student != null)) {
+		Student student = null;
+		if(session != null) {
+			student = (Student)session.getAttribute(name);
+		}
+		if (student != null) {
 			// include page based on the results
 			return (EVAL_BODY_INCLUDE);
 		} else {

@@ -11,7 +11,7 @@ public class PlanningDtd {
 
 	/** root balise */
 	static final String PLANNING = "planning";
-	
+
 	/** Month balise name */
 	static final String MONTH = "month";
 	/** Day balise name */
@@ -19,7 +19,6 @@ public class PlanningDtd {
 	/** Day and month balise parameter */
 	static final String NUMBER = "number";
 
-	
 	/** Mormning balise name */
 	static final String MORNING = "morning";
 	/** Afternoon balise name */
@@ -43,11 +42,10 @@ public class PlanningDtd {
 	static final String HOURPARAMMIN = "min";
 
 	/** the pah of the dtd */
-	
-	// TODO aaa changer si on change de compte
-	static String dtdPath = "file:///home/dslg00/npetitde/genieLog/jakarta-tomcat-4.1.18-LE-jdk14/webapps/tomcatDespe/WEB-INF/planningConf.dtd";
 
-	
+	// TODO aaa changer si on change de compte
+	static String dtdPath = "http://etudiant.univ-mlv.fr/~ncuvelie/planningConf.dtd";
+
 	/**
 	 * @param path the dtd's path
 	 * @roseuid 3FFBF0A3030D
@@ -55,8 +53,7 @@ public class PlanningDtd {
 	public void setDtdPath(String path) {
 		dtdPath = path;
 	}
-	
-	
+
 	/**
 	 * @return the dtd path of a planning
 	 */
