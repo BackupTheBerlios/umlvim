@@ -143,7 +143,7 @@ public class SetupPlanningAction extends UserAction {
 								databaseRdvManager.removeConf(calFromDate.getTime());	
 						// Ajout de la configuration du jour
 						DayConf day = new DayConf(am,pm,calFromDate.get(Calendar.DAY_OF_MONTH));
-					planningConf.setConf(calFromDate,day);
+						planningConf.setConf(calFromDate,day);
 					
 						//ajout des rendez-vous du matin dans la bd
 						calFromDate.set(Calendar.AM_PM,Calendar.AM);

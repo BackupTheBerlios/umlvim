@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.Locale;
 
@@ -84,37 +85,28 @@ final class DatabaseRdvList extends DatabaseAbstractList {
 	public String toXML() {
 		String s="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 		s += "<agenda><day>";
-	
-		int current = 0;
-		try {
-			current = rs.getRow();
-			rs.first();
-		} catch (SQLException e) {
-			// TODO Bloc catch auto-généré
-			e.printStackTrace();
-		}
-			
+		DateFormat datef = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRENCH);
+		String sDate = datef.format(new Date());
+		s += "<date>" + sDate.substring(0,8) + "</date>";
+		s += "<rdv><beginHour></beginHour><studentsName>";
 		for(Iterator it = iterator(); it.hasNext();) {
 			Rdv rdv = (Rdv)it.next();
-			DateFormat datef = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRENCH);
-			String sDate = datef.format(rdv.getDate());
-			String datePrec = sDate.substring(0,8);
-			s += "<date>" + sDate + "</date><rdv>";
-			if(datePrec.equals(sDate.substring(0,8))) {
-				s += "<beginHour>"+sDate+"</beginHour>";
-				s += "<studentsName>"+rdv.getName() + rdv.getFirstname()+ " ";
+			datef = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRENCH);
+			String date = datef.format(rdv.getDate());
+			System.out.println("Heure de rdv "+date);
+			//s += "<beginHour>"+ date.substring(8,14) +"</beginHour>";
+			if(date.equals(sDate)) {
+				s += rdv.getName() + " " +rdv.getFirstname() + " - ";
+				sDate = date;
 			}
-			else
+		
+			else {
 				s += "</studentsName></rdv>";
-				
+				s += "<rdv><beginHour>"+date+"</beginHour>";
+				s += "<studentsName>"+rdv.getName() +" "+rdv.getFirstname() + " - ";
+			}			
 		}
-		s += "</day></agenda>";
-		try {
-			rs.absolute(current);
-		} catch (SQLException e1) {
-			// TODO Bloc catch auto-généré
-			e1.printStackTrace();
-		}
+		s += "</studentsName></rdv></day></agenda>";
 		return s;
 	}
 }

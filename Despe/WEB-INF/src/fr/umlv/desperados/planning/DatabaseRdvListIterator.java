@@ -27,7 +27,7 @@ final class DatabaseRdvListIterator extends DatabaseAbstractListIterator {
 	/**
 	 * The ResultSet containing the Rdv list.
 	 */
-	private ResultSet rs;
+	//private ResultSet rs;
 
 	/**
 	 * Constructor.
@@ -74,15 +74,16 @@ final class DatabaseRdvListIterator extends DatabaseAbstractListIterator {
 				String name = rs.getString("NOM_PATRONYMIQUE");
 				String firstName = rs.getString("PRENOM1");
 
-				java.util.Date dateBac = rs.getDate("ANNEE_BAC");
-				Calendar calBac = new GregorianCalendar();
-				calBac.setTime(dateBac);
+				//java.util.Date dateBac = rs.getDate("ANNEE_BAC");
+				int dateBac = rs.getInt("ANNEE_BAC");
+				//Calendar calBac = new GregorianCalendar();
+				//calBac.setTime(dateBac);
 
 				java.util.Date dateRdv = rs.getDate("DATE_DE_RDV");
 				Calendar calRdv = new GregorianCalendar();
 				calRdv.setTime(dateRdv);
 
-				boolean isRavel = (calBac.get(Calendar.YEAR) == calRdv.get(Calendar.YEAR));
+				boolean isRavel = (dateBac == calRdv.get(Calendar.YEAR));
 
 				rdv = new Rdv(dateRdv, id, name, firstName, isRavel);
 
