@@ -76,13 +76,11 @@ public final class SearchStudentAction extends UserAction {
 			return (mapping.findForward("error"));
 		}
 
-		// TODO à mettre dans DatabaseDiplomaManager.searchStudent()
-		String ine = (searchForm.getIne()).replace('*','%');
-		String name = (searchForm.getName()).replace('*','%');
-		String firstname = (searchForm.getFirstname()).replace('*','%');
-		//
 		int diplomaId = Integer.parseInt(searchForm.getDiplomaId());
-		List studentList = manager.searchStudent(ine,name,firstname,diplomaId);
+		List studentList = manager.searchStudent(searchForm.getIne(),
+																					searchForm.getName(),
+																					searchForm.getFirstname(),
+																					diplomaId);
 
 		if(studentList != null) {
 			request.setAttribute("studentlist", studentList);

@@ -1,7 +1,3 @@
-// Created by Xslt generator for Eclipse.
-// XSL :  not found (java.io.FileNotFoundException:  (Aucun fichier ou répertoire de ce type))
-// Default XSL used : easystruts.jar$org.easystruts.xslgen.JavaClass.xsl
-
 package fr.umlv.desperados.struts.form;
 
 import javax.servlet.http.HttpServletRequest;
@@ -54,11 +50,10 @@ public class StudentForm extends ActionForm {
 		if((birthday == null) || (birthday).equals("")) {
 			errors.add("birthday", new ActionError("error.required"));
 		} else {
-			String formatRegexp = "\\d\\d/\\d\\d/\\d\\d\\d\\d"; // resources.getMessage("date.format.regexp");
+			String formatRegexp = "\\d\\d/\\d\\d/\\d\\d\\d\\d";
 			if (!birthday.matches(formatRegexp)) {
 				errors.add("birthday", new ActionError("error.date.format",
 																	"jj/mm/aaaa"));
-//																	resources.getMessage("date.format")));
 			}
 		}
 		return errors;

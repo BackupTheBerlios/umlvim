@@ -97,7 +97,7 @@ public class DatabaseStudentManager implements StudentManager {
 		
 		if (!(student.getPatronymicName().equals(null))) {
 			insert.append(prop.get("patronymicName") + ",");
-			values.append("'"+student.getPatronymicName() + "',");
+			values.append("UPPER('"+student.getPatronymicName() + "'),");
 		}
 
 		if (!student.getBirthday().equals(null)) {
@@ -110,7 +110,7 @@ public class DatabaseStudentManager implements StudentManager {
 
 		if (!student.getFirstname1().equals(null)) {
 			insert.append(prop.get("firstname1") + ",");
-			values.append("'"+student.getFirstname1() + "',");
+			values.append("UPPER('"+student.getFirstname1() + "'),");
 		}
 
 		insert.replace(insert.length() - 1, insert.length(), ")");
@@ -138,19 +138,18 @@ public class DatabaseStudentManager implements StudentManager {
 			
 			if(dateControl(birthday))
 					throw new StudentBirthdayException("Date of birthday is impossible");
-		
-			
+				
 			//TODO gerer les erreurs de date (genre 77/88/9999)
 		ResultSet result = null;
 		String query =
 			"SELECT "+ prop.get("studentId")
-			 +" FROM  "+ prop.get("tableName") +"  WHERE "
-			+prop.get("patronymicName")+"='"
+			 +" FROM  "+ prop.get("tableName") +"  WHERE UPPER("
+			+prop.get("patronymicName")+")=UPPER('"
 				+ patronymiqueName
-				+ "' and "
-			+prop.get("firstname1")+"='"
+				+ "') and UPPER("
+			+prop.get("firstname1")+")=UPPER('"
 				+ firstName
-				+ "' and "
+				+ "') and "
 				+" TO_CHAR("+prop.getProperty("birthday")+",'dd/mm/yyyy')="
 				+ "TO_DATE('"+DateFormat.getDateInstance(DateFormat.LONG).format(birthday)+"','dd/mm/yyyy')";
 			try {	
@@ -442,47 +441,47 @@ public class DatabaseStudentManager implements StudentManager {
 						throw new StudentBirthdayException("Date of birthday is impossible");
 			
 			String query="UPDATE "+prop.get("tableName")+" SET "+
-			prop.get("name")+"='"+student.getName()+"',"+
+			prop.get("name")+"=UPPER('"+student.getName()+"'),"+
 			prop.get("birthday")+"=TO_DATE('"+DateFormat.getDateInstance(DateFormat.LONG).format(student.getBirthday())+ "','DD/MM/YYYY'),"+
-			prop.get("firstname1")+"='"+student.getFirstname1()+"',"+
-			prop.get("ine")+"='"+student.getIne()+"',"+
+			prop.get("firstname1")+"=UPPER('"+student.getFirstname1()+"'),"+
+			prop.get("ine")+"=UPPER('"+student.getIne()+"'),"+
 			prop.get("wasToUmlvLastYear")+"="+ (student.isWasToUmlvLastYear()?1:0)+","+
-			prop.get("patronymicName")+"='"+student.getPatronymicName()+"',"+
-			prop.get("firstname2")+"='"+student.getFirstname2()+"',"+
-			prop.get("townOfBirth")+"='"+student.getTownOfBirth()+"',"+
-			prop.get("sex")+"='"+student.getSex()+"',"+
-			prop.get("firstInsSupEduc")+"='"+student.getFirstInsSupEduc()+"',"+
-			prop.get("firstInsFrenchUniv")+"='"+student.getFirstInsFrenchUniv()+"',"+
-			prop.get("estaFirstInsFrenchUniv")+"='"+student.getEstaFirstInsFrenchUniv()+"',"+
-			prop.get("firstInsEstablishment")+"='"+student.getFirstInsEstablishment()+"',"+
+			prop.get("patronymicName")+"=UPPER('"+student.getPatronymicName()+"'),"+
+			prop.get("firstname2")+"=UPPER('"+student.getFirstname2()+"'),"+
+			prop.get("townOfBirth")+"=UPPER('"+student.getTownOfBirth()+"'),"+
+			prop.get("sex")+"=UPPER('"+student.getSex()+"'),"+
+			prop.get("firstInsSupEduc")+"=UPPER('"+student.getFirstInsSupEduc()+"'),"+
+			prop.get("firstInsFrenchUniv")+"=UPPER('"+student.getFirstInsFrenchUniv()+"'),"+
+			prop.get("estaFirstInsFrenchUniv")+"=UPPER('"+student.getEstaFirstInsFrenchUniv()+"'),"+
+			prop.get("firstInsEstablishment")+"=UPPER('"+student.getFirstInsEstablishment()+"'),"+
 			prop.get("bacYear")+"="+student.getBacYear()+","+
-			prop.get("establishmentBacObtaining")+"='"+student.getEstablishmentBacObtaining()+"',"+
-			prop.get("foreignCityBac")+"='"+student.getForeignCityBac()+"',"+
+			prop.get("establishmentBacObtaining")+"=UPPER('"+student.getEstablishmentBacObtaining()+"'),"+
+			prop.get("foreignCityBac")+"=UPPER('"+student.getForeignCityBac()+"'),"+
 			prop.get("haveFixAddFr")+"="+(student.isHaveFixAddFr()?1:0)+","+
-			prop.get("numFixAdd")+"='"+student.getNumFixAdd()+"',"+
-			prop.get("streetFixAdd")+"='"+student.getStreetFixAdd()+"',"+
-			prop.get("buildingFixAdd")+"='"+student.getBuildingFixAdd()+"',"+
-			prop.get("foreignCityFixAdd")+"='"+student.getForeignCityFixAdd()+"',"+
-			prop.get("phoneFixAdd")+"='"+student.getPhoneFixAdd()+"',"+
+			prop.get("numFixAdd")+"=UPPER('"+student.getNumFixAdd()+"'),"+
+			prop.get("streetFixAdd")+"=UPPER('"+student.getStreetFixAdd()+"'),"+
+			prop.get("buildingFixAdd")+"=UPPER('"+student.getBuildingFixAdd()+"'),"+
+			prop.get("foreignCityFixAdd")+"=UPPER('"+student.getForeignCityFixAdd()+"'),"+
+			prop.get("phoneFixAdd")+"=UPPER('"+student.getPhoneFixAdd()+"'),"+
 			prop.getProperty("haveTmpAddFr")+"="+(student.isHaveTmpAddFr()?1:0)+","+
-			prop.get("numTmpAdd")+"='"+student.getNumTmpAdd()+"',"+
-			prop.get("streetTmpAdd")+"='"+student.getStreetTmpAdd()+"',"+
-			prop.get("buildingTmpAdd")+"='"+student.getBuildingTmpAdd()+"',"+
-			prop.get("cityTmpAdd")+"='"+student.getCityTmpAdd()+"',"+
-			prop.get("phoneTmpAdd")+"='"+student.getPhoneTmpAdd()+"',"+
+			prop.get("numTmpAdd")+"=UPPER('"+student.getNumTmpAdd()+"'),"+
+			prop.get("streetTmpAdd")+"=UPPER('"+student.getStreetTmpAdd()+"'),"+
+			prop.get("buildingTmpAdd")+"=UPPER('"+student.getBuildingTmpAdd()+"'),"+
+			prop.get("cityTmpAdd")+"=UPPER('"+student.getCityTmpAdd()+"'),"+
+			prop.get("phoneTmpAdd")+"=UPPER('"+student.getPhoneTmpAdd()+"'),"+
 			prop.get("isEmployed")+"="+(student.isEmployed()?1:0)+","+
-			prop.get("studEmplType")+"='"+student.getStudEmplType()+"',"+
-			prop.get("headFamProf")+"='"+student.getHeadFamProf()+"',"+
+			prop.get("studEmplType")+"=UPPER('"+student.getStudEmplType()+"'),"+
+			prop.get("headFamProf")+"=UPPER('"+student.getHeadFamProf()+"'),"+
 			prop.get("isNatSport")+"="+(student.isNatSport()?1:0)+","+
 			prop.get("isRegSport")+"="+(student.isRegSport()?1:0)+","+
-			prop.get("practisedSport")+"='"+student.getPractisedSport()+"',"+
+			prop.get("practisedSport")+"=UPPER('"+student.getPractisedSport()+"'),"+
 			prop.get("haveFinancialAss")+"="+(student.isHaveFinancialAss()?1:0)+","+
-			prop.get("internaExchOriEstab")+"='"+student.getInternaExchOriEstab()+"',"+
-			prop.get("internaExchRecEstab")+"='"+student.getInternaExchRecEstab()+"',"+
-			prop.get("lastAttendedEstab")+"='"+student.getLastAttendedEstab()+"',"+
-			prop.get("lastAttendedEstabYear")+"='"+student.getLastAttendedEstabYear()+"',"+
-			prop.get("precedentYearEstab")+"='"+student.getPrecedentYearEstab()+"',"+
-			prop.get("otherInsEstab")+"='"+student.getOtherInsEstab()+"',"+
+			prop.get("internaExchOriEstab")+"=UPPER('"+student.getInternaExchOriEstab()+"'),"+
+			prop.get("internaExchRecEstab")+"=UPPER('"+student.getInternaExchRecEstab()+"'),"+
+			prop.get("lastAttendedEstab")+"=UPPER('"+student.getLastAttendedEstab()+"'),"+
+			prop.get("lastAttendedEstabYear")+"=UPPER('"+student.getLastAttendedEstabYear()+"'),"+
+			prop.get("precedentYearEstab")+"=UPPER('"+student.getPrecedentYearEstab()+"'),"+
+			prop.get("otherInsEstab")+"=UPPER('"+student.getOtherInsEstab()+"'),"+
 			prop.get("princCycleInsNum")+"="+student.getPrincCycleInsNum()+","+
 			prop.get("complCycleInsNum")+"="+student.getComplCycleInsNum()+","+
 			prop.get("princDiplInsNum")+"="+student.getPrincDiplInsNum()+","+
@@ -490,18 +489,18 @@ public class DatabaseStudentManager implements StudentManager {
 			prop.get("princInsYearNum")+"="+student.getPrincInsYearNum()+","+
 			prop.get("compInsYearNum")+"="+student.getCompInsYearNum()+","+
 			prop.get("stockBrokerNum")+"="+student.getStockBrokerNum()+","+
-			prop.get("socialSecurityNum")+"='"+student.getSocialSecurityNum()+"',"+
-			prop.get("fatherName")+"='"+student.getFatherName()+"',"+
-			prop.get("fatherFirstName")+"='"+student.getFatherFirstName()+"',"+
-			prop.get("motherPatronymicName")+"='"+student.getMotherPatronymicName()+"',"+
-			prop.get("motherName")+"='"+student.getMotherName()+"',"+
+			prop.get("socialSecurityNum")+"=UPPER('"+student.getSocialSecurityNum()+"'),"+
+			prop.get("fatherName")+"=UPPER('"+student.getFatherName()+"'),"+
+			prop.get("fatherFirstName")+"=UPPER('"+student.getFatherFirstName()+"'),"+
+			prop.get("motherPatronymicName")+"=UPPER('"+student.getMotherPatronymicName()+"'),"+
+			prop.get("motherName")+"=UPPER('"+student.getMotherName()+"'),"+
 			prop.getProperty("insuranceCivilLiability")+"="+(student.isInsuranceCivilLiability()?1:0)+","+
 			prop.get("appointmentDate")+"=TO_DATE('"+DateFormat.getDateInstance(DateFormat.LONG).format(student.getAppointmentDate())+ "','DD/MM/YYYY'),"+
 			prop.get("workedShareId")+"="+student.getWorkedShareId()+","+
-			prop.get("financialAssistanceId")+"='"+student.getFinancialAssistanceId()+"',"+
+			prop.get("financialAssistanceId")+"=UPPER('"+student.getFinancialAssistanceId()+"'),"+
 			prop.get("socialEconomicCategoryId")+"="+student.getSocialEconomicCategoryId()+","+
 			prop.get("MLVDiplomaId")+"="+student.getMLVDiplomaId()+","+
-			prop.get("baccalaureatId")+"='"+student.getBaccalaureatId()+"',"+
+			prop.get("baccalaureatId")+"=UPPER('"+student.getBaccalaureatId()+"'),"+
 			prop.get("lodgingTypeId")+"="+student.getLodgingTypeId()+","+
 			prop.get("inscriptionModeId")+"="+student.getInscriptionModeId()+","+
 			prop.get("inscriptionTypeId")+"="+student.getInscriptionTypeId()+","+
@@ -511,7 +510,7 @@ public class DatabaseStudentManager implements StudentManager {
 			prop.get("socialSecurityId")+"="+student.getSocialSecurityId()+","+
 			prop.get("paymentModeId")+"="+student.getPaymentModeId()+","+
 			prop.get("purseId")+"="+student.getPurseId()+","+
-			prop.get("lastDiplomaTypeId")+"='"+student.getLastDiplomaTypeId()+"',"+
+			prop.get("lastDiplomaTypeId")+"=UPPER('"+student.getLastDiplomaTypeId()+"'),"+
 			prop.get("bacMentionId")+"="+student.getBacMentionId()+","+
 			prop.get("baccalaureatEstablishmentTypeId")+"="+student.getBaccalaureatEstablishmentTypeId()+","+
 			prop.getProperty("lastEstabTypeId")+"="+student.getLastEstabTypeId()+","+
@@ -530,9 +529,9 @@ public class DatabaseStudentManager implements StudentManager {
 			prop.get("foreignBirthplaceId")+"="+student.getForeignBirthplaceId()+","+
 			prop.get("fixeAddCountryId")+"="+student.getFixeAddCountryId()+","+
 			prop.get("tmpAddCountryId")+"="+student.getTmpAddCountryId()+","+
-			prop.get("precYearSitTypeId")+"='"+student.getPrecYearSitTypeId()+"',"+
+			prop.get("precYearSitTypeId")+"=UPPER('"+student.getPrecYearSitTypeId()+"'),"+
 			prop.get("famSituation")+"="+student.getFamSituation()+","+
-			prop.get("motifProlSocSec")+"='"+student.getMotifProlSocSec()+"',"+
+			prop.get("motifProlSocSec")+"=UPPER('"+student.getMotifProlSocSec()+"'),"+
 			prop.getProperty("noSocSecStu")+"="+(student.isNoSocSecStu()?1:0)+","+
  			prop.get("otherEtabIns")+"="+student.getOtherEtabIns()+","+
 			prop.get("headFamJob")+"="+student.getHeadFamJob()+","+
@@ -593,24 +592,28 @@ public class DatabaseStudentManager implements StudentManager {
 		String firstname,
 		int diplomaId) {
 	
+		INE = INE.replace('*','%');
+		patronymiqueName = patronymiqueName.replace('*','%');
+		firstname = firstname.replace('*', '%');
+
 		StringBuffer query =
 			new StringBuffer("SELECT * FROM "+prop.get("tableName")+" where ");
 		if (!(INE.equals(""))) {
-			query.append(prop.get("ine")+" like '" + INE + "' and ");
+			query.append(prop.get("ine")+" LIKE UPPER('" + INE + "') AND ");
 		}
 		if (!(patronymiqueName.equals(""))) {
-			query.append(prop.get("patronymicName")+" like '" + patronymiqueName + "%' and ");
+			query.append(prop.get("patronymicName")+" LIKE UPPER('" + patronymiqueName + "') AND ");
 		}
 		if (!(firstname.equals(""))) {
-			query.append(prop.get("firstName1")+" like " + firstname + "%' and ");
+			query.append(prop.get("firstName1")+" LIKE UPPER('" + firstname + "') AND ");
 		}
 		if (diplomaId != 0) {
-			query.append(prop.get("MLVDiplomaId")+"='" + diplomaId + "' and ");
+			query.append(prop.get("MLVDiplomaId")+"=UPPER('" + diplomaId + "') AND ");
 		}
 
 		query.replace(query.length() - 4, query.length(), "");
 		
-		System.out.println("quey : "+query);
+		System.out.println("query : "+query);
 
 		ResultSet rs = null;
 		try {

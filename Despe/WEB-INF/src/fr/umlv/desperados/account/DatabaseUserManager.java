@@ -223,14 +223,14 @@ public class DatabaseUserManager implements UserManager {
 			if("".equals(login)) {
 				login = "%";
 			} else {
-				login = login.replace('*', '%').replace('?', '_');
+				login = login.replace('*', '%');
 			}
 		}
 		if (name != null) {
 			if("".equals(name)) {
 				name="%";
 			} else {
-				name = name.replace('*', '%').replace('?', '_');
+				name = name.replace('*', '%');
 			}
 		}
 		StringBuffer cond = new StringBuffer();

@@ -11,6 +11,20 @@
 		</tr>
 		<tr>
 			<td align="right" valign="bottom">
+				<html:link action="/edit/student">
+					<bean:message key="menu.student.modifyInformation" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="bottom">
+				<html:link action="/printInscriptionFile?type=inscr">
+					<bean:message key="menu.student.printfile" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="bottom">
 				<html:link action="/list/rdv">
 					<bean:message key="menu.student.takerdv" />
 				</html:link>
@@ -20,13 +34,6 @@
 			<td align="right" valign="bottom">
 				<html:link action="/cancel/rdv">
 					<bean:message key="menu.student.cancelrdv" />
-				</html:link>
-			</td>
-		</tr>
-		<tr>
-			<td align="right" valign="bottom">
-				<html:link action="/printInscriptionFile?type=inscr">
-					<bean:message key="menu.student.printfile" />
 				</html:link>
 			</td>
 		</tr>

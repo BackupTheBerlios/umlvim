@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
@@ -21,7 +20,6 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.student.DatabaseInformationListManager;
 import fr.umlv.desperados.student.Student;
-import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.util.Constants;
 
 /**
@@ -30,9 +28,9 @@ import fr.umlv.desperados.util.Constants;
  * Pour changer le modèle de ce commentaire de type généré, allez à :
  * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
-public class EditStudentAction extends Action {
+public class EditStudentAction extends StudentAction {
 	
-	public ActionForward execute(
+	public ActionForward doExecute(
 		ActionMapping mapping,
 		ActionForm form,
 		HttpServletRequest request,
@@ -43,7 +41,6 @@ public class EditStudentAction extends Action {
 
 		// Load student
 		HttpSession session = request.getSession();
-		Student student=(Student) session.getAttribute(Constants.STUDENT_KEY);
 
 		DatabaseInformationListManager manager =
 			(DatabaseInformationListManager) servlet.getServletContext().getAttribute(
@@ -61,13 +58,12 @@ public class EditStudentAction extends Action {
 			//TODO mettre 1 au lieu de 3
 			page = "3";
 		} 
-		if ("3".equals(page))
-		{
+		if ("3".equals(page)) {
 			Set list=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
 			request.setAttribute( "socialSecurityAffList",list);
 		}
 
+		System.out.println("*****\nEditStudentAction: forwarding to "+page+"\n*****");
 		return (mapping.findForward(page));
 	}
-
 }

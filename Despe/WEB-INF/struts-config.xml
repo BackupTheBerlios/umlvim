@@ -43,7 +43,7 @@
 		<form-bean name="RdvTackingForm" type="fr.umlv.desperados.struts.form.RdvTackingForm" />
 		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
 		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
-		<form-bean name="StudentForm" type="fr.umlv.desperados.struts.form.StudentForm" />
+		<form-bean name="StudentSecuForm" type="fr.umlv.desperados.struts.form.StudentSecuForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -93,8 +93,8 @@
 		<action
 			path="/save/user"
 			type="fr.umlv.desperados.struts.action.SaveUserAction"
-			attribute="UserForm"
 			name="UserForm"
+			attribute="UserForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/UserDetails.jsp"
 			validate="false">
@@ -105,8 +105,8 @@
 		<action
 			path="/searchuser"
 			type="fr.umlv.desperados.struts.action.SearchUserAction"
-			attribute="SearchUserForm"
 			name="SearchUserForm"
+			attribute="SearchUserForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/SearchUser.jsp"
 			validate="false">
@@ -122,8 +122,8 @@
 			path="/setupConf"
 			type="fr.umlv.desperados.struts.action.SetupPlanningAction"
 			scope="request"
-			attribute="PlanningConfForm"
 			name="PlanningConfForm"
+			attribute="PlanningConfForm"
 			input="/WEB-INF/jsp/form/SetupPlanning.jsp"
 			validate="false"/>
 
@@ -136,8 +136,8 @@
 		<action
 			path="/set/StyleSheet"
 			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
-			attribute="SetStyleSheetForm"
 			name="SetStyleSheetForm"
+			attribute="SetStyleSheetForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
@@ -145,8 +145,8 @@
 		<action
 			path="/add/styleSheet"
 			type="fr.umlv.desperados.struts.action.AddStyleSheetAction"
-			attribute="UploadtStyleSheetForm"
 			name="UploadStyleSheetForm"
+			attribute="UploadtStyleSheetForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
@@ -154,8 +154,8 @@
 		<action
 			path="/remove/styleSheet"
 			type="fr.umlv.desperados.struts.action.RemoveStyleSheetAction"
-			attribute="SetStyleSheetForm"
 			name="SetStyleSheetForm"
+			attribute="SetStyleSheetForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/ListStyleSheet.jsp"
 			validate="false"/>
@@ -209,10 +209,10 @@
 		<action
 			path="/save/student"
 			type="fr.umlv.desperados.struts.action.SaveStudentAction"
-			attribute="StudentForm"
-			name="StudentForm"
+			name="StudentSecuForm"
+			attribute="StudentSecuForm"
 			scope="request"
-			input="/WEB-INF/jsp/form/EditStudent.jsp"
+			input="/WEB-INF/jsp/form/StudentSecu.jsp"
 			validate="false"/>
 
 		<action
@@ -223,8 +223,8 @@
 		<action
 			path="/searchstudent"
 			type="fr.umlv.desperados.struts.action.SearchStudentAction"
-			attribute="SearchStudentForm"
 			name="SearchStudentForm"
+			attribute="SearchStudentForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/SearchStudent.jsp"
 			validate="false">
@@ -234,8 +234,8 @@
 		<action
 			path="/take/rdv"
 			type="fr.umlv.desperados.struts.action.TakeRdvAction"
-			attribute="RdvTackingForm"
 			name="RdvTackingForm"
+			attribute="RdvTackingForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			validate="false"/>
@@ -243,8 +243,8 @@
         <action
         	path="/list/rdv"
    	    	type="fr.umlv.desperados.struts.action.ListRdvAction"
-			attribute="RdvTackingForm"
 			name="RdvTackingForm"
+			attribute="RdvTackingForm"
 			scope="request"
 			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			validate="false">
@@ -253,8 +253,8 @@
 		<action
 			path="/list/hour"
 			type="fr.umlv.desperados.struts.action.ListHourAction"
-			attribute="RdvTackingForm"
 			name="RdvTackingForm"
+			attribute="RdvTackingForm"
 			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			scope="request"
 			validate="false">
