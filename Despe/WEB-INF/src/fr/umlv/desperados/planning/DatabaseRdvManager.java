@@ -185,14 +185,14 @@ public class DatabaseRdvManager implements RdvManager {
 					requestor.doQuery(
 						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')='"
 							+ formatedDate
-							+ "'  AND NB_RAV_DSP>0");
+							+ "'  AND NB_RAV_DSP>0 ORDER BY DATE_RDV");
 
 			else
 				rs =
 					requestor.doQuery(
 						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')='"
 							+ formatedDate
-							+ "' AND NB_ETU_DSP>0");
+							+ "' AND NB_ETU_DSP>0 ORDER BY DATE_RDV");
 			rs.last();
 			freeHours = new String[rs.getRow()];
 			rs.first();
@@ -222,31 +222,35 @@ public class DatabaseRdvManager implements RdvManager {
 			rs =
 				requestor.doQuery(
 					"SELECT DATE_DE_RDV, NOM_PATRONYMIQUE, PRENOM1,ANNEE_BAC FROM Etudiant WHERE ID_ETU="
-						+ studentId);
-	
-		rs.next();
-		boolean isRavel = false;
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeInMillis(System.currentTimeMillis());
+						+ studentId+"  AND DATE_DE_RDV IS NOT NULL ");
+						
+		if(rs.next())
+		{
+			boolean isRavel = false;
+			Calendar cal = new GregorianCalendar();
+			cal.setTimeInMillis(System.currentTimeMillis());
 		
-		int currentYear = rs.getInt("ANNEE_BAC");
-		if (currentYear == cal.get(Calendar.YEAR))
-			isRavel = true;
+			int currentYear = rs.getInt("ANNEE_BAC");
+			if (currentYear == cal.get(Calendar.YEAR))
+				isRavel = true;
 			
-		long longDate=(rs.getTimestamp("DATE_DE_RDV")).getTime();
-	    Date date=new Date(longDate);
+			long longDate=(rs.getTimestamp("DATE_DE_RDV")).getTime();
+	    		Date date=new Date(longDate);
 	    
-		rdv =
-			new Rdv(
-				date,
-				String.valueOf(studentId),
-				rs.getString("NOM_PATRONYMIQUE"),
-				rs.getString("PRENOM1"),
-				isRavel);
+			rdv =
+				new Rdv(
+					date,
+					String.valueOf(studentId),
+					rs.getString("NOM_PATRONYMIQUE"),
+					rs.getString("PRENOM1"),
+					isRavel);
+		
+			return rdv;
+		}
 		} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		return rdv;
+						e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -396,4 +400,42 @@ public class DatabaseRdvManager implements RdvManager {
 		
 		return numberOfRdV;
 	}
+	
+	public boolean isConfigure(Date date)
+	{
+		boolean isConfigure=false; 
+		DateFormat dtf =
+				DateFormat.getDateInstance(DateFormat.SHORT);
+		String formatedDate = dtf.format(date);
+	
+		String rq="SELECT * from rdv_dispo where TO_CHAR(DATE_RDV,'DD/MM/YY')='"+formatedDate+"'";
+		ResultSet rs = null;
+		try {
+			rs=requestor.doQuery(rq);
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+		try {
+			isConfigure = rs.next();
+		} catch (SQLException e1) {
+			// TODO Bloc catch auto-généré
+			e1.printStackTrace();
+		}
+	return isConfigure;
+	}
+	
+	public void removeConf(Date date)
+	{
+		DateFormat dtf =DateFormat.getDateInstance(DateFormat.SHORT);
+		String formatedDate = dtf.format(date);
+		String rq="DELETE FROM rdv_dispo where TO_CHAR(DATE_RDV,'DD/MM/YY')='"+formatedDate+"'";
+		try {
+			requestor.executeQuery(rq);
+		} catch (SQLException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+	}
+	
 }

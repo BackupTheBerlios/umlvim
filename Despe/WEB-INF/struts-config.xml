@@ -118,6 +118,7 @@
 			type="fr.umlv.desperados.struts.action.ChangePasswordAction"/>
 
 		<action path="/confPlanning" 		forward="planning.configure"/>
+
 		<action
 			path="/setupConf"
 			type="fr.umlv.desperados.struts.action.SetupPlanningAction"
@@ -125,8 +126,10 @@
 			name="PlanningConfForm"
 			attribute="PlanningConfForm"
 			input="/WEB-INF/jsp/form/SetupPlanning.jsp"
-			validate="false"/>
-
+			validate="false">
+			<forward	name="conf"			path="planning.configure"/>
+		</action>
+			
 		<action
 			path="/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">

@@ -4,40 +4,123 @@
 <%@ taglib uri="/WEB-INF/tlds/app.tld" prefix="app" %>
 
 <app:checkLogon>
-<html:form action="/setupConf">
-  
-  
-    periode :<BR>
-     Du <html:text property="fromDate" size="10" maxlength="20" value=""/>
-     au <html:text property="toDate" size="10" maxlength="20" value=""/><BR><br>
-  
-
-    horaire :<BR>
-    
-  	Matin :	  de <html:text property="beginAM" size="10" maxlength="20" value=""/>
-         a <html:text property="endAM" size="10" maxlength="20" value=""/><br>
-         
-  	aprem :	  de <html:text property="beginPM" size="10" maxlength="20" value=""/>
-         a <html:text property="endPM" size="10" maxlength="20" value=""/>
-         
-   <br><br>
-   
-   Duree du rendez vous:<br>
-   Matin <html:text property="rdvDurationAM" size="10" maxlength="20" value=""/>             
-   Aprem <html:text property="rdvDurationPM" size="10" maxlength="20" value=""/><br><br>
-   
-   nombre de correcteur: <br>
-   Matin  <html:text property="nbCorrectorAM" size="10" maxlength="20" value=""/>
-   Aprem <html:text property="nbCorrectorPM" size="10" maxlength="20" value=""/>
-  
-  <br><br>        
- 	Nombre d etudiants ravel:<br>
-   Matin  <html:text property="nbRavelAM" size="10" maxlength="20" value=""/>
-   Aprem <html:text property="nbRavelPM" size="10" maxlength="20" value=""/>
-
- 	
-   <br> <html:submit value="Ok"/>
-   
-   </html:form>
+	<h1>
+		<br><bean:message key="title.user.setupplanning" />
+	</h1>
+	
+	<html:form action="/setupConf">
+		<table>
+			<tr>
+				<td colspan="3" >
+					<b><font size="3" align="left">Periode</font> :</b><br>
+				</td>
+				</tr>
+			<tr>
+				<td>
+					<font size="2">du</font>
+					<html:text property="fromDate" size="10" maxlength="20" />
+					<font size="2">au</font>
+				</td>
+				<td>
+					<html:text property="toDate" size="10" maxlength="20" />
+				 </td>
+			</tr>
+			<tr>
+				 	<td> <html:errors property="fromDate"/> </td>
+			 		<td> <html:errors property="toDate"/> </td>
+			 </tr>
+			<tr><td>&nbsp</td></tr>
+			 <tr>
+			  	<td colspan="3"><b><font size="3">Horaire :</font></b></td>
+			 </tr>
+			 <tr>
+			  	<td><font size="2">Matin :</font></td>
+		 		<td>
+		 			<font size="2">de</font>
+					<html:text property="beginAM" size="10" maxlength="20" />
+					<font size="2">a</font>
+				</td>
+				<td>
+			 		<html:text property="endAM" size="10" maxlength="20" />
+			 	</td>
+			 	</tr>
+			 	<tr>
+			 			<td></td>
+			 		 	<td> <html:errors property="beginAM"/> </td>
+	 		 		 	<td> <html:errors property="endAM"/> </td>
+			 </tr>
+			 <tr>
+		  		<td><font size="2">Apres midi :</font></td>
+		  		<td><font size="2">de	
+			  		<html:text property="beginPM" size="10" maxlength="20" />
+			   		<font size="2">a</font>
+		      	</td>
+		      <td>
+			 	<html:text property="endPM" size="10" maxlength="20" />
+			 </td>
+			  </tr>
+			 <tr>
+			 <td></td>
+	 	 	<td> <html:errors property="beginPM"/> </td>
+ 		 	<td> <html:errors property="endPM"/> </td>
+			 <tr><td>&nbsp</td></tr>
+		   	<tr>
+		   		  	<td colspan="3"><b><font size="3">Duree du rendez vous:<b></td>
+		   	</tr>
+		   			<td>
+		   				<font size="2">Matin</font>
+			   			 <html:text property="rdvDurationAM" size="10" maxlength="20" />
+			   		</td>
+		     		<td>
+		   				<font size="2">Apres midi</font>
+		   				<html:text property="rdvDurationPM" size="10" maxlength="20" />
+		   			</td>
+		   	  </tr>
+			 <tr>
+		   			 	<td> <html:errors property="rdvDurationAM"/> </td>
+ 		 				<td> <html:errors property="rdvDurationPM"/> </td>
+		   	</tr>
+		   	<tr><td>&nbsp</td></tr>
+		    <tr>
+			  	<td colspan="3"><b><font size="3">Nombre de correcteur: </font></b></td>
+			</tr>
+			<tr>
+			    <td>
+			   		<font size="2">Matin</font>
+			   		 <html:text property="nbCorrectorAM" size="10" maxlength="20" />
+			    </td>
+			    <td>
+		   			<font size="2">Apres midi</font>
+		   			<html:text property="nbCorrectorPM" size="10" maxlength="20" />
+		   		</td>
+		   	 </tr>
+			 <tr>
+		   		<td> <html:errors property="nbCorrectorAM"/> </td>
+ 		 		<td> <html:errors property="nbCorrectorPM"/> </td>
+		   	</tr>
+		   	<tr><td>&nbsp</td></tr>
+			<tr>      
+		 		<td colspan="3"><b><font size="3">Nombre d'etudiants ravel:</font></b></td>
+		 	</tr>
+		 	<tr>
+		  		<td>
+		  			<font size="2">Matin</font>
+			  		<html:text property="nbRavelAM" size="10" maxlength="20" />
+			  	</td>
+			  	<td>
+			 		<font size="2">Apres midi</font>
+				 	<html:text property="nbRavelPM" size="10" maxlength="20" />
+				 </td>
+				 </tr>
+			 <tr>
+				<td> <html:errors property="nbRavelAM"/> </td>
+ 		 		<td> <html:errors property="nbRavelPM"/> </td>
+			</tr>
+			   	<tr><td>&nbsp</td></tr>
+			<tr>
+		 	  <td colspan="3" align="center"><html:submit value="Ok"/></td>
+		 	 </tr>
+		 </table>
+	</html:form>
 
 </app:checkLogon>

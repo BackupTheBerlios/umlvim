@@ -14,6 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -33,9 +34,21 @@ public class SetupPlanningAction extends UserAction {
 		HttpServletRequest request,
 		HttpServletResponse response) {
 
+			PlanningConfForm planningForm = (PlanningConfForm) form;
+				if(form == null) {
+					return (mapping.findForward("conf"));
+				}
+				
+		ActionErrors errors = planningForm.validate(mapping, request);
+
+		if(!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("conf"));
+		}
+
 		String target = "success";
 
-		PlanningConfForm planningForm = (PlanningConfForm) form;
+	
 
 		String beginAM = planningForm.getBeginAM();
 		String endAM = planningForm.getEndAM();
@@ -97,7 +110,7 @@ public class SetupPlanningAction extends UserAction {
 			calbeginPM.set(Calendar.AM_PM,Calendar.PM);
 			Calendar calbeginPMTmp = new GregorianCalendar();
 			calbeginPMTmp.setTime(beginPMT);
-		calbeginPMTmp.set(Calendar.AM_PM,Calendar.PM);
+			calbeginPMTmp.set(Calendar.AM_PM,Calendar.PM);
 			
 			Calendar calendPM = new GregorianCalendar();
 			calendPM.setTime(endPMT);
@@ -116,6 +129,7 @@ public class SetupPlanningAction extends UserAction {
 			Calendar calToDate = new GregorianCalendar();
 			calToDate.setTime(toDateD);
 			calToDate.add(GregorianCalendar.DAY_OF_YEAR,1);
+			
 		
 		
 			while(calFromDate.before((Object)calToDate))
@@ -124,11 +138,15 @@ public class SetupPlanningAction extends UserAction {
 					
 					if(dayInWeek!=GregorianCalendar.SATURDAY && dayInWeek!=GregorianCalendar.SUNDAY)
 					{
+							
+						if(databaseRdvManager.isConfigure(calFromDate.getTime()))
+								databaseRdvManager.removeConf(calFromDate.getTime());	
 						// Ajout de la configuration du jour
 						DayConf day = new DayConf(am,pm,calFromDate.get(Calendar.DAY_OF_MONTH));
-						planningConf.setConf(calFromDate,day);
+		//			TODO JULIEEEEEEEEEEEN	planningConf.setConf(calFromDate,day);
 					
 						//ajout des rendez-vous du matin dans la bd
+						calFromDate.set(Calendar.AM_PM,Calendar.AM);
 						calFromDate.set(Calendar.HOUR,calbeginAM.get(Calendar.HOUR));
 						calFromDate.set(Calendar.MINUTE,calbeginAM.get(Calendar.MINUTE));
 						while(calbeginAMTmp.before(calendAM))
@@ -170,9 +188,6 @@ public class SetupPlanningAction extends UserAction {
 		} catch (NumberFormatException e) {
 			target = "error";
 			e.printStackTrace();
-			} catch (IOException e1) {
-				target = "error";
-					e1.printStackTrace();
 			}
 
 		return mapping.findForward(target);
