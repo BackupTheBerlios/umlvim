@@ -202,17 +202,17 @@ public class DatabaseStudentManager implements StudentManager {
 					result.getString(prop.get("bacYear").toString()));
 				student.setEstablishmentBacObtaining(
 					result.getString(
-						prop.get("EstablishmentBacObtaining").toString()));
+						prop.get("establishmentBacObtaining").toString()));
 				student.setForeignCityBac(
-					result.getString(prop.get("ForeignCityBac").toString()));
+					result.getString(prop.get("foreignCityBac").toString()));
 				student.setHaveFixAddFr(
-					result.getBoolean(prop.get("haveFixeAddFr").toString()));
+					result.getBoolean(prop.get("haveFixAddFr").toString()));
 				student.setNumFixAdd(
 					result.getString(prop.get("numFixAdd").toString()));
 				student.setStreetFixAdd(
 					result.getString(prop.get("streetFixAdd").toString()));
 				student.setBuildingFixAdd(
-					result.getString(prop.get("builingFixAdd").toString()));
+					result.getString(prop.get("buildingFixAdd").toString()));
 				student.setForeignCityFixAdd(
 					result.getString(prop.get("foreignCityFixAdd").toString()));
 				student.setPhoneFixAdd(
