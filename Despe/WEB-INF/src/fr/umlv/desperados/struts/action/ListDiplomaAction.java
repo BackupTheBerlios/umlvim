@@ -4,6 +4,7 @@
  */
 package fr.umlv.desperados.struts.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,6 +48,16 @@ public class ListDiplomaAction extends Action {
 
 		List diplomaList = manager.listDiploma();
 		request.setAttribute("diplomaList", diplomaList);
+
+		List daysList = new ArrayList();
+		for(int i =1; i<=31; i++)
+			daysList.add((new Integer(i)).toString());
+		request.setAttribute("daysList", daysList);
+		
+		List monthsList = new ArrayList();
+		for(int i =1; i<=12; i++)
+			monthsList.add((new Integer(i)).toString());
+		request.setAttribute("monthsList", monthsList);
 
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));

@@ -393,13 +393,17 @@ public class DatabaseRdvManager implements RdvManager {
 		
 		if(diplomaId == "")
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
-				+ "(to_char(DATE_DE_RDV, 'DD/MM/YY') >= '"+dateStart+"')"
-				+ "and (to_char(DATE_DE_RDV, 'DD/MM/YYYY') <= '"+dateEnd+"')";
+				+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
+				+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY')";
 		else 
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
-				+ "(to_char(DATE_DE_RDV, 'DD/MM/YY') >= '"+dateStart+"') "
-				+ "and (to_char(DATE_DE_RDV, 'DD/MM/YYYY') <= '"+dateEnd+"') "
+		+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
+		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY') "
 				+ "and (ID_DIP_MLV = "+diplomaId+")";
+		
+		System.err.println(dateStart);
+		System.err.println(dateEnd);
+		System.err.println(reqSql);
 		
 		try {
 			rs = requestor.doQuery(reqSql);

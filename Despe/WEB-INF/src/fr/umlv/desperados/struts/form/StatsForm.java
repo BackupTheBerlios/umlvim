@@ -20,13 +20,19 @@ public class StatsForm extends ActionForm {
 	// --------------------------------------------------------- Instance Variables
 
 	/** periodeDeb property */
-	private String periodeDeb;
-	
-	/** periodeFin property */
-	private String periodeFin;
-    
+	private String dayStartId = "1";
+
+	/** periodeDeb property */
+	private String monthStartId = "1";
+
+	/** periodeDeb property */
+	private String dayEndId = "1";
+
+	/** periodeDeb property */
+	private String monthEndId = "1";
+	    
 	/** diplomaId property */
-	private String diplomaId;
+	private String diplomaId = "-1";
 	
 	// --------------------------------------------------------- Methods
 
@@ -49,9 +55,11 @@ public class StatsForm extends ActionForm {
 	 * @param HttpServletRequest request
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-		periodeDeb = "";
-		periodeFin = "";
-		diplomaId = "";
+		dayStartId = "1";
+		monthStartId = "1";
+		dayEndId = "1";
+		monthEndId = "1";
+		diplomaId = "-1";
 	}
 	
 	/**
@@ -62,20 +70,6 @@ public class StatsForm extends ActionForm {
 	}
 
 	/**
-	 * @return
-	 */
-	public String getPeriodeDeb() {
-		return periodeDeb;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getPeriodeFin() {
-		return periodeFin;
-	}
-
-	/**
 	 * @param string
 	 */
 	public void setDiplomaId(String string) {
@@ -83,17 +77,59 @@ public class StatsForm extends ActionForm {
 	}
 
 	/**
-	 * @param string
+	 * @return
 	 */
-	public void setPeriodeDeb(String string) {
-		periodeDeb = string;
+	public String getDayStartId() {
+		return dayStartId;
 	}
 
 	/**
 	 * @param string
 	 */
-	public void setPeriodeFin(String string) {
-		periodeFin = string;
+	public void setDayStartId(String string) {
+		dayStartId = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getDayEndId() {
+		return dayEndId;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getMonthEndId() {
+		return monthEndId;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getMonthStartId() {
+		return monthStartId;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setDayEndId(String string) {
+		dayEndId = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setMonthEndId(String string) {
+		monthEndId = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setMonthStartId(String string) {
+		monthStartId = string;
 	}
 
 }

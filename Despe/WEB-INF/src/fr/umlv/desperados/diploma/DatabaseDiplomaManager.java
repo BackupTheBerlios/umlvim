@@ -60,7 +60,7 @@ public class DatabaseDiplomaManager implements DiplomaManager
    {
 	List laListe = null;
 	try {
-		ResultSet rs = requestor.doQuery("SELECT * FROM DIPLOME_MLV");
+		ResultSet rs = requestor.doQuery("SELECT * FROM DIPLOME_MLV order by LIB_DIP_MLV");
 		laListe = new DatabaseDiplomaList(rs);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
