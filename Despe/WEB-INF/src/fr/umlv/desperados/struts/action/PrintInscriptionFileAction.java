@@ -4,8 +4,6 @@
  */
 package fr.umlv.desperados.struts.action;
 
-
-
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -24,11 +22,13 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import fr.umlv.desperados.student.DatabaseInformationListManager;
 import fr.umlv.desperados.student.Student;
 import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.stylesheet.StyleSheet;
 import fr.umlv.desperados.stylesheet.StyleSheetManager;
 import fr.umlv.desperados.util.Constants;
+import fr.umlv.desperados.util.XSLTools;
 import fr.umlv.desperados.util.PDFTools;
 
 /**
@@ -40,8 +40,7 @@ public class PrintInscriptionFileAction extends Action {
 	/**
 		 * The <code>Log</code> instance for this application.
 		 */
-	 private Log log = LogFactory.getLog("fr.umlv.desperados.struts");
-
+	private Log log = LogFactory.getLog("fr.umlv.desperados.struts");
 
 	public ActionForward execute(
 		ActionMapping mapping,
@@ -52,13 +51,14 @@ public class PrintInscriptionFileAction extends Action {
 
 		ActionErrors errors = new ActionErrors();
 		HttpSession session = request.getSession();
-		
-		Student student = (Student)session.getAttribute(Constants.STUDENT_KEY);
+
+		Student student = (Student) session.getAttribute(Constants.STUDENT_KEY);
 		String type = request.getParameter("type");
-		
+
 		if (student == null) {
 			if (log.isWarnEnabled()) {
-				errors.add(ActionErrors.GLOBAL_ERROR,
+				errors.add(
+					ActionErrors.GLOBAL_ERROR,
 					new ActionError("error.mustbelogged"));
 				saveErrors(request, errors);
 			}
@@ -68,47 +68,65 @@ public class PrintInscriptionFileAction extends Action {
 		StudentManager manager =
 			(StudentManager) servlet.getServletContext().getAttribute(
 				Constants.STUDENT_DATABASE_KEY);
-				
-		StyleSheetManager ssManager = 
-			(StyleSheetManager)servlet.getServletContext().getAttribute(
+
+		StyleSheetManager ssManager =
+			(StyleSheetManager) servlet.getServletContext().getAttribute(
 				Constants.STYLESHEET_DATABASE_KEY);
 
+		DatabaseInformationListManager listManager =
+			(DatabaseInformationListManager)servlet.getServletContext().getAttribute(
+				Constants.INFORMATION_DATABASE_KEY);
+		
 		if (manager == null) {
 			errors.add(
 				ActionErrors.GLOBAL_ERROR,
 				new ActionError("error.database.missing"));
 		}
 
-		
 		int docType;
-		if(type.equals("inscr")) docType = 1;
+		if (type.equals("inscr"))
+			docType = 1;
 		else {
-			 docType = 2; 
-			 if(student.getAppointmentDate()==null) {
-			 	errors.add(
-			 		ActionErrors.GLOBAL_ERROR,
-			 		new ActionError("error.rdv.not.taken"));
-			 }
-		} 
-		
+			docType = 2;
+			if (student.getAppointmentDate() == null) {
+				errors.add(
+					ActionErrors.GLOBAL_ERROR,
+					new ActionError("error.rdv.not.taken"));
+			}
+		}
+
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("error"));
 		}
-		
-		StyleSheet s = ssManager.getStyleSheet(docType);
-		
-		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")
-																								+"/stylesheet/"+s.getFilename());
-		InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
-		InputStream is = PDFTools.generatePDF(isStudent,isStyleSheet);
 
-		response.setContentType("application/pdf");
+		StyleSheet s = ssManager.getStyleSheet(docType);
+
+		String stringWorkingDirectory = System.getProperty( "java.io.tmpdir" ).replace( '\\', '/' );
+		String filePath = servlet.getServletContext().getRealPath("/") + "stylesheet/" + s.getFilename();
+	
+		InputStream is;
+	
+		if(docType==1 || docType==2) {
+			String destFile = stringWorkingDirectory+"/"+s.getFilename();
+			PDFTools.copy(filePath, destFile);
+			PDFTools tools = new PDFTools(destFile); 
+			
+			tools.modifyFile(student, listManager);
+			is = new FileInputStream(tools.convertDocument());
+		}
+				
+		else {
+			InputStream isStyleSheet = new FileInputStream(filePath);
+			InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
+			is = XSLTools.generatePDF(isStudent,isStyleSheet);
+		}
+		response.setContentType("application/pdf");	
 		OutputStream writer = response.getOutputStream();
 		byte[] buffer = new byte[1024];
-		while(is.read(buffer)>0) {
+		while(is.read(buffer)>0)
 			writer.write(buffer);
-		}
+
 		return null;
 	}
 }
