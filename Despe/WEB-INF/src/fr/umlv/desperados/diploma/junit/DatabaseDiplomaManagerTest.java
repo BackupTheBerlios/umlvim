@@ -72,21 +72,6 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		super.tearDown();
 	}
 	
-	/*public void testAddDiploma() {
-		String diplomaId;
-		Diploma diploma = new Diploma("DEA informatique", "3");
-		
-		try {
-			ddm.addDiploma(diploma);
-		} catch (DiplomaAlreadyExistsException e) {
-			// TODO Bloc catch auto-généré
-			e.printStackTrace();
-			assertTrue(false);
-		}
-		diplomaId = diploma.getId();
-		assertTrue(! (diplomaId.equals("0")));
-	}*/
-	
 	public void testGetDiploma() {
 		Diploma diploma = ddm.getDiploma("-1");
 		assertTrue(diploma.getName().equals("default"));
