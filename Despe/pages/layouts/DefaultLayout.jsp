@@ -8,7 +8,7 @@
 		<html:base/>
 	</head>
 	<body bgcolor="#FFFFFF">
-		<table border="1" width="100%">
+		<table width="100%">
 			<tr>
 				<td  colspan="2" align="center">
 					<!-- Header page information -->
