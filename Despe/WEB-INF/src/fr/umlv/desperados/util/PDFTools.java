@@ -191,6 +191,7 @@ public class PDFTools {
 			replace(sbuff, "#heure#", sdate.substring(8,14));
 		}
 		// inscription
+		replace(sbuff, "#nom#", student.getName());
 		replace(sbuff,"#nom_pat#", student.getPatronymicName());	
 		replace(sbuff,"#prenom2#", student.getFirstname2());
 		DateFormat d = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRENCH);
@@ -216,13 +217,13 @@ public class PDFTools {
 		replace(sbuff, "#code_bac#", student.getBaccalaureatId());
 		replace(sbuff, "#annee_bac#", student.getBacYear());
 		String mention = manager.get(DatabaseInformationListManager.BAC_MENTION, new Integer(student.getBacMentionId()).toString());
-		replace(sbuff, "#mention#", mention);
+		//replace(sbuff, "#mention#", mention);
 		Integer year = new Integer(student.getBacYear());
 		String resource;
 		if(year.intValue() >= 1995)
 			resource = DatabaseInformationListManager.BAC_POST_95;
 		else resource = DatabaseInformationListManager.BAC_PRE_95;
-		replace(sbuff, "#serie#", manager.get(resource, student.getBaccalaureatId()));
+		//replace(sbuff, "#serie#", manager.get(resource, student.getBaccalaureatId()));
 		//replace(sbuff, "#bac_ville#", student.getb);
 		replace(sbuff, "#bac_eta#", student.getEstablishmentBacObtaining());
 	
@@ -249,7 +250,7 @@ public class PDFTools {
 	
 		/******************Financial Aid*****************/
 		replace(sbuff, "#aide_code#", student.getFinancialAssistanceId());
-		replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
+		//replace(sbuff, "#aide#", manager.get(DatabaseInformationListManager.FINANCIAL_AID, student.getFinancialAssistanceId()));
 	
 		/***************** Inscriptions ******************/
 		//String diploma = new Integer(student.getMLVDiplomaId()).toString();
