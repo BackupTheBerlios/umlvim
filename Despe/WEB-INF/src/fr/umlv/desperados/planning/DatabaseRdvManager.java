@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import fr.umlv.desperados.database.DatabaseRequestor;
 
 
-/**
+/** 
  * Provides an implementation of the RdvManager interface, using an relational 
  * database.
  * A unique instance of this manager is created ("singleton" design pattern) for a 
