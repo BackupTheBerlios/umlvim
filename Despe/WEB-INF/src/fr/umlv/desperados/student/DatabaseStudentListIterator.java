@@ -14,7 +14,7 @@ class DatabaseStudentListIterator implements ListIterator
 {
    
    /**
-    * The ResultSet containing the Student list.
+    * The ResultSet containing the Student list. 
     */
    private ResultSet rs;
    

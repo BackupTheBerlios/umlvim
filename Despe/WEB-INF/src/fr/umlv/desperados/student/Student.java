@@ -16,13 +16,12 @@ public class Student implements XMLable
    /**
     * primary key in the Student database
     */
-   private String studentId;
+   private int studentId;
    
    /**
     * @see Current name
     */
    private String name;
-   private String firstName;
    private Date birthday;
    private String ine;
    private boolean wasToUmlvLastYear;
@@ -30,7 +29,7 @@ public class Student implements XMLable
    private String firstname1;
    private String firstname2;
    private String townOfBirth;
-   private char sex;
+   private String sex;
    private String firstInsSupEduc;
    
    /**
@@ -87,7 +86,7 @@ public class Student implements XMLable
    /**
     * @see phone fixe address
     */
-   private int phoneFixAdd;
+   private String phoneFixAdd;
    
    /**
     * @see have a temporary address in France
@@ -117,7 +116,7 @@ public class Student implements XMLable
    /**
     * @see phone temporary address
     */
-   private int phoneTmpAdd;
+   private String phoneTmpAdd;
    
    /**
     * @see is employed
@@ -250,11 +249,10 @@ public class Student implements XMLable
     */
    private Timestamp appointmentDate;
    private int workedShareId;
-   private char financialAssistanceId;
+   private String financialAssistanceId;
    private int socialEconomicCategoryId;
    private int MLVDiplomaId;
    private String baccalaureatId;
-   private String handicapId;
    private int lodgingTypeId;
    private int inscriptionModeId;
    private int inscriptionTypeId;
@@ -263,8 +261,8 @@ public class Student implements XMLable
    private int mutualInsuranceCompanyId;
    private int socialSecurityId;
    private int paymentModeId;
-   private int purseIde;
-   private char lastDiplomaTypeId;
+   private int purseId;
+   private String lastDiplomaTypeId;
    private int bacMentionId;
    private int baccalaureatEstablishmentTypeId;
    private int lastEstabTypeId;
@@ -295,6 +293,7 @@ public class Student implements XMLable
    private int otherEstabInsPlaceId;
    private int bacObtainingCountryId;
    private int nationalityId;
+   private String handic;
    
    /**
     * @see international exchange place identify
@@ -315,21 +314,32 @@ public class Student implements XMLable
    /**
     * @see precedent year situation type identify
     */
-   private int precYearSitTypeId;
+   private String precYearSitTypeId;
    private int famSituation;
    private String motifProlSocSec;
    private boolean noSocSecStu;
-   private char sitLastYear;
    private int otherEtabIns;
+   private int headFamJob;
+   private int MLVDiplomaComplId;
+
    
    /**
     * @param studentId
     * @roseuid 3FCA089F033C
     */
-   public Student(String studentId) 
+   public Student(int studentId) 
    {
-    
+ 	this.studentId=studentId;
    }
+  
+    
+   /**
+	* @param studentId
+	* @roseuid 3FCA089F033C
+	*/
+   public Student() 
+   {
+	}
    
    /**
     * @param name
@@ -337,17 +347,9 @@ public class Student implements XMLable
     */
    public void setName(String name) 
    {
-    
+    this.name=name;
    }
-   
-   /**
-    * @param firstname
-    * @roseuid 3FCB6159007B
-    */
-   public void setFirstname(String firstname) 
-   {
-    
-   }
+
    
    /**
     * @param birthday
@@ -355,7 +357,7 @@ public class Student implements XMLable
     */
    public void setBirthday(java.util.Date birthday) 
    {
-    
+    this.birthday=birthday;
    }
    
    /**
@@ -364,7 +366,7 @@ public class Student implements XMLable
     */
    public void setIne(String ine) 
    {
-    
+    this.ine=ine;
    }
    
    /**
@@ -373,7 +375,7 @@ public class Student implements XMLable
     */
    public int getStudentId() 
    {
-    return 0;
+   	    return studentId;
    }
    
    /**
@@ -382,25 +384,16 @@ public class Student implements XMLable
     */
    public String getName() 
    {
-    return null;
+    return name;
    }
-   
-   /**
-    * @return java.lang.String
-    * @roseuid 3FD7AD82004E
-    */
-   public String getFirstName() 
-   {
-    return null;
-   }
-   
+
    /**
     * @return java.util.Date
     * @roseuid 3FD7AD9000BB
     */
    public Date getBirthday() 
    {
-    return null;
+    return birthday;
    }
    
    /**
@@ -409,7 +402,7 @@ public class Student implements XMLable
     */
    public String getIne() 
    {
-    return null;
+    return ine;
    }
    
    /**
@@ -420,6 +413,1314 @@ public class Student implements XMLable
    {
     return null;
    }
+/**
+ * @return
+ */
+public Timestamp getAppointmentDate() {
+	return appointmentDate;
+}
+
+/**
+ * @return
+ */
+public int getBaccalaureatEstablishmentTypeId() {
+	return baccalaureatEstablishmentTypeId;
+}
+
+/**
+ * @return
+ */
+public String getBaccalaureatId() {
+	return baccalaureatId;
+}
+
+/**
+ * @return
+ */
+public int getBacMentionId() {
+	return bacMentionId;
+}
+
+/**
+ * @return
+ */
+public int getBacObtainingCountryId() {
+	return bacObtainingCountryId;
+}
+
+/**
+ * @return
+ */
+public String getBacYear() {
+	return bacYear;
+}
+
+/**
+ * @return
+ */
+public String getBuildingFixAdd() {
+	return buildingFixAdd;
+}
+
+/**
+ * @return
+ */
+public String getBuildingTmpAdd() {
+	return buildingTmpAdd;
+}
+
+/**
+ * @return
+ */
+public int getCenterPaymentId() {
+	return centerPaymentId;
+}
+
+/**
+ * @return
+ */
+public String getCityTmpAdd() {
+	return cityTmpAdd;
+}
+
+/**
+ * @return
+ */
+public int getCompInsYearNum() {
+	return compInsYearNum;
+}
+
+/**
+ * @return
+ */
+public int getComplCycleInsNum() {
+	return complCycleInsNum;
+}
+
+/**
+ * @return
+ */
+public int getComplDipInsNum() {
+	return complDipInsNum;
+}
+
+/**
+ * @return
+ */
+public String getEstablishmentBacObtaining() {
+	return establishmentBacObtaining;
+}
+
+/**
+ * @return
+ */
+public String getEstaFirstInsFrenchUniv() {
+	return estaFirstInsFrenchUniv;
+}
+
+/**
+ * @return
+ */
+public int getFamSituation() {
+	return famSituation;
+}
+
+/**
+ * @return
+ */
+public String getFatherFirstName() {
+	return fatherFirstName;
+}
+
+/**
+ * @return
+ */
+public String getFatherName() {
+	return fatherName;
+}
+
+/**
+ * @return
+ */
+public String getFinancialAssistanceId() {
+	return financialAssistanceId;
+}
+
+/**
+ * @return
+ */
+public String getFirstInsEstablishment() {
+	return firstInsEstablishment;
+}
+
+/**
+ * @return
+ */
+public String getFirstInsFrenchUniv() {
+	return firstInsFrenchUniv;
+}
+
+/**
+ * @return
+ */
+public int getFirstInsFrUnivDepId() {
+	return firstInsFrUnivDepId;
+}
+
+/**
+ * @return
+ */
+public String getFirstInsSupEduc() {
+	return firstInsSupEduc;
+}
+
+/**
+ * @return
+ */
+public int getFixeAddCountryId() {
+	return fixeAddCountryId;
+}
+
+/**
+ * @return
+ */
+public int getFixeAddFrenchCityId() {
+	return fixeAddFrenchCityId;
+}
+
+/**
+ * @return
+ */
+public int getForeignBirthplaceId() {
+	return foreignBirthplaceId;
+}
+
+/**
+ * @return
+ */
+public String getForeignCityBac() {
+	return foreignCityBac;
+}
+
+/**
+ * @return
+ */
+public String getForeignCityFixAdd() {
+	return foreignCityFixAdd;
+}
+
+/**
+ * @return
+ */
+public int getFrenchBacCityId() {
+	return frenchBacCityId;
+}
+
+/**
+ * @return
+ */
+public int getFrenchBirthplaceId() {
+	return frenchBirthplaceId;
+}
+
+/**
+ * @return
+ */
+public boolean isHaveFinancialAss() {
+	return haveFinancialAss;
+}
+
+/**
+ * @return
+ */
+public boolean isHaveFixAddFr() {
+	return haveFixAddFr;
+}
+
+/**
+ * @return
+ */
+public boolean isHaveTmpAddFr() {
+	return haveTmpAddFr;
+}
+
+/**
+ * @return
+ */
+public String getHeadFamProf() {
+	return headFamProf;
+}
+
+/**
+ * @return
+ */
+public int getInscriptionModeId() {
+	return inscriptionModeId;
+}
+
+/**
+ * @return
+ */
+public int getInscriptionTypeId() {
+	return inscriptionTypeId;
+}
+
+/**
+ * @return
+ */
+public boolean isInsuranceCivilLiability() {
+	return insuranceCivilLiability;
+}
+
+/**
+ * @return
+ */
+public String getInternaExchOriEstab() {
+	return internaExchOriEstab;
+}
+
+/**
+ * @return
+ */
+public String getInternaExchRecEstab() {
+	return internaExchRecEstab;
+}
+
+/**
+ * @return
+ */
+public int getInternationalExchangeTypeId() {
+	return internationalExchangeTypeId;
+}
+
+/**
+ * @return
+ */
+public int getIntExchPlaceId() {
+	return intExchPlaceId;
+}
+
+/**
+ * @return
+ */
+public boolean isEmployed() {
+	return isEmployed;
+}
+
+/**
+ * @return
+ */
+public boolean isNatSport() {
+	return isNatSport;
+}
+
+/**
+ * @return
+ */
+public boolean isRegSport() {
+	return isRegSport;
+}
+
+/**
+ * @return
+ */
+public String getLastAttendedEstab() {
+	return lastAttendedEstab;
+}
+
+/**
+ * @return
+ */
+public int getLastAttendedEstabPlaceId() {
+	return lastAttendedEstabPlaceId;
+}
+
+/**
+ * @return
+ */
+public String getLastAttendedEstabYear() {
+	return lastAttendedEstabYear;
+}
+
+/**
+ * @return
+ */
+public String getLastDiplomaTypeId() {
+	return lastDiplomaTypeId;
+}
+
+/**
+ * @return
+ */
+public int getLastEstabTypeId() {
+	return lastEstabTypeId;
+}
+
+/**
+ * @return
+ */
+public int getLodgingTypeId() {
+	return lodgingTypeId;
+}
+
+/**
+ * @return
+ */
+public int getMilitarySituationId() {
+	return militarySituationId;
+}
+
+/**
+ * @return
+ */
+public int getMLVDiplomaId() {
+	return MLVDiplomaId;
+}
+
+/**
+ * @return
+ */
+public String getMotherName() {
+	return motherName;
+}
+
+/**
+ * @return
+ */
+public String getMotherPatronymicName() {
+	return motherPatronymicName;
+}
+
+/**
+ * @return
+ */
+public String getMotifProlSocSec() {
+	return motifProlSocSec;
+}
+
+/**
+ * @return
+ */
+public int getMutualInsuranceCompanyId() {
+	return mutualInsuranceCompanyId;
+}
+
+/**
+ * @return
+ */
+public int getNationalityId() {
+	return nationalityId;
+}
+
+/**
+ * @return
+ */
+public boolean isNoSocSecStu() {
+	return noSocSecStu;
+}
+
+/**
+ * @return
+ */
+public String getNumFixAdd() {
+	return numFixAdd;
+}
+
+/**
+ * @return
+ */
+public String getNumTmpAdd() {
+	return numTmpAdd;
+}
+
+/**
+ * @return
+ */
+public int getOtherEstabInsPlaceId() {
+	return otherEstabInsPlaceId;
+}
+
+/**
+ * @return
+ */
+public int getOtherEtabIns() {
+	return otherEtabIns;
+}
+
+/**
+ * @return
+ */
+public String getOtherInsEstab() {
+	return otherInsEstab;
+}
+
+/**
+ * @return
+ */
+public String getPatronymicName() {
+	return patronymicName;
+}
+
+/**
+ * @return
+ */
+public int getPaymentModeId() {
+	return paymentModeId;
+}
+
+/**
+ * @return
+ */
+public String getPhoneFixAdd() {
+	return phoneFixAdd;
+}
+
+/**
+ * @return
+ */
+public String getPhoneTmpAdd() {
+	return phoneTmpAdd;
+}
+
+/**
+ * @return
+ */
+public String getPractisedSport() {
+	return practisedSport;
+}
+
+/**
+ * @return
+ */
+public String getPrecedentYearEstab() {
+	return precedentYearEstab;
+}
+
+/**
+ * @return
+ */
+public int getPrecYearEstabPlaceId() {
+	return precYearEstabPlaceId;
+}
+
+/**
+ * @return
+ */
+public int getPrincCycleInsNum() {
+	return princCycleInsNum;
+}
+
+/**
+ * @return
+ */
+public int getPrincDiplInsNum() {
+	return princDiplInsNum;
+}
+
+/**
+ * @return
+ */
+public int getPrincInsYearNum() {
+	return princInsYearNum;
+}
+
+
+/**
+ * @return
+ */
+public String getSex() {
+	return sex;
+}
+
+
+
+/**
+ * @return
+ */
+public int getSocialEconomicCategoryId() {
+	return socialEconomicCategoryId;
+}
+
+/**
+ * @return
+ */
+public int getSocialSecurityId() {
+	return socialSecurityId;
+}
+
+/**
+ * @return
+ */
+public String getSocialSecurityNum() {
+	return socialSecurityNum;
+}
+
+/**
+ * @return
+ */
+public int getStockBrokerNum() {
+	return stockBrokerNum;
+}
+
+/**
+ * @return
+ */
+public String getStreetFixAdd() {
+	return streetFixAdd;
+}
+
+/**
+ * @return
+ */
+public String getStreetTmpAdd() {
+	return streetTmpAdd;
+}
+
+/**
+ * @return
+ */
+public String getStudEmplType() {
+	return studEmplType;
+}
+
+/**
+ * @return
+ */
+public int getTmpAddCountryId() {
+	return tmpAddCountryId;
+}
+
+/**
+ * @return
+ */
+public int getTmpAdressFrenchCityId() {
+	return tmpAdressFrenchCityId;
+}
+
+/**
+ * @return
+ */
+public String getTownOfBirth() {
+	return townOfBirth;
+}
+
+/**
+ * @return
+ */
+public boolean isWasToUmlvLastYear() {
+	return wasToUmlvLastYear;
+}
+
+/**
+ * @return
+ */
+public int getWorkedShareId() {
+	return workedShareId;
+}
+
+/**
+ * @param timestamp
+ */
+public void setAppointmentDate(Timestamp timestamp) {
+	appointmentDate = timestamp;
+}
+
+/**
+ * @param i
+ */
+public void setBaccalaureatEstablishmentTypeId(int i) {
+	baccalaureatEstablishmentTypeId = i;
+}
+
+/**
+ * @param string
+ */
+public void setBaccalaureatId(String string) {
+	baccalaureatId = string;
+}
+
+/**
+ * @param i
+ */
+public void setBacMentionId(int i) {
+	bacMentionId = i;
+}
+
+/**
+ * @param i
+ */
+public void setBacObtainingCountryId(int i) {
+	bacObtainingCountryId = i;
+}
+
+/**
+ * @param string
+ */
+public void setBacYear(String string) {
+	bacYear = string;
+}
+
+/**
+ * @param string
+ */
+public void setBuildingFixAdd(String string) {
+	buildingFixAdd = string;
+}
+
+/**
+ * @param string
+ */
+public void setBuildingTmpAdd(String string) {
+	buildingTmpAdd = string;
+}
+
+/**
+ * @param i
+ */
+public void setCenterPaymentId(int i) {
+	centerPaymentId = i;
+}
+
+/**
+ * @param string
+ */
+public void setCityTmpAdd(String string) {
+	cityTmpAdd = string;
+}
+
+/**
+ * @param i
+ */
+public void setCompInsYearNum(int i) {
+	compInsYearNum = i;
+}
+
+/**
+ * @param i
+ */
+public void setComplCycleInsNum(int i) {
+	complCycleInsNum = i;
+}
+
+/**
+ * @param i
+ */
+public void setComplDipInsNum(int i) {
+	complDipInsNum = i;
+}
+
+/**
+ * @param string
+ */
+public void setEstablishmentBacObtaining(String string) {
+	establishmentBacObtaining = string;
+}
+
+/**
+ * @param string
+ */
+public void setEstaFirstInsFrenchUniv(String string) {
+	estaFirstInsFrenchUniv = string;
+}
+
+/**
+ * @param i
+ */
+public void setFamSituation(int i) {
+	famSituation = i;
+}
+
+/**
+ * @param string
+ */
+public void setFatherFirstName(String string) {
+	fatherFirstName = string;
+}
+
+/**
+ * @param string
+ */
+public void setFatherName(String string) {
+	fatherName = string;
+}
+
+/**
+ * @param c
+ */
+public void setFinancialAssistanceId(String c) {
+	financialAssistanceId = c;
+}
+
+/**
+ * @param string
+ */
+public void setFirstInsEstablishment(String string) {
+	firstInsEstablishment = string;
+}
+
+/**
+ * @param string
+ */
+public void setFirstInsFrenchUniv(String string) {
+	firstInsFrenchUniv = string;
+}
+
+/**
+ * @param i
+ */
+public void setFirstInsFrUnivDepId(int i) {
+	firstInsFrUnivDepId = i;
+}
+
+/**
+ * @param string
+ */
+public void setFirstInsSupEduc(String string) {
+	firstInsSupEduc = string;
+}
+
+/**
+ * @param i
+ */
+public void setFixeAddCountryId(int i) {
+	fixeAddCountryId = i;
+}
+
+/**
+ * @param i
+ */
+public void setFixeAddFrenchCityId(int i) {
+	fixeAddFrenchCityId = i;
+}
+
+/**
+ * @param i
+ */
+public void setForeignBirthplaceId(int i) {
+	foreignBirthplaceId = i;
+}
+
+/**
+ * @param string
+ */
+public void setForeignCityBac(String string) {
+	foreignCityBac = string;
+}
+
+/**
+ * @param string
+ */
+public void setForeignCityFixAdd(String string) {
+	foreignCityFixAdd = string;
+}
+
+/**
+ * @param i
+ */
+public void setFrenchBacCityId(int i) {
+	frenchBacCityId = i;
+}
+
+/**
+ * @param i
+ */
+public void setFrenchBirthplaceId(int i) {
+	frenchBirthplaceId = i;
+}
+
+/**
+ * @param b
+ */
+public void setHaveFinancialAss(boolean b) {
+	haveFinancialAss = b;
+}
+
+/**
+ * @param b
+ */
+public void setHaveFixAddFr(boolean b) {
+	haveFixAddFr = b;
+}
+
+/**
+ * @param b
+ */
+public void setHaveTmpAddFr(boolean b) {
+	haveTmpAddFr = b;
+}
+
+/**
+ * @param string
+ */
+public void setHeadFamProf(String string) {
+	headFamProf = string;
+}
+
+/**
+ * @param i
+ */
+public void setInscriptionModeId(int i) {
+	inscriptionModeId = i;
+}
+
+/**
+ * @param i
+ */
+public void setInscriptionTypeId(int i) {
+	inscriptionTypeId = i;
+}
+
+/**
+ * @param b
+ */
+public void setInsuranceCivilLiability(boolean b) {
+	insuranceCivilLiability = b;
+}
+
+/**
+ * @param string
+ */
+public void setInternaExchOriEstab(String string) {
+	internaExchOriEstab = string;
+}
+
+/**
+ * @param string
+ */
+public void setInternaExchRecEstab(String string) {
+	internaExchRecEstab = string;
+}
+
+/**
+ * @param i
+ */
+public void setInternationalExchangeTypeId(int i) {
+	internationalExchangeTypeId = i;
+}
+
+/**
+ * @param i
+ */
+public void setIntExchPlaceId(int i) {
+	intExchPlaceId = i;
+}
+
+/**
+ * @param b
+ */
+public void setEmployed(boolean b) {
+	isEmployed = b;
+}
+
+/**
+ * @param b
+ */
+public void setNatSport(boolean b) {
+	isNatSport = b;
+}
+
+/**
+ * @param b
+ */
+public void setRegSport(boolean b) {
+	isRegSport = b;
+}
+
+/**
+ * @param string
+ */
+public void setLastAttendedEstab(String string) {
+	lastAttendedEstab = string;
+}
+
+/**
+ * @param i
+ */
+public void setLastAttendedEstabPlaceId(int i) {
+	lastAttendedEstabPlaceId = i;
+}
+
+/**
+ * @param string
+ */
+public void setLastAttendedEstabYear(String string) {
+	lastAttendedEstabYear = string;
+}
+
+/**
+ * @param c
+ */
+public void setLastDiplomaTypeId(String c) {
+	lastDiplomaTypeId = c;
+}
+
+/**
+ * @param i
+ */
+public void setLastEstabTypeId(int i) {
+	lastEstabTypeId = i;
+}
+
+/**
+ * @param i
+ */
+public void setLodgingTypeId(int i) {
+	lodgingTypeId = i;
+}
+
+/**
+ * @param i
+ */
+public void setMilitarySituationId(int i) {
+	militarySituationId = i;
+}
+
+/**
+ * @param i
+ */
+public void setMLVDiplomaId(int i) {
+	MLVDiplomaId = i;
+}
+
+/**
+ * @param string
+ */
+public void setMotherName(String string) {
+	motherName = string;
+}
+
+/**
+ * @param string
+ */
+public void setMotherPatronymicName(String string) {
+	motherPatronymicName = string;
+}
+
+/**
+ * @param string
+ */
+public void setMotifProlSocSec(String string) {
+	motifProlSocSec = string;
+}
+
+/**
+ * @param i
+ */
+public void setMutualInsuranceCompanyId(int i) {
+	mutualInsuranceCompanyId = i;
+}
+
+/**
+ * @param i
+ */
+public void setNationalityId(int i) {
+	nationalityId = i;
+}
+
+/**
+ * @param b
+ */
+public void setNoSocSecStu(boolean b) {
+	noSocSecStu = b;
+}
+
+/**
+ * @param string
+ */
+public void setNumFixAdd(String string) {
+	numFixAdd = string;
+}
+
+/**
+ * @param string
+ */
+public void setNumTmpAdd(String string) {
+	numTmpAdd = string;
+}
+
+/**
+ * @param i
+ */
+public void setOtherEstabInsPlaceId(int i) {
+	otherEstabInsPlaceId = i;
+}
+
+/**
+ * @param i
+ */
+public void setOtherEtabIns(int i) {
+	otherEtabIns = i;
+}
+
+/**
+ * @param string
+ */
+public void setOtherInsEstab(String string) {
+	otherInsEstab = string;
+}
+
+/**
+ * @param string
+ */
+public void setPatronymicName(String string) {
+	patronymicName = string;
+}
+
+/**
+ * @param i
+ */
+public void setPaymentModeId(int i) {
+	paymentModeId = i;
+}
+
+/**
+ * @param i
+ */
+public void setPhoneFixAdd(String i) {
+	phoneFixAdd = i;
+}
+
+/**
+ * @param i
+ */
+public void setPhoneTmpAdd(String i) {
+	phoneTmpAdd = i;
+}
+
+/**
+ * @param string
+ */
+public void setPractisedSport(String string) {
+	practisedSport = string;
+}
+
+/**
+ * @param string
+ */
+public void setPrecedentYearEstab(String string) {
+	precedentYearEstab = string;
+}
+
+/**
+ * @param i
+ */
+public void setPrecYearEstabPlaceId(int i) {
+	precYearEstabPlaceId = i;
+}
+
+
+/**
+ * @param i
+ */
+public void setPrincCycleInsNum(int i) {
+	princCycleInsNum = i;
+}
+
+/**
+ * @param i
+ */
+public void setPrincDiplInsNum(int i) {
+	princDiplInsNum = i;
+}
+
+/**
+ * @param i
+ */
+public void setPrincInsYearNum(int i) {
+	princInsYearNum = i;
+}
+
+
+/**
+ * @param c
+ */
+public void setSex(String c) {
+	sex = c;
+}
+
+
+/**
+ * @param i
+ */
+public void setSocialEconomicCategoryId(int i) {
+	socialEconomicCategoryId = i;
+}
+
+/**
+ * @param i
+ */
+public void setSocialSecurityId(int i) {
+	socialSecurityId = i;
+}
+
+/**
+ * @param string
+ */
+public void setSocialSecurityNum(String string) {
+	socialSecurityNum = string;
+}
+
+/**
+ * @param i
+ */
+public void setStockBrokerNum(int i) {
+	stockBrokerNum = i;
+}
+
+/**
+ * @param string
+ */
+public void setStreetFixAdd(String string) {
+	streetFixAdd = string;
+}
+
+/**
+ * @param string
+ */
+public void setStreetTmpAdd(String string) {
+	streetTmpAdd = string;
+}
+
+/**
+ * @param string
+ */
+public void setStudEmplType(String string) {
+	studEmplType = string;
+}
+
+/**
+ * @param i
+ */
+public void setTmpAddCountryId(int i) {
+	tmpAddCountryId = i;
+}
+
+/**
+ * @param i
+ */
+public void setTmpAdressFrenchCityId(int i) {
+	tmpAdressFrenchCityId = i;
+}
+
+/**
+ * @param string
+ */
+public void setTownOfBirth(String string) {
+	townOfBirth = string;
+}
+
+/**
+ * @param b
+ */
+public void setWasToUmlvLastYear(boolean b) {
+	wasToUmlvLastYear = b;
+}
+
+/**
+ * @param i
+ */
+public void setWorkedShareId(int i) {
+	workedShareId = i;
+}
+
+/**
+ * @return
+ */
+public String getFirstname1() {
+	return firstname1;
+}
+
+/**
+ * @return
+ */
+public String getFirstname2() {
+	return firstname2;
+}
+
+/**
+ * @param string
+ */
+public void setFirstname1(String string) {
+	firstname1 = string;
+}
+
+/**
+ * @param string
+ */
+public void setFirstname2(String string) {
+	firstname2 = string;
+}
+
+/**
+ * @return
+ */
+public int getHeadFamJob() {
+	return headFamJob;
+}
+
+/**
+ * @return
+ */
+public int getMLVDiplomaComplId() {
+	return MLVDiplomaComplId;
+}
+
+/**
+ * @return
+ */
+public int getPurseId() {
+	return purseId;
+}
+
+/**
+ * @param i
+ */
+public void setHeadFamJob(int i) {
+	headFamJob = i;
+}
+
+/**
+ * @param i
+ */
+public void setMLVDiplomaComplId(int i) {
+	MLVDiplomaComplId = i;
+}
+
+/**
+ * @param c
+ */
+public void setPrecYearSitTypeId(String c) {
+	precYearSitTypeId = c;
+}
+
+/**
+ * @param i
+ */
+public void setPurseId(int i) {
+	purseId = i;
+}
+
+/**
+ * @return
+ */
+public String getHandic() {
+	return handic;
+}
+
+/**
+ * @param string
+ */
+public void setHandic(String string) {
+	handic = string;
+}
+
+/**
+ * @return
+ */
+public String getPrecYearSitTypeId() {
+	return precYearSitTypeId;
+}
+
 }
 /**
  * 

@@ -42,7 +42,7 @@ public interface StudentManager
     * permanent storage.
     * @roseuid 3FBF5EA000BA
     */
-   public Student getStudent(String studentId);
+   public Student getStudent(int studentId);
    
    /**
     * Modifies a Student in the permanent storage.
