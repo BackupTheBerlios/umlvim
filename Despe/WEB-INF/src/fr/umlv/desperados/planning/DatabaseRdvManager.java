@@ -385,6 +385,12 @@ public class DatabaseRdvManager implements RdvManager {
 		String reqSql = "";
 		String numberOfRdV = "";
 		
+		// Add the year to the date : DD/MM/YYYY
+		Calendar calendar = new GregorianCalendar();
+		int year = calendar.get(Calendar.YEAR);
+		dateStart = dateStart + "/" + year;
+		dateEnd = dateEnd + "/" + year;
+		
 		if(diplomaId == "")
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 				+ "(to_char(DATE_DE_RDV, 'DD/MM/YY') >= '"+dateStart+"')"

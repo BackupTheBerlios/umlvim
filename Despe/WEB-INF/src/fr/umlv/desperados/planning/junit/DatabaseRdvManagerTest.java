@@ -7,8 +7,6 @@ package fr.umlv.desperados.planning.junit;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 import fr.umlv.desperados.planning.DatabaseRdvManager;
@@ -71,11 +69,6 @@ public class DatabaseRdvManagerTest extends TestCase {
 			
 			String dateStart = "18/01";
 			String dateEnd = "19/01";
-			
-			Calendar calendar = new GregorianCalendar();
-			int year = calendar.get(Calendar.YEAR);
-			dateStart = dateStart + "/" + year;
-			dateEnd = dateEnd + "/" + year;
 			
 			numberOfRdV = drm.giveRdVNumber(dateStart, dateEnd,"-1");
 			assertTrue(numberOfRdV.equals("1"));

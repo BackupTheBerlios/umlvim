@@ -90,8 +90,8 @@ public interface RdvManager
    /**
 	   * Give the number of Rdv from the planning.
 	   * 
-	   * @param dateStart Format DD/MM/YYYY.
-	   * @param dateEnd Format DD/MM/YYYY.
+	   * @param dateStart Format DD/MM.
+	   * @param dateEnd Format DD/MM.
 	   * @param diplomaId A String of a diploma.
 	   * @return the number of Rdv.
 	   * @roseuid 3FEEAB630340
