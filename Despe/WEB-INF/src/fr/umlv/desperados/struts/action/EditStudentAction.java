@@ -59,8 +59,14 @@ public class EditStudentAction extends StudentAction {
 			page = "3";
 		} 
 		if ("3".equals(page)) {
-			Set list=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
-			request.setAttribute( "socialSecurityAffList",list);
+			Set SocialSecurityAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
+			request.setAttribute( "socialSecurityAffList",SocialSecurityAffList);
+			Set SocialSecurityNonAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_NON_AFF);
+			request.setAttribute( "socialSecurityNonAffList",SocialSecurityNonAffList);
+			Set centerPaymentList=manager.list(DatabaseInformationListManager .PAYMENT_CENTER);
+			request.setAttribute( "centerPaymentList",centerPaymentList);		
+			Set mutualInsuranceCompanyList=manager.list(DatabaseInformationListManager .MUTUAL_COMPANY);
+			request.setAttribute( "mutualInsuranceCompanyList",mutualInsuranceCompanyList);		
 		}
 
 		System.out.println("*****\nEditStudentAction: forwarding to "+page+"\n*****");

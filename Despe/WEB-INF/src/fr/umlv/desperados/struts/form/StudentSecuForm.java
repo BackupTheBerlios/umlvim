@@ -21,6 +21,9 @@ public class StudentSecuForm extends ActionForm {
 	// --------------------------------------------------------- Instance Variables
 
 	private String affiliation;
+	private String nonAffiliation;
+	private String centerPayment;
+	private String mutualInsuranceCompany;
 
 	// --------------------------------------------------------- Methods
 
@@ -40,6 +43,15 @@ public class StudentSecuForm extends ActionForm {
 		if((affiliation == null) || (affiliation.equals(""))) {
 			errors.add("affiliation", new ActionError("error.required"));
 		}
+		if((nonAffiliation == null) || (nonAffiliation.equals(""))) {
+				errors.add("nonAffiliation", new ActionError("error.required"));
+			}
+		if((centerPayment == null) || (centerPayment.equals(""))) {
+				errors.add("centerPayment", new ActionError("error.required"));
+			}
+		if((mutualInsuranceCompany == null) || (mutualInsuranceCompany.equals(""))) {
+				errors.add("mutualInsuranceCompany", new ActionError("error.required"));
+			}
 		return errors;
 	}
 
@@ -50,6 +62,7 @@ public class StudentSecuForm extends ActionForm {
 	 */
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		affiliation="";
+		nonAffiliation="";
 	}
 
 	/**
@@ -65,4 +78,49 @@ public class StudentSecuForm extends ActionForm {
 	public void setAffiliation(String string) {
 		affiliation = string;
 	}
+	
+	
+	
+	/**
+	 * @return
+	 */
+	public String getNonAffiliation() {
+		return nonAffiliation;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setNonAffiliation(String string) {
+		nonAffiliation = string;
+	}
+	
+	
+	/**
+	 * @return
+	 */
+	public String getCenterPayment() {
+		return centerPayment;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setCenterPayment(String string) {
+		centerPayment = string;
+	}
+	
+	/**
+		 * @return
+		 */
+		public String getMutualInsuranceCompany() {
+			return mutualInsuranceCompany;
+		}
+
+		/**
+		 * @param string
+		 */
+		public void setMutualInsuranceCompany(String string) {
+			mutualInsuranceCompany = string;
+		}
 }
