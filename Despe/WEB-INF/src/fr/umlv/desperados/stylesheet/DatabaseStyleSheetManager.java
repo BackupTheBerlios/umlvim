@@ -114,7 +114,7 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 	public List listStyleSheet() {
 		List l = null;
 		try {
-			ResultSet rs = requestor.doQuery("SELECT * FROM FEUILLE_DE_STYLE");
+			ResultSet rs = requestor.doQuery("SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE");
 			l = new DatabaseStyleSheetList(rs);
 		} catch (SQLException e) {
 			// TODO Bloc catch auto-généré
@@ -139,9 +139,10 @@ public class DatabaseStyleSheetManager implements StyleSheetManager {
 			if(rs.first()) {
 				fileName = rs.getString("FEUILLE_STYLE_DOC");
 			}
+
 			rs =
 				requestor.doQuery(
-					"SELECT * FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU = '" + fileName+"'");
+					"SELECT NOM_FIC_FEU, NOM_FEU FROM FEUILLE_DE_STYLE WHERE NOM_FIC_FEU = '" + fileName+"'");
 			if(rs.first())
 				ss = new StyleSheet(rs.getString("NOM_FIC_FEU"), rs.getString("NOM_FEU"));
 		} catch (SQLException e) {
