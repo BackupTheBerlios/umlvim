@@ -110,7 +110,6 @@ public class PrintInscriptionFileAction extends Action {
 	
 		if(docType==1 || docType==2) {
 			String destFile = stringWorkingDirectory+"/";
-
 			int index = fileName.lastIndexOf(".");
 			destFile += fileName.substring(0, index) + student.getId() + fileName.substring(index,fileName.length());
 			System.out.println("destFile = "+destFile);
