@@ -21,8 +21,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th align="left"> <bean:message key="prompt.stats.section"/></th>
-			<td>
+				<td align="left"  colspan="4"><bean:message key="prompt.stats.section"/>
 				<html:select property="diplomaId">
 					<option value="-2" selected="selected">TOUTES</option>
 					<logic:iterate name="diplomaList" id="diploma"
