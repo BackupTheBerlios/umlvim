@@ -60,38 +60,40 @@
 
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
-		<forward 	name="logon"			path="user.logon" />
-		<forward	name="ident"			path="student.ident" />
-		<forward 	name="edituser"			path="admin.edit.user" />
-		<forward 	name="error"			path="common.operation.error" />
-		<forward	name="success"			path="common.operation.ok" />
+		<forward 	name="logon"					path="user.logon" />
+		<forward	name="ident"					path="student.ident" />
+		<forward 	name="edituser"				path="admin.edit.user" />
+		<forward 	name="error"					path="common.operation.error" />
+		<forward	name="success"				path="common.operation.ok" />
 		<forward	name="userhome"			path="user.home" />
 		<forward	name="studenthome"		path="student.home" />
 		<forward	name="searchuser"		path="admin.search.user" />
 		<forward	name="searchstudent"	path="user.search.student" />
-       <forward name="addstudent" path="user.add.student" />
+       <forward 	name="addstudent"		path="user.add.student" />
 	</global-forwards>
 
 	<!-- ========== Action Mapping Definitions ============================ -->
 	<action-mappings>
 
-		<action path="/confPlanning" forward="planning.configure"/>
-		<action path="/takeRdv"	forward="student.take.rdv"/>
-		<action path="/cancelRdv"	forward="student.cancel.rdv"/>
+		<action path="/confPlanning" 	forward="planning.configure"/>
+		<action path="/takeRdv"			forward="student.take.rdv"/>
+		<action path="/cancelRdv"		forward="student.cancel.rdv"/>
 
-		<action path="/loginPage"				forward="user.logon" />
-		<action path="/identPage"				forward="student.ident" />
-		<action path="/home/user"				forward="userhome" />
-		<action path="/home/student"			forward="studenthome" />
+		<action path="/loginPage"			forward="user.logon" />
+		<action path="/identPage"			forward="student.ident" />
+		<action path="/home/user"		forward="userhome" />
+		<action path="/home/student"	forward="studenthome" />
 		<action path="/addStudent"		forward="user.add.student"  />
-    <action
+
+	    <action
             attribute="AddStudentForm"
-             input="/pages/form/AddStudent.jsp"
+            input="/pages/form/AddStudent.jsp"
             name="AddStudentForm"
             path="/add/student"
             type="fr.umlv.desperados.struts.action.AddStudentAction"
-            validate="false" />
-
+            validate="false">
+		</action>
+		
 		<action
 			path="/userLogon"
 			type="fr.umlv.desperados.struts.action.UserLogonAction"
@@ -166,7 +168,6 @@
 			input="/pages/form/setupPlanning.jsp"
 			validate="false">
 		</action>
-
 	
 		<action
 			path="/printInscriptionFile"
