@@ -389,16 +389,16 @@ public class DatabaseRdvManager implements RdvManager {
 		Calendar calendar = new GregorianCalendar();
 		int year = calendar.get(Calendar.YEAR);
 		dateStart = dateStart + "/" + year;
-		dateEnd = dateEnd + "/" + year;
+		dateEnd = dateEnd + "/" + year + " 23:59:59";
 		
 		if(diplomaId == "")
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 				+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
-				+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY')";
+				+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY HH24:MI:SS')";
 		else 
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 		+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
-		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY') "
+		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY HH24:MI:SS') "
 				+ "and (ID_DIP_MLV = "+diplomaId+")";
 		
 		try {
