@@ -33,7 +33,7 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	 * @roseuid 3FF2CD41015A
 	 */
 	public ResultSet doQuery(String query) throws SQLException {
-		Statement stat=conn.createStatement();
+		Statement stat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		return stat.executeQuery(query);
 	}
 
