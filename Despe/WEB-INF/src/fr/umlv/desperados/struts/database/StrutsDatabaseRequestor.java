@@ -36,6 +36,10 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 																				ResultSet.CONCUR_UPDATABLE);
 		ResultSet myResultSet = null;
+		
+		// Ne marche pas avec notre driver Oracle. Permet de faire des requêtes sql avec Select For Update. 
+		// sStat.setCursorName("author_cursor"); 
+		
 		System.out.println("StrutsDatabaseRequestor.doQuery() : query="+query);
 		myResultSet = sStat.executeQuery(query);
 		if(myResultSet.getConcurrency() == ResultSet.CONCUR_READ_ONLY) {
