@@ -80,7 +80,7 @@
 						</option>
 					</logic:iterate>
 				</html:select>
-			</td>		
+			</td>
 		</tr>
 		<tr>
 			<td></td>
