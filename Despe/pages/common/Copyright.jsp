@@ -1,2 +1,4 @@
 <hr>
-Copyright &copy; 2004, Nicolas CUVELIER
+<div align="right">
+	Copyright &copy; 2004, UMLV Desperados Team   -  All Rights Reserved
+</div>
