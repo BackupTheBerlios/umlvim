@@ -10,13 +10,21 @@
 
 	<!-- ========== Form Bean Definitions ================================= -->
 	<form-beans>
+
 		<form-bean name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm" />
+
 		<form-bean name="StudentLogonForm" type="fr.umlv.desperados.struts.form.StudentLogonForm" />
+
 		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
+
 		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
+		
 		<form-bean name="SetStyleSheetForm" type="fr.umlv.desperados.struts.form.SetStyleSheetForm" />
+		
 		<form-bean name="UploadStyleSheetForm" type="fr.umlv.desperados.struts.form.UploadStyleSheetForm" />
+
 		<form-bean name="RdvTackingForm" type="fr.umlv.desperados.struts.form.RdvTackingForm" />
+		
 		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
 		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
 	</form-beans>
@@ -40,6 +48,8 @@
 	<!-- ========== Action Mapping Definitions ============================ -->
 	<action-mappings>
 
+		<action path="/confPlanning" forward="planning.configure"/>
+
 		<action path="/loginPage"				forward="user.logon" />
 		<action path="/identPage"				forward="student.ident" />
 		<action path="/home/user"				forward="userhome" />
@@ -52,7 +62,7 @@
 			scope="request"
 			input="/pages/form/UserLogon.jsp"
 			validate="false">
-		</action>
+			</action>
 
 		<action
 			path="/userLogoff"
@@ -121,6 +131,7 @@
 			validate="false">
 		</action>
 
+	
 		<action
 			path="/list/styleSheet"
 			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
@@ -156,7 +167,10 @@
 			input="/pages/form/ListStyleSheet.jsp"
 			validate="false">
 		</action>
-            
+
+
+
+
 		<action
 			path="/studentLogon"
 			type="fr.umlv.desperados.struts.action.StudentLogonAction"
