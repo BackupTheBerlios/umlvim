@@ -33,32 +33,20 @@
 -->
 	<!-- ========== Form Bean Definitions ================================= -->
 	<form-beans>
-		<form-bean	name="UserLogonForm"
-							type="fr.umlv.desperados.struts.form.UserLogonForm" />
-		<form-bean	name="StudentLogonForm"
-							type="fr.umlv.desperados.struts.form.StudentLogonForm" />
-		<form-bean	name="UserForm"
-							type="fr.umlv.desperados.struts.form.UserForm" />
-		<form-bean	name="SearchUserForm"
-							type="fr.umlv.desperados.struts.form.SearchUserForm" />
-		<form-bean	name="SearchStudentForm"
-							type="fr.umlv.desperados.struts.form.SearchStudentForm" />
-		<form-bean	name="SetStyleSheetForm"
-							type="fr.umlv.desperados.struts.form.SetStyleSheetForm" />
-		<form-bean	name="UploadStyleSheetForm"
-							type="fr.umlv.desperados.struts.form.UploadStyleSheetForm" />
-		<form-bean	name="RdvTackingForm"
-							type="fr.umlv.desperados.struts.form.RdvTackingForm" />
-		<form-bean	name="PlanningConfForm"
-							type="fr.umlv.desperados.struts.form.PlanningConfForm" />
-		<form-bean	name="StatsForm"
-							type="fr.umlv.desperados.struts.form.StatsForm" />
-		<form-bean	name="StudentPersoForm"
-							type="fr.umlv.desperados.struts.form.StudentPersoForm" />
-		<form-bean	name="StudentSecuForm"
-							type="fr.umlv.desperados.struts.form.StudentSecuForm" />
-		<form-bean	name="StudentFinancialForm"
-							type="fr.umlv.desperados.struts.form.StudentFinancialForm" />
+		<form-bean name="UserLogonForm" type="fr.umlv.desperados.struts.form.UserLogonForm" />
+		<form-bean name="StudentLogonForm" type="fr.umlv.desperados.struts.form.StudentLogonForm" />
+		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
+		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
+		<form-bean name="SearchStudentForm" type="fr.umlv.desperados.struts.form.SearchStudentForm" />
+		<form-bean name="SetStyleSheetForm" type="fr.umlv.desperados.struts.form.SetStyleSheetForm" />
+		<form-bean name="UploadStyleSheetForm" type="fr.umlv.desperados.struts.form.UploadStyleSheetForm" />
+		<form-bean name="RdvTackingForm" type="fr.umlv.desperados.struts.form.RdvTackingForm" />
+		<form-bean name="PlanningConfForm" type="fr.umlv.desperados.struts.form.PlanningConfForm" />
+		<form-bean name="StatsForm" type="fr.umlv.desperados.struts.form.StatsForm" />
+		<form-bean name="StudentSecuForm" type="fr.umlv.desperados.struts.form.StudentSecuForm" />
+		<form-bean name="StudentForm" type="fr.umlv.desperados.struts.form.StudentForm" />
+		<form-bean	name="StudentPersoForm" type="fr.umlv.desperados.struts.form.StudentPersoForm" />
+		<form-bean	name="StudentFinancialForm" type="fr.umlv.desperados.struts.form.StudentFinancialForm" />
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
@@ -211,23 +199,32 @@
 
 		<action
 			path="/edit/student"
-			type="fr.umlv.desperados.struts.action.FormStudentAction"
+			type="fr.umlv.desperados.struts.action.EditStudentAction"
 			attribute="StudentForm"
 			name="StudentForm"
 			input="/WEB-INF/jsp/form/EditStudent.jsp"
 			scope="request"
 			validate="false"/>
 
-		<action
+			<action
 			path="/edit/file"
 			type="fr.umlv.desperados.struts.action.EditStudentFileAction">
-			<forward name="1"							path="student.edit.perso"/>
-			<forward name="2"							path="student.edit.secu"/>
+			<forward name="1"						path="student.edit.perso"/>
+			<forward name="2"						path="student.edit.secu"/>
 			<forward name="3"						path="student.edit.secu"/>
 			<forward name="4"						path="student.edit.financial"/>
 		</action>
 
 		<action
+			path="/save/student"
+			type="fr.umlv.desperados.struts.action.SaveStudentAction"
+			name="StudentForm"
+			attribute="StudentForm"
+			scope="request"
+			input="/WEB-INF/jsp/form/StudentSecu.jsp"
+			validate="false"/>
+
+	<action
 			path="/save/student/perso"
 			type="fr.umlv.desperados.struts.action.SaveStudentFileAction"
 			name="StudentPersoForm"
@@ -236,7 +233,7 @@
 			input="/WEB-INF/jsp/form/StudentPerso.jsp"
 			validate="false"/>
 
-		<action
+	<action
 			path="/save/student/secu"
 			type="fr.umlv.desperados.struts.action.SaveStudentAction"
 			name="StudentSecuForm"
@@ -244,8 +241,8 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/StudentSecu.jsp"
 			validate="false"/>
-			
-		<action
+
+	<action
 			path="/save/student/financial"
 			type="fr.umlv.desperados.struts.action.SaveStudentAction"
 			name="StudentFinancialForm"
@@ -259,6 +256,7 @@
         	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
             <forward name="success"			path="user.search.student" />
         </action>
+        
 		<action
 			path="/searchstudent"
 			type="fr.umlv.desperados.struts.action.SearchStudentAction"
