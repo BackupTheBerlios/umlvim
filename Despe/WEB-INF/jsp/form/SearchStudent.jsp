@@ -47,12 +47,20 @@
 			<tr>
 				<th align="right"> <bean:message key="prompt.student.diploma"/> : </th>
 				<td align="left"> 		
-					<html:select property="diploma">
-					<option value=0 selected>tous les diplômes</option>
+					<html:select property="diplomaId">
+					<option value=0>Tous les diplômes</option>
 						<logic:present name="diplomaList">
+							<%! String selected = null; %>
 							<logic:iterate name="diplomaList" id="diploma"
 													type="fr.umlv.desperados.diploma.Diploma">
-								<option value="<bean:write name="diploma" property="id" />">
+								<% selected = null; %>
+								<logic:present name="SearchStudentForm" scope="request">
+									<logic:equal name="SearchStudentForm" scope="request"
+														property="diplomaId" value="<%= diploma.getId() %>">
+										<% selected = "SELECTED"; %>
+									</logic:equal>
+								</logic:present>
+								<option value="<bean:write name="diploma" property="id" />" <%= selected %> >
 									<bean:write name="diploma" property="name" />
 								</option>
 							</logic:iterate>

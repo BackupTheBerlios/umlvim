@@ -222,7 +222,7 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/SearchStudent.jsp"
 			validate="false">
-			<forward	name="itself"			path="user.search.student" />
+			<forward	name="itself"			path="/do/search/student" />
 		</action>
 
 		<action path="/take/rdv"					forward="student.take.rdv"/>
