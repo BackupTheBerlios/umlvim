@@ -71,7 +71,5 @@ public class PrefsPlugin implements PlugIn {
 	/* (non-Javadoc)
 	 * @see org.apache.struts.action.PlugIn#destroy()
 	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
-	}
+	public void destroy() {}
 }
