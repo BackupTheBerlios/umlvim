@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
     
 <!DOCTYPE preferences SYSTEM 'http://java.sun.com/dtd/preferences.dtd'>
     
@@ -14,20 +14,20 @@
 		</node>
 		<node name="accountCreatedMail">
 			<map>
-				<entry key="object" value="Creation de votre compte pour l'outil d'inscription des etudiants" />
-				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte #admin, pour acceder a l'application, a ete cree avec les parametres suivants : #newLine login : #login #newLine mot de passe : #password" />
+				<entry key="object" value="Création de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été créé avec les paramètres suivants : #newLine profil : #admin #newLine login : #login #newLine mot de passe : #password" />
 			</map>
 		</node>
 		<node name="accountModifiedMail">
 			<map>
-				<entry key="object" value="Modification de votre compte pour l'outil d'inscription des etudiants" />
-				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte #admin, pour acceder a l'application, a ete modifie avec les parametres suivants : #newLine login : #login #newLine mot de passe : #password" />
+				<entry key="object" value="Modification de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été modifié avec les paramètres suivants : #newLine profil : #admin #newLine login : #login #newLine mot de passe : #password" />
 			</map>
 		</node>
 		<node name="accountRemovedMail">
 			<map>
-				<entry key="object" value="Suppression de votre compte pour l'outil d'inscription des etudiants" />
-				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte #admin, pour acceder a l'application, a ete supprime." />
+				<entry key="object" value="Suppression de votre compte #admin pour l'application d'inscription en ligne à l'universitée" />
+				<entry key="body" value="Bonjour #firstName #name. #newLineVotre compte a bien été supprimé." />
 			</map>
 		</node>
 	</root>

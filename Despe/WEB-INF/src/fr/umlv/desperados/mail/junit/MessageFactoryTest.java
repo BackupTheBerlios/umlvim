@@ -77,8 +77,8 @@ public class MessageFactoryTest extends TestCase {
 	}
 	
 	public void testCreateMessage() {
-		final String object = "Creation de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete cree avec les parametres suivants : \n login : africott \n mot de passe : 123";
+		final String object = "Création de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été créé avec les paramètres suivants : \n profil : administrateur \n login : africott \n mot de passe : 123";
 		
 		Message message = null;
 		User user = new User("africott");
@@ -103,8 +103,8 @@ public class MessageFactoryTest extends TestCase {
 	}
 	
 	public void testModifyMessage() {
-		final String object = "Modification de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete modifie avec les parametres suivants : \n login : africott \n mot de passe : 123";		
+		final String object = "Modification de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été modifié avec les paramètres suivants : \n profil : administrateur \n login : africott \n mot de passe : 123";		
 		Message message = null;
 		User user = new User("africott");
 		user.setAdmin(true);
@@ -120,8 +120,8 @@ public class MessageFactoryTest extends TestCase {
 	}
 		
 	public void testRemoveMessage() {
-		final String object = "Suppression de votre compte pour l'outil d'inscription des etudiants";
-		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte administrateur, pour acceder a l'application, a ete supprime.";
+		final String object = "Suppression de votre compte administrateur pour l'application d'inscription en ligne à l'universitée";
+		final String body = "Bonjour Arnaud FRICOTTEAU. \nVotre compte a bien été supprimé.";
 		
 		Message message = null;
 		User user = new User("africott");

@@ -103,26 +103,26 @@ public class MessageFactory {
 	}
 
 	/**
-	 * @param body the body to update
+	 * @param message the message to update
 	 * @param user the user the mail is to be sent to
 	 * @return the updated body
 	 */
-	private String updateBodyMail(String body, User user) {
+	private String updateMail(String message, User user) {
 		
 		if(user != null) {
-			body = body.replaceAll("#firstName", user.getFirstname());
-			body = body.replaceAll("#name", user.getName());
+			message = message.replaceAll("#firstName", user.getFirstname());
+			message = message.replaceAll("#name", user.getName());
 			if (user.getAdmin())
-				body = body.replaceAll("#admin", "administrateur");
+				message = message.replaceAll("#admin", "administrateur");
 			else
-				body = body.replaceAll("#admin", "utilisateur");
-			body = body.replaceAll("#login", user.getLogin());
-			body = body.replaceAll("#password", user.getPassword());
+				message = message.replaceAll("#admin", "utilisateur");
+			message = message.replaceAll("#login", user.getLogin());
+			message = message.replaceAll("#password", user.getPassword());
 			
-			body = body.replaceAll("#newLine", "\n");
+			message = message.replaceAll("#newLine", "\n");
 		}
 		
-		return body;
+		return message;
 	}
 
 	/**
@@ -156,8 +156,9 @@ public class MessageFactory {
 			body = suppressionMessageBody;
 		}
 
-		// Update the message body with user infos
-		body = updateBodyMail(body, user);
+		// Update object and body of the message with user infos
+		object = updateMail(object, user);
+		body = updateMail(body, user);
 
 		// Creat the message
 		Message m = new Message(object, body);
