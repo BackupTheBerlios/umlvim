@@ -8,7 +8,7 @@
 	<definition name="baseDef" path="/pages/layouts/DefaultLayout.jsp">
 		<put name="header"			value="/pages/common/Header.jsp" />
 		<put name="footer"			value="/pages/common/Copyright.jsp" />
-		<put name="menubar"			value="/pages/UserMenu.jsp" />
+		<put name="menubar"			value="/pages/AdminMenu.jsp" />
 		<put name="body-content"	value="" />
 	</definition>
 
@@ -21,7 +21,11 @@
 		<put name="body-content"	value="/pages/form/UserLogon.jsp" />
 	</definition>
 
-	<definition name="User.edit" extends="baseDef">
+	<definition name="error.page" extends="baseDef">
+		<put name="body-content"	value="/pages/common/Error.jsp" />
+	</definition>
+
+	<definition name="user.edit" extends="baseDef">
 		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
 	</definition>
 

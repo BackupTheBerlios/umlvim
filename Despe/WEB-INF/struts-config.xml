@@ -42,17 +42,7 @@
 			type="fr.umlv.desperados.struts.action.UserLogoffAction">
 			<forward name="success"			path="logon.page" />
 		</action>
-<!--
-		<action
-			path="/edit*"
-			type="fr.umlv.desperados.struts.action.Edit{1}Action"
-		    attribute="{1}Form"
-		    scope="request"
-			input="/pages/form/{1]Details.jsp"
-		    validate="false">
-			<forward name="success"			path="/{1}.edit"/>
-		</action>
--->
+
 		<action
 			path="/editUser"
 			type="fr.umlv.desperados.struts.action.EditUserAction"
@@ -60,7 +50,8 @@
 			scope="request"
 			input="/pages/form/UserDetails.jsp"
 			validate="false">
-			<forward name="success"			path="User.edit" />
+			<forward name="success"			path="user.edit" />
+			<forward name="error"				path="error.page" />
 		</action>
 
 		<action
@@ -71,8 +62,8 @@
 			scope="request"
 			input="/pages/form/UserDetails.jsp"
 			validate="false">
-			<forward name="sucess"			path="User.edit" />
-			<forward name="failure"			path="User.notSaved" />
+			<forward name="sucess"			path="user.edit" />
+			<forward name="failure"			path="user.notSaved" />
 		</action>
 
 	</action-mappings>
@@ -104,11 +95,11 @@
 					value="true" />
 	</plug-in>
 
-	<plug-in className="fr.umlv.desperados.struts.plugin.ManagersPlugin" />
-
 	<plug-in className="fr.umlv.desperados.struts.plugin.PrefsPlugin">
 		<set-property property="confPath"
 					value="/WEB-INF/mail-conf.xml" />
 	</plug-in>
+
+	<plug-in className="fr.umlv.desperados.struts.plugin.InitManagersPlugin" />
 
 </struts-config>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+    
+    <!-- ========== Data Source Configuration =============================== -->
+    <data-sources />
+    
+    <!-- ========== Form Bean Definitions ================================== -->
+    <form-beans />
+    
+    <!-- ========== Global Exception Definitions ============================== -->
+    <global-exceptions />
+    
+    <!-- ========== Global Forward Definitions =============================== -->
+    <global-forwards />
+    
+    <!-- ========== Action Mapping Definitions =============================== -->
+    <action-mappings />
+    
+    <!-- ========== Controller Configuration ================================ -->
+    <controller />
+    
+    <!-- ========== Message Resources Definitions ============================ -->
+    
+    <!-- ========== Plug Ins Configuration ================================= -->
+</struts-config>
+

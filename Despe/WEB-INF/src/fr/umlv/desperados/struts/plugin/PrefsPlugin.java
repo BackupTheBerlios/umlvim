@@ -46,7 +46,6 @@ public class PrefsPlugin implements PlugIn {
 		String absoltuePath = (servlet.getServletContext()).getRealPath("/");
 		String prefix = config.getPrefix();
 		String path = absoltuePath + prefix + confPath;
-		System.out.println("***" + path + "***");
 
 		InputStream is = null;
 		try {

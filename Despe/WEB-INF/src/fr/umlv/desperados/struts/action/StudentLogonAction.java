@@ -4,6 +4,10 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,10 +21,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.account.User;
-import fr.umlv.desperados.account.UserManager;
-import fr.umlv.desperados.account.UserNotFoundException;
-import fr.umlv.desperados.struts.form.UserLogonForm;
+import fr.umlv.desperados.struts.form.StudentLogonForm;
+import fr.umlv.desperados.student.Student;
+import fr.umlv.desperados.student.StudentManager;
 import fr.umlv.desperados.util.Constants;
 
 /** 
@@ -31,7 +34,7 @@ import fr.umlv.desperados.util.Constants;
  * XDoclet definition:
  * @struts:action path="/userLogon" name="userlogonForm" attribute="userLogonForm" input="/form/userLogon.jsp" validate="true"
  */
-public class UserLogonAction extends Action {
+public class StudentLogonAction extends Action {
 
 	// ----------------------------------------------------- Instance Variables
 
@@ -61,6 +64,7 @@ public class UserLogonAction extends Action {
 		HttpServletResponse response)
 		throws Exception {
 
+		Locale locale = request.getLocale();
 		ActionErrors errors = form.validate(mapping, request);
 		// validate the form
 		if (!errors.isEmpty()) {
@@ -68,30 +72,39 @@ public class UserLogonAction extends Action {
 			return (mapping.findForward("failure"));
 		}
 
-		UserLogonForm userLogonForm = (UserLogonForm) form;
-		User user = null;
+		StudentLogonForm studentLogonForm = (StudentLogonForm) form;
+		Student student = null;
 
-		UserManager manager = (UserManager)servlet.getServletContext().
-			getAttribute(Constants.USER_DATABASE_KEY);
-
-		if (manager == null) {
-			errors.add("database",
-			   new ActionError("error.database.missing"));
-			log.warn("UserLogonAction: Database is missing");
-		}
-		else {
-			try {
-				user = manager.getUser(userLogonForm.getLogin());
-				String password = userLogonForm.getPassword();
-				if (!password.equals(user.getPassword())) {
-					errors.add("password",
-					   new ActionError("error.password.mismatch"));
-				}
-			} catch (UserNotFoundException e) {
-				errors.add("database",
-				   new ActionError("error.user.dontexist"));
+		StudentManager manager = (StudentManager)servlet.getServletContext().
+			getAttribute(Constants.STUDENT_DATABASE_KEY);
+// COMMENTED FOR TEST
+// TODO tester cette partie
+//		if (manager == null) {
+//			errors.add("database",
+//			   new ActionError("error.database.missing"));
+//			log.warn("StudentLogonAction: Database is missing");
+//		}
+//		else {
+			Date birthday = DateFormat.getDateInstance(DateFormat.SHORT, locale)
+											.parse(studentLogonForm.getBirthday());
+			String studentId = "1234567890";
+//			String studentId = manager.existStudent(studentLogonForm.getName(),
+//																					studentLogonForm.getFirstname(),
+//																					birthday);
+			if(studentId == null) {
+				errors.add(ActionErrors.GLOBAL_ERROR,
+				   new ActionError("error.student.dontexist"));
 			}
-		}
+			//student = manager.getStudent(studentId);
+			//***************
+			// Pour les tests
+			student = new Student(studentId);
+			student.setName(studentLogonForm.getName());
+			student.setFirstname(studentLogonForm.getFirstname());
+			student.setBirthday(birthday);
+			//***************
+// COMMENTED FOR TEST
+//		}
 
 		// Report any errors we have discovered back to the original form
 		if (!errors.isEmpty()) {
@@ -101,11 +114,11 @@ public class UserLogonAction extends Action {
 
 		// Save our logged-in user in the session
 		HttpSession session = request.getSession();
-		session.setAttribute(Constants.USER_KEY, user);
-		if (log.isDebugEnabled()) {
-			log.trace("UserLogonAction: User '" + user.getLogin() +
-					  "' logged on in session " + session.getId());
-		}
+		session.setAttribute(Constants.STUDENT_KEY, student);
+//		if (log.isDebugEnabled()) {
+//			log.trace("StudentLogonAction: Student '" + student.getId() +
+//					  "' logged on in session " + session.getId());
+//		}
 
 		// Remove the obsolete form bean
 		if (mapping.getAttribute() != null) {
