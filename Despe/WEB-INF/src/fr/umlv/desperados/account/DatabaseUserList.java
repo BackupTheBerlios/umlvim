@@ -32,21 +32,18 @@ final class DatabaseUserList extends DatabaseAbstractList {
 	 */
 	public Object get(int i) {
 		User user = null;
-		try {
-			rs.absolute(i);
-		} catch (SQLException e) {
-			// TODO Bloc catch auto-généré
-			e.printStackTrace();
-		}
-		try {
-			user = new User(rs.getString("LOGIN_COM"));
-			user.setName(rs.getString("NOM_COM"));
-			user.setFirstname(rs.getString("PRENOM_COM"));
-			user.setAdmin(rs.getBoolean("EST_ADM_COM"));
-			user.setPassword(rs.getString("PASS_COM"));
-		} catch (SQLException e1) {
-			// TODO Bloc catch auto-généré
-			e1.printStackTrace();
+		synchronized (rs) {
+			try {
+				rs.absolute(i + 1);
+				user = new User(rs.getString("LOGIN_COM"));
+				user.setName(rs.getString("NOM_COM"));
+				user.setFirstname(rs.getString("PRENOM_COM"));
+				user.setAdmin(rs.getBoolean("EST_ADM_COM"));
+				user.setPassword(rs.getString("PASS_COM"));
+			} catch (SQLException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			}
 		}
 		return user;
 	}

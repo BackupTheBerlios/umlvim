@@ -16,6 +16,8 @@
 		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
 
 		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
+		
+		<form-bean name="SetStyleSheetForm" type="fr.umlv.desperados.struts.form.SetStyleSheetForm" />
 
 	</form-beans>
 
@@ -81,6 +83,27 @@
 			name="SearchUserForm"
 			scope="request"
 			input="/pages/form/SearchUser.jsp"
+			validate="false">
+		</action>
+		
+		<action
+			path="/listStyleSheet"
+			type="fr.umlv.desperados.struts.action.ListStyleSheetAction"
+			attribute="SetStyleSheetForm"
+			name="SetStyleSheetForm"
+			scope="request"
+			input="/pages/form/ListStyleSheet.jsp"
+			validate="false">
+			<forward name="success" path="/pages/form/ListStyleSheet.jsp" />
+		</action>
+		
+		<action
+			path="/setStyleSheet"
+			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
+			attribute="SetStyleSheetForm"
+			name="SetStyleSheetForm"
+			scope="request"
+			input="/pages/form/ListStyleSheet.jsp"
 			validate="false">
 		</action>
 

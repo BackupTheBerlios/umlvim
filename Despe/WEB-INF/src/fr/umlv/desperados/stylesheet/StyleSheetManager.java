@@ -3,6 +3,7 @@
 package fr.umlv.desperados.stylesheet;
 
 import java.util.List;
+import java.util.Map;
 import java.io.InputStream;
 
 
@@ -59,4 +60,6 @@ public interface StyleSheetManager
     * @roseuid 3FD32FD700A4
     */
    public StyleSheet getStyleSheet(int DocType);
+   
+   public Map listDocType();
 }
