@@ -72,7 +72,7 @@ public class DatabaseUserManager implements UserManager {
 				throw new UserAlreadyExistsException("User exists in the database");
 			} else {
 				rs.moveToInsertRow();
-				updateRow(rs, user);
+				updateRowFromUser(rs, user);
 				rs.insertRow();
 			}
 		} catch (SQLException e) {
@@ -156,7 +156,8 @@ public class DatabaseUserManager implements UserManager {
 			if (!rs.first()) {
 				throw new UserNotFoundException("User not found in the database");
 			} else {
-				updateRow(rs, user);
+				updateRowFromUser(rs, user);
+				rs.updateRow();
 			}
 		} catch (SQLException e) {
 			throw new ManagerException("Unable to query the database");
@@ -270,7 +271,7 @@ public class DatabaseUserManager implements UserManager {
 			" FROM Compte WHERE " + condition);
 	}
 
-	private void updateRow(ResultSet rs, User user) throws SQLException {
+	private void updateRowFromUser(ResultSet rs, User user) throws SQLException {
 		rs.updateString(1, user.getLogin());
 		rs.updateString(2, user.getName());
 		rs.updateString(3, user.getFirstname());

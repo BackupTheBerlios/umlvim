@@ -35,20 +35,20 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	public ResultSet doQuery(String query) throws SQLException {
 		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
 																				ResultSet.CONCUR_UPDATABLE);
-				ResultSet myResultSet = null;
-				myResultSet = sStat.executeQuery(query);
-				System.out.println("type de rs: "+myResultSet.getConcurrency()
-												+"\n(RO="+ResultSet.CONCUR_READ_ONLY
-												+"\tUPDATE="+ResultSet.CONCUR_UPDATABLE+")");
-				return myResultSet;
+		ResultSet myResultSet = null;
+		myResultSet = sStat.executeQuery(query);
+		if(myResultSet.getConcurrency() == ResultSet.CONCUR_READ_ONLY) {
+			System.out.println("StrutsDatabaseRequestor: ATTENTION: ResultSet non updatable");
+		}
+		return myResultSet;
 	}
 
 
 	public int executeQuery(String modificationQuery) throws SQLException{
 		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-									sStat=conn.createStatement();
-									return(sStat.executeUpdate(modificationQuery));
-									}
+		sStat=conn.createStatement();
+		return(sStat.executeUpdate(modificationQuery));
+	}
 
 
 	public void closeConnection() {

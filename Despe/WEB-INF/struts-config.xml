@@ -52,10 +52,10 @@
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
 		<forward	name="ident"					path="student.ident" />
-		<forward  name="error"						path="common.operation.error" />
+		<forward 	name="error"					path="common.operation.error" />
 		<forward	name="success"				path="common.operation.ok" />
 		<forward	name="studenthome"		path="student.home" />
-		<forward  name="editstudent"			path="user.edit.student" />
+		<forward	name="editstudent"		path="user.edit.student" />
 		<forward	name="takerdv"				path="student.take.rdv" />
 	</global-forwards>
 
@@ -191,7 +191,7 @@
 			path="/studentLogoff"
 			type="fr.umlv.desperados.struts.action.StudentLogoffAction"/>
 
-	    <action
+	<!--   <action
 			path="/edit/student"
 			type="fr.umlv.desperados.struts.action.FormStudentAction"
 			attribute="StudentForm"
@@ -199,6 +199,12 @@
 			input="/WEB-INF/jsp/form/EditStudent.jsp"
 			scope="request"
 			validate="false"/>
+-->
+		<action
+			path="/edit/student"
+			type="fr.umlv.desperados.struts.action.EditStudentAction">
+			<forward name="3"						path="student.edit.secu"/>
+		</action>
 
 		<action
 			path="/save/student"
