@@ -66,12 +66,11 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @return the unique instance of DatabaseStudentManager.
 	 * @roseuid 3FF851EE0284
 	 */
-	public DatabaseStudentManager getInstance(
+	public static synchronized DatabaseStudentManager getInstance(
 		DatabaseRequestor requestor,
 		String propertiesPath) {
 		if (theInstance == null)
 			theInstance = new DatabaseStudentManager(requestor, propertiesPath);
-
 		return theInstance;
 	}
 
@@ -809,7 +808,7 @@ public class DatabaseStudentManager implements StudentManager {
 	 * @roseuid 3FF9BE4C01C4
 	 */
 	public void setCacheSize(int size) {
-		cache.setCapacity(size);
+		//cache.setCapacity(size); 
 	}
 }
 /**
