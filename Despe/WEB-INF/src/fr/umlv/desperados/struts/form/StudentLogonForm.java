@@ -4,6 +4,11 @@
 
 package fr.umlv.desperados.struts.form;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.text.ParseException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
@@ -56,7 +61,8 @@ public class StudentLogonForm extends ActionForm {
 		}
 		if((birthday == null) || (birthday).equals("")) {
 			errors.add("birthday", new ActionError("error.required"));
-		} else {
+		}
+		else {
 			String formatRegexp = "\\d\\d/\\d\\d/\\d\\d\\d\\d"; // resources.getMessage("date.format.regexp");
 			if (!birthday.matches(formatRegexp)) {
 				errors.add("birthday", new ActionError("error.date.format",
@@ -64,6 +70,18 @@ public class StudentLogonForm extends ActionForm {
 //																	resources.getMessage("date.format")));
 			}
 		}
+		
+		// Test if the date of birth is valid
+		DateFormat formatDate = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+		formatDate.setLenient(false);
+	
+		Date dateBirthday = null;
+		try {
+			dateBirthday = formatDate.parse(birthday);
+		} catch (ParseException e) {
+			errors.add("birthday", new ActionError("error.date.birthday.no.exist", birthday));
+		}
+		
 		return errors;
 	}
 
