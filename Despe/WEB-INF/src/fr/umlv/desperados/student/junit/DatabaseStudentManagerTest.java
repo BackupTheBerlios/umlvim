@@ -103,7 +103,7 @@ ResultSet result = null;
 			e.printStackTrace();
 		}
 		String truc="test";
-		assertFalse(databaseStudentManager.existStudent("dupont","gabriel",new Date(1981,02,10))==null);
+		assertFalse(databaseStudentManager.existStudent("dupont","gabriel",new Date(1981,02,10)) == 0);
 	}
 
 }
