@@ -156,21 +156,6 @@
 			input="/pages/form/ListStyleSheet.jsp"
 			validate="false">
 		</action>
-
-        <action
-        	path="/list/diploma"
-        	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
-            <forward name="success" path="user.stats" />
-        </action>
-        
-        <action
-            attribute="StatsForm"
-            input="/pages/form/stats.jsp"
-            name="StatsForm"
-            path="/stats"
-            type="fr.umlv.desperados.struts.action.ViewStatsAction"
-            validate="false">
-        </action>
             
 		<action
 			path="/studentLogon"
@@ -185,6 +170,21 @@
 			path="/studentLogoff"
 			type="fr.umlv.desperados.struts.action.StudentLogoffAction">
 		</action>
+		
+		<action
+        	path="/list/diploma"
+        	type="fr.umlv.desperados.struts.action.ListDiplomaAction">
+            <forward name="success" path="user.stats" />
+        </action>
+        
+        <action
+            attribute="StatsForm"
+            input="/pages/form/stats.jsp"
+            name="StatsForm"
+            path="/stats"
+            type="fr.umlv.desperados.struts.action.ViewStatsAction"
+            validate="false">
+        </action>
 
 	</action-mappings>
 
