@@ -2,8 +2,7 @@
 
 package fr.umlv.desperados.student;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 
 import fr.umlv.desperados.util.XMLable;
@@ -16,13 +15,13 @@ public class Student implements XMLable {
 	/**
 	 * primary key in the Student database
 	 */
-	private int studentId;
+	private int id;
 
 	/**
 	 * @see Current name
 	 */
 	private String name;
-	private java.sql.Date birthday;
+	private Date birthday;
 	private String ine;
 	private boolean wasToUmlvLastYear;
 	private String patronymicName;
@@ -247,7 +246,7 @@ public class Student implements XMLable {
 	/**
 	 * @see appointment date
 	 */
-	private Timestamp appointmentDate;
+	private Date appointmentDate;
 	private int workedShareId;
 	private String financialAssistanceId;
 	private int socialEconomicCategoryId;
@@ -327,8 +326,7 @@ public class Student implements XMLable {
 	 * @roseuid 3FCA089F033C
 	 */
 	public Student(int studentId) {
-		this.studentId = studentId;
-//		DateFormat.getDateInstance(DateFormat.SHORT).format(birthday);
+		this.id = studentId;
 	}
 
 	/**
@@ -336,7 +334,6 @@ public class Student implements XMLable {
 		* @roseuid 3FCA089F033C
 		*/
 	public Student() {
-//		DateFormat.getDateInstance(DateFormat.SHORT).format(birthday);
 	}
 
 	/**
@@ -351,7 +348,7 @@ public class Student implements XMLable {
 	 * @param birthday
 	 * @roseuid 3FCB618101F5
 	 */
-	public void setBirthday(java.sql.Date birthday) {
+	public void setBirthday(java.util.Date birthday) {
 		this.birthday = birthday;
 	}
 
@@ -367,8 +364,8 @@ public class Student implements XMLable {
 	 * @return int
 	 * @roseuid 3FD7AD550148
 	 */
-	public int getStudentId() {
-		return studentId;
+	public int getId() {
+		return id;
 	}
 
 	/**
@@ -405,7 +402,7 @@ public class Student implements XMLable {
 	/**
 	 * @return
 	 */
-	public Timestamp getAppointmentDate() {
+	public Date getAppointmentDate() {
 		return appointmentDate;
 	}
 
@@ -1007,8 +1004,8 @@ public class Student implements XMLable {
 	/**
 	 * @param timestamp
 	 */
-	public void setAppointmentDate(Timestamp timestamp) {
-		appointmentDate = timestamp;
+	public void setAppointmentDate(Date d) {
+		appointmentDate = d;
 	}
 
 	/**

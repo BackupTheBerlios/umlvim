@@ -2,7 +2,7 @@
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 
 <html:errors property="database" />
-<html:form action="/userLogon" focus="name">
+<html:form action="/studentLogon" focus="name">
 	<table>
 		<tr>
 			<th> <bean:message key="prompt.student.name" /> : </th>
@@ -20,8 +20,7 @@
 		</tr>
 		<tr>
 			<td> <html:submit> <bean:message key="button.submit" /> </html:submit> </td>
-			<td> <html:cancel> <bean:message key="button.cancel" /> </html:cancel>
-				&nbsp; <html:reset> <bean:message key="button.reset" /> </html:reset> </td>
+			<td> <html:reset> <bean:message key="button.reset" /> </html:reset> </td>
 		</tr>
 	</table>
 </html:form>

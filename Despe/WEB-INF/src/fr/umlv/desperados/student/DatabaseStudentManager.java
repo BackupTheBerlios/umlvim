@@ -124,7 +124,7 @@ public class DatabaseStudentManager implements StudentManager {
 	public int existStudent(
 		String patronymiqueName,
 		String firstName,
-		java.sql.Date birthday) {
+		java.util.Date birthday) {
 		ResultSet result = null;
 		String query =
 			"SELECT "+ prop.get("studentId")
@@ -143,7 +143,7 @@ public class DatabaseStudentManager implements StudentManager {
 			e.printStackTrace();
 		}
 		try {
-			if (result.next())
+			if (result.first())
 				return result.getInt("id_etu");
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -416,7 +416,7 @@ public class DatabaseStudentManager implements StudentManager {
 					student.getName());
 				result.updateDate(
 					prop.get("birthday").toString(),
-					new java.sql.Date(student.getBirthday().getTime()));
+					(java.sql.Date)student.getBirthday());
 				result.updateString(
 					prop.get("firstname1").toString(),
 					student.getFirstname1());
@@ -573,9 +573,9 @@ public class DatabaseStudentManager implements StudentManager {
 				result.updateBoolean(
 					prop.getProperty("insuranceCivilLiability").toString(),
 					student.isInsuranceCivilLiability());
-				result.updateTimestamp(
+				result.updateDate(
 					prop.get("appointmentDate").toString(),
-					student.getAppointmentDate());
+					(java.sql.Date)student.getAppointmentDate());
 				result.updateInt(
 					prop.get("workedShareId").toString(),
 					student.getWorkedShareId());
@@ -778,312 +778,3 @@ public class DatabaseStudentManager implements StudentManager {
 //		cache.setCapacity(size);
 	}
 }
-/**
- * 
- *  
- * DatabaseStudentManager.addStudent(Student){
- *     
- *    }
- *  
- *  
- * DatabaseStudentManager.existStudent(String,String,java.util.Date){
- *     return null;
- *    }
- *  
- *  
- * DatabaseStudentManager.getStudent(int){
- *     return null;
- *    }
- *  
- *  
- * DatabaseStudentManager.searchStudent(String,String,String,int){
- *     return null;
- *    }
- *  
- *  
- * DatabaseStudentManager.modifyStudent(Student){
- *     
- *    }
- *  
- *  
- * DatabaseStudentManager.removeStudent(String){
- *     return null;
- *    }
- *  
- *  
- */
-
-/*
-if(!student.getIne().equals(null))
-{
-	query.append(prop.get("ine")+",");
-	values.append(student.getIne()+",");
-}
-   	
-	query.append(prop.get("wasToUmlvLastYear")+",");
-	values.append(student.isWasToUmlvLastYear()+","); 
-   	
-if(!student.getPatronymicName() .equals(null))
-	{
-		query.append(prop.get("patronymicName")+",");
-		values.append(student.getPatronymicName() +",");
-	}
-   		
-if(!student.getFirstname1().equals(null))
-	{
-		query.append(prop.get("firstname1")+",");
-		values.append(student.getFirstname1() +",");
-	}
-	   
-   if(!student.getFirstname2() .equals(null))
-   {
-	query.append(prop.get("firstname2")+",");
-	values.append(student.getFirstname2()+",");
-   }
-	   
-if(!student.getTownOfBirth() .equals(null))
-	   {
-		query.append(prop.get("townOfBirth")+",");
-		values.append(student.getTownOfBirth()+",");
-	   }
-	   
-if(!(student.getSex ().equals(null)))
-	   {
-		query.append(prop.get("sex")+",");
-		values.append(student.getSex()+",");
-	   }
-	   
-if(!(student.getFirstInsSupEduc() .equals(null)))
-		   {
-			query.append(prop.get("firstInsSupEduc")+",");
-			values.append(student.getFirstInsSupEduc()+",");
-		   }
-
-if(!(student.getFirstInsFrenchUniv () .equals(null)))
-		   {
-			query.append(prop.get("firstInsFrenchUniv")+",");
-			values.append(student.getFirstInsFrenchUniv ()+",");
-		   }	   
-	   
-if(!(student.getEstaFirstInsFrenchUniv() .equals(null)))
-		   {
-			query.append(prop.get("estaFirstInsFrenchUniv")+",");
-			values.append(student.getEstaFirstInsFrenchUniv()+",");
-		   }
-	
-if(!(student.getFirstInsEstablishment() .equals(null)))
-		   {
-			query.append(prop.get("firstInsEstablishment")+",");
-			values.append(student.getFirstInsEstablishment()+",");
-		   }		   
-   	  
-if(!(student.getBacYear() .equals(null)))
-		   {
-			query.append(prop.get("bacYear")+",");
-			values.append(student.getBacYear ()+",");
-		   }
-	
-if(!(student.getEstablishmentBacObtaining () .equals(null)))
-		   {
-			query.append(prop.get("EstablishmentBacObtaining")+",");
-			values.append(student.getEstablishmentBacObtaining()+",");
-		   }		   
-	
-if(!(student.getForeignCityBac () .equals(null)))
-		   {
-			query.append(prop.get("ForeignCityBac")+",");
-			values.append(student.getForeignCityBac ()+",");
-		   }		   
-      
-query.append(prop.get("haveFixeAddFr")+",");
-values.append(student.isHaveFixAddFr ()+",");
-		
-if(!(student.getNumFixAdd() .equals(null)))
-		   {
-			query.append(prop.get("numFixAdd")+",");
-			values.append(student.getNumFixAdd()+",");
-		   }
-      
-if(!(student.getStreetFixAdd () .equals(null)))
-		   {
-			query.append(prop.get("streetFixAdd")+",");
-			values.append(student.getStreetFixAdd ()+",");
-		   }
-      
-if(!(student.getBuildingFixAdd() .equals(null)))
-		   {
-			query.append(prop.get("builingFixAdd")+",");
-			values.append(student.getBuildingFixAdd ()+",");
-		   }
-      
-if(!(student.getForeignCityFixAdd () .equals(null)))
-		   {
-			query.append(prop.get("foreignCityFixAdd")+",");
-			values.append(student.getForeignCityFixAdd ()+",");
-		   }
-      
-if(!(student.getPhoneFixAdd ()==null))
-		   {
-			query.append(prop.get("phoneFixAdd")+",");
-			values.append(student.getPhoneFixAdd()+",");
-		   }
-      
-  query.append( "haveTmpAddFr"+",");
-  values.append(student.isHaveTmpAddFr()+",");
-      
-if(!(student.getNumTmpAdd() .equals(null)))
-		   {
-			query.append(prop.get("numTmpAdd")+",");
-			values.append(student.getNumTmpAdd()+",");
-		   }
-			   
-if(!(student.getStreetTmpAdd() .equals(null)))
-		   {
-			query.append(prop.get("streetTmpAdd")+",");
-			values.append(student.getStreetTmpAdd()+",");
-		   }
-      
-if(!(student.getBuildingTmpAdd () .equals(null)))
-		   {
-			query.append(prop.get("buildingTmpAdd")+",");
-			values.append(student.getBuildingTmpAdd ()+",");
-		   }
-      
-if(!(student.getCityTmpAdd() .equals(null)))
-		   {
-			query.append(prop.get("cityTmpAdd")+",");
-			values.append(student.getCityTmpAdd()+",");
-		   }
-      
-if(!(student.getPhoneTmpAdd()==null))
-		   {
-			query.append(prop.get("phoneTmpAdd")+",");
-			values.append(student.getPhoneTmpAdd()+",");
-		   }
-      
-  query.append( prop.get("isEmployed")+",");
-  values.append(student.isEmployed() +",");
-      
-if(!(student.getStudEmplType() .equals(null)))
-		   {
-			query.append(prop.get("studEmplType")+",");
-			values.append(student.getStudEmplType()+",");
-		   }
-      
-if(!(student.getHeadFamProf() .equals(null)))
-		   {
-			query.append(prop.get("headFamProf")+",");
-			values.append(student.getHeadFamProf()+",");
-		   }
-      
-query.append(prop.get("isNatSport")+",");
-values.append(student.isNatSport ()+",");
-				
-query.append(prop.get("isRegSport")+",");
-values.append(student.isRegSport()+",");
-      
-if(!(student.getPractisedSport() .equals(null)))
-			   {
-				query.append(prop.get("practisedSport")+",");
-				values.append(student.getPractisedSport()+",");
-			   }
-      
-	query.append(prop.get("haveFinancialAss")+",");
-	values.append(student.isHaveFinancialAss ()+",");
-		
-if(!(student.getInternaExchOriEstab () .equals(null)))
-				   {
-					query.append(prop.get("internaExchOriEstab")+",");
-					values.append(student.getInternaExchOriEstab ()+",");
-				   }
-		
-if(!(student.getInternaExchRecEstab() .equals(null)))
-				   {
-					query.append(prop.get("internaExchRecEstab")+",");
-					values.append(student.getInternaExchRecEstab ()+",");
-				   }
-					   
-if(!(student.getLastAttendedEstab () .equals(null)))
-				   {
-					query.append(prop.get("lastAttendedEstab")+",");
-					values.append(student.getLastAttendedEstab ()+",");
-				   }
-           
-if(!(student.getLastAttendedEstabYear() .equals(null)))
-				   {
-					query.append(prop.get("lastAttendedEstabYear")+",");
-					values.append(student.getLastAttendedEstabYear()+",");
-				   }
-					   
-if(!(student.getPrecedentYearEstab() .equals(null)))
-				   {
-					query.append(prop.get("precedentYearEstab")+",");
-					values.append(student.getPrecedentYearEstab()+",");
-				   }
-      
-if(!(student.getOtherInsEstab() .equals(null)))
-				   {
-					query.append(prop.get("otherInsEstab")+",");
-					values.append(student.getOtherInsEstab()+",");
-				   }
-      
-if(!(student.getPrincCycleInsNum() ==null))
-				   {
-					query.append(prop.get("princCycleInsNum")+",");
-					values.append(student.getPrincCycleInsNum()+",");
-				   }
-      
-  private int complCycleInsNum;
-  private int princDiplInsNum;
-  private int complDipInsNum;
-  private int princInsYearNum;
-  private int compInsYearNum;
-  private int stockBrokerNum;
-  private String socialSecurityNum;
-  private String fatherName;
-  private String fatherFirstName;
-  private String motherPatronymicName;
-  private String motherName;
-  private boolean insuranceCivilLiability;
-  private Timestamp appointmentDate;
-   private int workedShareId;
-   private char financialAssistanceId;
-   private int socialEconomicCategoryId;
-   private int MLVDiplomaId;
-   private String baccalaureatId;
-   private int lodgingTypeId;
-   private int inscriptionModeId;
-   private int inscriptionTypeId;
-   private int centerPaymentId;
-   private int internationalExchangeTypeId;
-   private int mutualInsuranceCompanyId;
-   private int socialSecurityId;
-   private int paymentModeId;
-   private int purseId;
-   private char lastDiplomaTypeId;
-   private int bacMentionId;
-   private int baccalaureatEstablishmentTypeId;
-   private int lastEstabTypeId;
-   private int militarySituationId;
-   private int fixeAddFrenchCityId;
-   private int tmpAdressFrenchCityId;
-   private int frenchBirthplaceId;
-   private int frenchBacCityId;
-  private int firstInsFrUnivDepId;
-  private int lastAttendedEstabPlaceId;
-  private int precYearEstabPlaceId;
-  private int otherEstabInsPlaceId;
-   private int bacObtainingCountryId;
-   private int nationalityId;
-  private int intExchPlaceId;
-   private int foreignBirthplaceId;
-  private int fixeAddCountryId;
-  private int tmpAddCountryId;
-  private char precYearSitTypeId;
-   private int famSituation;
-   private String motifProlSocSec;
-   private boolean noSocSecStu;
-   private int otherEtabIns;
-   private int headFamJob;
-   private int MLVDiplomaComplId;
-*/
