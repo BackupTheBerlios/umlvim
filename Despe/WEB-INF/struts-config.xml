@@ -18,6 +18,8 @@
 		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
 		
 		<form-bean name="SetStyleSheetForm" type="fr.umlv.desperados.struts.form.SetStyleSheetForm" />
+		
+		<form-bean name="UploadStyleSheetForm" type="fr.umlv.desperados.struts.form.UploadStyleSheetForm" />
 
 	</form-beans>
 
@@ -87,18 +89,33 @@
 		
 		<action
 			path="/listStyleSheet"
-			type="fr.umlv.desperados.struts.action.ListStyleSheetAction"
-			attribute="SetStyleSheetForm"
-			name="SetStyleSheetForm"
-			scope="request"
-			input="/pages/form/ListStyleSheet.jsp"
-			validate="false">
-			<forward name="success" path="/pages/form/ListStyleSheet.jsp" />
+			type="fr.umlv.desperados.struts.action.ListStyleSheetAction">
+			<forward name="success" path="stylesheet" />
 		</action>
 		
 		<action
 			path="/setStyleSheet"
 			type="fr.umlv.desperados.struts.action.SetStyleSheetAction"
+			attribute="SetStyleSheetForm"
+			name="SetStyleSheetForm"
+			scope="request"
+			input="/pages/form/ListStyleSheet.jsp"
+			validate="false">
+		</action>
+
+		<action
+			path="/addStyleSheet"
+			type="fr.umlv.desperados.struts.action.AddStyleSheetAction"
+			attribute="UploadtStyleSheetForm"
+			name="UploadStyleSheetForm"
+			scope="request"
+			input="/pages/form/ListStyleSheet.jsp"
+			validate="false">
+		</action>
+		
+		<action
+			path="/removeStyleSheet"
+			type="fr.umlv.desperados.struts.action.RemoveStyleSheetAction"
 			attribute="SetStyleSheetForm"
 			name="SetStyleSheetForm"
 			scope="request"
