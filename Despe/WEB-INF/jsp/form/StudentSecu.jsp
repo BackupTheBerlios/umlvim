@@ -7,7 +7,7 @@
 <app:checkIdent>
 	<h1>	<bean:message key="title.student.edit" />	</h1>
 	<br>
-<html:form action="/save/student">
+<html:form action="/save/file/secu">
 	<table width="100%">
 		<tr>
 			<th align=left>

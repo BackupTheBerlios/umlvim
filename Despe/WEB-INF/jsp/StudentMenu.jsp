@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign="bottom">
-				<html:link action="/edit/student">
+				<html:link action="/edit/file">
 					<bean:message key="menu.student.modifyInformation" />
 				</html:link>
 			</td>

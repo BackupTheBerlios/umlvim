@@ -58,11 +58,30 @@ public class EditStudentFileAction extends StudentAction {
 			page = "1";
 		} 
 		if ("1".equals(page)) {
+			Set lodgingTypeList=manager.list(DatabaseInformationListManager .LODGING_TYPE);
+						request.setAttribute( "lodgingTypeList",lodgingTypeList);
+			
+			
+			
+		}
+		if ("2".equals(page)) {
 		}
 		if ("3".equals(page)) {
-			Set list=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
-			request.setAttribute( "socialSecurityAffList",list);
-		}
+				Set SocialSecurityAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_AFF);
+				request.setAttribute( "socialSecurityAffList",SocialSecurityAffList);
+				Set SocialSecurityNonAffList=manager.list(DatabaseInformationListManager .SOCIAL_SECURITY_NON_AFF);
+				request.setAttribute( "socialSecurityNonAffList",SocialSecurityNonAffList);
+				Set centerPaymentList=manager.list(DatabaseInformationListManager .PAYMENT_CENTER);
+				request.setAttribute( "centerPaymentList",centerPaymentList);		
+				Set mutualInsuranceCompanyList=manager.list(DatabaseInformationListManager .MUTUAL_COMPANY);
+				request.setAttribute( "mutualInsuranceCompanyList",mutualInsuranceCompanyList);		
+			}
+			if("4".equals(page)){
+				Set financialAssistanceList=manager.list(DatabaseInformationListManager .FINANCIAL_AID);
+				request.setAttribute( "financialAssistanceList",financialAssistanceList);		
+				Set purseList=manager.list(DatabaseInformationListManager .PURSE);
+						request.setAttribute( "purseList",purseList);		
+			}
 
 		System.out.println("*****\nEditStudentAction: forwarding to "+page+"\n*****");
 		return (mapping.findForward(page));

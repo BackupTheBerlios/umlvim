@@ -5,9 +5,7 @@
 <logic:present name="dossier" scope="request">
 
 	<table>
-		<th>
-			<td align="center" colspan="2"> <bean:message key="inscription.maritalStatus.title"/> </td>
-		</tr>
+			<tr align="center"><b> <bean:message key="inscription.maritalStatus.title"/></b> </tr>
 		<tr>
 			<td> <bean:message key="inscription.maritalStatus.name.patro"/> </td>
 			<td> <html:text property="patronymicName" /> </td>

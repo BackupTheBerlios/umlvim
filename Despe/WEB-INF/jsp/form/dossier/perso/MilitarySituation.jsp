@@ -2,7 +2,7 @@
 <%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
 <%@ taglib uri="/WEB-INF/tlds/struts-logic.tld" prefix="logic" %>
 
-<logic:present name="dossier" scope="page">
+<logic:present name="dossier" scope="request">
 
 	<table>
 		<tr>

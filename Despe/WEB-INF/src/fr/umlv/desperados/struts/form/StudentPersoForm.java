@@ -30,6 +30,12 @@ public class StudentPersoForm extends ActionForm {
 	private String birthdep;
 	private String sex;
 	private String nationality;
+	private String address;
+	private String zip;
+	private String city;
+	private String country;
+	private String phone;
+	private String lodgingType;
 
 	// --------------------------------------------------------- Methods
 
@@ -76,6 +82,25 @@ public class StudentPersoForm extends ActionForm {
 		if((sex == null) || (sex.equals(""))) {
 			errors.add("sex", new ActionError("error.required"));
 		}
+		if((address == null) || (address.equals(""))) {
+			errors.add("address", new ActionError("error.required"));
+		}
+		if((zip == null) || (zip.equals(""))) {
+			errors.add("zip", new ActionError("error.required"));
+		}
+		if((city == null) || (city.equals(""))) {
+			errors.add("city", new ActionError("error.required"));
+		}
+		if((country == null) || (country.equals(""))) {
+			errors.add("country", new ActionError("error.required"));
+		}
+		if((phone == null) || (phone.equals(""))) {
+			errors.add("phone", new ActionError("error.required"));
+		}
+		if((lodgingType == null) || (lodgingType.equals(""))) {
+			errors.add("lodgingType", new ActionError("error.required"));
+		}
+		
 		return errors;
 	}
 
@@ -235,6 +260,90 @@ public class StudentPersoForm extends ActionForm {
 	 */
 	public void setSex(String string) {
 		sex = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getCountry() {
+		return country;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getZip() {
+		return zip;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setAddress(String string) {
+		address = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setCity(String string) {
+		city = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setCountry(String string) {
+		country = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setZip(String string) {
+		zip = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setPhone(String string) {
+		phone = string;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getLodgingType() {
+		return lodgingType;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setLodgingType(String string) {
+		lodgingType = string;
 	}
 
 }
