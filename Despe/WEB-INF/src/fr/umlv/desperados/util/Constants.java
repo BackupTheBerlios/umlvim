@@ -14,6 +14,8 @@ package fr.umlv.desperados.util;
  */
 abstract public class Constants {
 
+	public static String PLANNINGCONF = "PLANNINGCONF";
+
 	public final static String DATE_FORMAT = "\\d\\d/\\d\\d/\\d\\d\\d\\d";
 
 	private final static String pack = "fr.umlv.desperados";

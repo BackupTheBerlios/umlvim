@@ -33,9 +33,19 @@ public class StrutsDatabaseRequestor implements DatabaseRequestor {
 	 * @roseuid 3FF2CD41015A
 	 */
 	public ResultSet doQuery(String query) throws SQLException {
-		Statement stat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		return stat.executeQuery(query);
+		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				ResultSet myResultSet = null;
+				myResultSet = sStat.executeQuery(query);
+				return myResultSet;
 	}
+
+
+	public void executeQuery(String modificationQuery) throws SQLException{
+		Statement sStat=conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+									sStat=conn.createStatement();
+									sStat.executeUpdate(modificationQuery);
+									}
+
 
 	public void closeConnection() {
 		try {
