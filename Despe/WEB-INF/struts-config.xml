@@ -52,9 +52,11 @@
 	<!-- ========== Global Forward Definitions ============================ -->
 	<global-forwards>
 		<forward	name="ident"					path="student.ident" />
-		<forward 	name="error"					path="common.operation.error" />
+		<forward  name="error"						path="common.operation.error" />
 		<forward	name="success"				path="common.operation.ok" />
 		<forward	name="studenthome"		path="student.home" />
+		<forward  name="editstudent"			path="user.edit.student" />
+		<forward	name="takerdv"				path="student.take.rdv" />
 	</global-forwards>
 
 	<!-- ========== Action Mapping Definitions ============================ -->
@@ -232,7 +234,27 @@
 			scope="request"
 			input="/WEB-INF/jsp/form/TakeRdv.jsp"
 			validate="false"/>
-
+				   
+        <action
+        	path="/list/rdv"
+   	    	type="fr.umlv.desperados.struts.action.ListRdvAction"
+			attribute="RdvTackingForm"
+			name="RdvTackingForm"
+			scope="request"
+			input="/WEB-INF/jsp/form/takeRdv.jsp"
+			validate="false">
+         </action>
+					
+		<action
+			path="/list/hour"
+			type="fr.umlv.desperados.struts.action.ListHourAction"
+			attribute="RdvTackingForm"
+			name="RdvTackingForm"
+			input="/WEB-INF/jsp/form/takeRdv.jsp"
+			scope="request"
+			validate="false">
+		</action>
+		
 		<action path="/cancel/rdv"				forward="student.cancel.rdv"/>
 		<action
 			path="/cancelRdv"
