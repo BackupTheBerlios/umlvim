@@ -13,7 +13,7 @@
 
   <tag>
     <name>checkLogon</name>
-    <tagclass>fr.umlv.desperados.struts.CheckLogonTag</tagclass>
+    <tagclass>fr.umlv.desperados.struts.util.CheckLogonTag</tagclass>
     <info>
       Validate that there is a currently logged on user, by checking for
       the existence of a session-scope bean under the specified name.
@@ -21,6 +21,7 @@
       which will typically be a logon form.
 
       name - Name of the session-scope bean to check for [user]
+      admin - whether or not the user must be an admin [false]
       page - Context-relative path to the logon page [/form/UserLogon.jsp]
     </info>
     <attribute>
@@ -30,6 +31,11 @@
     </attribute>
     <attribute>
       <name>page</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>admin</name>
       <required>false</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
