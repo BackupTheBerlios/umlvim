@@ -61,8 +61,7 @@ public class DatabaseDiplomaManager implements DiplomaManager
 	List laListe = null;
 	try {
 		ResultSet rs = requestor.doQuery("SELECT * FROM DIPLOME_MLV");
-		if(rs.first())
-			laListe = new DatabaseDiplomaList(rs);
+		laListe = new DatabaseDiplomaList(rs);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -106,12 +105,7 @@ public class DatabaseDiplomaManager implements DiplomaManager
 		+diploma.getName()
 		+"')";
     
-	/*String reqSelectId = "SELECT * FROM DIPLOME_MLV WHERE (ID_CYC = "
-		+diploma.getCycle()
-		+" AND LIB_DIP_MLV = '"
-		+diploma.getName()
-		+"') order by ID_DIP_MLV";*/
-	String reqSelectId = "SELECT MAX(ID_DIP_MLV) FROM DIPLOME_MLV";
+	String reqSelectMaxId = "SELECT MAX(ID_DIP_MLV) FROM DIPLOME_MLV";
     
 	try {
 		synchronized(requestor) {
@@ -119,11 +113,10 @@ public class DatabaseDiplomaManager implements DiplomaManager
 			
 			// When a diploma is insert, the database attribute an unique id
 			// by incrementation of the max
-			rs = requestor.doQuery(reqSelectId);
+			rs = requestor.doQuery(reqSelectMaxId);
 		}
-		//rs.last();
-		rs.first();
-		String idMax = rs.getString("ID_DIP_MLV"); 
+		rs.first(); 
+		String idMax = rs.getString(1);
 
 		diploma.setId(idMax);
 	} catch (SQLException e) {
