@@ -789,4 +789,10 @@ public class DatabaseStudentManager implements StudentManager {
 	public void setCacheSize(int size) {
 //		cache.setCapacity(size);
 	}
+	
+	private java.util.Date dateControl(java.util.Date date){
+		if(date.getTime()>System.currentTimeMillis())
+		return new java.util.Date(System.currentTimeMillis());
+		return date;
+	}
 }
