@@ -25,7 +25,9 @@ public class RdvTackingForm extends ActionForm {
 	// --------------------------------------------------------- Methods
 	private String date;
 
-
+	private String day;
+	
+	private String hour;
 
 	/** 
 	 * Method validate
@@ -47,6 +49,10 @@ public class RdvTackingForm extends ActionForm {
 
 	}
 
+
+
+
+
 	/**
 	 * @return
 	 */
@@ -55,10 +61,38 @@ public class RdvTackingForm extends ActionForm {
 	}
 
 	/**
+	 * @return
+	 */
+	public String getDay() {
+		return day;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getHour() {
+		return hour;
+	}
+
+	/**
 	 * @param string
 	 */
 	public void setDate(String string) {
 		date = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setDay(String string) {
+		day = string;
+	}
+
+	/**
+	 * @param string
+	 */
+	public void setHour(String string) {
+		hour = string;
 	}
 
 }

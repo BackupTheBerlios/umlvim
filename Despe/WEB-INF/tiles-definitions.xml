@@ -51,7 +51,8 @@
 	<definition name="student.take.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/TakeRdv.jsp" />
 	</definition>
-	
+
+
 	<definition name="student.cancel.rdv" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/CancelRdv.jsp" />
 	</definition>
@@ -95,6 +96,10 @@
 
 	<definition name="admin.search.user" extends="baseDef">
 		<put name="body-content"	value="/WEB-INF/jsp/form/SearchUser.jsp" />
+	</definition>
+	
+	<definition name="planning.configure" extends="userBaseDef">
+		<put name="body-content"	value="/pages/form/setupPlanning.jsp" />
 	</definition>
 
 	<definition name="admin.stylesheet.list" extends="baseDef">

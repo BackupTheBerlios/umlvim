@@ -45,45 +45,40 @@ public class TakeRdvAction extends Action {
 		ActionErrors errors = new ActionErrors();
 
 		// Use the LoginForm to get the request parameters			
-		String date = viewConfForm.getDate();
-		System.out.println("date :" + date);
+		String hour = viewConfForm.getHour();
+	
+		Date rdvDate = null;
 		try {
-			
-			Date rdvDate = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.FRANCE).parse(date);
-			System.out.println("date :" + rdvDate);
-			ServletContext context = servlet.getServletContext();
-			DatabaseRdvManager databaseRdvManager = 
-				(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
-
-			// get student info
-			Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
-
-			// check if the student already have a rdv
-			if (student.getAppointmentDate() != null) {
-				errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.allready.taken"));
-			} else { // set the rdv date in the db
-
-				DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
-				//Date dateBac = df.parse(student.getBacYear());
-
-				//Calendar calDateBac = new GregorianCalendar();
-				Calendar calCurrent = GregorianCalendar.getInstance();
-				//calDateBac.setTime(dateBac);
-				
-
-				int bYear = new Integer(student.getBacYear()).intValue();
-				boolean isRavel = (  bYear == calCurrent.get(Calendar.YEAR));
-
-				Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
-
-				databaseRdvManager.addRdv(rdv);
-
-			}
+			rdvDate = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT,Locale.FRANCE).parse(hour);
 		} catch (ParseException e) {
-			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.global"));
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+		ServletContext context = servlet.getServletContext();
+		DatabaseRdvManager databaseRdvManager = 
+			(DatabaseRdvManager) context.getAttribute(Constants.RDV_DATABASE_KEY);
+		
+		// get student info
+		Student student = (Student) request.getSession().getAttribute(Constants.STUDENT_KEY);
+		
+		// check if the student already have a rdv
+		if (student.getAppointmentDate() != null) {
+			errors.add(ActionErrors.GLOBAL_ERROR, new ActionError("error.rdv.allready.taken"));
+		} else { 
+			// set the rdv date in the db
+			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, Locale.FRANCE);
+			Calendar calCurrent = GregorianCalendar.getInstance();
+		
+			int bYear = new Integer(student.getBacYear()).intValue();
+			boolean isRavel = (  bYear == calCurrent.get(Calendar.YEAR));
+		
+			Rdv rdv = new Rdv(rdvDate, Integer.toString(student.getId()), student.getPatronymicName(), student.getFirstname1(), isRavel);
+			databaseRdvManager.addRdv(rdv);
+			
+			student.setAppointmentDate(rdvDate);
+		
 		}
 		
-		request.setAttribute("date", date);
 
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);

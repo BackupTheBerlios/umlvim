@@ -8,8 +8,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import fr.umlv.desperados.database.DatabaseRequestor;
 
@@ -98,86 +100,66 @@ public class DatabaseRdvManager implements RdvManager {
 	 * @return java.util.Date[]
 	 * @roseuid 3FF869CD00FB
 	 */
-	public Date[] getFreeDays(boolean ravel) {
+	public String[] getFreeDays(boolean ravel) {
 		ResultSet rs = null;
 		DateFormat dtf =
-			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
-		Date[] freeDate = null;
+			DateFormat.getDateInstance(DateFormat.SHORT);
+		String[] freeDate = null;
 		int i = 0;
+	
 		try {
 		if (ravel)
+			
+					rs =
+						requestor.doQuery(
+							"SELECT date_rdv FROM rdv_dispo  WHERE NB_RAV_DSP>0 order by date_rdv");
 		
-				rs =
-					requestor.doQuery(
-						"SELECT DATE_RDV FROM rdv_dispo  WHERE NB_RAV_DSP>0 ORDER BY DATE_RDV");
 	
 		else
 			rs =
 				requestor.doQuery(
-					"SELECT DATE_RDV FROM rdv_dispo WHERE NB_ETU_DSP>0 ORDER BY DATE_RDV");
+					"SELECT date_rdv from rdv_dispo WHERE NB_ETU_DSP>0 order by date_rdv");
 
 		ArrayList listTmp = new ArrayList();
 
-//		rs.first();
-//		Date dateTmp = rs.getDate("DATE_RDV");
-//		System.out.println("date :"+dateTmp);
-//		Date date;
-//		listTmp.add(dateTmp);
-//		//we use DO WHILE because the cursor is already on the first row
-//		while (rs.next()){
-//			date = rs.getDate("DATE_RDV");
-//			Calendar cal = new GregorianCalendar();
-//			Calendar calTmp = new GregorianCalendar();
-//	
-//			cal.setTime(date);
-//			calTmp.setTime(dateTmp);
-//			if (cal.get(Calendar.DATE) == calTmp.get(Calendar.DATE)
-//				&& cal.get(Calendar.MONTH) == calTmp.get(Calendar.MONTH))
-//				listTmp.add(date);
-//
-//			dateTmp = date;
-//
-//		} 
-//		
-//		System.out.println("listTmp :"+listTmp);
-//		
-//		
-//		//freeDate = (java.sql.Date[])listTmp.toArray();
-//		
-//		int size = listTmp.size();
-//		Iterator it = listTmp.iterator();
-//		
-//		freeDate = new Date[size];
-//		for(int cpt = 0; it.hasNext();++cpt ){
-//			freeDate[cpt] = (java.util.Date)it.next();
-//			System.out.println("jour :"+freeDate[cpt].getDate());
-//		}
-		rs.last();
-		freeDate =new Date[rs.getRow()];
 		rs.first();
-		
-		do{
+		Date dateTmp = rs.getDate("DATE_RDV");
 	
-		//	Date date = new Date;
+		Date date;
+		listTmp.add(dateTmp);
+	
+		while (rs.next()){
+			date = rs.getDate("DATE_RDV");
 			Calendar cal = new GregorianCalendar();
-		
-			long longDate=(rs.getTimestamp("DATE_RDV")).getTime();
-			Date date=new Date(longDate);
-			freeDate[i]=date;
-			System.out.println("date :"+freeDate[i]);
+			Calendar calTmp = new GregorianCalendar();
+	
 			cal.setTime(date);
-			
-			i++;			
-		}
-		while( rs.next() );
-			
+			calTmp.setTime(dateTmp);
+			if (cal.get(Calendar.DATE) != calTmp.get(Calendar.DATE)
+				|| cal.get(Calendar.MONTH) != calTmp.get(Calendar.MONTH))
+				listTmp.add(date);
+
+			dateTmp = date;
+	
+
+		} 
+
+		int size = listTmp.size();
+		Iterator it = listTmp.iterator();
 		
+		freeDate = new String[size];
+		for(int cpt = 0; it.hasNext();++cpt ){
+			freeDate[cpt] = dtf.format((java.util.Date)it.next());
+			}
+			
 		} catch (SQLException e) {
-				e.printStackTrace();
-		}
+					// TODO Bloc catch auto-généré
+					e.printStackTrace();
+				}
+	
 			
 		return freeDate;
-
+		
 	}
 
 	/**
@@ -186,35 +168,39 @@ public class DatabaseRdvManager implements RdvManager {
 	 * @return java.util.Date[]
 	 * @roseuid 3FF869CD0119
 	 */
-	public Date[] getFreeHours(java.util.Date day, boolean ravel) {
+	public String[] getFreeHours(java.util.Date day, boolean ravel) {
 		ResultSet rs = null;
 		DateFormat dtf =
-			DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
+			DateFormat.getDateInstance(DateFormat.SHORT);
 		String formatedDate = dtf.format(day);
-		Date[] freeHours = null;
+		
+		DateFormat dtfHour =
+				DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.SHORT, Locale.FRANCE);
+	
+		String[] freeHours = null;
 		int i = 0;
 		try {
 			if (ravel)
 				rs =
 					requestor.doQuery(
-						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')="
+						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')='"
 							+ formatedDate
-							+ "  AND NB_RAV_DSP>0");
+							+ "'  AND NB_RAV_DSP>0");
 
 			else
 				rs =
 					requestor.doQuery(
-						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')="
+						"SELECT DATE_RDV FROM rdv_dispo WHERE TO_DATE(DATE_RDV,'DD/MM/YY')='"
 							+ formatedDate
-							+ " AND NB_ETU_DSP>0");
+							+ "' AND NB_ETU_DSP>0");
 			rs.last();
-			freeHours = new Date[rs.getRow()];
+			freeHours = new String[rs.getRow()];
 			rs.first();
 
 			//we use DO WHILE because the cursor is already on the first row
 			do {
-
-				freeHours[i] = rs.getDate("DATE_RDV");
+				System.out.println("heure libres:"+rs.getTimestamp("DATE_RDV"));
+				freeHours[i] = dtfHour.format(rs.getTimestamp("DATE_RDV"));
 
 				i++;
 			} while (rs.next());
@@ -384,15 +370,21 @@ public class DatabaseRdvManager implements RdvManager {
 		ResultSet rs = null;
 		String reqSql = "";
 		String numberOfRdV = "";
-				
+		
+		// Add the year to the date : DD/MM/YYYY
+		Calendar calendar = new GregorianCalendar();
+		int year = calendar.get(Calendar.YEAR);
+		dateStart = dateStart + "/" + year;
+		dateEnd = dateEnd + "/" + year;
+		
 		if(diplomaId == "")
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 				+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
-				+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY HH24:MI:SS')";
+				+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY')";
 		else 
 			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
 		+ "DATE_DE_RDV >= to_date('"+dateStart+"', 'DD/MM/YYYY') "
-		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY HH24:MI:SS') "
+		+ "and DATE_DE_RDV <= to_date('"+dateEnd+"', 'DD/MM/YYYY') "
 				+ "and (ID_DIP_MLV = "+diplomaId+")";
 		
 		try {

@@ -37,7 +37,7 @@ public interface RdvManager
     * @return the <code>List</code> of Date which are free.
     * @roseuid 3FBF57650241
     */
-   public Date[] getFreeDays(boolean ravel);
+   public String[] getFreeDays(boolean ravel);
    
    /**
     * Gets the hours when Rdv can still be reserved in the specified day.
@@ -48,7 +48,7 @@ public interface RdvManager
     * @return the <code>List</code> of hours which are free (in the form of Date).
     * @roseuid 3FBF57A90241
     */
-   public Date[] getFreeHours(java.util.Date day, boolean ravel);
+   public String[] getFreeHours(java.util.Date day, boolean ravel);
    
    /**
     * Gets the Rdv of the given Student.
