@@ -75,7 +75,6 @@ public class UserLogonAction extends Action {
 		UserLogonForm userLogonForm = (UserLogonForm) form;
 		User user = null;
 
-/*
 		UserManager manager = (UserManager)servlet.getServletContext().
 			getAttribute(Constants.USER_DATABASE_KEY);
 
@@ -102,16 +101,6 @@ public class UserLogonAction extends Action {
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
 			return (mapping.findForward("itself"));
-		}
-*/
-		user = new User();
-		user.setLogin("ncuvelie");
-		user.setEmail("ncuvelie@etudiant.univ-mlv.fr");
-		user.setFirstname("Nicolas");
-		user.setName("CUVELIER");
-		user.setPassword("tototo");
-		if(userLogonForm.getLogin().equals("admin")) {
-			user.setAdmin(true);
 		}
 
 		// Save our logged-in user in the session

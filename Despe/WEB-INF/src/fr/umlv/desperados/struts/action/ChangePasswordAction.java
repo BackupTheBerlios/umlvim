@@ -6,7 +6,6 @@ package fr.umlv.desperados.struts.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionError;
 import org.apache.struts.action.ActionErrors;
@@ -14,17 +13,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.account.User;
-import fr.umlv.desperados.account.UserAlreadyExistsException;
 import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.account.UserNotFoundException;
 import fr.umlv.desperados.account.UserUtilities;
-import fr.umlv.desperados.mail.MailNotSentException;
 import fr.umlv.desperados.mail.Mailer;
 import fr.umlv.desperados.mail.Message;
 import fr.umlv.desperados.mail.MessageFactory;
-import fr.umlv.desperados.struts.form.UserForm;
-import fr.umlv.desperados.struts.util.FormUtilities;
 import fr.umlv.desperados.util.Constants;
 import fr.umlv.desperados.util.ManagerException;
 
@@ -81,7 +75,7 @@ public class ChangePasswordAction extends UserAction {
 			// send mail to the user
 			MessageFactory factory = new MessageFactory();
 			Mailer mailer = new Mailer();
-			Message message = factory.createMessage(Message.CREATION_MESSAGE, loggedUser);
+			Message message = factory.createMessage(Message.MODIFICATION_MESSAGE, loggedUser);
 			mailer.sendMail(loggedUser.getEmail(), message);
 		} catch(UserNotFoundException e) {
 			err = "error.user.dontexist";
