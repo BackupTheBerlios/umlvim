@@ -91,17 +91,17 @@ final class DatabaseStudentListIterator extends DatabaseAbstractListIterator {
 					rs.getString(prop.get("bacYear").toString()));
 				student.setEstablishmentBacObtaining(
 					rs.getString(
-						prop.get("EstablishmentBacObtaining").toString()));
+						prop.get("establishmentBacObtaining").toString()));
 				student.setForeignCityBac(
-					rs.getString(prop.get("ForeignCityBac").toString()));
+					rs.getString(prop.get("foreignCityBac").toString()));
 				student.setHaveFixAddFr(
-					rs.getBoolean(prop.get("haveFixeAddFr").toString()));
+					rs.getBoolean(prop.get("haveFixAddFr").toString()));
 				student.setNumFixAdd(
 					rs.getString(prop.get("numFixAdd").toString()));
 				student.setStreetFixAdd(
 					rs.getString(prop.get("streetFixAdd").toString()));
 				student.setBuildingFixAdd(
-					rs.getString(prop.get("builingFixAdd").toString()));
+					rs.getString(prop.get("buildingFixAdd").toString()));
 				student.setForeignCityFixAdd(
 					rs.getString(prop.get("foreignCityFixAdd").toString()));
 				student.setPhoneFixAdd(

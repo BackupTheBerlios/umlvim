@@ -454,10 +454,10 @@ public class DatabaseStudentManager implements StudentManager {
 					prop.get("bacYear").toString(),
 					student.getBacYear());
 				result.updateString(
-					prop.get("EstablishmentBacObtaining").toString(),
+					prop.get("establishmentBacObtaining").toString(),
 					student.getEstablishmentBacObtaining());
 				result.updateString(
-					prop.get("ForeignCityBac").toString(),
+					prop.get("foreignCityBac").toString(),
 					student.getForeignCityBac());
 				result.updateBoolean(
 					prop.get("haveFixeAddFr").toString(),
@@ -469,7 +469,7 @@ public class DatabaseStudentManager implements StudentManager {
 					prop.get("streetFixAdd").toString(),
 					student.getStreetFixAdd());
 				result.updateString(
-					prop.get("builingFixAdd").toString(),
+					prop.get("buildingFixAdd").toString(),
 					student.getBuildingFixAdd());
 				result.updateString(
 					prop.get("foreignCityFixAdd").toString(),
