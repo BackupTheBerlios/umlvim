@@ -40,6 +40,12 @@ public class User {
 	private String password = null;
 
 	/**
+	 * Default Constructor
+	 */
+	public User() {
+	}
+
+	/**
 	 * Constructor.
 	 * 
 	 * @param login the login of the User to create.
