@@ -30,7 +30,7 @@ public interface StyleSheetManager
     * @param styleSheetId the identifiant of the StyleSheet to remove.
     * @roseuid 3FC0F49800DA
     */
-   public void removeStyleSheet(String styleSheetId, String path);
+   public void removeStyleSheet(String styleSheetId, String path) throws UsedStylesheetException;
    
    /**
     * Assigns a StyleSheet to a type of document (which is one of 

@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.struts.form.SetStyleSheetForm;
 import fr.umlv.desperados.stylesheet.StyleSheetManager;
+import fr.umlv.desperados.stylesheet.UsedStylesheetException;
 import fr.umlv.desperados.util.Constants;
 
 /**
@@ -43,17 +44,25 @@ public class RemoveStyleSheetAction extends AdminAction {
 				new ActionError("error.database.missing"));
 		}
 
-		if (!errors.isEmpty()) {
-			saveErrors(request, errors);
-			return (mapping.findForward("error"));
-		}
+
 
 		String styleSheetId = styleSheetForm.getStyleSheetId();
 		int docTypeId = styleSheetForm.getDocTypeId();
 
 		String path = servlet.getServletContext().getRealPath("/")+"/stylesheet/";
-		manager.removeStyleSheet(styleSheetId, path);
-
+		try {
+			manager.removeStyleSheet(styleSheetId, path);
+		}
+		catch(UsedStylesheetException e){
+			errors.add(
+				ActionErrors.GLOBAL_ERROR,
+				new ActionError("error.stylesheet.remove"));
+		}
+		
+		if (!errors.isEmpty()) {
+			saveErrors(request, errors);
+			return (mapping.findForward("error"));
+		}
 		// Forward control to the specified success URI
 		return (mapping.findForward("success"));
 	}
