@@ -5,12 +5,9 @@ package fr.umlv.desperados.planning;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -169,14 +166,13 @@ public class DatabaseRdvManager implements RdvManager {
 			freeDate[i]=date;
 			System.out.println("date :"+freeDate[i]);
 			cal.setTime(date);
-			System.out.println("heure :"+date.getHours());
+			
 			i++;			
 		}
 		while( rs.next() );
 			
 		
 		} catch (SQLException e) {
-				// TODO Bloc catch auto-généré
 				e.printStackTrace();
 		}
 			
@@ -223,7 +219,6 @@ public class DatabaseRdvManager implements RdvManager {
 				i++;
 			} while (rs.next());
 		} catch (SQLException e1) {
-			// TODO Bloc catch auto-généré
 			e1.printStackTrace();
 		}
 		return freeHours;
@@ -247,11 +242,14 @@ public class DatabaseRdvManager implements RdvManager {
 		boolean isRavel = false;
 		Calendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(System.currentTimeMillis());
+		
 		int currentYear = rs.getInt("ANNEE_BAC");
 		if (currentYear == cal.get(Calendar.YEAR))
 			isRavel = true;
+			
 		long longDate=(rs.getTimestamp("DATE_DE_RDV")).getTime();
 	    Date date=new Date(longDate);
+	    
 		rdv =
 			new Rdv(
 				date,
@@ -260,7 +258,6 @@ public class DatabaseRdvManager implements RdvManager {
 				rs.getString("PRENOM1"),
 				isRavel);
 		} catch (SQLException e) {
-				// TODO Bloc catch auto-généré
 				e.printStackTrace();
 			}
 		return rdv;
@@ -358,10 +355,8 @@ public class DatabaseRdvManager implements RdvManager {
 					+ formatedDate
 					+ "','DD/MM/YY HH24:MI') ");
 		} catch (NumberFormatException e) {
-				// TODO Bloc catch auto-généré
 				e.printStackTrace();
 			} catch (SQLException e) {
-				// TODO Bloc catch auto-généré
 				e.printStackTrace();
 			}
 	}
