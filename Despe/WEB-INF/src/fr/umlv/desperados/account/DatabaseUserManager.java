@@ -62,28 +62,36 @@ public class DatabaseUserManager implements UserManager {
 	 * @throws fr.umlv.desperados.account.UserAlreadyExistsException
 	 * @roseuid 3FF869B902D2
 	 */
-	public void addUser(User user) throws UserAlreadyExistsException {
-
-		ResultSet rs = null;
+	public void addUser(User user) throws UserAlreadyExistsException, UserException {	
 		try {
-			rs = doSelectQuery(user.getLogin());
-			if (rs.first()) {
-				throw new UserAlreadyExistsException("User exists in the database");
-			} else {
-				rs.moveToInsertRow();
-				updateRow(rs, user);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
+		  int nbRows = requestor.executeQuery("INSERT INTO Compte (LOGIN_COM, NOM_COM,PRENOM_COM,MAIL_COM,EST_ADM_COM,PASS_COM) VALUES('"+user.getLogin()+"',''"+user.getName()+"','"+user.getFirstname()+"','"+user.getEmail()+"',"+user.getAdmin()+",'"+user.getPassword()+"'");
+			if (nbRows==0)
+			  throw new UserException("Impossible to create student");
+		  				
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+//TODO a décommenter quand les Resulset seront updatable
+//		ResultSet rs = null;
+//		try {
+//			rs = doSelectQuery(user.getLogin());
+//			if (rs.first()) {
+//				throw new UserAlreadyExistsException("User exists in the database");
+//			} else {
+//				rs.moveToInsertRow();
+//				updateRow(rs, user);
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			try {
+//				rs.close();
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
+//		}
 	}
 
 	/**

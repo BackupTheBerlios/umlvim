@@ -21,7 +21,7 @@ public interface UserManager
     * already exists in the permanent storage.
     * @roseuid 3FC46F9F007D
     */
-   public void addUser(User user) throws UserAlreadyExistsException;
+   public void addUser(User user) throws UserAlreadyExistsException,UserException;
    
    /**
     * Checks if a User exists in the permanent storage.
