@@ -1,8 +1,6 @@
 /*
- * Créé le 21 janv. 2004
+ * Cree le 21 janv. 2004
  *
- * Pour changer le modèle de ce fichier généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
 package fr.umlv.desperados.diploma.junit;
 
@@ -23,8 +21,6 @@ import junit.framework.TestCase;
 /**
  * @author africott
  *
- * Pour changer le modèle de ce commentaire de type généré, allez à :
- * Fenêtre&gt;Préférences&gt;Java&gt;Génération de code&gt;Code et commentaires
  */
 public class DatabaseDiplomaManagerTest extends TestCase {
 
@@ -106,7 +102,7 @@ public class DatabaseDiplomaManagerTest extends TestCase {
 		 try {
 			ddm.addDiploma(diploma);
 		 } catch (DiplomaAlreadyExistsException e) {
-			// TODO Bloc catch auto-généré
+			// TODO Bloc catch auto-g?n?r?
 			e.printStackTrace();
 		 }
 		 

@@ -86,4 +86,15 @@ public interface RdvManager
     * @roseuid 3FBF58180251
     */
    public void removeRdv(Rdv rdv);
+   
+   /**
+	   * Give the number of Rdv from the planning.
+	   * 
+	   * @param dateStart Format DD/MM/YYYY.
+	   * @param dateEnd Format DD/MM/YYYY.
+	   * @param diplomaId A String of a diploma.
+	   * @return the number of Rdv.
+	   * @roseuid 3FEEAB630340
+	   */
+	  public String giveRdVNumber(String dateStart, String dateEnd, String diplomaId);
 }

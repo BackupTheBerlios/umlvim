@@ -376,6 +376,37 @@ public class DatabaseRdvManager implements RdvManager {
 	
 		
 	}
+
+	/* (non-Javadoc)
+	 * @see fr.umlv.desperados.planning.RdvManager#giveRdVNumber(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public String giveRdVNumber(String dateStart, String dateEnd, String diplomaId) {
+		ResultSet rs = null;
+		String reqSql = "";
+		String numberOfRdV = "";
+		
+		if(diplomaId == "")
+			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
+				+ "(to_char(DATE_DE_RDV, 'DD/MM/YY') >= '"+dateStart+"')"
+				+ "and (to_char(DATE_DE_RDV, 'DD/MM/YYYY') <= '"+dateEnd+"')";
+		else 
+			reqSql = "SELECT COUNT(ID_ETU) FROM ETUDIANT WHERE "
+				+ "(to_char(DATE_DE_RDV, 'DD/MM/YY') >= '"+dateStart+"') "
+				+ "and (to_char(DATE_DE_RDV, 'DD/MM/YYYY') <= '"+dateEnd+"') "
+				+ "and (ID_DIP_MLV = "+diplomaId+")";
+		
+		try {
+			rs = requestor.doQuery(reqSql);
+				
+			rs.first(); 
+			numberOfRdV = rs.getString(1);			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return numberOfRdV;
+	}
 	
 
 }
