@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/search?type=user">
+				<html:link action="/search/user">
 					<bean:message key="menu.admin.searchuser"/>
 				</html:link>
 			</td>
