@@ -29,4 +29,8 @@
 		<put name="body-content"	value="/pages/form/UserDetails.jsp" />
 	</definition>
 
+	<definition name="user.research" extends="baseDef">
+		<put name="body-content"	value="/pages/form/SearchUser.jsp" />
+	</definition>
+
 </tiles-definitions>

@@ -15,13 +15,19 @@
 
 		<form-bean name="UserForm" type="fr.umlv.desperados.struts.form.UserForm" />
 
+		<form-bean name="SearchUserForm" type="fr.umlv.desperados.struts.form.SearchUserForm" />
+
 	</form-beans>
 
 	<!-- ========== Global Exception Definitions ========================== -->
 	<global-exceptions />
 
 	<!-- ========== Global Forward Definitions ============================ -->
-	<global-forwards />
+	<global-forwards>
+		<forward 	name="logon"			path="logon.page" />
+		<forward 	name="edituser"			path="user.edit" />
+		<forward 	name="searchuser"		path="user.research" />
+	</global-forwards>
 
 	<!-- ========== Action Mapping Definitions ============================ -->
 	<action-mappings>
@@ -34,13 +40,11 @@
 			input="/pages/form/UserLogon.jsp"
 			validate="false">
 			<forward name="success"			path="home.page" />
-			<forward name="failure"			path="logon.page" />
 		</action>
 
 		<action
 			path="/userLogoff"
 			type="fr.umlv.desperados.struts.action.UserLogoffAction">
-			<forward name="success"			path="logon.page" />
 		</action>
 
 		<action
@@ -50,8 +54,7 @@
 			scope="request"
 			input="/pages/form/UserDetails.jsp"
 			validate="false">
-			<forward name="success"			path="user.edit" />
-			<forward name="error"				path="error.page" />
+			<forward name="error"			path="error.page" />
 		</action>
 
 		<action
@@ -62,8 +65,23 @@
 			scope="request"
 			input="/pages/form/UserDetails.jsp"
 			validate="false">
-			<forward name="sucess"			path="user.edit" />
+			<forward name="success"			path="user.edit" />
 			<forward name="failure"			path="user.notSaved" />
+		</action>
+
+		<action
+			path="/search"
+			type="fr.umlv.desperados.struts.action.SearchAction">
+		</action>
+
+		<action
+			path="/searchUser"
+			type="fr.umlv.desperados.struts.action.SearchUserAction"
+			attribute="SearchUserForm"
+			name="SearchUserForm"
+			scope="request"
+			input="/pages/form/SearchUser.jsp"
+			validate="false">
 		</action>
 
 	</action-mappings>

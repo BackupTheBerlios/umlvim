@@ -1,0 +1,49 @@
+// Created by Xslt generator for Eclipse.
+// XSL :  not found (java.io.FileNotFoundException:  (Bad file descriptor))
+// Default XSL used : easystruts.jar$org.easystruts.xslgen.JavaClass.xsl
+
+package fr.umlv.desperados.struts.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
+/** 
+ * SaveUserAction.java created by EasyStruts - XsltGen.
+ * http://easystruts.sf.net
+ * created on 01-07-2004
+ * 
+ * XDoclet definition:
+ * @struts:action path="/saveUser" name="userForm" attribute="userForm" input="/form/userDetails.jsp" validate="true"
+ */
+public final class SearchAction extends AdminAction {
+
+	// --------------------------------------------------------- Public Methods
+
+	/** 
+	 * Method execute
+	 * @param ActionMapping mapping
+	 * @param ActionForm form
+	 * @param HttpServletRequest request
+	 * @param HttpServletResponse response
+	 * @return ActionForward
+	 * @throws Exception
+	 */
+	public ActionForward doExecute(
+		ActionMapping mapping,
+		ActionForm form,
+		HttpServletRequest request,
+		HttpServletResponse response)
+		throws Exception {
+
+		String type = request.getParameter("type");
+		if(type == null) {
+			type = "student";
+		}
+		return (mapping.findForward("search"+type));
+	}
+
+}

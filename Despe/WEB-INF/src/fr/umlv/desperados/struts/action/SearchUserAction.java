@@ -4,6 +4,7 @@
 
 package fr.umlv.desperados.struts.action;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import fr.umlv.desperados.account.UserManager;
-import fr.umlv.desperados.struts.form.UserForm;
+import fr.umlv.desperados.struts.form.SearchUserForm;
 import fr.umlv.desperados.util.Constants;
 
 /** 
@@ -47,21 +48,30 @@ public final class SearchUserAction extends AdminAction {
 		HttpServletResponse response)
 		throws Exception {
 
-		ActionErrors errors = new ActionErrors();
-		UserForm userForm = (UserForm) form;
+		SearchUserForm searchForm = (SearchUserForm) form;
+		ActionErrors errors = searchForm.validate(mapping, request);
+////////////////////
+//COMMENTED FOR TEST
+//		UserManager manager = (UserManager)servlet.getServletContext().
+//								getAttribute(Constants.USER_DATABASE_KEY);
+//		if(manager == null) {
+//			errors.add("database",
+//			   new ActionError("error.database.missing"));
+//			log.warn("UserLogonAction: Database is missing");
+//		}
+//
+//		if(!errors.isEmpty()) {
+//			saveErrors(request, errors);
+//			return (mapping.findForward("searchuser"));
+//		}
+		PrintWriter pw = response.getWriter();
+		pw.println("Searching login='"+searchForm.getLogin()+"' name='"+searchForm.getName()+"'");		
 
-		UserManager manager = (UserManager)servlet.getServletContext().
-								getAttribute(Constants.USER_DATABASE_KEY);
-		if(manager == null) {
-			errors.add("database",
-			   new ActionError("error.database.missing"));
-			log.warn("UserLogonAction: Database is missing");
-			return (mapping.findForward("error"));
-		}
-		List userList = manager.searchUser(userForm.getLogin(), userForm.getName());
+//		List userList = manager.searchUser(searchForm.getLogin(), searchForm.getName());
+//		request.setAttribute("userList", userList);
+////////////////////
 
-		request.setAttribute("userList", userList);
-		return (mapping.findForward("logon"));
+		return (mapping.findForward("searchuser"));
 	}
 
 }

@@ -1,7 +1,6 @@
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
-<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic"%>
-<%@ taglib uri="/WEB-INF/app.tld" prefix="app"%>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
+<%@ taglib uri="/WEB-INF/app.tld" prefix="app" %>
 
 <app:checkLogon page="">
 	<table>
@@ -22,7 +21,9 @@
 		</tr>
 		<tr align="right">
 			<td width="120">
-				<html:link action="/userLogoff.do">déconnexion</html:link>
+				<html:link action="/userLogoff.do">
+					<bean:message key="link.logoff" />
+				</html:link>
 			</td>
 		</tr>
 	</table>

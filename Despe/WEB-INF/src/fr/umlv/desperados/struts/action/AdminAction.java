@@ -21,7 +21,7 @@ import fr.umlv.desperados.util.Constants;
  * user logoff.
  *
  * @author Craig R. McClanahan
- * @version $Revision: 1.1 $ $Date: 2004/01/18 15:16:28 $
+ * @version $Revision: 1.2 $ $Date: 2004/01/19 06:48:40 $
  */
 
 public abstract class AdminAction extends Action {
@@ -70,7 +70,7 @@ public abstract class AdminAction extends Action {
 					new ActionError("error.mustbeloggedasadmin"));
 				saveErrors(request, errors);
 			}
-			return (mapping.findForward("error"));
+			return (mapping.findForward("failure"));
 		}
 		return doExecute(mapping, form, request, response);
 	}
