@@ -11,6 +11,13 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
+				<html:link action="/modifyStudentInformation">
+					<bean:message key="menu.student.modifyInformation" />
+				</html:link>
+			</td>
+		</tr>
+		<tr>
+			<td align="right" valign="top">
 				<html:link action="/take/rdv">
 					<bean:message key="menu.student.takerdv" />
 				</html:link>
