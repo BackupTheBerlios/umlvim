@@ -5,7 +5,7 @@
  * Team : Desperados
  * Version: 0.1
  */
- 
+
 package fr.umlv.desperados.planning.junit;
 
 import junit.framework.Test;
@@ -22,11 +22,12 @@ public class AllTests {
 	}
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for fr.umlv.desperados.planning.junit");
+		TestSuite suite =
+			new TestSuite("Test for fr.umlv.desperados.planning.junit");
 		//$JUnit-BEGIN$
-		suite.addTest(TestHourNodeConvertor.suite());
-		suite.addTest(TestHalfDayConf.suite());
 		suite.addTest(TestDayConf.suite());
+		suite.addTest(TestHalfDayConf.suite());
+		suite.addTest(TestHourNodeConvertor.suite());
 		suite.addTest(TestPlanningConf.suite());
 		//$JUnit-END$
 		return suite;
