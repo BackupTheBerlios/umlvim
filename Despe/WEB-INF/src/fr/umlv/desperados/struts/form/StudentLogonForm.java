@@ -4,8 +4,6 @@
 
 package fr.umlv.desperados.struts.form;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.action.ActionError;
@@ -13,8 +11,6 @@ import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.util.MessageResources;
-
-import fr.umlv.desperados.util.Constants;
 
 /** 
  * UserLogonForm.java created by EasyStruts - XsltGen.

@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
-				<html:link action="/search/?type=student">
+				<html:link action="/search?type=student">
 					<bean:message key="menu.user.searchstudent"/>
 				</html:link>
 			</td>

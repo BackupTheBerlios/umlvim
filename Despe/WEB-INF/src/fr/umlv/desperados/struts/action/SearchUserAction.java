@@ -4,10 +4,7 @@
 
 package fr.umlv.desperados.struts.action;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +15,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import fr.umlv.desperados.account.User;
 import fr.umlv.desperados.account.UserManager;
 import fr.umlv.desperados.struts.form.SearchUserForm;
 import fr.umlv.desperados.util.Constants;
