@@ -11,6 +11,9 @@
 		</tr>
 		<tr>
 			<td align="right" valign="top">
+				<html:link action="/takeRdv">
+					<bean:message key="menu.student.takerdv" />
+				</html:link>
 			</td>
 		</tr>
 		<tr>

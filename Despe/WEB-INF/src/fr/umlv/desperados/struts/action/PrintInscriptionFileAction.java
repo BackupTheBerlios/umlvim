@@ -40,7 +40,7 @@ public class PrintInscriptionFileAction extends Action {
 	/**
 		 * The <code>Log</code> instance for this application.
 		 */
-	 private Log log = LogFactory.getLog("fr.umlv.fdesperados.struts");
+	 private Log log = LogFactory.getLog("fr.umlv.desperados.struts");
 
 
 	public ActionForward execute(
@@ -58,10 +58,8 @@ public class PrintInscriptionFileAction extends Action {
 		Student student = (Student)session.getAttribute(Constants.STUDENT_KEY);
 		if (student == null) {
 			if (log.isWarnEnabled()) {
-				log.warn("AdminAction: User is not logged on"
-						+ session.getId());
 				errors.add(ActionErrors.GLOBAL_ERROR,
-					new ActionError("error.mustbeloggedasadmin"));
+					new ActionError("error.mustbelogged"));
 				saveErrors(request, errors);
 			}
 			return (mapping.findForward("error"));
@@ -82,8 +80,7 @@ public class PrintInscriptionFileAction extends Action {
 			return (mapping.findForward("failure"));
 		}
 
-
-		InputStream isStyleSheet = new FileInputStream("/home/dslg00/ndedanil/dess/genie_log/projet/test/stylesheet/dossier.xsl");
+		InputStream isStyleSheet = new FileInputStream(servlet.getServletContext().getRealPath("/")+"/stylesheet/dossier.xsl");
 		InputStream isStudent = new ByteArrayInputStream(student.toXML().getBytes());
 		InputStream is = PDFTools.generatePDF(isStudent,isStyleSheet);
 		

@@ -45,7 +45,7 @@ public class RemoveStyleSheetAction extends AdminAction {
 
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
+			return (mapping.findForward("error"));
 		}
 
 		String styleSheetId = styleSheetForm.getStyleSheetId();

@@ -50,6 +50,7 @@
 	<action-mappings>
 
 		<action path="/confPlanning" forward="planning.configure"/>
+		<action path="/takeRdv"	forward="student.rdv"/>
 
 		<action path="/loginPage"				forward="user.logon" />
 		<action path="/identPage"				forward="student.ident" />

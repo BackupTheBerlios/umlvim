@@ -54,7 +54,7 @@ public class AddStyleSheetAction extends AdminAction {
 
 		if (!errors.isEmpty()) {
 			saveErrors(request, errors);
-			return (mapping.findForward("failure"));
+			return (mapping.findForward("error"));
 		}
 
 
@@ -89,10 +89,10 @@ public class AddStyleSheetAction extends AdminAction {
 			stream.close();
 		}
 		catch (FileNotFoundException fnfe) {
-			return mapping.findForward("failure");
+			return mapping.findForward("error");
 		}
 		catch (IOException ioe) {
-			return mapping.findForward("failure");
+			return mapping.findForward("error");
 		}
 
 		file.destroy();
