@@ -169,7 +169,8 @@
             name="StatsForm"
             path="/stats"
             type="fr.umlv.desperados.struts.action.ViewStatsAction"
-            validate="false" />
+            validate="false">
+        </action>
             
 		<action
 			path="/studentLogon"
