@@ -56,12 +56,13 @@ public class DatabaseDiplomaManager implements DiplomaManager
 	* @return java.util.List
 	* @roseuid 3FF869CF00DF
 	*/
-   public List listDiploma() 
+   public List listDiploma()
    {
 	List laListe = null;
 	try {
 		ResultSet rs = requestor.doQuery("SELECT * FROM DIPLOME_MLV");
-		laListe = new DatabaseDiplomaList(rs);
+		if(rs.first())
+			laListe = new DatabaseDiplomaList(rs);
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -105,11 +106,12 @@ public class DatabaseDiplomaManager implements DiplomaManager
 		+diploma.getName()
 		+"')";
     
-	String reqSelectId = "SELECT * FROM DIPLOME_MLV WHERE (ID_CYC = "
+	/*String reqSelectId = "SELECT * FROM DIPLOME_MLV WHERE (ID_CYC = "
 		+diploma.getCycle()
 		+" AND LIB_DIP_MLV = '"
 		+diploma.getName()
-		+"') order by ID_DIP_MLV";
+		+"') order by ID_DIP_MLV";*/
+	String reqSelectId = "SELECT MAX(ID_DIP_MLV) FROM DIPLOME_MLV";
     
 	try {
 		synchronized(requestor) {
@@ -119,7 +121,8 @@ public class DatabaseDiplomaManager implements DiplomaManager
 			// by incrementation of the max
 			rs = requestor.doQuery(reqSelectId);
 		}
-		rs.last();
+		//rs.last();
+		rs.first();
 		String idMax = rs.getString("ID_DIP_MLV"); 
 
 		diploma.setId(idMax);
